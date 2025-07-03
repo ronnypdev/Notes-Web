@@ -8,6 +8,8 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-inter);
   --font-mono: var(--font-jetbrains-mono);
+  --font-sans-alt: var(--font-noto-serif);
+  --font-code: var(--font-source-code-pro);
   --color-neutral-950: var(--neutral-950);
   --color-neutral-900: var(--neutral-900);
   --color-neutral-800: var(--neutral-800);
@@ -98,11 +100,17 @@
   }
 
   /* Font Family Utilities */
-  .font-sans {
+  .font-inter {
     font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   }
-  .font-mono {
+  .font-jetbrains-mono {
     font-family: var(--font-jetbrains-mono), ui-monospace, 'Courier New',
       monospace;
+  }
+  .font-noto-serif {
+    font-family: var(--font-noto-serif), ui-serif, serif;
+  }
+  .font-source-code-pro {
+    font-family: var(--font-source-code-pro), ui-monospace, monospace;
   }
 }
