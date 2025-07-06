@@ -45,6 +45,10 @@
   --spacing-600: 3rem;
   --spacing-800: 4rem;
   --spacing-1000: 5rem;
+
+  /* Shadow Variables */
+  --shadow-small: 0px 4px 6px 0px rgba(240, 240, 240, 0.6);
+  --shadow-large: 0px 8px 12px 0px rgba(240, 240, 240, 0.6);
 }
 
 :root {
