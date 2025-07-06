@@ -46,11 +46,9 @@
   --spacing-800: 4rem;
   --spacing-1000: 5rem;
 
-<<<<<<< HEAD
   /* Shadow Variables */
   --shadow-small: 0px 4px 6px 0px rgba(240, 240, 240, 0.6);
   --shadow-large: 0px 8px 12px 0px rgba(240, 240, 240, 0.6);
-=======
   /* Radius Variables */
   --radius-0: 0rem;
   --radius-4: 0.25rem;
@@ -62,7 +60,6 @@
   --radius-20: 1.25rem;
   --radius-24: 1.5rem;
   --radius-full: 62.4375rem;
->>>>>>> main
 }
 
 :root {
