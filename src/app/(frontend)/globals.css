@@ -60,6 +60,25 @@
   --radius-20: 1.25rem;
   --radius-24: 1.5rem;
   --radius-full: 62.4375rem;
+
+  /* Grid System Variables */
+  --grid-columns-desktop: 12;
+  --grid-columns-tablet: 8;
+  --grid-columns-mobile: 4;
+
+  --grid-column-width-desktop: 4.375rem;
+  --grid-column-width-tablet: 4.1875rem;
+  --grid-column-width-mobile: 4.375rem;
+
+  --grid-gutter-desktop: 1.5rem;
+  --grid-gutter-tablet: 1.5rem;
+  --grid-gutter-mobile: 1rem;
+
+  --grid-margin-desktop: 2rem;
+  --grid-margin-tablet: 2rem;
+  --grid-margin-mobile: 1rem;
+
+  --sidebar-width: 17.1875rem;
 }
 
 :root {
@@ -93,6 +112,25 @@
   /* Legacy variables */
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
+
+  /* Grid System Variables */
+  --grid-columns-desktop: 12;
+  --grid-columns-tablet: 8;
+  --grid-columns-mobile: 4;
+
+  --grid-column-width-desktop: 4.375rem;
+  --grid-column-width-tablet: 4.1875rem;
+  --grid-column-width-mobile: 4.375rem;
+
+  --grid-gutter-desktop: 1.5rem;
+  --grid-gutter-tablet: 1.5rem;
+  --grid-gutter-mobile: 1rem;
+
+  --grid-margin-desktop: 2rem;
+  --grid-margin-tablet: 2rem;
+  --grid-margin-mobile: 1rem;
+
+  --sidebar-width: 17.1875rem;
 }
 
 .dark {
@@ -140,5 +178,52 @@
   }
   .font-source-code-pro {
     font-family: var(--font-source-code-pro), ui-monospace, monospace;
+  }
+
+  /* Grid System Utilities */
+  .grid-desktop {
+    display: grid;
+    grid-template-columns: repeat(
+      var(--grid-columns-desktop),
+      var(--grid-column-width-desktop)
+    );
+    gap: var(--grid-gutter-desktop);
+    margin-left: var(--grid-margin-desktop);
+    margin-right: var(--grid-margin-desktop);
+  }
+  .sidebar {
+    width: var(--sidebar-width);
+  }
+  /* Hide on tablet and below */
+  @media (max-width: 1024px) {
+    .grid-desktop {
+      display: none;
+    }
+    .grid-tablet {
+      display: grid;
+      grid-template-columns: repeat(
+        var(--grid-columns-tablet),
+        var(--grid-column-width-tablet)
+      );
+      gap: var(--grid-gutter-tablet);
+      margin-left: var(--grid-margin-tablet);
+      margin-right: var(--grid-margin-tablet);
+    }
+  }
+  /* Hide on mobile and below */
+  @media (max-width: 640px) {
+    .grid-tablet {
+      display: none;
+    }
+    .grid-mobile {
+      display: grid;
+      grid-template-columns: repeat(
+        var(--grid-columns-mobile),
+        var(--grid-column-width-mobile)
+      );
+      gap: var(--grid-gutter-mobile);
+      margin-left: var(--grid-margin-mobile);
+      margin-right: var(--grid-margin-mobile);
+    }
   }
 }
