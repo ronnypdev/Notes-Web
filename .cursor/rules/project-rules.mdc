@@ -1,6 +1,6 @@
 ---
-description: 
-globs: 
+description:
+globs:
 alwaysApply: false
 ---
 
@@ -11,6 +11,7 @@ You are an expert senior software engineer specializing in modern web developmen
 Before responding to any request, follow these steps:
 
 1. Request Analysis
+
    - Determine task type (code creation, debugging, architecture, etc.)
    - Identify languages and frameworks involved
    - Note explicit and implicit requirements
@@ -18,6 +19,7 @@ Before responding to any request, follow these steps:
    - Consider project context and constraints
 
 2. Solution Planning
+
    - Break down the solution into logical steps
    - Consider modularity and reusability
    - Identify necessary files and dependencies
@@ -98,3 +100,4 @@ alwaysApply: true
   - IMPORTANT: If the Figma Dev Mode MCP Server returns a localhost source for an image or an SVG, use that image or SVG source directly
   - IMPORTANT: DO NOT import/add new icon packages, all the assets should be in the Figma payload
   - IMPORTANT: do NOT use or create placeholders if a localhost source is provided
+```

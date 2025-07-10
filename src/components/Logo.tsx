@@ -8,8 +8,7 @@ export default function Logo() {
     <Link
       href="/"
       className="box-border content-stretch flex flex-row gap-2.5 items-center justify-start p-0 relative size-full"
-      data-name="logo"
-      id="node-2359_17916">
+      data-name="logo">
       <div className="relative shrink-0" data-name="Feather Notes Logo">
         <Image
           alt="Logo icon"
