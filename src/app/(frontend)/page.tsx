@@ -1,11 +1,27 @@
 import Image from 'next/image';
 import Logo from '@/components/Logo';
+import { Button } from '@/components/ui/button';
+import { PlusIcon, RefreshLeftIcon } from '@/components/icons';
 
 export default function Home() {
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
         <Logo />
+        <div className="grid grid-cols-3 grid-rows-2 gap-4 w-full">
+          <Button variant="default">
+            <PlusIcon />
+            Primary Button
+          </Button>
+          <Button variant="outline">
+            <PlusIcon />
+            Secondary Button
+          </Button>
+          <Button variant="ghost">
+            <RefreshLeftIcon />
+            Border Button
+          </Button>
+        </div>
         <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
           <li className="mb-2 tracking-[-.01em]">
             Get started by editing{' '}
