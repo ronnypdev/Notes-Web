@@ -30,6 +30,8 @@
   --color-red-500: var(--red-500);
   --color-red-100: var(--red-100);
 
+  --color-primary: var(--blue-500);
+
   /* Spacing Variables */
   --spacing-0: 0rem;
   --spacing-025: 0.125rem;

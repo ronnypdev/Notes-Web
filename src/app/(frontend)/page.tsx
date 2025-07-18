@@ -9,10 +9,7 @@ export default function Home() {
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
         <Logo />
         <div className="grid grid-cols-3 grid-rows-2 gap-4 w-full">
-          <Button variant="default">
-            <PlusIcon />
-            Primary Button
-          </Button>
+          <Button variant="default">Primary Button</Button>
           <Button variant="outline">
             <PlusIcon />
             Secondary Button
