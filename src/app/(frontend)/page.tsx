@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Logo from '@/components/Logo';
 import { Button } from '@/components/ui/button';
-import { PlusIcon, RefreshLeftIcon } from '@/components/icons';
+import { RefreshLeftIcon } from '@/components/icons';
 
 export default function Home() {
   return (
@@ -10,14 +10,12 @@ export default function Home() {
         <Logo />
         <div className="grid grid-cols-3 grid-rows-2 gap-4 w-full">
           <Button variant="default">Primary Button</Button>
+          <Button variant="secondary">Secondary Button</Button>
           <Button variant="outline">
-            <PlusIcon />
-            Secondary Button
-          </Button>
-          <Button variant="ghost">
             <RefreshLeftIcon />
-            Border Button
+            Outline Button
           </Button>
+          <Button variant="destructive">Destructive Button</Button>
         </div>
         <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
           <li className="mb-2 tracking-[-.01em]">
