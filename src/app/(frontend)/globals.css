@@ -30,6 +30,11 @@
   --color-red-500: var(--red-500);
   --color-red-100: var(--red-100);
 
+  --color-primary: var(--blue-500);
+
+  --shadow-btn-focus: var(--box-shadow-btn-focus);
+  --shadow-btn-secondary-hover: var(--box-shadow-btn-secondary-hover);
+
   /* Spacing Variables */
   --spacing-0: 0rem;
   --spacing-025: 0.125rem;
@@ -112,6 +117,10 @@
   /* Legacy variables */
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
+
+  --box-shadow-btn-focus: 0px 0px 0px 2px var(--neutral-0),
+    0px 0px 0px 4px var(--neutral-400);
+  --box-shadow-btn-secondary-hover: 0px 1px 2px 0px var(--neutral-950/[.03]);
 
   /* Grid System Variables */
   --grid-columns-desktop: 12;
