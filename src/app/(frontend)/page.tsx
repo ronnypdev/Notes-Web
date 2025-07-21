@@ -9,13 +9,50 @@ export default function Home() {
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
         <Logo />
         <div className="grid grid-cols-3 grid-rows-2 gap-4 w-full">
-          <Button variant="default">Primary Button</Button>
-          <Button variant="secondary">Secondary Button</Button>
-          <Button variant="outline">
-            <RefreshLeftIcon />
-            Outline Button
-          </Button>
-          <Button variant="destructive">Destructive Button</Button>
+          <div className="flex flex-col gap-4">
+            <Button variant="default" size="sm">
+              Primary Button
+            </Button>
+            <Button variant="default">Primary Button</Button>
+            <Button variant="default" size="lg">
+              Primary Button
+            </Button>
+          </div>
+
+          <div className="flex flex-col gap-4">
+            <Button variant="secondary" size="sm">
+              Secondary Button
+            </Button>
+            <Button variant="secondary">Secondary Button</Button>
+            <Button variant="secondary" size="lg">
+              Secondary Button
+            </Button>
+          </div>
+
+          <div className="flex flex-col gap-4">
+            <Button variant="outline" size="sm">
+              <RefreshLeftIcon />
+              Outline Button
+            </Button>
+            <Button variant="outline">
+              <RefreshLeftIcon />
+              Outline Button
+            </Button>
+            <Button variant="outline" size="lg">
+              <RefreshLeftIcon />
+              Outline Button
+            </Button>
+          </div>
+
+          <div className="flex flex-col gap-4">
+            <Button variant="destructive" size="sm">
+              Destructive Button
+            </Button>
+            <Button variant="destructive">Destructive Button</Button>
+            <Button variant="destructive" size="lg">
+              Destructive Button
+            </Button>
+          </div>
         </div>
         <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
           <li className="mb-2 tracking-[-.01em]">
