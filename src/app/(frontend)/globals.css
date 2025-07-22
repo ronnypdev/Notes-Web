@@ -34,6 +34,7 @@
 
   --shadow-btn-focus: var(--box-shadow-btn-focus);
   --shadow-btn-secondary-hover: var(--box-shadow-btn-secondary-hover);
+  --shadow-toast: var(--box-shadow-toast);
 
   /* Spacing Variables */
   --spacing-0: 0rem;
@@ -121,6 +122,8 @@
   --box-shadow-btn-focus: 0px 0px 0px 2px var(--neutral-0),
     0px 0px 0px 4px var(--neutral-400);
   --box-shadow-btn-secondary-hover: 0px 1px 2px 0px var(--neutral-950/[.03]);
+
+  --box-shadow-toast: 0px 16px 32px -12px var(--neutral-950/[.10]);
 
   /* Grid System Variables */
   --grid-columns-desktop: 12;
