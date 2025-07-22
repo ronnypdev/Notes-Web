@@ -23,6 +23,7 @@ export { default as CloseIcon } from './CloseIcon';
 export { default as AlertCircleIcon } from './AlertCircleIcon';
 export { default as TargetIcon } from './TargetIcon';
 export { default as CheckIcon } from './CheckIcon';
+export { default as CheckCircleIcon } from './CheckCircleIcon';
 export { default as InfoIcon } from './InfoIcon';
 export { default as FocusIcon } from './FocusIcon';
 export { default as RefreshLeftIcon } from './RefreshLeftIcon';
