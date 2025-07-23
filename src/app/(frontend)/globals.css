@@ -85,6 +85,10 @@
   --grid-margin-mobile: 1rem;
 
   --sidebar-width: 17.1875rem;
+  --leading-line-normal: var(--line-height);
+  --leading-line-sm: var(--line-height-small);
+
+  --tracking-tighter-xxs: var(--letter-spacing-extra-tight);
 }
 
 :root {
@@ -143,6 +147,10 @@
   --grid-margin-mobile: 1rem;
 
   --sidebar-width: 17.1875rem;
+  --line-height: 16px;
+  --line-height-small: 14.4px;
+
+  --letter-spacing-extra-tight: -0.0125em;
 }
 
 .dark {
