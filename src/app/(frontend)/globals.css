@@ -34,6 +34,7 @@
 
   --shadow-btn-focus: var(--box-shadow-btn-focus);
   --shadow-btn-secondary-hover: var(--box-shadow-btn-secondary-hover);
+  --shadow-toast: var(--box-shadow-toast);
 
   /* Spacing Variables */
   --spacing-0: 0rem;
@@ -84,6 +85,10 @@
   --grid-margin-mobile: 1rem;
 
   --sidebar-width: 17.1875rem;
+  --leading-line-normal: var(--line-height);
+  --leading-line-sm: var(--line-height-small);
+
+  --tracking-tighter-xxs: var(--letter-spacing-extra-tight);
 }
 
 :root {
@@ -122,6 +127,8 @@
     0px 0px 0px 4px var(--neutral-400);
   --box-shadow-btn-secondary-hover: 0px 1px 2px 0px var(--neutral-950/[.03]);
 
+  --box-shadow-toast: 0px 16px 32px -12px var(--neutral-950/[.10]);
+
   /* Grid System Variables */
   --grid-columns-desktop: 12;
   --grid-columns-tablet: 8;
@@ -140,6 +147,10 @@
   --grid-margin-mobile: 1rem;
 
   --sidebar-width: 17.1875rem;
+  --line-height: 16px;
+  --line-height-small: 14.4px;
+
+  --letter-spacing-extra-tight: -0.0125em;
 }
 
 .dark {
