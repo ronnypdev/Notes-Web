@@ -9,43 +9,53 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
+import { TrashIcon, DownloadIcon } from '@/components/icons';
 
-export const Modal = () => {
+interface ModalProps {
+  type: 'delete' | 'archive';
+}
+
+export const Modal = ({ type }: ModalProps) => {
   return (
     <Dialog>
-      <form>
-        <DialogTrigger asChild>
-          <Button variant="outline">Open Dialog</Button>
-        </DialogTrigger>
-        <DialogContent className="sm:max-w-[425px]">
+      <DialogTrigger asChild>
+        <Button variant="outline">Open Dialog</Button>
+      </DialogTrigger>
+      <DialogContent className="max-w-full border-none">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            {type === 'delete' ? (
+              <TrashIcon className="size-6 text-neutral-400" />
+            ) : (
+              <DownloadIcon className="size-6 text-neutral-400" />
+            )}
+          </div>
           <DialogHeader>
-            <DialogTitle>Edit profile</DialogTitle>
+            <DialogTitle>
+              {type === 'delete' ? 'Delete Note' : 'Archive Note'}
+            </DialogTitle>
             <DialogDescription>
-              Make changes to your profile here. Click save when you&apos;re
-              done.
+              {type === 'delete'
+                ? 'Are you sure you want to permanently delete this note? This action cannot be undone'
+                : 'Are you sure you want to archive this note? You can find it in the Archived Notes section and restore it anytime.'}
             </DialogDescription>
           </DialogHeader>
-          <div className="grid gap-4">
-            <div className="grid gap-3">
-              <Label htmlFor="name-1">Name</Label>
-              <Input id="name-1" name="name" defaultValue="Pedro Duarte" />
-            </div>
-            <div className="grid gap-3">
-              <Label htmlFor="username-1">Username</Label>
-              <Input id="username-1" name="username" defaultValue="@peduarte" />
-            </div>
-          </div>
-          <DialogFooter>
-            <DialogClose asChild>
-              <Button variant="outline">Cancel</Button>
-            </DialogClose>
-            <Button type="submit">Save changes</Button>
-          </DialogFooter>
-        </DialogContent>
-      </form>
+        </div>
+
+        <DialogFooter className="border-t border-solid border-neutral-200">
+          <DialogClose asChild>
+            <Button variant="secondary">Cancel</Button>
+          </DialogClose>
+          {type === 'delete' ? (
+            <Button type="submit" variant="destructive">
+              Delete Note
+            </Button>
+          ) : (
+            <Button type="submit">Archive Note</Button>
+          )}
+        </DialogFooter>
+      </DialogContent>
     </Dialog>
   );
 };
