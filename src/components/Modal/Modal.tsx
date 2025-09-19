@@ -23,19 +23,19 @@ export const Modal = ({ type }: ModalProps) => {
         <Button variant="outline">Open Dialog</Button>
       </DialogTrigger>
       <DialogContent className="max-w-full border-none">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
+        <div className="flex items-center justify-between gap-4">
+          <div className="flex items-center justify-center bg-neutral-100 rounded-lg p-3 self-start">
             {type === 'delete' ? (
-              <TrashIcon className="size-6 text-neutral-400" />
+              <TrashIcon className="size-6 text-neutral-950" />
             ) : (
-              <DownloadIcon className="size-6 text-neutral-400" />
+              <DownloadIcon className="size-6 text-neutral-950" />
             )}
           </div>
           <DialogHeader>
-            <DialogTitle>
+            <DialogTitle className="font-sans font-semibold">
               {type === 'delete' ? 'Delete Note' : 'Archive Note'}
             </DialogTitle>
-            <DialogDescription>
+            <DialogDescription className="font-sans font-normal">
               {type === 'delete'
                 ? 'Are you sure you want to permanently delete this note? This action cannot be undone'
                 : 'Are you sure you want to archive this note? You can find it in the Archived Notes section and restore it anytime.'}
@@ -43,7 +43,7 @@ export const Modal = ({ type }: ModalProps) => {
           </DialogHeader>
         </div>
 
-        <DialogFooter className="border-t border-solid border-neutral-200">
+        <DialogFooter className="border-t border-solid border-neutral-200 pt-4">
           <DialogClose asChild>
             <Button variant="secondary">Cancel</Button>
           </DialogClose>
