@@ -25,5 +25,6 @@ export { default as TargetIcon } from './TargetIcon';
 export { default as CheckIcon } from './CheckIcon';
 export { default as CheckCircleIcon } from './CheckCircleIcon';
 export { default as InfoIcon } from './InfoIcon';
+export { default as InfoCircleIcon } from './InfoCircleIcon';
 export { default as FocusIcon } from './FocusIcon';
 export { default as RefreshLeftIcon } from './RefreshLeftIcon';

@@ -11,7 +11,7 @@ export default function Home() {
           label="Changel Label"
           placeholder="Enter your name"
           type="text"
-          value=""
+          info="This is a hint text to help user."
           required
         />
         <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
