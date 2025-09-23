@@ -19,17 +19,19 @@ export default function InputField({
 }: InputFieldProps) {
   return (
     <>
-      <Label htmlFor={label}>
-        {label}
+      <div className="flex flex-col gap-2 max-w-full">
+        <Label htmlFor={label} className="self-start">
+          {label}
+        </Label>
         <Input
           id={label}
           placeholder={placeholder}
           type={type}
           required={required}
         />
-      </Label>
+      </div>
       {info && (
-        <div className="flex items-center gap-2 mt-1">
+        <div className="flex items-center gap-2">
           <InfoCircleIcon className="w-4 h-4 text-neutral-600" />
           <span className="text-sm text-neutral-600">{info}</span>
         </div>
