@@ -1,6 +1,6 @@
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { InfoCircleIcon } from '@/components/icons';
+import { InfoCircleIcon, ShowIcon } from '@/components/icons';
 
 interface InputFieldProps {
   label: string;
@@ -19,19 +19,22 @@ export default function InputField({
 }: InputFieldProps) {
   return (
     <>
-      <div className="flex flex-col gap-2 max-w-full">
+      <div className="flex flex-col gap-2 max-w-full w-full">
         <Label htmlFor={label} className="self-start">
           {label}
         </Label>
-        <Input
-          id={label}
-          placeholder={placeholder}
-          type={type}
-          required={required}
-        />
+        <div className="relative w-full flex items-center">
+          <Input
+            id={label}
+            placeholder={placeholder}
+            type={type}
+            required={required}
+          />
+          <ShowIcon className="w-4 h-4 text-neutral-600 absolute right-2 top-1/2 -translate-y-1/2" />
+        </div>
       </div>
       {info && (
-        <div className="flex items-center gap-2">
+        <div className="flex items-center relative bottom-250">
           <InfoCircleIcon className="w-4 h-4 text-neutral-600" />
           <span className="text-sm text-neutral-600">{info}</span>
         </div>
