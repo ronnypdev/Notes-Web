@@ -40,7 +40,7 @@ export default function InputField({
         </div>
       </div>
       {info && (
-        <div className="flex items-center relative bottom-250">
+        <div className="flex items-center relative bottom-5">
           <InfoCircleIcon className="w-4 h-4 text-neutral-600" />
           <span className="text-sm text-neutral-600">{info}</span>
         </div>
