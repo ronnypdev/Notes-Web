@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const ArrowLeftIcon = ({
   className,
@@ -6,16 +6,18 @@ const ArrowLeftIcon = ({
 }: React.SVGProps<SVGSVGElement>) => (
   <svg
     className={className}
+    width="24"
+    height="24"
     viewBox="0 0 24 24"
     fill="none"
-    stroke="currentColor"
-    strokeWidth={1.5}
-    strokeLinecap="round"
-    strokeLinejoin="round"
     xmlns="http://www.w3.org/2000/svg"
     {...props}>
-    <line x1="19" y1="12" x2="5" y2="12" />
-    <polyline points="12 19 5 12 12 5" />
+    <path
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M15.7499 20.414L7.33594 12L15.7499 3.586L17.1639 5L10.1639 12L17.1639 19L15.7499 20.414Z"
+      fill="currentColor"
+    />
   </svg>
 );
 
