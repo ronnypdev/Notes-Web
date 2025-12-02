@@ -1,6 +1,6 @@
 import React from "react";
 
-const InfoCircleIcon = ({
+const CloseRemoveIcon = ({
   className,
   ...props
 }: React.SVGProps<SVGSVGElement>) => (
@@ -13,14 +13,14 @@ const InfoCircleIcon = ({
     xmlns="http://www.w3.org/2000/svg"
     {...props}>
     <path
-      d="M3 12C3 16.9699 7.02908 21 12 21C16.9709 21 21 16.9699 21 12C21 7.02908 16.9709 3 12 3C7.02908 3 3 7.02908 3 12Z"
+      d="M6 6L18 18"
       stroke="currentColor"
       strokeWidth="1.5"
       strokeLinecap="round"
       strokeLinejoin="round"
     />
     <path
-      d="M12.0057 15.6932V11.3936M12 8.35426V8.29102"
+      d="M18 6L6 18"
       stroke="currentColor"
       strokeWidth="1.5"
       strokeLinecap="round"
@@ -29,4 +29,4 @@ const InfoCircleIcon = ({
   </svg>
 );
 
-export default InfoCircleIcon;
+export default CloseRemoveIcon;
