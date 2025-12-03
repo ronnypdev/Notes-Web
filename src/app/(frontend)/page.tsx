@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Logo from "@/components/Logo";
 import { Button } from "@/components/ui/button";
+import RefreshIcon from "@/components/icons/RefreshIcon";
 
 export default function Home() {
   return (
@@ -16,6 +17,9 @@ export default function Home() {
             <Button variant="default" size="sm">
               Primary Button
             </Button>
+            <Button variant="disabled" size="lg">
+              Primary Button
+            </Button>
           </div>
           <div className="button-group-item flex flex-col gap-4">
             <Button variant="secondary">Secondary Button</Button>
@@ -25,6 +29,7 @@ export default function Home() {
             <Button variant="secondary" size="sm">
               Secondary Button
             </Button>
+            <Button variant="secondary">Secondary Button</Button>
           </div>
           <div className="button-group-item flex flex-col gap-4">
             <Button variant="outline">Outline Button</Button>
@@ -34,6 +39,7 @@ export default function Home() {
             <Button variant="outline" size="sm">
               Outline Button
             </Button>
+            <Button variant="outline">Outline Button</Button>
           </div>
           <div className="button-group-item flex flex-col gap-4">
             <Button variant="destructive">Destructive Button</Button>
@@ -43,6 +49,7 @@ export default function Home() {
             <Button variant="destructive" size="sm">
               Destructive Button
             </Button>
+            <Button variant="destructive">Destructive Button</Button>
           </div>
           <div className="button-group-item flex flex-col gap-4">
             <Button variant="ghost">Ghost Button</Button>
@@ -52,6 +59,7 @@ export default function Home() {
             <Button variant="ghost" size="sm">
               Ghost Button
             </Button>
+            <Button variant="ghost">Ghost Button</Button>
           </div>
         </div>
         <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">

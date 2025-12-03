@@ -17,6 +17,8 @@ const buttonVariants = cva(
         destructive: "bg-red-500 text-white shadow-xs hover:bg-red-500/90",
         ghost:
           "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
+        disabled:
+          "bg-neutral-100 text-neutral-300 py-[var(--spacing-150)] px-[var(--spacing-200)] pointer-events-none",
         link: "text-primary underline-offset-4 hover:underline",
       },
       size: {
