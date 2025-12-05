@@ -1,11 +1,11 @@
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { InfoCircleIcon, ShowIcon, SearchIcon } from '@/components/icons';
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { InfoCircleIcon, ShowIcon, SearchIcon } from "@/components/icons";
 
 interface InputFieldProps {
-  label: string;
+  label?: string;
   placeholder: string;
-  type: 'text' | 'number' | 'email' | 'password' | 'search';
+  type: "text" | "number" | "email" | "password" | "search";
   required?: boolean;
   info?: string;
 }
@@ -24,17 +24,17 @@ export default function InputField({
           {label}
         </Label>
         <div className="relative w-full flex items-center">
-          {type === 'search' && (
+          {type === "search" && (
             <SearchIcon className="w-5 h-5 text-neutral-600 absolute left-2 -top-0.5 translate-y-1/2" />
           )}
           <Input
-            className={`${type === 'search' ? 'px-8' : ''}`}
+            className={`${type === "search" ? "px-8" : ""}`}
             id={label}
             placeholder={placeholder}
             type={type}
             required={required}
           />
-          {type === 'password' && (
+          {type === "password" && (
             <ShowIcon className="w-4 h-4 text-neutral-600 absolute right-2 top-1/2 -translate-y-1/2" />
           )}
         </div>
