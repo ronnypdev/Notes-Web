@@ -3,15 +3,11 @@ import Link from "next/link";
 import Image from "next/image";
 const img = "/logo.svg"; // Replace with actual SVG path if available in public folder
 
-interface LogoProps {
-  stylesName?: string;
-}
-
-export default function Logo({ stylesName }: LogoProps) {
+export default function Logo() {
   return (
     <Link
       href="/"
-      className={`box-border content-stretch flex flex-row gap-2.5 items-center justify-start p-0 relative size-full ${stylesName}`}
+      className="box-border content-stretch flex flex-row gap-2.5 items-center justify-start p-0 relative w-24 h-7"
       data-name="logo">
       <div className="relative shrink-0" data-name="Feather Notes Logo">
         <Image
