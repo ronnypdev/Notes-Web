@@ -22,9 +22,11 @@ export default function InputField({
   return (
     <>
       <div className="flex flex-col gap-2 max-w-full w-full">
-        <Label htmlFor={label} className="self-start">
-          {labelName}
-        </Label>
+        {label && (
+          <Label htmlFor={label} className="self-start">
+            {labelName}
+          </Label>
+        )}
         <div className="relative w-full flex items-center">
           {type === "search" && (
             <SearchIcon className="w-5 h-5 text-neutral-600 absolute left-2 -top-0.5 translate-y-1/2" />
