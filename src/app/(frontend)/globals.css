@@ -1,5 +1,5 @@
-@import 'tailwindcss';
-@import 'tw-animate-css';
+@import "tailwindcss";
+@import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -190,7 +190,7 @@
     font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   }
   .font-jetbrains-mono {
-    font-family: var(--font-jetbrains-mono), ui-monospace, 'Courier New',
+    font-family: var(--font-jetbrains-mono), ui-monospace, "Courier New",
       monospace;
   }
   .font-noto-serif {
