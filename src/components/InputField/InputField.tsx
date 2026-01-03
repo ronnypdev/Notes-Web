@@ -3,7 +3,7 @@ import { Label } from "@/components/ui/label";
 import { InfoCircleIcon, ShowIcon, SearchIcon } from "@/components/icons";
 
 interface InputFieldProps {
-  label?: string;
+  label: string;
   labelName?: string;
   placeholder: string;
   type: "text" | "number" | "email" | "password" | "search";
