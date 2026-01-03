@@ -4,6 +4,7 @@ import { InfoCircleIcon, ShowIcon, SearchIcon } from "@/components/icons";
 
 interface InputFieldProps {
   label?: string;
+  labelName?: string;
   placeholder: string;
   type: "text" | "number" | "email" | "password" | "search";
   required?: boolean;
@@ -12,6 +13,7 @@ interface InputFieldProps {
 
 export default function InputField({
   label,
+  labelName,
   placeholder,
   type,
   required,
@@ -21,7 +23,7 @@ export default function InputField({
     <>
       <div className="flex flex-col gap-2 max-w-full w-full">
         <Label htmlFor={label} className="self-start">
-          {label}
+          {labelName}
         </Label>
         <div className="relative w-full flex items-center">
           {type === "search" && (

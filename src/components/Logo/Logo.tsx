@@ -4,14 +4,14 @@ import Image from "next/image";
 const img = "/logo.svg"; // Replace with actual SVG path if available in public folder
 
 interface LogoProps {
-  className?: string;
+  stylesName?: string;
 }
 
-export default function Logo({ className }: LogoProps) {
+export default function Logo({ stylesName }: LogoProps) {
   return (
     <Link
       href="/"
-      className={`box-border content-stretch flex flex-row gap-2.5 items-center justify-start p-0 relative size-full ${className}`}
+      className={`box-border content-stretch flex flex-row gap-2.5 items-center justify-start p-0 relative size-full ${stylesName}`}
       data-name="logo">
       <div className="relative shrink-0" data-name="Feather Notes Logo">
         <Image

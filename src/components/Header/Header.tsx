@@ -6,12 +6,13 @@ export default function Header() {
   return (
     <>
       <header className="container flex items-center justify-between my-0 mx-auto bg-neutral-100 md:bg-transparent border-none md:border-solid md:border-b md:border-b-neutral-200 px-[var(--spacing-400)] py-3.5">
-        <Logo className="block md:hidden" />
+        <Logo stylesName="block md:hidden" />
         <h1 className="font-sans font-bold text-2xl hidden md:block">
           All Notes
         </h1>
         <div className="hidden md:flex justify-center items-center gap-4 w-[358px] max-w-full h-11">
           <InputField
+            label="search-notes"
             type="search"
             placeholder="Search by title, content, or tags…"
           />
