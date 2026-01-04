@@ -3,8 +3,6 @@ import React from "react";
 const LockIcon = ({ className, ...props }: React.SVGProps<SVGSVGElement>) => (
   <svg
     className={className}
-    width="18"
-    height="21"
     viewBox="0 0 18 21"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
