@@ -164,6 +164,11 @@
   }
 }
 
+@layer components {
+  .grid-box {
+  }
+}
+
 @layer utilities {
   /* Font Weight Utilities */
   .font-light {
