@@ -160,12 +160,37 @@
 
 @layer base {
   body {
-    @apply bg-background text-foreground font-sans;
+    @apply bg-background text-foreground font-sans h-dvh;
   }
 }
 
 @layer components {
   .grid-box {
+    min-height: 100dvh;
+    display: grid;
+    grid-template-columns: 242px 1fr 1fr 242px;
+    grid-template-rows: auto 1fr 1fr auto;
+    grid-template-areas:
+      "sidebarleft header header header"
+      "sidebarleft main main sidebarright"
+      "sidebarleft main main sidebarright"
+      "sidebarleft main main sidebarright";
+  }
+
+  .grid-box-header {
+    grid-area: header;
+  }
+
+  .grid-box-sidebar-left {
+    grid-area: sidebarleft;
+  }
+
+  .grid-box-sidebar-main {
+    grid-area: main;
+  }
+
+  .grid-box-sidebar-right {
+    grid-area: sidebarright;
   }
 }
 

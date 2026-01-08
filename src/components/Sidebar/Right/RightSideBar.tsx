@@ -1,5 +1,5 @@
-import React from "react";
-
 export default function RightSideBar() {
-  return <aside>Right sidebar</aside>;
+  return (
+    <aside className="grid-box-sidebar-right bg-red-400">Right sidebar</aside>
+  );
 }
