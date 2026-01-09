@@ -168,13 +168,14 @@
   .grid-box {
     min-height: 100dvh;
     display: grid;
-    grid-template-columns: 242px 1fr 1fr 242px;
+    grid-template-columns: 15.125rem 15.125rem 1fr 15.125rem;
     grid-template-rows: auto 1fr 1fr auto;
     grid-template-areas:
       "sidebarleft header header header"
       "sidebarleft main main sidebarright"
       "sidebarleft main main sidebarright"
       "sidebarleft main main sidebarright";
+    gap: 1.5rem;
   }
 
   .grid-box-header {
@@ -228,52 +229,5 @@
   }
   .font-source-code-pro {
     font-family: var(--font-source-code-pro), ui-monospace, monospace;
-  }
-
-  /* Grid System Utilities */
-  .grid-desktop {
-    display: grid;
-    grid-template-columns: repeat(
-      var(--grid-columns-desktop),
-      var(--grid-column-width-desktop)
-    );
-    gap: var(--grid-gutter-desktop);
-    margin-left: var(--grid-margin-desktop);
-    margin-right: var(--grid-margin-desktop);
-  }
-  .sidebar {
-    width: var(--sidebar-width);
-  }
-  /* Hide on tablet and below */
-  @media (max-width: 1024px) {
-    .grid-desktop {
-      display: none;
-    }
-    .grid-tablet {
-      display: grid;
-      grid-template-columns: repeat(
-        var(--grid-columns-tablet),
-        var(--grid-column-width-tablet)
-      );
-      gap: var(--grid-gutter-tablet);
-      margin-left: var(--grid-margin-tablet);
-      margin-right: var(--grid-margin-tablet);
-    }
-  }
-  /* Hide on mobile and below */
-  @media (max-width: 640px) {
-    .grid-tablet {
-      display: none;
-    }
-    .grid-mobile {
-      display: grid;
-      grid-template-columns: repeat(
-        var(--grid-columns-mobile),
-        var(--grid-column-width-mobile)
-      );
-      gap: var(--grid-gutter-mobile);
-      margin-left: var(--grid-margin-mobile);
-      margin-right: var(--grid-margin-mobile);
-    }
   }
 }
