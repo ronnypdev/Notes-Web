@@ -160,7 +160,7 @@
 
 @layer base {
   body {
-    @apply bg-background text-foreground font-sans h-dvh;
+    @apply bg-background text-foreground font-sans h-dvh px-8 border-b border-[var(--neutral-200)];
   }
 }
 
