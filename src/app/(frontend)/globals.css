@@ -187,6 +187,7 @@
 
   .grid-box-sidebar-main {
     grid-area: main;
+    max-width: 100%;
   }
 
   .grid-box-sidebar-right {
