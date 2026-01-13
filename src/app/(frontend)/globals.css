@@ -68,21 +68,19 @@
   --radius-full: 62.4375rem;
 
   /* Grid System Variables */
-  --grid-columns-desktop: 12;
-  --grid-columns-tablet: 8;
-  --grid-columns-mobile: 4;
+  /* Sidebar measurements - collapse gracefully when space is tight */
+  --sidebar-left: minmax(0, var(--sidebar-width));
+  --sidebar-right: minmax(0, var(--sidebar-width));
 
-  --grid-column-width-desktop: 4.375rem;
-  --grid-column-width-tablet: 4.1875rem;
-  --grid-column-width-mobile: 4.375rem;
+  /* Notes list section - maintains minimum width, expands fluidly */
+  --notes-list-min: 15.125rem;
+  --notes-list: minmax(var(--notes-list-min), min(25rem, 20vw));
 
-  --grid-gutter-desktop: 1.5rem;
-  --grid-gutter-tablet: 1.5rem;
-  --grid-gutter-mobile: 1rem;
+  /* Main content - fluid with intelligent max-width constraint */
+  --main-content: minmax(0, min(100%, clamp(35rem, 55vw, 90rem)));
 
-  --grid-margin-desktop: 2rem;
-  --grid-margin-tablet: 2rem;
-  --grid-margin-mobile: 1rem;
+  /* Responsive gap that scales with viewport */
+  --grid-gap: clamp(0.5rem, 1.5vw, 1.5rem);
 
   --sidebar-width: 17.1875rem;
   --leading-line-normal: var(--line-height);
@@ -129,22 +127,19 @@
 
   --box-shadow-toast: 0px 16px 32px -12px var(--neutral-950/[.10]);
 
-  /* Grid System Variables */
-  --grid-columns-desktop: 12;
-  --grid-columns-tablet: 8;
-  --grid-columns-mobile: 4;
+  /* Sidebar measurements - collapse gracefully when space is tight */
+  --sidebar-left: minmax(0, var(--sidebar-width));
+  --sidebar-right: minmax(0, var(--sidebar-width));
 
-  --grid-column-width-desktop: 4.375rem;
-  --grid-column-width-tablet: 4.1875rem;
-  --grid-column-width-mobile: 4.375rem;
+  /* Notes list section - maintains minimum width, expands fluidly */
+  --notes-list-min: 15.125rem;
+  --notes-list: minmax(var(--notes-list-min), min(25rem, 20vw));
 
-  --grid-gutter-desktop: 1.5rem;
-  --grid-gutter-tablet: 1.5rem;
-  --grid-gutter-mobile: 1rem;
+  /* Main content - fluid with intelligent max-width constraint */
+  --main-content: minmax(0, min(100%, clamp(35rem, 55vw, 90rem)));
 
-  --grid-margin-desktop: 2rem;
-  --grid-margin-tablet: 2rem;
-  --grid-margin-mobile: 1rem;
+  /* Responsive gap that scales with viewport */
+  --grid-gap: clamp(0.5rem, 1.5vw, 1.5rem);
 
   --sidebar-width: 17.1875rem;
   --line-height: 16px;
@@ -160,7 +155,7 @@
 
 @layer base {
   body {
-    @apply bg-background text-foreground font-sans h-dvh px-8 border-b border-[var(--neutral-200)];
+    @apply bg-background text-foreground font-sans h-dvh border-b border-[var(--neutral-200)];
   }
 }
 
@@ -168,33 +163,75 @@
   .grid-box {
     min-height: 100dvh;
     display: grid;
-    grid-template-columns: 15.125rem 15.125rem 1fr 15.125rem;
-    grid-template-rows: auto 1fr 1fr auto;
+
+    /* Mobile-first: Single column layout */
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
     grid-template-areas:
-      "sidebarleft header header header"
-      "sidebarleft main main sidebarright"
-      "sidebarleft main main sidebarright"
-      "sidebarleft main main sidebarright";
+      "header"
+      "main";
+    gap: 0;
   }
 
+  /* Mobile & Tablet: Hide all sidebars */
+  .grid-box-sidebar-left,
+  .grid-box-sidebar-right {
+    display: none;
+  }
+
+  /* Desktop: Full 4-column layout */
+  @media (min-width: 1024px) {
+    .grid-box {
+      grid-template-columns:
+        minmax(0, var(--sidebar-width))
+        minmax(15.125rem, 1fr)
+        minmax(0, 1fr)
+        minmax(0, var(--sidebar-width));
+      grid-template-rows: auto 1fr;
+      grid-template-areas:
+        "sidebarleft header header header"
+        "sidebarleft main main sidebarright";
+    }
+
+    .grid-box-sidebar-left {
+      display: block;
+      grid-area: sidebarleft;
+      min-width: 0;
+      overflow: hidden;
+    }
+
+    .grid-box-sidebar-right {
+      display: block;
+      grid-area: sidebarright;
+      min-width: 0;
+      overflow: hidden;
+    }
+  }
+
+  /* Grid area assignments */
   .grid-box-header {
     grid-area: header;
   }
 
   .grid-box-sidebar-left {
     grid-area: sidebarleft;
+    min-width: 0;
+    overflow: hidden;
   }
 
   .grid-box-sidebar-main {
     grid-area: main;
+    min-width: 0;
     max-width: 100%;
+    overflow-x: hidden;
   }
 
   .grid-box-sidebar-right {
     grid-area: sidebarright;
+    min-width: 0;
+    overflow: hidden;
   }
 }
-
 @layer utilities {
   /* Font Weight Utilities */
   .font-light {

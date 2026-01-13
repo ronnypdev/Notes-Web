@@ -7,7 +7,7 @@ export default function Logo() {
   return (
     <Link
       href="/"
-      className="box-border content-stretch flex flex-row gap-2.5 items-center justify-start p-0 relative w-24 h-7 md:hidden"
+      className="box-border content-stretch flex flex-row gap-2.5 items-center justify-start p-0 relative w-24 h-7 lg:hidden"
       data-name="logo">
       <div className="relative shrink-0" data-name="Feather Notes Logo">
         <Image
