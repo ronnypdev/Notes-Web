@@ -5,7 +5,7 @@ import { SettingIcon } from "../icons";
 export default function Header() {
   return (
     <>
-      <header className="w-full max-w-full flex items-center justify-between my-0 mx-auto bg-neutral-100 lg:bg-transparent border-none lg:border-solid lg:border-b lg:border-b-neutral-200 px-[var(--spacing-400)] py-3.5 grid-box-header">
+      <header className="w-full max-w-full flex items-center justify-between my-0 mx-auto bg-neutral-100 lg:bg-transparent border-none lg:border-solid lg:border-b lg:border-b-neutral-200 px-[var(--spacing-400)] py-3.5">
         <Logo />
         <h1 className="font-sans font-bold text-2xl hidden lg:block">
           All Notes
