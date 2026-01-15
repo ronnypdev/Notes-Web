@@ -6,7 +6,7 @@ export default function Main({
   children: React.ReactNode;
 }>) {
   return (
-    <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start grid-box-sidebar-main border-r border-neutral-200">
+    <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
       {children}
     </main>
   );

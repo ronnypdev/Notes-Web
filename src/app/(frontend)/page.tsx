@@ -5,7 +5,7 @@ import RightSideBar from "@/components/Sidebar/Right/RightSideBar";
 
 export default function Home() {
   return (
-    <div className="grid-box max-w-full">
+    <div className="max-w-full">
       <Header />
       <LeftSideBar />
       <Main>
