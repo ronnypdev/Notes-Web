@@ -5,7 +5,7 @@ import {
   Source_Code_Pro,
   Noto_Serif,
 } from "next/font/google";
-import "./globals.css";
+import "../globals.css";
 
 const inter = Inter({
   variable: "--font-inter",
