@@ -7,10 +7,12 @@ export default function FrontendLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div>
+    <>
       <Header />
-      {children}
+      <main className="flex flex-col gap-[32px] items-center sm:items-start">
+        {children}
+      </main>
       <Footer />
-    </div>
+    </>
   );
 }

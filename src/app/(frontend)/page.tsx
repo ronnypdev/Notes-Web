@@ -1,13 +1,9 @@
-import Header from "@/components/Header/Header";
-import Main from "@/components/Main/Main";
+import LeftSideBar from "@/components/Sidebar/Left/LeftSideBar";
 
 export default function Home() {
   return (
     <div className="max-w-full">
-      <Header />
-      <Main>
-        <h1>Main</h1>
-      </Main>
+      <LeftSideBar />
     </div>
   );
 }
