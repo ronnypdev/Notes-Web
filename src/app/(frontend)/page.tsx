@@ -1,9 +1,9 @@
-import LeftSideBar from "@/components/Sidebar/Left/LeftSideBar";
-
-export default function Home() {
+export default async function FrontendPage() {
   return (
-    <div className="max-w-full">
-      <LeftSideBar />
-    </div>
+    <>
+      <section className="grid-content-container">
+        <h1>Frontend Page</h1>
+      </section>
+    </>
   );
 }
