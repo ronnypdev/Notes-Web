@@ -13,10 +13,10 @@ export default async function FrontendLayout({
         <LeftSideBar />
         <SidebarInset>
           <Header />
+          <section className="flex flex-col gap-[32px] items-center sm:items-start">
+            {children}
+          </section>
         </SidebarInset>
-        <main className="flex flex-col gap-[32px] items-center sm:items-start">
-          {children}
-        </main>
       </SidebarProvider>
     </>
   );
