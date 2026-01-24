@@ -122,14 +122,19 @@
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
 
-  --box-shadow-btn-focus: 0px 0px 0px 2px var(--neutral-0),
-    0px 0px 0px 4px var(--neutral-400);
+  --box-shadow-btn-focus:
+    0px 0px 0px 2px var(--neutral-0), 0px 0px 0px 4px var(--neutral-400);
   --box-shadow-btn-secondary-hover: 0px 1px 2px 0px var(--neutral-950/[.03]);
 
   --box-shadow-toast: 0px 16px 32px -12px var(--neutral-950/[.10]);
 
+  --line-height: 16px;
+  --line-height-small: 14.4px;
+
+  --letter-spacing-extra-tight: -0.0125em;
+
   --sidebar-width: 17.1875rem;
-  --sidebar: oklch(0.985 0 0);
+  --sidebar: transparent;
   --sidebar-foreground: oklch(0.145 0 0);
   --sidebar-primary: oklch(0.205 0 0);
   --sidebar-primary-foreground: oklch(0.985 0 0);
@@ -137,27 +142,6 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: var(--neutral-200);
   --sidebar-ring: var(--neutral-200);
-
-  --line-height: 16px;
-  --line-height-small: 14.4px;
-
-  --letter-spacing-extra-tight: -0.0125em;
-
-  --sidebar: hsl(0 0% 98%);
-
-  --sidebar-foreground: var(--neutral-200);
-
-  --sidebar-primary: hsl(240 5.9% 10%);
-
-  --sidebar-primary-foreground: hsl(0 0% 98%);
-
-  --sidebar-accent: hsl(240 4.8% 95.9%);
-
-  --sidebar-accent-foreground: hsl(240 5.9% 10%);
-
-  --sidebar-border: hsl(220 13% 91%);
-
-  --sidebar-ring: hsl(217.2 91.2% 59.8%);
 }
 
 .dark {
@@ -205,8 +189,8 @@
     font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   }
   .font-jetbrains-mono {
-    font-family: var(--font-jetbrains-mono), ui-monospace, "Courier New",
-      monospace;
+    font-family:
+      var(--font-jetbrains-mono), ui-monospace, "Courier New", monospace;
   }
   .font-noto-serif {
     font-family: var(--font-noto-serif), ui-serif, serif;
