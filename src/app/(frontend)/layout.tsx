@@ -1,6 +1,7 @@
 import Header from "@/components/Header/Header";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import LeftSideBar from "@/components/Sidebar/Left/LeftSideBar";
+import RightSideBar from "@/components/Sidebar/Right/RightSideBar";
 
 export default async function FrontendLayout({
   children,
@@ -16,6 +17,7 @@ export default async function FrontendLayout({
           <section className="flex flex-col gap-[32px] items-center sm:items-start">
             {children}
           </section>
+          <RightSideBar />
         </SidebarInset>
       </SidebarProvider>
     </>
