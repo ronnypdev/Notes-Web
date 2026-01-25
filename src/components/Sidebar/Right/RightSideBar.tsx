@@ -3,7 +3,7 @@ import { ArchiveIcon, DeleteIcon } from "@/components/icons";
 
 export default function RightSideBar() {
   return (
-    <aside className="w-[var(--sidebar-width)] border-l border-solid border-neutral-200 bg-background p-4 flex flex-col gap-2">
+    <aside className="w-[var(--sidebar-width)] border-l border-solid border-neutral-200 bg-background p-4 lg:flex flex-col gap-2 hidden">
       <Button variant="outline" className="justify-start gap-2" size="lg">
         <ArchiveIcon />
         Archive Note
