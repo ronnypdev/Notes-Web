@@ -135,7 +135,7 @@
 
   --sidebar-width: 17.1875rem;
   --sidebar: transparent;
-  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-foreground: var(--neutral-200);
   --sidebar-primary: oklch(0.205 0 0);
   --sidebar-primary-foreground: oklch(0.985 0 0);
   --sidebar-accent: oklch(0.97 0 0);
