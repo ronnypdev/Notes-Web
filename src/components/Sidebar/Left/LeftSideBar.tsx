@@ -1,5 +1,12 @@
-import React from "react";
+import { Sidebar, SidebarFooter, SidebarHeader } from "@/components/ui/sidebar";
 
 export default function LeftSideBar() {
-  return <aside>Left sidebar</aside>;
+  return (
+    <>
+      <Sidebar side="left">
+        <SidebarHeader>Left Sidebar</SidebarHeader>
+        <SidebarFooter>footer</SidebarFooter>
+      </Sidebar>
+    </>
+  );
 }

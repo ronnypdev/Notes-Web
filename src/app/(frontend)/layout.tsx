@@ -1,56 +1,27 @@
-import type { Metadata } from "next";
-import {
-  Inter,
-  JetBrains_Mono,
-  Source_Code_Pro,
-  Noto_Serif,
-} from "next/font/google";
-import "./globals.css";
+import Header from "@/components/Header/Header";
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
+import LeftSideBar from "@/components/Sidebar/Left/LeftSideBar";
+import RightSideBar from "@/components/Sidebar/Right/RightSideBar";
 
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800"],
-  display: "swap",
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  variable: "--font-jetbrains-mono",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800"],
-  display: "swap",
-});
-
-const sourceCodePro = Source_Code_Pro({
-  variable: "--font-source-code-pro",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800"],
-  display: "swap",
-});
-
-const notoSerif = Noto_Serif({
-  variable: "--font-noto-serif",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800"],
-  display: "swap",
-});
-
-export const metadata: Metadata = {
-  title: "Notes Web App",
-  description: "A modern note-taking application",
-};
-
-export default function RootLayout({
+export default async function FrontendLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${inter.variable} ${jetbrainsMono.variable} ${sourceCodePro.variable} ${notoSerif.variable} antialiased`}>
-        {children}
-      </body>
-    </html>
+    <>
+      <SidebarProvider>
+        <LeftSideBar />
+        <SidebarInset>
+          <Header />
+          <div className="flex flex-1">
+            <main className="flex-1 p-4">
+              {children}
+            </main>
+            <RightSideBar />
+          </div>
+        </SidebarInset>
+      </SidebarProvider>
+    </>
   );
 }
