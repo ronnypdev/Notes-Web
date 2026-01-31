@@ -5,10 +5,10 @@ import {
   SidebarGroup,
   SidebarGroupLabel,
   SidebarFooter,
-} from "@/components/ui/sidebar";
-import Link from "next/link";
-import Logo from "@/components/Logo/Logo";
-import { ArchiveIcon, HomeIcon, ChevronRightIcon } from "@/components/icons";
+} from '@/components/ui/sidebar';
+import Link from 'next/link';
+import Logo from '@/components/Logo/Logo';
+import { ArchiveIcon, HomeIcon, ChevronRightIcon } from '@/components/icons';
 
 export default function LeftSideBar() {
   return (
@@ -21,14 +21,14 @@ export default function LeftSideBar() {
           <div className="flex flex-col gap-2">
             <Link
               href="/allnotes"
-              className="py-2 px-3 flex items-center gap-2 text-neutral-950">
+              className="py-1.5 px-3 flex items-center gap-2 text-neutral-950">
               <HomeIcon className="w-6 h-6" />
               <span>All Notes</span>
               <ChevronRightIcon className="w-6 h-6 ml-auto" />
             </Link>
             <Link
               href="/archivenotes"
-              className="py-2 px-3 flex items-center gap-2 text-neutral-950">
+              className="py-1.5 px-3 flex items-center gap-2 text-neutral-950">
               <ArchiveIcon className="w-6 h-6" />
               <span>Archived Notes</span>
               <ChevronRightIcon className="w-6 h-6 ml-auto" />
