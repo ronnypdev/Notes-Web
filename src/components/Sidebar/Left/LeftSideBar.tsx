@@ -22,14 +22,14 @@ export default function LeftSideBar() {
             <Link
               href="/allnotes"
               className="py-1.5 px-3 flex items-center gap-2 text-neutral-950">
-              <HomeIcon className="w-6 h-6" />
+              <HomeIcon className="w-5 h-5" />
               <span>All Notes</span>
               <ChevronRightIcon className="w-6 h-6 ml-auto" />
             </Link>
             <Link
               href="/archivenotes"
               className="py-1.5 px-3 flex items-center gap-2 text-neutral-950">
-              <ArchiveIcon className="w-6 h-6" />
+              <ArchiveIcon className="w-5 h-5" />
               <span>Archived Notes</span>
               <ChevronRightIcon className="w-6 h-6 ml-auto" />
             </Link>
