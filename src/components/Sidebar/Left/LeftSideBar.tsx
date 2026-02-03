@@ -11,7 +11,12 @@ import {
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import Logo from '@/components/Logo/Logo';
-import { ArchiveIcon, HomeIcon, ChevronRightIcon } from '@/components/icons';
+import {
+  ArchiveIcon,
+  HomeIcon,
+  ChevronRightIcon,
+  TagIcon,
+} from '@/components/icons';
 import clsx from 'clsx';
 
 export default function LeftSideBar() {
@@ -63,51 +68,52 @@ export default function LeftSideBar() {
         </SidebarHeader>
         <SidebarContent>
           <SidebarGroup>
-            <SidebarGroupLabel>Tags</SidebarGroupLabel>
+            <SidebarGroupLabel className="text-neutral-500 font-sans text-sm font-medium leading-[1.2] tracking-[-0.2px]">
+              Tags
+            </SidebarGroupLabel>
             <ul className="tags">
-              <li>
+              <li className="flex py-[0.625rem] px-[0.75rem] items-center gap-[0.5rem] self-stretch">
+                <TagIcon className="w-5 h-5 text-neutral-700" />
+                <span className="text-neutral-700 font-sans text-sm font-medium leading-[1.2] tracking-[-0.0125rem]">Cooking</span>
+              </li>
+              <li className="flex py-[0.625rem] px-[0.75rem] items-center gap-[0.5rem] self-stretch">
+                <TagIcon className="w-5 h-5 text-neutral-700" />
+                <span className="text-neutral-700 font-sans text-sm font-medium leading-[1.2] tracking-[-0.0125rem]">Dev</span>
+              </li>
+              <li className="flex py-[0.625rem] px-[0.75rem] items-center gap-[0.5rem] self-stretch">
+                <TagIcon className="w-5 h-5 text-neutral-700" />
+                <span className="text-neutral-700 font-sans text-sm font-medium leading-[1.2] tracking-[-0.0125rem]">Fitness</span>
+              </li>
+              <li className="flex py-[0.625rem] px-[0.75rem] items-center gap-[0.5rem] self-stretch">
+                <TagIcon className="w-5 h-5 text-neutral-700" />
+                <span className="text-neutral-700 font-sans text-sm font-medium leading-[1.2] tracking-[-0.0125rem]">Health</span>
+              </li>
+              <li className="flex py-[0.625rem] px-[0.75rem] items-center gap-[0.5rem] self-stretch">
+                <TagIcon className="w-5 h-5 text-neutral-700" />
+                <span className="text-neutral-700 font-sans text-sm font-medium leading-[1.2] tracking-[-0.0125rem]">Personal</span>
+              </li>
+              <li className="flex py-[0.625rem] px-[0.75rem] items-center gap-[0.5rem] self-stretch">
+                <TagIcon className="w-5 h-5 text-neutral-700" />
                 <a href="#">
-                  <span>Cooking</span>
+                  <span className="text-neutral-700 font-sans text-sm font-medium leading-[1.2] tracking-[-0.0125rem]">React</span>
                 </a>
               </li>
-              <li>
+              <li className="flex py-[0.625rem] px-[0.75rem] items-center gap-[0.5rem] self-stretch">
+                <TagIcon className="w-5 h-5 text-neutral-700" />
                 <a href="#">
-                  <span>Dev</span>
+                  <span className="text-neutral-700 font-sans text-sm font-medium leading-[1.2] tracking-[-0.0125rem]">Shopping</span>
                 </a>
               </li>
-              <li>
+              <li className="flex py-[0.625rem] px-[0.75rem] items-center gap-[0.5rem] self-stretch">
+                <TagIcon className="w-5 h-5 text-neutral-700" />
                 <a href="#">
-                  <span>Fitness</span>
+                  <span className="text-neutral-700 font-sans text-sm font-medium leading-[1.2] tracking-[-0.0125rem]">Travel</span>
                 </a>
               </li>
-              <li>
+              <li className="flex py-[0.625rem] px-[0.75rem] items-center gap-[0.5rem] self-stretch">
+                <TagIcon className="w-5 h-5 text-neutral-700" />
                 <a href="#">
-                  <span>Health</span>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <span>Personal</span>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <span>React</span>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <span>Shopping</span>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <span>Travel</span>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <span>TypeScript</span>
+                  <span className="text-neutral-700 font-sans text-sm font-medium leading-[1.2] tracking-[-0.0125rem]">TypeScript</span>
                 </a>
               </li>
             </ul>
