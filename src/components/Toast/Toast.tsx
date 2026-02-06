@@ -1,4 +1,4 @@
-import { CheckCircleIcon, CloseIcon } from '@/components/icons';
+import { CheckCircleIcon, CloseRemoveIcon } from '@/components/icons';
 import Link from 'next/link';
 
 interface ToastProps {
@@ -42,7 +42,7 @@ export const Toast = ({ message, type, routeLink }: ToastProps) => {
           className="text-xs text-neutral-950 underline font-sans font-normal leading-line-sm tracking-tighter-xxs">
           {toastNotificationType(type)}
         </Link>
-        <CloseIcon className="size-4 text-neutral-400 cursor-pointer" />
+        <CloseRemoveIcon className="size-4 text-neutral-400 cursor-pointer" />
       </div>
     </div>
   );
