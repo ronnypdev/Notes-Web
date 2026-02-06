@@ -10,7 +10,7 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
-import { TrashIcon, DownloadIcon } from '@/components/icons';
+import { DeleteIcon, ArchiveIcon } from '@/components/icons';
 
 interface ModalProps {
   type: 'delete' | 'archive';
@@ -26,9 +26,9 @@ export const Modal = ({ type }: ModalProps) => {
         <div className="flex items-center justify-between gap-4">
           <div className="flex items-center justify-center bg-neutral-100 rounded-lg p-3 self-start">
             {type === 'delete' ? (
-              <TrashIcon className="size-6 text-neutral-950" />
+              <DeleteIcon className="size-6 text-neutral-950" />
             ) : (
-              <DownloadIcon className="size-6 text-neutral-950" />
+              <ArchiveIcon className="size-6 text-neutral-950" />
             )}
           </div>
           <DialogHeader>
