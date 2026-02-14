@@ -13,7 +13,7 @@ import Logo from '@/components/Logo/Logo';
 
 export default function SignupPage() {
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-neutral-100">
+    <div className="flex flex-col items-center justify-center h-screen bg-neutral-100 border border-neutral-100">
       <div className="flex flex-col items-center justify-center gap-2">
         <div className="flex flex-col items-center justify-center gap-2">
           <Logo />
