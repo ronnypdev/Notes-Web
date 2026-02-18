@@ -25,6 +25,7 @@ export default function SignupPage() {
             placeholder="email@example.com"
             type="email"
             required={true}
+            utilityClasses="mb-4"
           />
           <InputField
             label="password"
@@ -32,11 +33,19 @@ export default function SignupPage() {
             placeholder="•••••••"
             type="email"
             required={true}
+            utilityClasses="mb-4"
           />
           <Button variant="default" type="submit">
-            Signup
+            Login
           </Button>
         </form>
+        <div className="w-full flex flex-col items-center gap-4 self-stretch pt-6">
+          <p>Or log in with:</p>
+          <Button variant="outline" type="button">
+            <GoogleIcon className="w-4 h-4" />
+            Google
+          </Button>
+        </div>
       </div>
     </div>
   );
