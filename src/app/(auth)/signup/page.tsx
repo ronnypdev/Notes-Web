@@ -1,6 +1,8 @@
 import InputField from '@/components/InputField/InputField';
 import { Button } from '@/components/ui/button';
 import Logo from '@/components/Logo/Logo';
+import GoogleIcon from '@/components/icons/GoogleIcon';
+import Link from 'next/link';
 
 export default function SignupPage() {
   return (
@@ -18,7 +20,7 @@ export default function SignupPage() {
             </p>
           </div>
         </div>
-        <form className="flex flex-col gap-2 w-full pt-6">
+        <form className="flex flex-col gap-2 w-full pt-6 my-4">
           <InputField
             label="email"
             labelName="Email Address"
@@ -39,12 +41,22 @@ export default function SignupPage() {
             Login
           </Button>
         </form>
-        <div className="w-full flex flex-col items-center gap-4 self-stretch pt-6">
-          <p>Or log in with:</p>
-          <Button variant="outline" type="button">
+        <div className="w-full flex flex-col items-center gap-4 self-stretch pt-6 border-t border-neutral-200">
+          <p className="text-sm font-sans font-normal leading-4 tracking-tight text-neutral-600">
+            Or log in with:
+          </p>
+          <Button className="w-full" variant="outline" type="button">
             <GoogleIcon className="w-4 h-4" />
             Google
           </Button>
+        </div>
+        <div className="flex items-center justify-center">
+          <p className="text-sm font-sans font-normal leading-4 tracking-tight text-neutral-600">
+            No account yet?{' '}
+            <Link href="/signup" className="text-neutral-950 underline">
+              Sign up
+            </Link>
+          </p>
         </div>
       </div>
     </div>
