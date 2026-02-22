@@ -38,10 +38,10 @@ export default function SignupPage() {
             utilityClasses="mb-4"
           />
           <Button variant="default" type="submit">
-            Login
+            Sing up
           </Button>
         </form>
-        <div className="w-full flex flex-col items-center gap-4 self-stretch pt-6 border-t border-neutral-200">
+        <div className="w-full flex flex-col items-center gap-4 self-stretch pt-6 border-t border-neutral-200 mb-1.5">
           <p className="text-sm font-sans font-normal leading-4 tracking-tight text-neutral-600">
             Or log in with:
           </p>
@@ -50,11 +50,12 @@ export default function SignupPage() {
             Google
           </Button>
         </div>
+        <div className="border-t border-neutral-200 h-0.5 w-full"></div>
         <div className="flex items-center justify-center">
           <p className="text-sm font-sans font-normal leading-4 tracking-tight text-neutral-600">
-            No account yet?{' '}
-            <Link href="/signup" className="text-neutral-950 underline">
-              Sign up
+            Already have an account?{' '}
+            <Link href="/signin" className="text-neutral-950 underline">
+              Login
             </Link>
           </p>
         </div>
