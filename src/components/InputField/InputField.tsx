@@ -1,14 +1,16 @@
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { InfoCircleIcon, ShowIcon, SearchIcon } from '@/components/icons';
+import Link from 'next/link';
 
 interface InputFieldProps {
   label: string;
   labelName?: string;
-  placeholder: string;
+  placeholder?: string;
   type: 'text' | 'number' | 'email' | 'password' | 'search';
   required?: boolean;
   utilityClasses?: string;
+  forgotPasswordLink?: string;
   info?: string;
 }
 
@@ -19,16 +21,24 @@ export default function InputField({
   type,
   required,
   utilityClasses,
+  forgotPasswordLink,
   info,
 }: InputFieldProps) {
   return (
     <>
       <div
         className={`flex flex-col gap-2 max-w-full w-full ${utilityClasses}`}>
-        {label && (
-          <Label htmlFor={label} className="self-start">
-            {labelName}
-          </Label>
+        {(label || forgotPasswordLink) && (
+          <div className="flex justify-between items-center w-full">
+            {label && <Label htmlFor={label}>{labelName}</Label>}
+            {forgotPasswordLink && (
+              <Link
+                href={forgotPasswordLink}
+                className="text-sm text-neutral-600 font-sans font-normal leading-4 tracking-tight">
+                <span className="underline">Forgot</span>
+              </Link>
+            )}
+          </div>
         )}
         <div className="relative w-full flex items-center">
           {type === 'search' && (

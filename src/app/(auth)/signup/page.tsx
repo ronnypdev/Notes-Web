@@ -1,8 +1,8 @@
 import InputField from '@/components/InputField/InputField';
 import { Button } from '@/components/ui/button';
-import Logo from '@/components/Logo/Logo';
 import GoogleIcon from '@/components/icons/GoogleIcon';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function SignupPage() {
   return (
@@ -10,7 +10,13 @@ export default function SignupPage() {
       <div className="flex flex-col items-center justify-center gap-2 bg-white border border-neutral-100 w-[540px] max-w-full p-12 rounded-12">
         <div className="flex flex-col items-center justify-center gap-2">
           <div className="mb-4">
-            <Logo />
+            <Image
+              src="/logo.svg"
+              alt="Logo"
+              width={28}
+              height={28}
+              className="w-28 h-7"
+            />
           </div>
 
           <div className="mb-4 text-center flex flex-col items-center gap-2 self-stretch">
@@ -32,10 +38,10 @@ export default function SignupPage() {
           <InputField
             label="password"
             labelName="Password"
-            placeholder="•••••••"
-            type="email"
+            type="password"
             required={true}
             utilityClasses="mb-4"
+            info="At least 8 characters"
           />
           <Button variant="default" type="submit">
             Sing up
