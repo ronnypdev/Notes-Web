@@ -4,7 +4,46 @@ import GoogleIcon from '@/components/icons/GoogleIcon';
 import Link from 'next/link';
 import Image from 'next/image';
 
-export default function AuthForm() {
+interface InputFieldData {
+  label: string;
+  labelName: string;
+  placeholder: string;
+  type: 'text' | 'number' | 'email' | 'password' | 'search';
+  required: boolean;
+  utilityClasses: string;
+  forgotPasswordLink?: string;
+  info?: string;
+}
+
+interface AuthFormProps {
+  formType: 'signup' | 'login' | 'forgotpassword' | 'resetpassword';
+  formTitle: string;
+  formDescription: string;
+  inputFields: InputFieldData[];
+  onSubmit: (data: InputFieldData) => void;
+  submitButtonText: string;
+  loggingWithGoogleText: string;
+  googleButtonText: string;
+  loggingWithGoogle: boolean;
+  formFooterText: string;
+  formFooterLink: string;
+  formFooterLinkText: string;
+}
+
+export default function AuthForm({
+  formType,
+  formTitle,
+  formDescription,
+  inputFields,
+  onSubmit,
+  submitButtonText,
+  loggingWithGoogleText,
+  googleButtonText,
+  loggingWithGoogle,
+  formFooterText,
+  formFooterLink,
+  formFooterLinkText,
+}: AuthFormProps) {
   return (
     <div className="flex flex-col items-center justify-center gap-2 bg-white border border-neutral-100 w-[540px] max-w-full p-12 rounded-12">
       <div className="flex flex-col items-center justify-center gap-2">
