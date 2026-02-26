@@ -57,10 +57,8 @@ export default function AuthForm({
           />
         </div>
         <div className="mb-4 text-center flex flex-col items-center gap-2 self-stretch">
-          <h1 className="text-2xl font-bold">Create Your Account</h1>
-          <p className="text-sm text-neutral-500">
-            Sign up to start organizing your notes and boost your productivity.
-          </p>
+          <h1 className="text-2xl font-bold">{formTitle}</h1>
+          <p className="text-sm text-neutral-500">{formDescription}</p>
         </div>
       </div>
       <form className="flex flex-col gap-2 w-full pt-6 my-4">
