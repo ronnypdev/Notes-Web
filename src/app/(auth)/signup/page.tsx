@@ -6,6 +6,12 @@ export default function SignupPage() {
       <AuthForm
         formTitle="Create Your Account"
         formDescription="Sign up to start organizing your notes and boost your productivity."
+        submitButtonText="Sign Up"
+        loggingWithGoogleText="Or log in with:"
+        googleButtonText="Google"
+        formFooterText="Already have an account?"
+        formFooterLink="/signin"
+        formFooterLinkText="Login"
       />
     </div>
   );
