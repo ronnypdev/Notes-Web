@@ -1,6 +1,6 @@
 import AuthForm from '../components/AuthForm';
 
-export default function SignupPage() {
+export default function Signup() {
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-neutral-100">
       <AuthForm
