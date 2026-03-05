@@ -4,7 +4,7 @@ branch: notesweb-auth-implementation-v2
 
 ## Objective
 
-Help me finish building the `AuthForm` component which will be use for the `/signup` `/login`, `/forgotpassword` and `/resetpassword` for this feature we're only focusing on the architecture of the AuthForm component no actual authentication or backend logic will be implemented at the moment this is purely a client side feature.
+Help me finish building the `AuthForm` component which will be use for the `/signup` `/login`, `/forgotpassword` and `/resetpassword` for this feature we're only focusing on the architecture of the AuthForm component no actual authentication or backend logic will be implemented at the moment this is purely a client side feature. The whole point of this feature is to build `AuthForm` component once and use many times to meet the different edge cases.
 
 ## Functional Requirements
 
@@ -69,3 +69,7 @@ Help me finish building the `AuthForm` component which will be use for the `/sig
   - `inputFields`
   - `onSubmit`
   - `submitButtonText`
+
+## Edge Cases
+
+- For `/login` page the the `AuthForm`
