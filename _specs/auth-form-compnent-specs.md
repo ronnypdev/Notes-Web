@@ -73,3 +73,105 @@ Help me finish building the `AuthForm` component which will be use for the `/sig
 ## Edge Cases
 
 - For `/login` page the the `AuthForm`
+  - when the `formType` is `login` the `AuthForm` component should display the login form like this:
+    - `formTitle` should be `Log in to your account`
+    - `formDescription` should be `Welcome back! Please enter your details.`
+    - `inputFields` should be `[
+  {
+    label: 'email',
+    labelName: 'Email Address',
+    placeholder: 'email@example.com',
+    type: 'email',
+    required: true,
+    utilityClasses: 'mb-4'
+  }
+  {
+    label: 'password',
+    labelName: 'Password',
+    placeholder: 'password',
+    type: 'password',
+    required: true,
+    utilityClasses: 'mb-4'
+  }
+]`
+    - `onSubmit` should be a function that will be called when the user submits the form
+    - `submitButtonText` should be `Log in`
+    - `loggingWithGoogleText` should be `Or log in with:`
+    - `googleButtonText` should be `Google`
+    - `loggingWithGoogle` should be `true`
+    - `formFooterText` should be `Don't have an account?`
+    - `formFooterLink` should be `/signup`
+    - `formFooterLinkText` should be `Sign up`
+    - take a look at the `/public/loginform.png` file for the exact props and how the `AuthForm` component is used
+
+  - when the `formType` is `signup` the `AuthForm` component should display the signup form like this:
+    - `formTitle` should be `Create Your Account`
+    - `formDescription` should be `Sign up to start organizing your notes and boost your productivity.`
+    - `inputFields` should be `[
+  {
+    label: 'email',
+    labelName: 'Email Address',
+    placeholder: 'email@example.com',
+    type: 'email',
+    required: true,
+    utilityClasses: 'mb-4'
+  }
+  {
+    label: 'password',
+    labelName: 'Password',
+    placeholder: 'password',
+    type: 'password',
+    required: true,
+    utilityClasses: 'mb-4'
+  }
+]`
+    - `onSubmit` should be a function that will be called when the user submits the form
+    - `submitButtonText` should be `Sign Up`
+    - `loggingWithGoogleText` should be `Or log in with:`
+    - `googleButtonText` should be `Google`
+    - `loggingWithGoogle` should be `true`
+    - `formFooterText` should be `Already have an account?`
+    - `formFooterLink` should be `/login`
+    - `formFooterLinkText` should be `Login`
+    - take a look at the `/public/signupform.png` file for the exact props and how the `AuthForm` component is used
+  - when the `formType` is `forgotpassword` the `AuthForm` component should display the forgot password form like this:
+    - `formTitle` should be `Forgot Your Password?`
+    - `formDescription` should be `No worries! Enter your email to reset your password.`
+    - `inputFields` should be `[
+  {
+    label: 'email',
+    labelName: 'Email Address',
+    placeholder: 'email@example.com',
+    type: 'email',
+    required: true,
+    utilityClasses: 'mb-4'
+  }
+]`
+    - `onSubmit` should be a function that will be called when the user submits the form
+    - `submitButtonText` should be `Send Reset Link`
+    - take a look at the `/public/forgotpasswordform.png` file for the exact props and how the `AuthForm` component is used
+
+  - when the `formType` is `resetpassword` the `AuthForm` component should display the reset password form like this:
+    - `formTitle` should be `Reset Your Password`
+    - `formDescription` should be `Enter your new password below.`
+    - `inputFields` should be `[
+  {
+    label: 'password',
+    labelName: 'Password',
+    placeholder: 'password',
+    type: 'password',
+    required: true,
+    utilityClasses: 'mb-4'
+  }
+  {
+    label: 'confirm password',
+    labelName: 'Confirm Password',
+    placeholder: 'confirm password',
+    type: 'password',
+    required: true,
+    utilityClasses: 'mb-4'
+  }
+]`
+    - `onSubmit` should be a function that will be called when the user submits the form
+    - `submitButtonText` should be `Reset Password`
+    - take a look at the `/public/resetpasswordform.png` file for the exact props and how the `AuthForm` component is used
