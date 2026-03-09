@@ -1,3 +1,5 @@
+'use client';
+
 import InputField from '@/components/InputField/InputField';
 import { Button } from '@/components/ui/button';
 import GoogleIcon from '@/components/icons/GoogleIcon';
@@ -20,14 +22,14 @@ interface AuthFormProps {
   formTitle: string;
   formDescription: string;
   inputFields: InputFieldData[];
-  onSubmit: (data: InputFieldData) => void;
+  onSubmit: () => void;
   submitButtonText: string;
-  loggingWithGoogleText: string;
-  googleButtonText: string;
-  loggingWithGoogle: boolean;
-  formFooterText: string;
-  formFooterLink: string;
-  formFooterLinkText: string;
+  loggingWithGoogleText?: string;
+  googleButtonText?: string;
+  loggingWithGoogle?: boolean;
+  formFooterText?: string;
+  formFooterLink?: string;
+  formFooterLinkText?: string;
 }
 
 export default function AuthForm({
@@ -61,45 +63,45 @@ export default function AuthForm({
           <p className="text-sm text-neutral-500">{formDescription}</p>
         </div>
       </div>
-      <form className="flex flex-col gap-2 w-full pt-6 my-4">
-        <InputField
-          label="email"
-          labelName="Email Address"
-          placeholder="email@example.com"
-          type="email"
-          required={true}
-          utilityClasses="mb-4"
-        />
-        <InputField
-          label="password"
-          labelName="Password"
-          type="password"
-          required={true}
-          utilityClasses="mb-4"
-          info="At least 8 characters"
-        />
+      <form
+        className="flex flex-col gap-2 w-full pt-6 my-4"
+        onSubmit={(e) => {
+          e.preventDefault();
+          onSubmit();
+        }}>
+        {inputFields.map((field) => (
+          <InputField key={field.label} {...field} />
+        ))}
         <Button variant="default" type="submit">
           {submitButtonText}
         </Button>
       </form>
-      <div className="w-full flex flex-col items-center gap-4 self-stretch pt-6 border-t border-neutral-200 mb-1.5">
-        <p className="text-sm font-sans font-normal leading-4 tracking-tight text-neutral-600">
-          {loggingWithGoogleText}
-        </p>
-        <Button className="w-full" variant="outline" type="button">
-          <GoogleIcon className="w-4 h-4" />
-          {googleButtonText}
-        </Button>
-      </div>
-      <div className="border-t border-neutral-200 h-0.5 w-full"></div>
-      <div className="flex items-center justify-center">
-        <p className="text-sm font-sans font-normal leading-4 tracking-tight text-neutral-600">
-          {formFooterText}{' '}
-          <Link href={formFooterLink} className="text-neutral-950 underline">
-            {formFooterLinkText}
-          </Link>
-        </p>
-      </div>
+      {loggingWithGoogle && (
+        <div className="w-full flex flex-col items-center gap-4 self-stretch pt-6 border-t border-neutral-200 mb-1.5">
+          <p className="text-sm font-sans font-normal leading-4 tracking-tight text-neutral-600">
+            {loggingWithGoogleText}
+          </p>
+          <Button className="w-full" variant="outline" type="button">
+            <GoogleIcon className="w-4 h-4" />
+            {googleButtonText}
+          </Button>
+        </div>
+      )}
+      {formFooterText && formFooterLink && formFooterLinkText && (
+        <>
+          <div className="border-t border-neutral-200 h-0.5 w-full"></div>
+          <div className="flex items-center justify-center">
+            <p className="text-sm font-sans font-normal leading-4 tracking-tight text-neutral-600">
+              {formFooterText}{' '}
+              <Link
+                href={formFooterLink}
+                className="text-neutral-950 underline">
+                {formFooterLinkText}
+              </Link>
+            </p>
+          </div>
+        </>
+      )}
     </div>
   );
 }
