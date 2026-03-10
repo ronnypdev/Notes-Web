@@ -4,10 +4,9 @@ import AuthForm from '../components/AuthForm';
 
 export default function Signup() {
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-neutral-100">
+    <div className="flex flex-col items-center justify-center h-screen bg-neutral-100 p-5 md:p-0">
       <AuthForm
-        formType="signup"
-        formTitle="Sign up to start organizing your notes and boost your productivity."
+        formTitle="Create Your Account"
         formDescription="Sign up to start organizing your notes and boost your productivity."
         inputFields={[
           {

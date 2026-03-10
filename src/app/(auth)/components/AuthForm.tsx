@@ -18,7 +18,6 @@ interface InputFieldData {
 }
 
 interface AuthFormProps {
-  formType: 'signup' | 'login' | 'forgotpassword' | 'resetpassword';
   formTitle: string;
   formDescription: string;
   inputFields: InputFieldData[];
@@ -33,7 +32,6 @@ interface AuthFormProps {
 }
 
 export default function AuthForm({
-  formType,
   formTitle,
   formDescription,
   inputFields,

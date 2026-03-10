@@ -4,11 +4,10 @@ import AuthForm from '../components/AuthForm';
 
 export default function Login() {
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-neutral-100">
+    <div className="flex flex-col items-center justify-center h-screen bg-neutral-100 p-5 md:p-0">
       <AuthForm
-        formType="login"
-        formTitle="Please log in to continue"
-        formDescription="Welcome back! Please enter your details."
+        formTitle="Welcome to Note"
+        formDescription="Please log in to continue"
         inputFields={[
           {
             label: 'email',
