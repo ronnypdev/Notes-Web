@@ -7,7 +7,7 @@ export default function ResetPassword() {
     <div className="flex flex-col items-center justify-center h-screen bg-neutral-100">
       <AuthForm
         formType="resetpassword"
-        formTitle="Reset Your Password"
+        formTitle="Choose a new password to secure your account."
         formDescription="Enter your new password below."
         inputFields={[
           {

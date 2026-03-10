@@ -7,7 +7,7 @@ export default function Login() {
     <div className="flex flex-col items-center justify-center h-screen bg-neutral-100">
       <AuthForm
         formType="login"
-        formTitle="Log in to your account"
+        formTitle="Please log in to continue"
         formDescription="Welcome back! Please enter your details."
         inputFields={[
           {

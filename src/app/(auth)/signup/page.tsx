@@ -7,7 +7,7 @@ export default function Signup() {
     <div className="flex flex-col items-center justify-center h-screen bg-neutral-100">
       <AuthForm
         formType="signup"
-        formTitle="Create Your Account"
+        formTitle="Sign up to start organizing your notes and boost your productivity."
         formDescription="Sign up to start organizing your notes and boost your productivity."
         inputFields={[
           {

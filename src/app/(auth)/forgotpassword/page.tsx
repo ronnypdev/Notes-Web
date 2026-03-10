@@ -7,7 +7,7 @@ export default function ForgotPassword() {
     <div className="flex flex-col items-center justify-center h-screen bg-neutral-100">
       <AuthForm
         formType="forgotpassword"
-        formTitle="Forgot Your Password?"
+        formTitle="Enter your email below, and we’ll send you a link to reset it."
         formDescription="No worries! Enter your email to reset your password."
         inputFields={[
           {
