@@ -1,10 +1,6 @@
-'use client';
-import { useState } from 'react';
 import AuthForm from '../components/AuthForm';
 
 export default function Login() {
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-neutral-100 p-5 md:p-0">
       <AuthForm
