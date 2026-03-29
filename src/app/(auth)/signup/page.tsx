@@ -1,8 +1,17 @@
-'use client';
-
+import { useState } from 'react';
+import { authClient } from '@/lib/auth-client';
 import AuthForm from '../components/AuthForm';
 
 export default function Signup() {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const { data, error } = await authClient.signUp.email({
+    email,
+    password,
+    name,
+    callbackURL: "/allnotes'",
+  });
+
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-neutral-100 p-5 md:p-0">
       <AuthForm
