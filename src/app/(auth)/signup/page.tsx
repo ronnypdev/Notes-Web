@@ -1,3 +1,4 @@
+'use client';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
@@ -16,6 +17,7 @@ type signUpSchema = z.infer<typeof signUpSchema>;
 
 export default function Signup() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
 
   const {
     register,
@@ -26,15 +28,9 @@ export default function Signup() {
   });
 
   async function submitSignUpForm(data: signUpForm) {
-    const { data, error } = await authClient.signUp.email(
-      {
-        email, // user email address
-        password, // user password -> min 8 characters by default
-        name, // user display name
-        image, // User image URL (optional)
-        callbackURL: '/dashboard', // A URL to redirect to after the user verifies their email (optional)
-      },
-      {
+    setIsLoading(true);
+    try {
+      await authClient.signUp.email({
         onRequest: (ctx) => {
           //show loading
         },
@@ -45,8 +41,12 @@ export default function Signup() {
           // display the error message
           alert(ctx.error.message);
         },
-      },
-    );
+      });
+    } catch (err) {
+      console.log(`Connection failed! Try again! ${err.message}`);
+      setError(err);
+    } finally {
+    }
   }
 
   return (
