@@ -1,23 +1,25 @@
 'use client';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useRouter } from 'next/navigation';
 import * as z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { authClient } from '@/lib/auth-client';
 import AuthForm from '../components/AuthForm';
+import { toast } from 'sonner';
 
 const signUpSchema = z.object({
-  username: z.string().min(1, 'Name is required'),
+  name: z.string().min(1, 'Name is required'),
   email: z.email('Invalid email address').min(1, 'Email is required'),
   password: z.string().min(6, 'Password must be at least 6 characters'),
-  callbackurl: z.string().default('/allnotes'),
+  // callbackurl: z.string().default('/allnotes'),
 });
 
-type signUpSchema = z.infer<typeof signUpSchema>;
+type signUpForm = z.infer<typeof signUpSchema>;
 
 export default function Signup() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
+  const router = useRouter();
 
   const {
     register,
@@ -28,24 +30,36 @@ export default function Signup() {
   });
 
   async function submitSignUpForm(data: signUpForm) {
-    setIsLoading(true);
     try {
       await authClient.signUp.email({
-        onRequest: (ctx) => {
-          //show loading
-        },
-        onSuccess: (ctx) => {
-          //redirect to the dashboard or sign in page
-        },
-        onError: (ctx) => {
-          // display the error message
-          alert(ctx.error.message);
+        ...data,
+        fetchOptions: {
+          onRequest: () => {
+            //show loading
+            setIsLoading(true);
+          },
+          onResponse: () => {
+            setIsLoading(false);
+          },
+          onSuccess: () => {
+            //redirect to the dashboard or sign in page
+            toast.success('Congratulation! You successfully sign up', {
+              position: 'top-right',
+            });
+            router.push('/allnotes');
+          },
+          onError: () => {
+            toast.error('Something went wrong!, Please try again!', {
+              position: 'top-right',
+            });
+          },
         },
       });
-    } catch (err) {
-      console.log(`Connection failed! Try again! ${err.message}`);
-      setError(err);
+    } catch (error) {
+      toast.error('Connection failed! Try again!', { position: 'top-right' });
+      console.log(`Connection failed! Try again! ${error.message}`);
     } finally {
+      setIsLoading(false);
     }
   }
 
