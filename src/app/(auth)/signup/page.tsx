@@ -9,7 +9,6 @@ import AuthForm from '../components/AuthForm';
 import { toast } from 'sonner';
 
 const signUpSchema = z.object({
-  name: z.string().min(1, 'Name is required'),
   email: z.email('Invalid email address').min(1, 'Email is required'),
   password: z.string().min(6, 'Password must be at least 6 characters'),
   // callbackurl: z.string().default('/allnotes'),
@@ -69,7 +68,7 @@ export default function Signup() {
         formType="signup"
         formTitle="Create Your Account"
         formDescription="Sign up to start organizing your notes and boost your productivity."
-        onSubmit={() => {}}
+        onSubmit={handleSubmit(submitSignUpForm)}
         submitButtonText="Sign Up"
         loggingWithGoogle={true}
         loggingWithGoogleText="Or log in with:"
@@ -77,6 +76,7 @@ export default function Signup() {
         formFooterText="Already have an account?"
         formFooterLink="/login"
         formFooterLinkText="Login"
+        loading={isLoading}
       />
     </div>
   );

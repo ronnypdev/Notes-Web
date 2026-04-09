@@ -3,6 +3,7 @@
 import InputField from '@/components/InputField/InputField';
 import { Button } from '@/components/ui/button';
 import GoogleIcon from '@/components/icons/GoogleIcon';
+import { Spinner } from '@/components/ui/spinner';
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -10,7 +11,7 @@ interface AuthFormProps {
   formType: 'login' | 'signup' | 'forgotpassword' | 'resetpassword';
   formTitle: string;
   formDescription: string;
-  onSubmit: () => void;
+  onSubmit: React.SubmitEventHandler<HTMLFormElement>;
   submitButtonText: string;
   loggingWithGoogleText?: string;
   googleButtonText?: string;
@@ -18,6 +19,7 @@ interface AuthFormProps {
   formFooterText?: string;
   formFooterLink?: string;
   formFooterLinkText?: string;
+  loading: boolean;
 }
 
 export default function AuthForm({
@@ -32,6 +34,7 @@ export default function AuthForm({
   formFooterText,
   formFooterLink,
   formFooterLinkText,
+  loading,
 }: AuthFormProps) {
   return (
     <div className="flex flex-col items-center justify-center gap-2 bg-white border border-neutral-100 w-[540px] max-w-full p-12 rounded-12">
@@ -132,7 +135,7 @@ export default function AuthForm({
         )}
 
         <Button variant="default" type="submit">
-          {submitButtonText}
+          {loading === true ? <Spinner /> : submitButtonText}
         </Button>
       </form>
       {loggingWithGoogle && (
