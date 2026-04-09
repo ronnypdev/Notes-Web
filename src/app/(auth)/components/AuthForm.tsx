@@ -6,21 +6,10 @@ import GoogleIcon from '@/components/icons/GoogleIcon';
 import Link from 'next/link';
 import Image from 'next/image';
 
-interface InputFieldData {
-  label: string;
-  labelName: string;
-  placeholder: string;
-  type: 'text' | 'number' | 'email' | 'password' | 'search';
-  required: boolean;
-  utilityClasses: string;
-  forgotPasswordLink?: string;
-  info?: string;
-}
-
 interface AuthFormProps {
+  formType: 'login' | 'signup' | 'forgotpassword' | 'resetpassword';
   formTitle: string;
   formDescription: string;
-  inputFields: InputFieldData[];
   onSubmit: () => void;
   submitButtonText: string;
   loggingWithGoogleText?: string;
@@ -32,9 +21,9 @@ interface AuthFormProps {
 }
 
 export default function AuthForm({
+  formType,
   formTitle,
   formDescription,
-  inputFields,
   onSubmit,
   submitButtonText,
   loggingWithGoogleText,
@@ -67,9 +56,81 @@ export default function AuthForm({
           e.preventDefault();
           onSubmit();
         }}>
-        {inputFields.map((field) => (
-          <InputField key={field.label} {...field} />
-        ))}
+        {formType === 'signup' && (
+          <>
+            <InputField
+              label="email"
+              labelName="Email Address"
+              placeholder="email@example.com"
+              type="email"
+              required={true}
+              utilityClasses="mb-4"
+            />
+            <InputField
+              label="password"
+              labelName="Password"
+              type="password"
+              required={true}
+              utilityClasses="mb-4"
+              info="At least 8 characters"
+            />
+          </>
+        )}
+
+        {formType === 'login' && (
+          <>
+            <InputField
+              label="email"
+              labelName="Email Address"
+              placeholder="email@example.com"
+              type="email"
+              required={true}
+              utilityClasses="mb-4"
+            />
+            <InputField
+              label="password"
+              labelName="Password"
+              type="password"
+              required={true}
+              utilityClasses="mb-4"
+              forgotPasswordLink="/forgotpassword"
+            />
+          </>
+        )}
+
+        {formType === 'forgotpassword' && (
+          <>
+            <InputField
+              label="email"
+              labelName="Email Address"
+              placeholder="email@example.com"
+              type="email"
+              required={true}
+              utilityClasses="mb-4"
+            />
+          </>
+        )}
+
+        {formType === 'resetpassword' && (
+          <>
+            <InputField
+              label="newPassword"
+              labelName="New Password"
+              type="password"
+              required={true}
+              utilityClasses="mb-4"
+              info="At least 8 characters"
+            />
+            <InputField
+              label="confirmPassword"
+              labelName="Confirm New Password"
+              type="password"
+              required={true}
+              utilityClasses="mb-4"
+            />
+          </>
+        )}
+
         <Button variant="default" type="submit">
           {submitButtonText}
         </Button>
