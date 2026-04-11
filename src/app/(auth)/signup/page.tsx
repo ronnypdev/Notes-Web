@@ -9,8 +9,8 @@ import AuthForm from '../components/AuthForm';
 import { toast } from 'sonner';
 
 const signUpSchema = z.object({
-  email: z.email('Invalid email address').min(1, 'Email is required'),
-  password: z.string().min(6, 'Password must be at least 6 characters'),
+  email: z.email('Invalid email address').min(8, 'Email is required'),
+  password: z.string().min(8, 'Password must be at least 8 characters'),
 });
 
 type signUpForm = z.infer<typeof signUpSchema>;
@@ -49,15 +49,22 @@ export default function Signup() {
             router.push('/allnotes');
           },
           onError: () => {
-            toast.error('Something went wrong!, Please try again!', {
-              position: 'top-right',
-            });
+            toast.error(
+              'Something went wrong!, Please try again!',
+              error.message,
+              {
+                position: 'top-right',
+              },
+            );
           },
         },
       });
     } catch (error) {
       toast.error('Connection failed! Try again!', { position: 'top-right' });
-      console.log(`Connection failed! Try again! ${error.message}`);
+      console.log(
+        'Connection failed! Try again!: ',
+        error instanceof Error ? error.message : 'Unknown error',
+      );
     } finally {
       setIsLoading(false);
     }

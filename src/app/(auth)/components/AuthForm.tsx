@@ -6,13 +6,14 @@ import GoogleIcon from '@/components/icons/GoogleIcon';
 import { Spinner } from '@/components/ui/spinner';
 import Link from 'next/link';
 import Image from 'next/image';
-import { UseFormRegister, FieldValues } from 'react-hook-form';
+// import { UseFormRegister, FieldValues, FieldErrors } from 'react-hook-form';
 
 interface AuthFormProps {
   formTitle: string;
   formType: 'login' | 'signup' | 'forgotpassword' | 'resetpassword';
-  inputRef: React.RefObject<HTMLInputElement | null>;
-  register: UseFormRegister<FieldValues>;
+  // inputRef: React.RefObject<HTMLInputElement | null>;
+  // register: UseFormRegister<FieldValues>;
+  // errors: FieldErrors<FieldValues>;
   formDescription: string;
   onSubmit: React.SubmitEventHandler<HTMLFormElement>;
   submitButtonText: string;
@@ -28,8 +29,6 @@ interface AuthFormProps {
 export default function AuthForm({
   formType,
   formTitle,
-  inputRef,
-  register,
   formDescription,
   onSubmit,
   submitButtonText,
@@ -60,10 +59,7 @@ export default function AuthForm({
       </div>
       <form
         className="flex flex-col gap-2 w-full pt-6 my-4"
-        onSubmit={(e) => {
-          e.preventDefault();
-          onSubmit();
-        }}>
+        onSubmit={onSubmit}>
         {formType === 'signup' && (
           <>
             <InputField
@@ -73,7 +69,6 @@ export default function AuthForm({
               type="email"
               required={true}
               utilityClasses="mb-4"
-              {...register('email')}
             />
             <InputField
               label="password"
