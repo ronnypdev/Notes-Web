@@ -3,25 +3,19 @@
 import InputField from '@/components/InputField/InputField';
 import { Button } from '@/components/ui/button';
 import GoogleIcon from '@/components/icons/GoogleIcon';
+import { Spinner } from '@/components/ui/spinner';
 import Link from 'next/link';
 import Image from 'next/image';
-
-interface InputFieldData {
-  label: string;
-  labelName: string;
-  placeholder: string;
-  type: 'text' | 'number' | 'email' | 'password' | 'search';
-  required: boolean;
-  utilityClasses: string;
-  forgotPasswordLink?: string;
-  info?: string;
-}
+// import { UseFormRegister, FieldValues, FieldErrors } from 'react-hook-form';
 
 interface AuthFormProps {
   formTitle: string;
+  formType: 'login' | 'signup' | 'forgotpassword' | 'resetpassword';
+  // inputRef: React.RefObject<HTMLInputElement | null>;
+  // register: UseFormRegister<FieldValues>;
+  // errors: FieldErrors<FieldValues>;
   formDescription: string;
-  inputFields: InputFieldData[];
-  onSubmit: () => void;
+  onSubmit: React.SubmitEventHandler<HTMLFormElement>;
   submitButtonText: string;
   loggingWithGoogleText?: string;
   googleButtonText?: string;
@@ -29,12 +23,13 @@ interface AuthFormProps {
   formFooterText?: string;
   formFooterLink?: string;
   formFooterLinkText?: string;
+  loading: boolean;
 }
 
 export default function AuthForm({
+  formType,
   formTitle,
   formDescription,
-  inputFields,
   onSubmit,
   submitButtonText,
   loggingWithGoogleText,
@@ -43,6 +38,7 @@ export default function AuthForm({
   formFooterText,
   formFooterLink,
   formFooterLinkText,
+  loading,
 }: AuthFormProps) {
   return (
     <div className="flex flex-col items-center justify-center gap-2 bg-white border border-neutral-100 w-[540px] max-w-full p-12 rounded-12">
@@ -63,15 +59,84 @@ export default function AuthForm({
       </div>
       <form
         className="flex flex-col gap-2 w-full pt-6 my-4"
-        onSubmit={(e) => {
-          e.preventDefault();
-          onSubmit();
-        }}>
-        {inputFields.map((field) => (
-          <InputField key={field.label} {...field} />
-        ))}
+        onSubmit={onSubmit}>
+        {formType === 'signup' && (
+          <>
+            <InputField
+              label="email"
+              labelName="Email Address"
+              placeholder="email@example.com"
+              type="email"
+              required={true}
+              utilityClasses="mb-4"
+            />
+            <InputField
+              label="password"
+              labelName="Password"
+              type="password"
+              required={true}
+              utilityClasses="mb-4"
+              info="At least 8 characters"
+            />
+          </>
+        )}
+
+        {formType === 'login' && (
+          <>
+            <InputField
+              label="email"
+              labelName="Email Address"
+              placeholder="email@example.com"
+              type="email"
+              required={true}
+              utilityClasses="mb-4"
+            />
+            <InputField
+              label="password"
+              labelName="Password"
+              type="password"
+              required={true}
+              utilityClasses="mb-4"
+              forgotPasswordLink="/forgotpassword"
+            />
+          </>
+        )}
+
+        {formType === 'forgotpassword' && (
+          <>
+            <InputField
+              label="email"
+              labelName="Email Address"
+              placeholder="email@example.com"
+              type="email"
+              required={true}
+              utilityClasses="mb-4"
+            />
+          </>
+        )}
+
+        {formType === 'resetpassword' && (
+          <>
+            <InputField
+              label="newPassword"
+              labelName="New Password"
+              type="password"
+              required={true}
+              utilityClasses="mb-4"
+              info="At least 8 characters"
+            />
+            <InputField
+              label="confirmPassword"
+              labelName="Confirm New Password"
+              type="password"
+              required={true}
+              utilityClasses="mb-4"
+            />
+          </>
+        )}
+
         <Button variant="default" type="submit">
-          {submitButtonText}
+          {loading === true ? <Spinner /> : submitButtonText}
         </Button>
       </form>
       {loggingWithGoogle && (
