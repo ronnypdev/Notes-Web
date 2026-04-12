@@ -1,21 +1,28 @@
 'use client';
 
+import { useForm } from 'react-hook-form';
+import * as z from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
 import InputField from '@/components/InputField/InputField';
+import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import GoogleIcon from '@/components/icons/GoogleIcon';
 import { Spinner } from '@/components/ui/spinner';
 import Link from 'next/link';
 import Image from 'next/image';
-// import { UseFormRegister, FieldValues, FieldErrors } from 'react-hook-form';
+
+const signUpSchema = z.object({
+  email: z.email('Invalid email address').min(8, 'Email is required'),
+  password: z.string().min(8, 'Password must be at least 8 characters'),
+});
+
+export type SignUpFormValues = z.infer<typeof signUpSchema>;
 
 interface AuthFormProps {
-  formTitle: string;
   formType: 'login' | 'signup' | 'forgotpassword' | 'resetpassword';
-  // inputRef: React.RefObject<HTMLInputElement | null>;
-  // register: UseFormRegister<FieldValues>;
-  // errors: FieldErrors<FieldValues>;
+  onSubmit: (data: SignUpFormValues) => void | Promise<void>;
+  formTitle: string;
   formDescription: string;
-  onSubmit: React.SubmitEventHandler<HTMLFormElement>;
   submitButtonText: string;
   loggingWithGoogleText?: string;
   googleButtonText?: string;
@@ -40,6 +47,14 @@ export default function AuthForm({
   formFooterLinkText,
   loading,
 }: AuthFormProps) {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<signUpForm>({
+    resolver: zodResolver(signUpSchema),
+  });
+
   return (
     <div className="flex flex-col items-center justify-center gap-2 bg-white border border-neutral-100 w-[540px] max-w-full p-12 rounded-12">
       <div className="flex flex-col items-center justify-center gap-2">
@@ -59,7 +74,7 @@ export default function AuthForm({
       </div>
       <form
         className="flex flex-col gap-2 w-full pt-6 my-4"
-        onSubmit={onSubmit}>
+        onSubmit={handleSubmit(onSubmit)}>
         {formType === 'signup' && (
           <>
             <InputField
