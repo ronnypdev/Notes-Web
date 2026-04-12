@@ -41,6 +41,7 @@ export type SignUpFormValues = z.infer<typeof signUpSchema>;
 interface AuthFormProps {
   formType: 'login' | 'signup' | 'forgotpassword' | 'resetpassword';
   onSubmit: (data: SignUpFormValues) => void | Promise<void>;
+  loading: boolean;
   formTitle: string;
   formDescription: string;
   submitButtonText: string;
@@ -50,14 +51,14 @@ interface AuthFormProps {
   formFooterText?: string;
   formFooterLink?: string;
   formFooterLinkText?: string;
-  loading: boolean;
 }
 
 export default function AuthForm({
   formType,
+  onSubmit,
+  loading,
   formTitle,
   formDescription,
-  onSubmit,
   submitButtonText,
   loggingWithGoogleText,
   googleButtonText,
@@ -65,7 +66,6 @@ export default function AuthForm({
   formFooterText,
   formFooterLink,
   formFooterLinkText,
-  loading,
 }: AuthFormProps) {
   const {
     register,
@@ -76,25 +76,23 @@ export default function AuthForm({
   });
 
   return (
-    <Card className="flex flex-col items-center justify-center gap-2 bg-white border border-neutral-100 w-[540px] max-w-full p-12 rounded-12">
-      <CardHeader className="flex flex-col items-center justify-center gap-2">
-        <div className="mb-4 w-full">
-          <Image
-            src="/logo.svg"
-            alt="Logo"
-            width={28}
-            height={28}
-            className="w-28 h-7"
-          />
-        </div>
+    <Card className="bg-white border border-neutral-100 w-[540px] max-w-full p-12 rounded-12">
+      <CardHeader className="flex flex-col items-center justify-center p-0">
+        <Image
+          src="/logo.svg"
+          alt="Logo"
+          width={28}
+          height={28}
+          className="w-28 h-7 mb-4"
+        />
         <div className="mb-4 text-center flex flex-col items-center gap-2 w-full">
           <CardTitle className="text-2xl font-bold">{formTitle}</CardTitle>
-          <CardDescription className="text-sm text-neutral-500">
+          <CardDescription className="text-xs text-neutral-500">
             {formDescription}
           </CardDescription>
         </div>
       </CardHeader>
-      <CardContent className="flex flex-col gap-2 w-full pt-6 my-4">
+      <CardContent className="p-0 my-4">
         <form onSubmit={handleSubmit(onSubmit)}>
           {formType === 'signup' && (
             <>
@@ -170,12 +168,12 @@ export default function AuthForm({
               />
             </>
           )}
-          <Button variant="default" type="submit">
+          <Button variant="default" className="w-full" type="submit">
             {loading === true ? <Spinner /> : submitButtonText}
           </Button>
         </form>
       </CardContent>
-      <CardFooter>
+      <CardFooter className="flex-col gap-2 w-full max-w-full px-0">
         {loggingWithGoogle && (
           <div className="w-full flex flex-col items-center gap-4 self-stretch pt-6 border-t border-neutral-200 mb-1.5">
             <p className="text-sm font-sans font-normal leading-4 tracking-tight text-neutral-600">

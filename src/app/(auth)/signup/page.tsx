@@ -48,6 +48,7 @@ export default function Signup() {
       <AuthForm
         formType="signup"
         onSubmit={handleSignUpForm}
+        loading={isLoading}
         formTitle="Create Your Account"
         formDescription="Sign up to start organizing your notes and boost your productivity."
         submitButtonText="Sign Up"
@@ -57,7 +58,6 @@ export default function Signup() {
         formFooterText="Already have an account?"
         formFooterLink="/login"
         formFooterLinkText="Login"
-        loading={isLoading}
       />
     </div>
   );
