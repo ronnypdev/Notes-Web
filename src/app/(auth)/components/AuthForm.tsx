@@ -27,6 +27,7 @@ import {
 } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import GoogleIcon from '@/components/icons/GoogleIcon';
+import { InfoCircleIcon, ShowIcon } from '@/components/icons';
 import { Spinner } from '@/components/ui/spinner';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -96,86 +97,139 @@ export default function AuthForm({
         <form onSubmit={handleSubmit(onSubmit)}>
           {formType === 'signup' && (
             <>
-              <InputField
-                label="email"
-                labelName="Email Address"
-                placeholder="email@example.com"
-                type="email"
-                required={true}
-                utilityClasses="mb-4"
-              />
-              <InputField
-                label="password"
-                labelName="Password"
-                type="password"
-                required={true}
-                utilityClasses="mb-4"
-                info="At least 8 characters"
-              />
+              <FieldSet>
+                <FieldGroup className="gap-4">
+                  <Field>
+                    <FieldLabel htmlFor="email">Email Address</FieldLabel>
+                    <Input
+                      id="email"
+                      type="email"
+                      placeholder="email@example.com"
+                      required={true}
+                    />
+                  </Field>
+                  <Field>
+                    <FieldLabel htmlFor="password">Password</FieldLabel>
+                    <div className="relative w-full flex items-center">
+                      <Input
+                        id="password"
+                        type="password"
+                        placeholder="Password"
+                        required={true}
+                      />
+                      <ShowIcon className="w-4 h-4 text-neutral-600 absolute cursor-pointer right-2 top-1/2 -translate-y-1/2" />
+                    </div>
+                    <FieldDescription className="flex items-center relative bottom-2">
+                      <InfoCircleIcon className="w-4 h-4 text-neutral-600" />
+                      <span className="text-xs text-neutral-600">
+                        At least 8 characters
+                      </span>
+                    </FieldDescription>
+                  </Field>
+                </FieldGroup>
+              </FieldSet>
             </>
           )}
 
           {formType === 'login' && (
             <>
-              <InputField
-                label="email"
-                labelName="Email Address"
-                placeholder="email@example.com"
-                type="email"
-                required={true}
-                utilityClasses="mb-4"
-              />
-              <InputField
-                label="password"
-                labelName="Password"
-                type="password"
-                required={true}
-                utilityClasses="mb-4"
-                forgotPasswordLink="/forgotpassword"
-              />
+              <FieldSet>
+                <FieldGroup className="gap-4">
+                  <Field>
+                    <FieldLabel htmlFor="email">Email Address</FieldLabel>
+                    <Input
+                      id="email"
+                      type="email"
+                      placeholder="email@example.com"
+                      required={true}
+                    />
+                  </Field>
+                  <Field>
+                    <div className="flex justify-between items-center w-full">
+                      <FieldLabel htmlFor="password">Password</FieldLabel>
+                      <Link
+                        href="/forgotpassword"
+                        className="text-sm text-neutral-600 font-sans font-normal leading-4 tracking-tight">
+                        <span className="underline">Forgot</span>
+                      </Link>
+                    </div>
+                    <div className="relative w-full flex items-center">
+                      <Input
+                        id="password"
+                        type="password"
+                        placeholder="Password"
+                        required={true}
+                      />
+                      <ShowIcon className="w-4 h-4 text-neutral-600 absolute cursor-pointer right-2 top-1/2 -translate-y-1/2" />
+                    </div>
+                  </Field>
+                </FieldGroup>
+              </FieldSet>
             </>
           )}
 
           {formType === 'forgotpassword' && (
             <>
-              <InputField
-                label="email"
-                labelName="Email Address"
-                placeholder="email@example.com"
-                type="email"
-                required={true}
-                utilityClasses="mb-4"
-              />
+              <FieldSet>
+                <FieldGroup>
+                  <Field>
+                    <FieldLabel htmlFor="forgotpassword">
+                      Email Address
+                    </FieldLabel>
+                    <Input
+                      id="forgotpassword"
+                      type="email"
+                      placeholder="email@example.com"
+                      required={true}
+                    />
+                  </Field>
+                </FieldGroup>
+              </FieldSet>
             </>
           )}
 
           {formType === 'resetpassword' && (
             <>
-              <InputField
-                label="newPassword"
-                labelName="New Password"
-                type="password"
-                required={true}
-                utilityClasses="mb-4"
-                info="At least 8 characters"
-              />
-              <InputField
-                label="confirmPassword"
-                labelName="Confirm New Password"
-                type="password"
-                required={true}
-                utilityClasses="mb-4"
-              />
+              <FieldSet>
+                <FieldGroup className="gap-4">
+                  <Field>
+                    <FieldLabel htmlFor="newPassword">New Password</FieldLabel>
+                    <div className="relative w-full flex items-center">
+                      <Input id="newPassword" type="password" required={true} />
+                      <ShowIcon className="w-4 h-4 text-neutral-600 absolute cursor-pointer right-2 top-1/2 -translate-y-1/2" />
+                    </div>
+                    <FieldDescription className="flex items-center relative bottom-2">
+                      <InfoCircleIcon className="w-4 h-4 text-neutral-600" />
+                      <span className="text-xs text-neutral-600">
+                        At least 8 characters
+                      </span>
+                    </FieldDescription>
+                  </Field>
+                  <Field>
+                    <FieldLabel htmlFor="confirmPassword">
+                      Confirm New Password
+                    </FieldLabel>
+                    <div className="relative w-full flex items-center">
+                      <Input
+                        id="confirmPassword"
+                        type="password"
+                        required={true}
+                      />
+                      <ShowIcon className="w-4 h-4 text-neutral-600 absolute cursor-pointer right-2 top-1/2 -translate-y-1/2" />
+                    </div>
+                  </Field>
+                </FieldGroup>
+              </FieldSet>
             </>
           )}
-          <Button variant="default" className="w-full" type="submit">
+          <Button variant="default" className="w-full mt-4" type="submit">
             {loading === true ? <Spinner /> : submitButtonText}
           </Button>
         </form>
       </CardContent>
       <CardFooter className="flex-col gap-2 w-full max-w-full px-0">
         {loggingWithGoogle && (
-          <div className="w-full flex flex-col items-center gap-4 self-stretch pt-6 border-t border-neutral-200 mb-1.5">
+          <div className="w-full flex flex-col items-center gap-4 self-stretch pt-3 border-t border-neutral-200 mb-1.5">
             <p className="text-sm font-sans font-normal leading-4 tracking-tight text-neutral-600">
               {loggingWithGoogleText}
             </p>
