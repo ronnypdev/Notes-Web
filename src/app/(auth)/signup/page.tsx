@@ -13,6 +13,7 @@ export default function Signup() {
   const handleSignUpForm = (value: SignUpFormValues) => {
     authClient.signUp.email(
       {
+        name: value.name,
         email: value.email,
         password: value.password,
       },

@@ -1,20 +1,15 @@
 'use client';
 
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import * as z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import InputField from '@/components/InputField/InputField';
 import {
   Field,
-  FieldContent,
   FieldDescription,
   FieldError,
   FieldGroup,
   FieldLabel,
-  FieldLegend,
-  FieldSeparator,
   FieldSet,
-  FieldTitle,
 } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
 import {
@@ -33,7 +28,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 const signUpSchema = z.object({
-  email: z.email('Invalid email address').min(8, 'Email is required'),
+  name: z.string().min(4, 'Name is required and must be at least 4 characters'),
+  email: z.email({ pattern: z.regexes.email }).min(8, 'Email is required'),
   password: z.string().min(8, 'Password must be at least 8 characters'),
 });
 
@@ -68,11 +64,7 @@ export default function AuthForm({
   formFooterLink,
   formFooterLinkText,
 }: AuthFormProps) {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<signUpForm>({
+  const { control, handleSubmit } = useForm<SignUpFormValues>({
     resolver: zodResolver(signUpSchema),
   });
 
@@ -99,33 +91,56 @@ export default function AuthForm({
             <>
               <FieldSet>
                 <FieldGroup className="gap-4">
-                  <Field>
-                    <FieldLabel htmlFor="email">Email Address</FieldLabel>
-                    <Input
-                      id="email"
-                      type="email"
-                      placeholder="email@example.com"
-                      required={true}
-                    />
-                  </Field>
-                  <Field>
-                    <FieldLabel htmlFor="password">Password</FieldLabel>
-                    <div className="relative w-full flex items-center">
-                      <Input
-                        id="password"
-                        type="password"
-                        placeholder="Password"
-                        required={true}
-                      />
-                      <ShowIcon className="w-4 h-4 text-neutral-600 absolute cursor-pointer right-2 top-1/2 -translate-y-1/2" />
-                    </div>
-                    <FieldDescription className="flex items-center relative bottom-2">
-                      <InfoCircleIcon className="w-4 h-4 text-neutral-600" />
-                      <span className="text-xs text-neutral-600">
-                        At least 8 characters
-                      </span>
-                    </FieldDescription>
-                  </Field>
+                  <Controller
+                    name="email"
+                    control={control}
+                    render={({ field, fieldState }) => (
+                      <Field>
+                        <FieldLabel htmlFor="email">Email Address</FieldLabel>
+                        <Input
+                          {...field}
+                          id={field.name}
+                          type="email"
+                          aria-invalid={fieldState.invalid}
+                          placeholder="email@example.com"
+                          required={true}
+                        />
+                        {fieldState.invalid && (
+                          <FieldError errors={[fieldState.error]} />
+                        )}
+                      </Field>
+                    )}
+                  />
+
+                  <Controller
+                    name="password"
+                    control={control}
+                    render={({ field, fieldState }) => (
+                      <Field>
+                        <FieldLabel htmlFor="password">Password</FieldLabel>
+                        <div className="relative w-full flex items-center">
+                          <Input
+                            {...field}
+                            id={field.name}
+                            type="password"
+                            aria-invalid={fieldState.invalid}
+                            placeholder="Password"
+                            required={true}
+                          />
+                          <ShowIcon className="w-4 h-4 text-neutral-600 absolute cursor-pointer right-2 top-1/2 -translate-y-1/2" />
+                          {fieldState.invalid && (
+                            <FieldError errors={[fieldState.error]} />
+                          )}
+                        </div>
+                        <FieldDescription className="flex items-center relative bottom-2">
+                          <InfoCircleIcon className="w-4 h-4 text-neutral-600" />
+                          <span className="text-xs text-neutral-600">
+                            At least 8 characters
+                          </span>
+                        </FieldDescription>
+                      </Field>
+                    )}
+                  />
                 </FieldGroup>
               </FieldSet>
             </>
