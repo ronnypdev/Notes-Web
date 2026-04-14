@@ -7,13 +7,30 @@ import { toast } from 'sonner';
 
 export default function Signup() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
-
   const router = useRouter();
+
+  const deriveDisplayName = (email: string) => {
+    const localPart = email.split('@')[0]?.trim() ?? '';
+    if (!localPart) return 'User';
+
+    // "john.doe_99" -> "John Doe 99"
+    const normalized = localPart
+      .replace(/[._-]+/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim();
+    if (!normalized) return 'User';
+
+    return normalized
+      .split(' ')
+      .filter(Boolean)
+      .map((chunk) => chunk.charAt(0).toUpperCase() + chunk.slice(1))
+      .join(' ');
+  };
 
   const handleSignUpForm = (value: SignUpFormValues) => {
     authClient.signUp.email(
       {
-        name: value.name,
+        name: deriveDisplayName(value.email),
         email: value.email,
         password: value.password,
       },

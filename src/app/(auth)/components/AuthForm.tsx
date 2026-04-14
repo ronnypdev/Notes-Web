@@ -29,7 +29,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 const signUpSchema = z.object({
-  name: z.string().min(4, 'Name is required and must be at least 4 characters'),
   email: z.email({ pattern: z.regexes.email }).min(8, 'Email is required'),
   password: z.string().min(8, 'Password must be at least 8 characters'),
 });
@@ -69,6 +68,10 @@ export default function AuthForm({
 
   const { control, handleSubmit } = useForm<SignUpFormValues>({
     resolver: zodResolver(signUpSchema),
+    defaultValues: {
+      email: '',
+      password: '',
+    },
   });
 
   return (
@@ -103,6 +106,7 @@ export default function AuthForm({
                         <Input
                           {...field}
                           id={field.name}
+                          value={field.value ?? ''}
                           type="email"
                           aria-invalid={fieldState.invalid}
                           placeholder="email@example.com"
@@ -124,6 +128,7 @@ export default function AuthForm({
                         <div className="relative w-full flex items-center">
                           <Input
                             {...field}
+                            value={field.value ?? ''}
                             id={field.name}
                             type={showPassword ? 'text' : 'password'}
                             aria-invalid={fieldState.invalid}
