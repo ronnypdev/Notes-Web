@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import * as z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -64,6 +65,8 @@ export default function AuthForm({
   formFooterLink,
   formFooterLinkText,
 }: AuthFormProps) {
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+
   const { control, handleSubmit } = useForm<SignUpFormValues>({
     resolver: zodResolver(signUpSchema),
   });
@@ -122,12 +125,17 @@ export default function AuthForm({
                           <Input
                             {...field}
                             id={field.name}
-                            type="password"
+                            type={showPassword ? 'text' : 'password'}
                             aria-invalid={fieldState.invalid}
                             placeholder="Password"
                             required={true}
                           />
-                          <ShowIcon className="w-4 h-4 text-neutral-600 absolute cursor-pointer right-2 top-1/2 -translate-y-1/2" />
+                          <ShowIcon
+                            className="w-4 h-4 text-neutral-600 absolute cursor-pointer right-2 top-1/2 -translate-y-1/2"
+                            onClick={() =>
+                              setShowPassword((prevPassword) => !prevPassword)
+                            }
+                          />
                           {fieldState.invalid && (
                             <FieldError errors={[fieldState.error]} />
                           )}
