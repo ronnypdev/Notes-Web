@@ -49,13 +49,10 @@ export default function Signup() {
           });
           router.push('/allnotes');
         },
-        onError: (error) => {
-          toast.error(
-            error.error.message || 'Something went wrong!, Please try again!',
-            {
-              position: 'top-right',
-            },
-          );
+        onError: ({ error }) => {
+          toast.error(error.message, {
+            position: 'top-right',
+          });
         },
       },
     );
