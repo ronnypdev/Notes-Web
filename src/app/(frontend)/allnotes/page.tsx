@@ -1,3 +1,3 @@
-export default async function AllNotesPage() {
+export default  function AllNotesPage() {
   return <div>All Notes Page</div>;
 }
