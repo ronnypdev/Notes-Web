@@ -2,12 +2,19 @@ import Header from '@/components/Header/Header';
 import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
 import LeftSideBar from '@/components/Sidebar/Left/LeftSideBar';
 import RightSideBar from '@/components/Sidebar/Right/RightSideBar';
+import { getServerSessions } from '@/lib/usersessions';
+import UnauthenticatedPage from '@/app/(frontend)/unauthenticated/page';
 
 export default async function FrontendLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const session = await getServerSessions();
+  const user = session?.user;
+
+  if (!user) return <UnauthenticatedPage />;
+
   return (
     <>
       <SidebarProvider>
