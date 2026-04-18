@@ -12,7 +12,7 @@ import {
   FieldLabel,
   FieldSet,
 } from '@/components/ui/field';
-import { Input } from '@/components/ui/input';
+
 import {
   Card,
   CardHeader,
@@ -23,20 +23,11 @@ import {
 } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import GoogleIcon from '@/components/icons/GoogleIcon';
-import { InfoCircleIcon, ShowIcon } from '@/components/icons';
 import { Spinner } from '@/components/ui/spinner';
 import Link from 'next/link';
 import Image from 'next/image';
 
-const signUpSchema = z.object({
-  email: z.email({ pattern: z.regexes.email }).min(8, 'Email is required'),
-  password: z.string().min(8, 'Password must be at least 8 characters'),
-});
-
-export type SignUpFormValues = z.infer<typeof signUpSchema>;
-
 interface AuthFormProps {
-  formType: 'login' | 'signup' | 'forgotpassword' | 'resetpassword';
   onSubmit: (data: SignUpFormValues) => void | Promise<void>;
   loading: boolean;
   formTitle: string;
@@ -48,10 +39,10 @@ interface AuthFormProps {
   formFooterText?: string;
   formFooterLink?: string;
   formFooterLinkText?: string;
+  children: React.ReactNode;
 }
 
 export default function AuthForm({
-  formType,
   onSubmit,
   loading,
   formTitle,
@@ -60,20 +51,11 @@ export default function AuthForm({
   loggingWithGoogleText,
   googleButtonText,
   loggingWithGoogle,
+  children,
   formFooterText,
   formFooterLink,
   formFooterLinkText,
 }: AuthFormProps) {
-  const [showPassword, setShowPassword] = useState<boolean>(false);
-
-  const { control, handleSubmit } = useForm<SignUpFormValues>({
-    resolver: zodResolver(signUpSchema),
-    defaultValues: {
-      email: '',
-      password: '',
-    },
-  });
-
   return (
     <Card className="bg-white border border-neutral-100 w-[540px] max-w-full p-12 rounded-12">
       <CardHeader className="flex flex-col items-center justify-center p-0">
@@ -93,71 +75,7 @@ export default function AuthForm({
       </CardHeader>
       <CardContent className="p-0 my-4">
         <form onSubmit={handleSubmit(onSubmit)}>
-          {formType === 'signup' && (
-            <>
-              <FieldSet>
-                <FieldGroup className="gap-4">
-                  <Controller
-                    name="email"
-                    control={control}
-                    render={({ field, fieldState }) => (
-                      <Field>
-                        <FieldLabel htmlFor="email">Email Address</FieldLabel>
-                        <Input
-                          {...field}
-                          id={field.name}
-                          value={field.value ?? ''}
-                          type="email"
-                          aria-invalid={fieldState.invalid}
-                          placeholder="email@example.com"
-                          required={true}
-                        />
-                        {fieldState.invalid && (
-                          <FieldError errors={[fieldState.error]} />
-                        )}
-                      </Field>
-                    )}
-                  />
-
-                  <Controller
-                    name="password"
-                    control={control}
-                    render={({ field, fieldState }) => (
-                      <Field>
-                        <FieldLabel htmlFor="password">Password</FieldLabel>
-                        <div className="relative w-full flex items-center">
-                          <Input
-                            {...field}
-                            value={field.value ?? ''}
-                            id={field.name}
-                            type={showPassword ? 'text' : 'password'}
-                            aria-invalid={fieldState.invalid}
-                            placeholder="Password"
-                            required={true}
-                          />
-                          <ShowIcon
-                            className="w-4 h-4 text-neutral-600 absolute cursor-pointer right-2 top-1/2 -translate-y-1/2"
-                            onClick={() =>
-                              setShowPassword((prevPassword) => !prevPassword)
-                            }
-                          />
-                          {fieldState.invalid && (
-                            <FieldError errors={[fieldState.error]} />
-                          )}
-                        </div>
-                        <FieldDescription className="flex items-center relative bottom-2">
-                          <InfoCircleIcon className="w-4 h-4 text-neutral-600" />
-                          <span className="text-xs text-neutral-600">
-                            At least 8 characters
-                          </span>
-                        </FieldDescription>
-                      </Field>
-                    )}
-                  />
-                </FieldGroup>
-              </FieldSet>
-            </>
-          )}
+          {children}
 
           {formType === 'login' && (
             <>

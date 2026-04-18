@@ -24,7 +24,7 @@ export default function Login() {
           setIsLoading(false);
         },
         onSuccess: () => {
-          //redirect to the dashboard or sign in page
+          // redirect to allnotes route
           toast.success('Congratulation! You successfully logged in', {
             position: 'top-right',
           });
