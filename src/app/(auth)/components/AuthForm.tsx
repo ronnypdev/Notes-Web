@@ -12,7 +12,7 @@ import {
   FieldLabel,
   FieldSet,
 } from '@/components/ui/field';
-
+import { Input } from '@/components/ui/input';
 import {
   Card,
   CardHeader,
@@ -23,6 +23,7 @@ import {
 } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import GoogleIcon from '@/components/icons/GoogleIcon';
+
 import { Spinner } from '@/components/ui/spinner';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -74,45 +75,8 @@ export default function AuthForm({
         </div>
       </CardHeader>
       <CardContent className="p-0 my-4">
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={onSubmit}>
           {children}
-
-          {formType === 'login' && (
-            <>
-              <FieldSet>
-                <FieldGroup className="gap-4">
-                  <Field>
-                    <FieldLabel htmlFor="email">Email Address</FieldLabel>
-                    <Input
-                      id="email"
-                      type="email"
-                      placeholder="email@example.com"
-                      required={true}
-                    />
-                  </Field>
-                  <Field>
-                    <div className="flex justify-between items-center w-full">
-                      <FieldLabel htmlFor="password">Password</FieldLabel>
-                      <Link
-                        href="/forgotpassword"
-                        className="text-sm text-neutral-600 font-sans font-normal leading-4 tracking-tight">
-                        <span className="underline">Forgot</span>
-                      </Link>
-                    </div>
-                    <div className="relative w-full flex items-center">
-                      <Input
-                        id="password"
-                        type="password"
-                        placeholder="Password"
-                        required={true}
-                      />
-                      <ShowIcon className="w-4 h-4 text-neutral-600 absolute cursor-pointer right-2 top-1/2 -translate-y-1/2" />
-                    </div>
-                  </Field>
-                </FieldGroup>
-              </FieldSet>
-            </>
-          )}
 
           {formType === 'forgotpassword' && (
             <>
