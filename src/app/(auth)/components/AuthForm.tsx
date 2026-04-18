@@ -1,18 +1,4 @@
 'use client';
-
-import { useState } from 'react';
-import { Controller, useForm } from 'react-hook-form';
-import * as z from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
-import {
-  Field,
-  FieldDescription,
-  FieldError,
-  FieldGroup,
-  FieldLabel,
-  FieldSet,
-} from '@/components/ui/field';
-import { Input } from '@/components/ui/input';
 import {
   Card,
   CardHeader,
@@ -77,61 +63,6 @@ export default function AuthForm({
       <CardContent className="p-0 my-4">
         <form onSubmit={onSubmit}>
           {children}
-
-          {formType === 'forgotpassword' && (
-            <>
-              <FieldSet>
-                <FieldGroup>
-                  <Field>
-                    <FieldLabel htmlFor="forgotpassword">
-                      Email Address
-                    </FieldLabel>
-                    <Input
-                      id="forgotpassword"
-                      type="email"
-                      placeholder="email@example.com"
-                      required={true}
-                    />
-                  </Field>
-                </FieldGroup>
-              </FieldSet>
-            </>
-          )}
-
-          {formType === 'resetpassword' && (
-            <>
-              <FieldSet>
-                <FieldGroup className="gap-4">
-                  <Field>
-                    <FieldLabel htmlFor="newPassword">New Password</FieldLabel>
-                    <div className="relative w-full flex items-center">
-                      <Input id="newPassword" type="password" required={true} />
-                      <ShowIcon className="w-4 h-4 text-neutral-600 absolute cursor-pointer right-2 top-1/2 -translate-y-1/2" />
-                    </div>
-                    <FieldDescription className="flex items-center relative bottom-2">
-                      <InfoCircleIcon className="w-4 h-4 text-neutral-600" />
-                      <span className="text-xs text-neutral-600">
-                        At least 8 characters
-                      </span>
-                    </FieldDescription>
-                  </Field>
-                  <Field>
-                    <FieldLabel htmlFor="confirmPassword">
-                      Confirm New Password
-                    </FieldLabel>
-                    <div className="relative w-full flex items-center">
-                      <Input
-                        id="confirmPassword"
-                        type="password"
-                        required={true}
-                      />
-                      <ShowIcon className="w-4 h-4 text-neutral-600 absolute cursor-pointer right-2 top-1/2 -translate-y-1/2" />
-                    </div>
-                  </Field>
-                </FieldGroup>
-              </FieldSet>
-            </>
-          )}
           <Button variant="default" className="w-full mt-4" type="submit">
             {loading === true ? <Spinner /> : submitButtonText}
           </Button>
