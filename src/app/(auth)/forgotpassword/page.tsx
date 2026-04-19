@@ -2,16 +2,38 @@
 
 import AuthForm from '../components/AuthForm';
 
+import {
+  Field,
+  FieldError,
+  FieldGroup,
+  FieldLabel,
+  FieldSet,
+} from '@/components/ui/field';
+import { Input } from '@/components/ui/input';
+
 export default function ForgotPassword() {
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-neutral-100 p-5 md:p-0">
       <AuthForm
-        formType="forgotpassword"
+        onSubmit={() => {}}
+        loading={isLoading}
         formTitle="Forgotten your password?"
         formDescription="Enter your email below, and we’ll send you a link to reset it."
-        onSubmit={() => {}}
-        submitButtonText="Send Reset Link"
-      />
+        submitButtonText="Send Reset Link">
+        <FieldSet>
+          <FieldGroup>
+            <Field>
+              <FieldLabel htmlFor="forgotpassword">Email Address</FieldLabel>
+              <Input
+                id="forgotpassword"
+                type="email"
+                placeholder="email@example.com"
+                required={true}
+              />
+            </Field>
+          </FieldGroup>
+        </FieldSet>
+      </AuthForm>
     </div>
   );
 }

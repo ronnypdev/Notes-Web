@@ -1,18 +1,4 @@
 'use client';
-
-import { useState } from 'react';
-import { Controller, useForm } from 'react-hook-form';
-import * as z from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
-import {
-  Field,
-  FieldDescription,
-  FieldError,
-  FieldGroup,
-  FieldLabel,
-  FieldSet,
-} from '@/components/ui/field';
-import { Input } from '@/components/ui/input';
 import {
   Card,
   CardHeader,
@@ -23,21 +9,13 @@ import {
 } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import GoogleIcon from '@/components/icons/GoogleIcon';
-import { InfoCircleIcon, ShowIcon } from '@/components/icons';
+
 import { Spinner } from '@/components/ui/spinner';
 import Link from 'next/link';
 import Image from 'next/image';
 
-const signUpSchema = z.object({
-  email: z.email({ pattern: z.regexes.email }).min(8, 'Email is required'),
-  password: z.string().min(8, 'Password must be at least 8 characters'),
-});
-
-export type SignUpFormValues = z.infer<typeof signUpSchema>;
-
 interface AuthFormProps {
-  formType: 'login' | 'signup' | 'forgotpassword' | 'resetpassword';
-  onSubmit: (data: SignUpFormValues) => void | Promise<void>;
+  onSubmit: (e: React.SubmitEvent<HTMLFormElement>) => void | Promise<void>;
   loading: boolean;
   formTitle: string;
   formDescription: string;
@@ -48,10 +26,10 @@ interface AuthFormProps {
   formFooterText?: string;
   formFooterLink?: string;
   formFooterLinkText?: string;
+  children: React.ReactNode;
 }
 
 export default function AuthForm({
-  formType,
   onSubmit,
   loading,
   formTitle,
@@ -60,20 +38,11 @@ export default function AuthForm({
   loggingWithGoogleText,
   googleButtonText,
   loggingWithGoogle,
+  children,
   formFooterText,
   formFooterLink,
   formFooterLinkText,
 }: AuthFormProps) {
-  const [showPassword, setShowPassword] = useState<boolean>(false);
-
-  const { control, handleSubmit } = useForm<SignUpFormValues>({
-    resolver: zodResolver(signUpSchema),
-    defaultValues: {
-      email: '',
-      password: '',
-    },
-  });
-
   return (
     <Card className="bg-white border border-neutral-100 w-[540px] max-w-full p-12 rounded-12">
       <CardHeader className="flex flex-col items-center justify-center p-0">
@@ -92,164 +61,8 @@ export default function AuthForm({
         </div>
       </CardHeader>
       <CardContent className="p-0 my-4">
-        <form onSubmit={handleSubmit(onSubmit)}>
-          {formType === 'signup' && (
-            <>
-              <FieldSet>
-                <FieldGroup className="gap-4">
-                  <Controller
-                    name="email"
-                    control={control}
-                    render={({ field, fieldState }) => (
-                      <Field>
-                        <FieldLabel htmlFor="email">Email Address</FieldLabel>
-                        <Input
-                          {...field}
-                          id={field.name}
-                          value={field.value ?? ''}
-                          type="email"
-                          aria-invalid={fieldState.invalid}
-                          placeholder="email@example.com"
-                          required={true}
-                        />
-                        {fieldState.invalid && (
-                          <FieldError errors={[fieldState.error]} />
-                        )}
-                      </Field>
-                    )}
-                  />
-
-                  <Controller
-                    name="password"
-                    control={control}
-                    render={({ field, fieldState }) => (
-                      <Field>
-                        <FieldLabel htmlFor="password">Password</FieldLabel>
-                        <div className="relative w-full flex items-center">
-                          <Input
-                            {...field}
-                            value={field.value ?? ''}
-                            id={field.name}
-                            type={showPassword ? 'text' : 'password'}
-                            aria-invalid={fieldState.invalid}
-                            placeholder="Password"
-                            required={true}
-                          />
-                          <ShowIcon
-                            className="w-4 h-4 text-neutral-600 absolute cursor-pointer right-2 top-1/2 -translate-y-1/2"
-                            onClick={() =>
-                              setShowPassword((prevPassword) => !prevPassword)
-                            }
-                          />
-                          {fieldState.invalid && (
-                            <FieldError errors={[fieldState.error]} />
-                          )}
-                        </div>
-                        <FieldDescription className="flex items-center relative bottom-2">
-                          <InfoCircleIcon className="w-4 h-4 text-neutral-600" />
-                          <span className="text-xs text-neutral-600">
-                            At least 8 characters
-                          </span>
-                        </FieldDescription>
-                      </Field>
-                    )}
-                  />
-                </FieldGroup>
-              </FieldSet>
-            </>
-          )}
-
-          {formType === 'login' && (
-            <>
-              <FieldSet>
-                <FieldGroup className="gap-4">
-                  <Field>
-                    <FieldLabel htmlFor="email">Email Address</FieldLabel>
-                    <Input
-                      id="email"
-                      type="email"
-                      placeholder="email@example.com"
-                      required={true}
-                    />
-                  </Field>
-                  <Field>
-                    <div className="flex justify-between items-center w-full">
-                      <FieldLabel htmlFor="password">Password</FieldLabel>
-                      <Link
-                        href="/forgotpassword"
-                        className="text-sm text-neutral-600 font-sans font-normal leading-4 tracking-tight">
-                        <span className="underline">Forgot</span>
-                      </Link>
-                    </div>
-                    <div className="relative w-full flex items-center">
-                      <Input
-                        id="password"
-                        type="password"
-                        placeholder="Password"
-                        required={true}
-                      />
-                      <ShowIcon className="w-4 h-4 text-neutral-600 absolute cursor-pointer right-2 top-1/2 -translate-y-1/2" />
-                    </div>
-                  </Field>
-                </FieldGroup>
-              </FieldSet>
-            </>
-          )}
-
-          {formType === 'forgotpassword' && (
-            <>
-              <FieldSet>
-                <FieldGroup>
-                  <Field>
-                    <FieldLabel htmlFor="forgotpassword">
-                      Email Address
-                    </FieldLabel>
-                    <Input
-                      id="forgotpassword"
-                      type="email"
-                      placeholder="email@example.com"
-                      required={true}
-                    />
-                  </Field>
-                </FieldGroup>
-              </FieldSet>
-            </>
-          )}
-
-          {formType === 'resetpassword' && (
-            <>
-              <FieldSet>
-                <FieldGroup className="gap-4">
-                  <Field>
-                    <FieldLabel htmlFor="newPassword">New Password</FieldLabel>
-                    <div className="relative w-full flex items-center">
-                      <Input id="newPassword" type="password" required={true} />
-                      <ShowIcon className="w-4 h-4 text-neutral-600 absolute cursor-pointer right-2 top-1/2 -translate-y-1/2" />
-                    </div>
-                    <FieldDescription className="flex items-center relative bottom-2">
-                      <InfoCircleIcon className="w-4 h-4 text-neutral-600" />
-                      <span className="text-xs text-neutral-600">
-                        At least 8 characters
-                      </span>
-                    </FieldDescription>
-                  </Field>
-                  <Field>
-                    <FieldLabel htmlFor="confirmPassword">
-                      Confirm New Password
-                    </FieldLabel>
-                    <div className="relative w-full flex items-center">
-                      <Input
-                        id="confirmPassword"
-                        type="password"
-                        required={true}
-                      />
-                      <ShowIcon className="w-4 h-4 text-neutral-600 absolute cursor-pointer right-2 top-1/2 -translate-y-1/2" />
-                    </div>
-                  </Field>
-                </FieldGroup>
-              </FieldSet>
-            </>
-          )}
+        <form onSubmit={onSubmit}>
+          {children}
           <Button variant="default" className="w-full mt-4" type="submit">
             {loading === true ? <Spinner /> : submitButtonText}
           </Button>
