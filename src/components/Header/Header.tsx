@@ -1,8 +1,19 @@
-import Logo from "../Logo/Logo";
-import InputField from "../InputField/InputField";
-import { SettingIcon } from "../icons";
+'use client';
+
+import { useRouter } from 'next/navigation';
+import { authClient } from '@/lib/auth-client';
+
+import Logo from '../Logo/Logo';
+import InputField from '../InputField/InputField';
+import UserDropDown from '../UserDropDown/UserDropDown';
 
 export default function Header() {
+  const router = useRouter();
+  const session = authClient.useSession();
+  const user = session.data?.user;
+
+  if (!user) return;
+
   return (
     <>
       <header className="w-full max-w-full flex items-center justify-between my-0 mx-auto bg-neutral-100 lg:bg-transparent border-none lg:border-solid lg:border-b lg:border-b-neutral-200 px-[var(--spacing-400)] py-3.5">
@@ -18,7 +29,18 @@ export default function Header() {
             type="search"
             placeholder="Search by title, content, or tags…"
           />
-          <SettingIcon className="w-8 h-8 cursor-pointer text-neutral-500 relative top-1" />
+          <UserDropDown
+            user={user}
+            onSignOut={() => {
+              authClient.signOut({
+                fetchOptions: {
+                  onSuccess: () => {
+                    router.push('/login'); // redirect to login page
+                  },
+                },
+              });
+            }}
+          />
         </div>
       </header>
     </>
