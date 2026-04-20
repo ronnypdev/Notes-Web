@@ -1,6 +1,7 @@
-import Logo from "../Logo/Logo";
-import InputField from "../InputField/InputField";
-import { SettingIcon } from "../icons";
+import Logo from '../Logo/Logo';
+import InputField from '../InputField/InputField';
+// import { SettingIcon } from "../icons";
+import UserDropDown from '../UserDropDown/UserDropDown';
 
 export default function Header() {
   return (
@@ -18,7 +19,7 @@ export default function Header() {
             type="search"
             placeholder="Search by title, content, or tags…"
           />
-          <SettingIcon className="w-8 h-8 cursor-pointer text-neutral-500 relative top-1" />
+          <UserDropDown />
         </div>
       </header>
     </>
