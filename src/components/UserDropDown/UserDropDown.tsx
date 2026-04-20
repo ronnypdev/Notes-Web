@@ -1,4 +1,6 @@
-import { BadgeCheckIcon, LogOutIcon } from 'lucide-react';
+'use client';
+
+import { BadgeCheckIcon, LogOutIcon, Mail } from 'lucide-react';
 import { SettingIcon } from '@/components/icons';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
@@ -11,7 +13,25 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 
-export default function UserDropDown() {
+function initials(input: string) {
+  return input
+    .split(' ')
+    .map((n) => n[0])
+    .join('')
+    .toUpperCase()
+    .substring(0, 2);
+}
+
+interface UserDropDownProps {
+  onSignOut: () => void;
+  user: {
+    name: string;
+    image?: string | null;
+    email: string;
+  };
+}
+
+export default function UserDropDown({ onSignOut, user }: UserDropDownProps) {
   return (
     <>
       <DropdownMenu>
@@ -21,8 +41,8 @@ export default function UserDropDown() {
             size="icon"
             className="rounded-full focus-visible:outline-primary">
             <Avatar>
-              <AvatarImage src="https://github.com/shadcn.png" alt="shadcn" />
-              <AvatarFallback>LR</AvatarFallback>
+              <AvatarImage src={user.image ?? undefined} alt="shadcn" />
+              <AvatarFallback>{initials(user.name)}</AvatarFallback>
             </Avatar>
           </Button>
         </DropdownMenuTrigger>
@@ -32,7 +52,11 @@ export default function UserDropDown() {
           <DropdownMenuGroup>
             <DropdownMenuItem>
               <BadgeCheckIcon />
-              Account
+              {user.name}
+            </DropdownMenuItem>
+            <DropdownMenuItem>
+              <Mail />
+              {user.email}
             </DropdownMenuItem>
             <DropdownMenuItem>
               <SettingIcon />
@@ -40,7 +64,7 @@ export default function UserDropDown() {
             </DropdownMenuItem>
           </DropdownMenuGroup>
           <DropdownMenuSeparator />
-          <DropdownMenuItem variant="destructive">
+          <DropdownMenuItem variant="destructive" onClick={onSignOut}>
             <LogOutIcon />
             Sign Out
           </DropdownMenuItem>
