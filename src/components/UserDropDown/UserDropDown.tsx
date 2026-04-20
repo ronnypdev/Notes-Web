@@ -1,9 +1,5 @@
-import {
-  BadgeCheckIcon,
-  BellIcon,
-  CreditCardIcon,
-  LogOutIcon,
-} from 'lucide-react';
+import { BadgeCheckIcon, LogOutIcon } from 'lucide-react';
+import { SettingIcon } from '@/components/icons';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import {
@@ -39,7 +35,7 @@ export default function UserDropDown() {
               Account
             </DropdownMenuItem>
             <DropdownMenuItem>
-              <CreditCardIcon />
+              <SettingIcon />
               Settings
             </DropdownMenuItem>
           </DropdownMenuGroup>
