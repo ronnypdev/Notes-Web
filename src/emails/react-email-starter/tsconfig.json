@@ -1,3 +1,4 @@
+// src/emails/react-email-starter/tsconfig.json
 {
   "compilerOptions": {
     "composite": false,
@@ -5,7 +6,9 @@
     "skipLibCheck": true,
     "strict": true,
     "noEmit": true,
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "module": "esnext",
+    "moduleResolution": "bundler"
   },
   "include": ["**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules", ".react-email"]
