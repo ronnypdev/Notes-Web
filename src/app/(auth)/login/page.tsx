@@ -1,11 +1,12 @@
 'use client';
 import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import * as z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
 import { authClient } from '@/lib/auth-client';
+import { loginSchema, LoginFormValues } from '@/lib/zod';
 import AuthForm from '../components/AuthForm';
+
 import {
   Field,
   FieldError,
@@ -17,13 +18,6 @@ import { Input } from '@/components/ui/input';
 import { ShowIcon } from '@/components/icons';
 import { toast } from 'sonner';
 import Link from 'next/link';
-
-const loginSchema = z.object({
-  email: z.email({ pattern: z.regexes.email }).min(8, 'Email is required'),
-  password: z.string().min(8, 'Password must be at least 8 characters'),
-});
-
-export type LoginFormValues = z.infer<typeof loginSchema>;
 
 export default function Login() {
   const [isLoading, setIsLoading] = useState<boolean>(false);

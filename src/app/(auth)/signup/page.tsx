@@ -1,10 +1,10 @@
 'use client';
 import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import * as z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
 import { authClient } from '@/lib/auth-client';
+import { signUpSchema, SignUpFormValues } from '@/lib/zod';
 import AuthForm from '../components/AuthForm';
 
 import {
@@ -18,13 +18,6 @@ import {
 import { Input } from '@/components/ui/input';
 import { InfoCircleIcon, ShowIcon } from '@/components/icons';
 import { toast } from 'sonner';
-
-const signUpSchema = z.object({
-  email: z.email({ pattern: z.regexes.email }).min(8, 'Email is required'),
-  password: z.string().min(8, 'Password must be at least 8 characters'),
-});
-
-export type SignUpFormValues = z.infer<typeof signUpSchema>;
 
 export default function Signup() {
   const [isLoading, setIsLoading] = useState<boolean>(false);

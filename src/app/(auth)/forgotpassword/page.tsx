@@ -12,6 +12,8 @@ import {
 import { Input } from '@/components/ui/input';
 
 export default function ForgotPassword() {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-neutral-100 p-5 md:p-0">
       <AuthForm
