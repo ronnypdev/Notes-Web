@@ -1,16 +1,12 @@
 import {
   Body,
   Button,
-  Column,
   Container,
   Head,
   Heading,
-  Hr,
   Html,
   Img,
-  Link,
   Preview,
-  Row,
   Section,
   Tailwind,
   Text,
@@ -18,6 +14,9 @@ import {
 
 interface VercelInviteUserEmailProps {
   username?: string;
+  userEmail?: string;
+  userLink?: string;
+  userToken?: string;
   userImage?: string;
   invitedByUsername?: string;
   invitedByEmail?: string;
@@ -34,14 +33,8 @@ const baseUrl = process.env.VERCEL_URL
 
 export const VercelInviteUserEmail = ({
   username,
-  userImage,
   invitedByUsername,
-  invitedByEmail,
-  teamName,
-  teamImage,
   inviteLink,
-  inviteFromIp,
-  inviteFromLocation,
 }: VercelInviteUserEmailProps) => {
   const previewText = `Join ${invitedByUsername} on Vercel`;
 
