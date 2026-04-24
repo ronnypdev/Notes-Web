@@ -41,13 +41,13 @@ export default function Login() {
         onSuccess: () => {
           // redirect to allnotes route
           toast.success('Congratulation! You successfully logged in', {
-            position: 'top-right',
+            position: 'bottom-right',
           });
           router.push('/allnotes');
         },
         onError: ({ error }) => {
           toast.error(error.message, {
-            position: 'top-right',
+            position: 'bottom-right',
           });
         },
       },

@@ -36,12 +36,12 @@ export default function ForgotPassword() {
         },
         onSuccess: () => {
           toast.success('Reset password link sent to your email', {
-            position: 'top-right',
+            position: 'bottom-right',
           });
         },
         onError: ({ error }) => {
           toast.error(error.message, {
-            position: 'top-right',
+            position: 'bottom-right',
           });
         },
       },

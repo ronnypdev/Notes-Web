@@ -60,13 +60,13 @@ export default function Signup() {
         onSuccess: () => {
           //redirect to the dashboard or sign in page
           toast.success('Congratulation! You successfully sign up', {
-            position: 'top-right',
+            position: 'bottom-right',
           });
           router.push('/allnotes');
         },
         onError: ({ error }) => {
           toast.error(error.message, {
-            position: 'top-right',
+            position: 'bottom-right',
           });
         },
       },
