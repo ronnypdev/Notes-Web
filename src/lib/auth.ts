@@ -21,10 +21,6 @@ export const auth = betterAuth({
         resetLink: `${url}?token=${token}`,
       });
     },
-    onPasswordReset: async ({ user }) => {
-      // your logic here
-      console.log(`Password for user ${user.email} has been reset.`);
-    },
   },
 
   secret: process.env.BETTER_AUTH_SECRET,
