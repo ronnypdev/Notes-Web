@@ -21,3 +21,10 @@ export const forgotPasswordSchema = z.object({
 });
 
 export type ForgotPasswordFormValues = z.infer<typeof forgotPasswordSchema>;
+
+export const resetPasswordSchema = z.object({
+  newPassword: z.string().min(8, 'Password must be at least 8 characters'),
+  token: z.string(),
+});
+
+export type ResetPasswordFormValues = z.infer<typeof resetPasswordSchema>;

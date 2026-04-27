@@ -63,12 +63,12 @@ export default function ForgotPassword() {
         formTitle="Forgotten your password?"
         formDescription="Enter your email below, and we’ll send you a link to reset it."
         submitButtonText="Send Reset Link">
-        <Controller
-          name="email"
-          control={control}
-          render={({ field, fieldState }) => (
-            <FieldSet>
-              <FieldGroup>
+        <FieldSet>
+          <FieldGroup>
+            <Controller
+              name="email"
+              control={control}
+              render={({ field, fieldState }) => (
                 <Field>
                   <FieldLabel htmlFor="forgotpassword">
                     Email Address
@@ -86,10 +86,10 @@ export default function ForgotPassword() {
                     <FieldError errors={[fieldState.error]} />
                   )}
                 </Field>
-              </FieldGroup>
-            </FieldSet>
-          )}
-        />
+              )}
+            />
+          </FieldGroup>
+        </FieldSet>
       </AuthForm>
     </div>
   );

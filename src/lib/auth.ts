@@ -17,7 +17,7 @@ export const auth = betterAuth({
         username: user.name,
         fromEmail: 'noreply@example.com',
         userEmail: user.email,
-        emailSubject: 'Reset your password',
+        emailSubject: 'Request to reset your password',
         resetLink: `${url}?token=${token}`,
       });
     },
