@@ -13,6 +13,7 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
+  CardContent,
 } from '@/components/ui/card';
 
 import {
@@ -26,6 +27,8 @@ import {
 import { Input } from '@/components/ui/input';
 import { InfoCircleIcon, ShowIcon } from '@/components/icons';
 import { toast } from 'sonner';
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
 
 export default function ResetPassword() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -159,6 +162,13 @@ export default function ResetPassword() {
               link.
             </CardDescription>
           </CardHeader>
+          <CardContent className="p-0 my-4">
+            <Link href="/forgotpassword">
+              <Button variant="default" className="w-full mt-4">
+                Request New Reset Link
+              </Button>
+            </Link>
+          </CardContent>
         </Card>
       )}
     </div>
