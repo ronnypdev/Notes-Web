@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, Suspense } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter, useSearchParams } from 'next/navigation';
@@ -30,11 +30,39 @@ import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 
+function InvalidTokenCard() {
+  const searchParams = useSearchParams();
+  const error = searchParams.get('error');
+
+  return (
+    <>
+      {error === 'invalid_token' && (
+        <Card className="bg-white border border-neutral-100 w-[540px] max-w-full p-12 rounded-12">
+          <CardHeader className="flex flex-col items-center justify-center p-0">
+            <CardTitle className="text-2xl font-bold text-red-500">
+              Invalid Token
+            </CardTitle>
+            <CardDescription className="text-sm text-red-500">
+              The token is invalid or has expired. Please request a new reset
+              link.
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="p-0 my-4">
+            <Link href="/forgotpassword">
+              <Button variant="default" className="w-full mt-4">
+                Request New Reset Link
+              </Button>
+            </Link>
+          </CardContent>
+        </Card>
+      )}
+    </>
+  );
+}
+
 export default function ResetPassword() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  const searchParams = useSearchParams();
-  const error = searchParams.get('error');
   const router = useRouter();
 
   const handleResetPasswordForm = (values: ResetPasswordFormValues) => {
@@ -54,7 +82,7 @@ export default function ResetPassword() {
           toast.success('Reset password link sent to your email', {
             position: 'bottom-right',
           });
-          router.push('/allnotes');
+          router.push('/login');
         },
         onError: ({ error }) => {
           toast.error(error.message, {
@@ -151,26 +179,9 @@ export default function ResetPassword() {
         </FieldSet>
       </AuthForm>
 
-      {error === 'invalid_token' && (
-        <Card className="bg-white border border-neutral-100 w-[540px] max-w-full p-12 rounded-12">
-          <CardHeader className="flex flex-col items-center justify-center p-0">
-            <CardTitle className="text-2xl font-bold text-red-500">
-              Invalid Token
-            </CardTitle>
-            <CardDescription className="text-sm text-red-500">
-              The token is invalid or has expired. Please request a new reset
-              link.
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="p-0 my-4">
-            <Link href="/forgotpassword">
-              <Button variant="default" className="w-full mt-4">
-                Request New Reset Link
-              </Button>
-            </Link>
-          </CardContent>
-        </Card>
-      )}
+      <Suspense>
+        <InvalidTokenCard />
+      </Suspense>
     </div>
   );
 }
