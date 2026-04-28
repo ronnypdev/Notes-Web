@@ -69,7 +69,6 @@ export default function ResetPassword() {
     authClient.resetPassword(
       {
         newPassword: values.newPassword,
-        token: values.token,
       },
       {
         onRequest: () => {
@@ -79,7 +78,7 @@ export default function ResetPassword() {
           setIsLoading(false);
         },
         onSuccess: () => {
-          toast.success('Reset password link sent to your email', {
+          toast.success('Password reset successful! Login to continue', {
             position: 'bottom-right',
           });
           router.push('/login');
@@ -97,6 +96,7 @@ export default function ResetPassword() {
     resolver: zodResolver(resetPasswordSchema),
     defaultValues: {
       newPassword: '',
+      confirmPassword: '',
       token: '',
     },
   });
@@ -147,11 +147,11 @@ export default function ResetPassword() {
             />
 
             <Controller
-              name="newPassword"
+              name="confirmPassword"
               control={control}
               render={({ field, fieldState }) => (
                 <Field>
-                  <FieldLabel htmlFor="newPassword">
+                  <FieldLabel htmlFor="confirmPassword">
                     Confirm New Password
                   </FieldLabel>
                   <div className="relative w-full flex items-center">

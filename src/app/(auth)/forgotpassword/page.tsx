@@ -35,9 +35,12 @@ export default function ForgotPassword() {
           setIsLoading(false);
         },
         onSuccess: () => {
-          toast.success('Reset password link sent to your email', {
-            position: 'bottom-right',
-          });
+          toast.success(
+            'If email account exist a link has been sent to reset your password',
+            {
+              position: 'bottom-right',
+            },
+          );
         },
         onError: ({ error }) => {
           toast.error(error.message, {
@@ -70,9 +73,7 @@ export default function ForgotPassword() {
               control={control}
               render={({ field, fieldState }) => (
                 <Field>
-                  <FieldLabel htmlFor="forgotpassword">
-                    Email Address
-                  </FieldLabel>
+                  <FieldLabel htmlFor="email">Email Address</FieldLabel>
                   <Input
                     {...field}
                     id={field.name}
