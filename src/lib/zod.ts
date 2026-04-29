@@ -28,7 +28,6 @@ export const resetPasswordSchema = z
     confirmPassword: z
       .string()
       .min(8, 'Confirm password must be at least 8 characters'),
-    token: z.string(),
   })
   .refine((data) => data.newPassword === data.confirmPassword, {
     path: ['confirmPassword'],

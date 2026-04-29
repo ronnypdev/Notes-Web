@@ -36,7 +36,7 @@ function InvalidTokenCard() {
 
   return (
     <>
-      {error === 'invalid_token' && (
+      {error === 'INVALID_TOKEN' && (
         <Card className="bg-white border border-neutral-100 w-[540px] max-w-full p-12 rounded-12">
           <CardHeader className="flex flex-col items-center justify-center p-0">
             <CardTitle className="text-2xl font-bold text-red-500">
@@ -60,15 +60,17 @@ function InvalidTokenCard() {
   );
 }
 
-export default function ResetPassword() {
+function ResetPasswordContent() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [showPassword, setShowPassword] = useState<boolean>(false);
+  const searchParams = useSearchParams();
   const router = useRouter();
 
   const handleResetPasswordForm = (values: ResetPasswordFormValues) => {
     authClient.resetPassword(
       {
         newPassword: values.newPassword,
+        token: searchParams.get('token') ?? undefined,
       },
       {
         onRequest: () => {
@@ -97,7 +99,6 @@ export default function ResetPassword() {
     defaultValues: {
       newPassword: '',
       confirmPassword: '',
-      token: '',
     },
   });
 
@@ -178,10 +179,15 @@ export default function ResetPassword() {
           </FieldGroup>
         </FieldSet>
       </AuthForm>
-
-      <Suspense>
-        <InvalidTokenCard />
-      </Suspense>
+      <InvalidTokenCard />
     </div>
+  );
+}
+
+export default function ResetPassword() {
+  return (
+    <Suspense>
+      <ResetPasswordContent />
+    </Suspense>
   );
 }
