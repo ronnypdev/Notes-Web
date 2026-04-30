@@ -91,6 +91,11 @@ export default function Signup() {
         submitButtonText="Sign Up"
         loggingWithGoogle={true}
         loggingWithGoogleText="Or log in with:"
+        onGoogleLogin={() => {
+          authClient.signIn.social({
+            provider: 'google',
+          });
+        }}
         googleButtonText="Google"
         formFooterText="Already have an account?"
         formFooterLink="/login"
