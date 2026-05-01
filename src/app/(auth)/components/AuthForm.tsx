@@ -20,9 +20,10 @@ interface AuthFormProps {
   formTitle: string;
   formDescription: string;
   submitButtonText: string;
-  loggingWithGoogleText?: string;
-  googleButtonText?: string;
   loggingWithGoogle?: boolean;
+  loggingWithGoogleText?: string;
+  onGoogleLogin?: () => void | Promise<void>;
+  googleButtonText?: string;
   formFooterText?: string;
   formFooterLink?: string;
   formFooterLinkText?: string;
@@ -35,9 +36,10 @@ export default function AuthForm({
   formTitle,
   formDescription,
   submitButtonText,
-  loggingWithGoogleText,
-  googleButtonText,
   loggingWithGoogle,
+  loggingWithGoogleText,
+  onGoogleLogin,
+  googleButtonText,
   children,
   formFooterText,
   formFooterLink,
@@ -74,7 +76,11 @@ export default function AuthForm({
             <p className="text-sm font-sans font-normal leading-4 tracking-tight text-neutral-600">
               {loggingWithGoogleText}
             </p>
-            <Button className="w-full" variant="outline" type="button">
+            <Button
+              className="w-full"
+              variant="outline"
+              type="button"
+              onClick={onGoogleLogin}>
               <GoogleIcon className="w-4 h-4" />
               {googleButtonText}
             </Button>
