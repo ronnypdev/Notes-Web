@@ -1,5 +1,5 @@
 import { expect, test } from 'vitest';
-import { render } from 'react-dom';
+import { render, screen } from '@testing-library/react';
 import AuthForm from '../AuthForm';
 
 test('renders AuthForm component', () => {
@@ -19,5 +19,5 @@ test('renders AuthForm component', () => {
       <></>
     </AuthForm>,
   );
-  expect(screen.getByText('Log in to your account')).toBeDefined();
+  expect(screen.getByText('Log in to your account')).toBeInTheDocument();
 });
