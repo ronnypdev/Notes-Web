@@ -15,7 +15,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 interface AuthFormProps {
-  onSubmit: (e: React.SubmitEvent<HTMLFormElement>) => void | Promise<void>;
+  onSubmit: (e: React.FormEvent<HTMLFormElement>) => void | Promise<void>;
   loading: boolean;
   formTitle: string;
   formDescription: string;
