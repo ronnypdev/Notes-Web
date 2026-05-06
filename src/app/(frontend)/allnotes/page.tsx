@@ -7,5 +7,9 @@ export default async function AllNotesPage() {
 
   if (!user) return <UnauthenticatedPage />;
 
-  return <div>All Notes Page</div>;
+  return (
+    <section className="w-full h-full">
+      <h1>All Notes</h1>
+    </section>
+  );
 }
