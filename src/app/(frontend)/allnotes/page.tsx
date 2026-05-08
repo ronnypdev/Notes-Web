@@ -9,7 +9,8 @@ export default async function AllNotesPage() {
 
   return (
     <section className="w-full h-full">
-      <h1>All Notes</h1>
+      <div className="notes-sidebar">notes sidebar</div>
+      <div className="notes-content">notes content</div>
     </section>
   );
 }
