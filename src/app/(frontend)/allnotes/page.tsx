@@ -8,7 +8,7 @@ export default async function AllNotesPage() {
   if (!user) return <UnauthenticatedPage />;
 
   return (
-    <section className="w-full h-full grid grid-cols-[250px_1fr] grid-rows-[1fr]">
+    <section className="w-full h-full grid grid-cols-[350px_1fr] grid-rows-[1fr]">
       <div className="notes-sidebar col-span-1 row-span-1 border-r border-neutral-200 p-4">
         notes sidebar
       </div>
