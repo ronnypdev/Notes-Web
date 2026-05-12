@@ -1,3 +1,5 @@
+'use client';
+import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 
 import {
@@ -18,6 +20,7 @@ interface NoteItemProps {
 }
 
 export default function NoteItem({ title, id, tags, date }: NoteItemProps) {
+  const pathname = usePathname();
   return (
     <Link href={`/allnotes/${id}`}>
       <Item
