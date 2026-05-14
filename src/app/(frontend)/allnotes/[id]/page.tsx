@@ -7,7 +7,7 @@ import { Badge } from '@/components/ui/badge';
 export default function NoteItemDetails() {
   return (
     <>
-      <article>
+      <article className="h-full flex flex-col">
         <header className="px-250 flex flex-col gap-200 text-neutral-950">
           <h6 className="text-neutral-950 font-sans font-bold text-2xl leading-[1.2] tracking-[-0.5px]">
             React Performance Optimization
@@ -40,10 +40,17 @@ export default function NoteItemDetails() {
           </div>
         </header>
         <Separator className="my-4" />
-        <Textarea placeholder="Enter your note content here..." />
+        <Textarea
+          className="text-neutral-950 flex-1 min-h-0 border-none resize-none outline-none focus-visible:ring-0 focus-visible:ring-offset-0 shadow-none"
+          placeholder="Enter your note content here..."
+        />
 
-        <Button>Save</Button>
-        <Button variant="secondary">Cancel</Button>
+        <Separator className="my-4" />
+
+        <div className="actions flex items-center gap-2">
+          <Button>Save</Button>
+          <Button variant="secondary">Cancel</Button>
+        </div>
       </article>
     </>
   );
