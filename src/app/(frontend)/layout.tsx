@@ -22,7 +22,7 @@ export default async function FrontendLayout({
         <SidebarInset>
           <Header />
           <div className="flex flex-1">
-            <main className="flex-1 p-4">{children}</main>
+            <main className="flex-1 h-full">{children}</main>
             <RightSideBar />
           </div>
         </SidebarInset>
