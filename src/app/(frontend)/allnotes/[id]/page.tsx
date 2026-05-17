@@ -1,14 +1,22 @@
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
-import { TagIcon, CircleClockIcon } from '@/components/icons';
+import { TagIcon, CircleClockIcon, ArrowLeftIcon } from '@/components/icons';
 import { Separator } from '@/components/ui/separator';
 import { Badge } from '@/components/ui/badge';
+import Link from 'next/link';
 
 export default function NoteItemDetails() {
   return (
     <>
       <article className="h-full flex flex-col">
         <header className="px-250 flex flex-col gap-200 text-neutral-950">
+          <div className="mobile-properties lg:hidden">
+            <Link className="flex items-center gap-1" href="/allnotes">
+              <ArrowLeftIcon className="size-4 text-neutral-950" />
+              Go Back
+            </Link>
+            <Separator className="my-200" />
+          </div>
           <h6 className="text-neutral-950 font-sans font-bold text-2xl leading-[1.2] tracking-[-0.5px]">
             React Performance Optimization
           </h6>

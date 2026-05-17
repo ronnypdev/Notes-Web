@@ -11,10 +11,11 @@ export default function NoteLayout({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
-  const isMobile = pathname === '/allnotes';
+  const isAllNotesRoute = pathname === '/allnotes';
   return (
     <section className="w-full h-full grid grid-cols-1 lg:grid-cols-[350px_1fr] grid-rows-[1fr]">
-      <div className="notes-sidebar col-span-1 row-span-1 border-r border-neutral-200 py-5 pl-4 pr-8">
+      <div
+        className={`notes-sidebar w-full col-span-1 row-span-1 border-r border-neutral-200 py-5 pl-4 pr-8 ${isAllNotesRoute ? 'block' : 'hidden'} lg:block`}>
         <Button className="w-full mb-200">+ Create New Note</Button>
         <NoteItem
           title="React Performance Optimization"
@@ -47,7 +48,8 @@ export default function NoteLayout({
           id="5"
         />
       </div>
-      <div className="notes-content col-span-1 row-span-1 p-4 hidden lg:block">
+      <div
+        className={`notes-content col-span-1 row-span-1 p-4 ${isAllNotesRoute ? 'hidden' : 'block'} lg:block`}>
         {children}
       </div>
     </section>
