@@ -4,6 +4,7 @@ import { usePathname } from 'next/navigation';
 
 import { Button } from '@/components/ui/button';
 import NoteItem from './components/NoteItem';
+import { PlusIcon } from 'lucide-react';
 
 export default function NoteLayout({
   children,
@@ -15,8 +16,10 @@ export default function NoteLayout({
   return (
     <section className="w-full h-full grid grid-cols-1 lg:grid-cols-[350px_1fr] grid-rows-[1fr]">
       <div
-        className={`notes-sidebar w-full col-span-1 row-span-1 border-r border-neutral-200 py-5 pl-4 pr-8 ${isAllNotesRoute ? 'block' : 'hidden'} lg:block`}>
-        <Button className="w-full mb-200">+ Create New Note</Button>
+        className={`notes-sidebar w-full col-span-1 row-span-1 border-r border-neutral-200 py-5 pl-4 pr-8 ${isAllNotesRoute ? 'block' : 'hidden'} lg:block relative`}>
+        <Button className="w-full mb-200 hidden lg:block">
+          + Create New Note
+        </Button>
         <NoteItem
           title="React Performance Optimization"
           date="29 Oct 2024"
@@ -47,6 +50,9 @@ export default function NoteLayout({
           tags={['cooking', 'meal prep']}
           id="5"
         />
+        <Button variant="mobileCreate">
+          <PlusIcon className="size-6" />
+        </Button>
       </div>
       <div
         className={`notes-content col-span-1 row-span-1 p-4 ${isAllNotesRoute ? 'hidden' : 'block'} lg:block`}>

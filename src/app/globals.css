@@ -1,5 +1,5 @@
-@import "tailwindcss";
-@import "tw-animate-css";
+@import 'tailwindcss';
+@import 'tw-animate-css';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -54,9 +54,10 @@
   --color-accent-foreground: hsl(222, 32%, 8%); /* neutral-950 */
 
   /* Shadows */
-  --shadow-btn-focus: 0px 0px 0px 2px hsl(0, 0%, 100%), 0px 0px 0px 4px hsl(220, 11%, 64%);
+  --shadow-btn-focus:
+    0px 0px 0px 2px hsl(0, 0%, 100%), 0px 0px 0px 4px hsl(220, 11%, 64%);
   --shadow-btn-secondary-hover: 0px 1px 2px 0px rgba(14, 18, 27, 0.03);
-  --shadow-toast: 0px 16px 32px -12px rgba(14, 18, 27, 0.10);
+  --shadow-toast: 0px 16px 32px -12px rgba(14, 18, 27, 0.1);
 
   /* Spacing Variables */
   --spacing-0: 0rem;
@@ -77,6 +78,7 @@
   /* Shadow Variables */
   --shadow-small: 0px 4px 6px 0px rgba(240, 240, 240, 0.6);
   --shadow-large: 0px 8px 12px 0px rgba(240, 240, 240, 0.6);
+  --shadow-btn-create-new-note: 0px 7px 11px 0px rgba(202, 207, 216, 0.7);
   /* Radius Variables */
   --radius-0: 0rem;
   --radius-4: 0.25rem;
@@ -179,7 +181,7 @@
   }
   .font-jetbrains-mono {
     font-family:
-      var(--font-jetbrains-mono), ui-monospace, "Courier New", monospace;
+      var(--font-jetbrains-mono), ui-monospace, 'Courier New', monospace;
   }
   .font-noto-serif {
     font-family: var(--font-noto-serif), ui-serif, serif;
