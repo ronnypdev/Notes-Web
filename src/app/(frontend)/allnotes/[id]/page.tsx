@@ -1,14 +1,40 @@
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
-import { TagIcon, CircleClockIcon } from '@/components/icons';
+import {
+  TagIcon,
+  CircleClockIcon,
+  ArrowLeftIcon,
+  ArchiveIcon,
+  DeleteIcon,
+} from '@/components/icons';
 import { Separator } from '@/components/ui/separator';
 import { Badge } from '@/components/ui/badge';
+import Link from 'next/link';
 
 export default function NoteItemDetails() {
   return (
     <>
       <article className="h-full flex flex-col">
         <header className="px-250 flex flex-col gap-200 text-neutral-950">
+          <div className="mobile-properties-link lg:hidden flex items-center justify-between">
+            <Link
+              className="flex items-center gap-1 font-sans text-sm font-normal leading-[1.3] tracking-[-0.0125rem] text-neutral-600"
+              href="/allnotes">
+              <ArrowLeftIcon className="size-4 text-neutral-600" />
+              Go Back
+            </Link>
+            <div className="mobile-properties-controls flex items-center gap-200">
+              <DeleteIcon className="size-5 text-neutral-600 cursor-pointer" />
+              <ArchiveIcon className="size-5 text-neutral-600 cursor-pointer" />
+              <Button variant="link" className="text-neutral-600 p-0">
+                Cancel
+              </Button>
+              <Button variant="link" className="p-0">
+                Save
+              </Button>
+            </div>
+          </div>
+          <Separator className="block lg:hidden" />
           <h6 className="text-neutral-950 font-sans font-bold text-2xl leading-[1.2] tracking-[-0.5px]">
             React Performance Optimization
           </h6>
