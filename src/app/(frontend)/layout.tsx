@@ -4,6 +4,7 @@ import LeftSideBar from '@/components/Sidebar/Left/LeftSideBar';
 import RightSideBar from '@/components/Sidebar/Right/RightSideBar';
 import { getServerSessions } from '@/lib/usersessions';
 import UnauthenticatedPage from '@/app/(frontend)/unauthenticated/page';
+import MobileMenu from '@/components/MobileMenu/MobileMenu';
 
 export default async function FrontendLayout({
   children,
@@ -27,6 +28,7 @@ export default async function FrontendLayout({
           </div>
         </SidebarInset>
       </SidebarProvider>
+      <MobileMenu />
     </>
   );
 }
