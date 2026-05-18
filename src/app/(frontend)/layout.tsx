@@ -28,7 +28,9 @@ export default async function FrontendLayout({
           </div>
         </SidebarInset>
       </SidebarProvider>
-      <MobileMenu />
+      <div className="fixed bottom-0 left-0 w-full lg:hidden z-50">
+        <MobileMenu />
+      </div>
     </>
   );
 }

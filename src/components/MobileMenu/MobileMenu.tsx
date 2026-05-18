@@ -16,7 +16,7 @@ import {
 export default function MobileMenu() {
   return (
     <>
-      <NavigationMenu className="lg:hidden">
+      <NavigationMenu>
         <NavigationMenuList>
           <NavigationMenuItem>
             <NavigationMenuLink asChild>
