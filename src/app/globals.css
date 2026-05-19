@@ -79,6 +79,7 @@
   --shadow-small: 0px 4px 6px 0px rgba(240, 240, 240, 0.6);
   --shadow-large: 0px 8px 12px 0px rgba(240, 240, 240, 0.6);
   --shadow-btn-create-new-note: 0px 7px 11px 0px rgba(202, 207, 216, 0.7);
+  --shadow-mobile-menu: 0 -4px 6px 0 rgba(240, 240, 240, 0.6);
   /* Radius Variables */
   --radius-0: 0rem;
   --radius-4: 0.25rem;
