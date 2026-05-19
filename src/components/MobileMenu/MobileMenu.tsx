@@ -12,6 +12,7 @@ import {
   TagIcon,
   SettingIcon,
 } from '@/components/icons';
+import { Separator } from '../ui/separator';
 
 export default function MobileMenu() {
   return (
@@ -20,34 +21,70 @@ export default function MobileMenu() {
         viewport={false}
         className="w-full border-t max-w-full bg-white border-neutral-200 shadow-mobile-menu [&>div]:w-full">
         <NavigationMenuList className="flex items-center justify-between py-[var(--spacing-150)] px-[var(--spacing-200)]">
-          <NavigationMenuItem className="cursor-pointer">
-            <HomeIcon className="size-5" />
+          <NavigationMenuItem className="flex flex-col items-center justify-center shrink-0 cursor-pointer py-1 text-neutral-600">
+            <HomeIcon className="size-6" />
             <NavigationMenuLink asChild>
-              <Link href="/allnotes">All Notes</Link>
+              <Link
+                className="font-sans text-sm font-normal leading-[1.2] tracking-[-0.2px]"
+                href="/allnotes">
+                All Notes
+              </Link>
             </NavigationMenuLink>
           </NavigationMenuItem>
-          <NavigationMenuItem className="cursor-pointer">
-            <SearchIcon className="size-5" />
+          <Separator
+            className="data-[orientation=vertical]:h-auto self-stretch shrink-0"
+            orientation="vertical"
+          />
+          <NavigationMenuItem className="flex flex-col items-center justify-center shrink-0 cursor-pointer py-1 text-neutral-600">
+            <SearchIcon className="size-6" />
             <NavigationMenuLink asChild>
-              <Link href="/allnotes">Search</Link>
+              <Link
+                className="font-sans text-sm font-normal leading-[1.2] tracking-[-0.2px]"
+                href="/allnotes">
+                Search
+              </Link>
             </NavigationMenuLink>
           </NavigationMenuItem>
-          <NavigationMenuItem className="cursor-pointer">
-            <ArchiveIcon className="size-5" />
+          <Separator
+            className="data-[orientation=vertical]:h-auto self-stretch shrink-0"
+            orientation="vertical"
+          />
+          <NavigationMenuItem className="flex flex-col items-center justify-center shrink-0 cursor-pointer py-1 text-neutral-600">
+            <ArchiveIcon className="size-6" />
             <NavigationMenuLink asChild>
-              <Link href="/archivenotes">Archived</Link>
+              <Link
+                className="font-sans text-sm font-normal leading-[1.2] tracking-[-0.2px]"
+                href="/archivenotes">
+                Archived
+              </Link>
             </NavigationMenuLink>
           </NavigationMenuItem>
-          <NavigationMenuItem className="cursor-pointer">
-            <TagIcon className="size-5" />
+          <Separator
+            className="data-[orientation=vertical]:h-auto self-stretch shrink-0"
+            orientation="vertical"
+          />
+          <NavigationMenuItem className="flex flex-col items-center justify-center shrink-0 cursor-pointer py-1 text-neutral-600">
+            <TagIcon className="size-6" />
             <NavigationMenuLink asChild>
-              <Link href="/tags">Tags</Link>
+              <Link
+                className="font-sans text-sm font-normal leading-[1.2] tracking-[-0.2px]"
+                href="/tags">
+                Tags
+              </Link>
             </NavigationMenuLink>
           </NavigationMenuItem>
-          <NavigationMenuItem className="cursor-pointer">
-            <SettingIcon className="size-5" />
+          <Separator
+            className="data-[orientation=vertical]:h-auto self-stretch shrink-0"
+            orientation="vertical"
+          />
+          <NavigationMenuItem className="flex flex-col items-center justify-center shrink-0 cursor-pointer py-1 text-neutral-600">
+            <SettingIcon className="size-6" />
             <NavigationMenuLink asChild>
-              <Link href="/settings">Settings</Link>
+              <Link
+                className="font-sans text-sm font-normal leading-[1.2] tracking-[-0.2px]"
+                href="/settings">
+                Settings
+              </Link>
             </NavigationMenuLink>
           </NavigationMenuItem>
         </NavigationMenuList>
