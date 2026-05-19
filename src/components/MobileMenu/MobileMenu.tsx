@@ -40,7 +40,7 @@ export default function MobileMenu() {
             <NavigationMenuLink asChild>
               <Link
                 className="font-sans text-sm font-normal leading-[1.2] tracking-[-0.2px]"
-                href="/allnotes">
+                href="#">
                 Search
               </Link>
             </NavigationMenuLink>
@@ -68,7 +68,7 @@ export default function MobileMenu() {
             <NavigationMenuLink asChild>
               <Link
                 className="font-sans text-sm font-normal leading-[1.2] tracking-[-0.2px]"
-                href="/tags">
+                href="#">
                 Tags
               </Link>
             </NavigationMenuLink>
@@ -82,7 +82,7 @@ export default function MobileMenu() {
             <NavigationMenuLink asChild>
               <Link
                 className="font-sans text-sm font-normal leading-[1.2] tracking-[-0.2px]"
-                href="/settings">
+                href="#">
                 Settings
               </Link>
             </NavigationMenuLink>
