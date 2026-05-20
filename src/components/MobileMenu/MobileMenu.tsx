@@ -32,7 +32,7 @@ export default function MobileMenu() {
             </NavigationMenuLink>
           </NavigationMenuItem>
           <Separator
-            className="data-[orientation=vertical]:h-auto self-stretch shrink-0"
+            className="data-[orientation=vertical]:h-auto self-stretch shrink-0 hidden md:block lg:hidden"
             orientation="vertical"
           />
           <NavigationMenuItem className="flex flex-col items-center justify-center shrink-0 cursor-pointer py-1 text-neutral-600">
@@ -46,7 +46,7 @@ export default function MobileMenu() {
             </NavigationMenuLink>
           </NavigationMenuItem>
           <Separator
-            className="data-[orientation=vertical]:h-auto self-stretch shrink-0"
+            className="data-[orientation=vertical]:h-auto self-stretch shrink-0 hidden md:block lg:hidden"
             orientation="vertical"
           />
           <NavigationMenuItem className="flex flex-col items-center justify-center shrink-0 cursor-pointer py-1 text-neutral-600">
@@ -60,7 +60,7 @@ export default function MobileMenu() {
             </NavigationMenuLink>
           </NavigationMenuItem>
           <Separator
-            className="data-[orientation=vertical]:h-auto self-stretch shrink-0"
+            className="data-[orientation=vertical]:h-auto self-stretch shrink-0 hidden md:block lg:hidden"
             orientation="vertical"
           />
           <NavigationMenuItem className="flex flex-col items-center justify-center shrink-0 cursor-pointer py-1 text-neutral-600">
@@ -74,7 +74,7 @@ export default function MobileMenu() {
             </NavigationMenuLink>
           </NavigationMenuItem>
           <Separator
-            className="data-[orientation=vertical]:h-auto self-stretch shrink-0"
+            className="data-[orientation=vertical]:h-auto self-stretch shrink-0 hidden md:block lg:hidden"
             orientation="vertical"
           />
           <NavigationMenuItem className="flex flex-col items-center justify-center shrink-0 cursor-pointer py-1 text-neutral-600">
