@@ -1,3 +1,8 @@
+'use client';
+import { useState, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
+import { cn } from '@/lib/utils';
+
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -12,9 +17,21 @@ import {
   TagIcon,
   SettingIcon,
 } from '@/components/icons';
-import { Separator } from '../ui/separator';
+import { Separator } from '@/components/ui/separator';
 
 export default function MobileMenu() {
+  const [pendingHref, setPendingHref] = useState<string | null>(null);
+  const pathname = usePathname();
+
+  useEffect(() => {
+    if (pendingHref && pathname.startsWith(pendingHref)) {
+      setPendingHref(null);
+    }
+  }, [pathname, pendingHref]);
+
+  const isActive = (href: string) =>
+    pathname.startsWith(href) || pendingHref === href;
+
   return (
     <>
       <NavigationMenu
@@ -23,13 +40,19 @@ export default function MobileMenu() {
         <NavigationMenuList className="flex items-center justify-between py-[var(--spacing-150)] px-[var(--spacing-200)]">
           <NavigationMenuItem>
             <NavigationMenuLink
-              className="flex flex-col items-center justify-center shrink-0 cursor-pointer py-1 text-neutral-600 hover:text-blue-500 hover:bg-blue-50 group/menu-link"
+              className={cn(
+                'flex flex-col items-center justify-center shrink-0 cursor-pointer py-1',
+                isActive('/allnotes')
+                  ? 'text-blue-500 bg-blue-50 rounded-lg px-2'
+                  : 'text-neutral-600 hover:text-blue-500 hover:bg-blue-50',
+              )}
               asChild>
               <Link
                 className="font-sans text-sm font-normal leading-[1.2] tracking-[-0.2px]"
-                href="/allnotes">
-                <HomeIcon className="group-hover/menu-link:text-blue-500 size-6" />
-                All Notes
+                href="/allnotes"
+                onClick={() => setPendingHref('/allnotes')}>
+                <HomeIcon className="size-6 text-current" />
+                <span className="hidden md:block">All Notes</span>
               </Link>
             </NavigationMenuLink>
           </NavigationMenuItem>
@@ -39,13 +62,19 @@ export default function MobileMenu() {
           />
           <NavigationMenuItem>
             <NavigationMenuLink
-              className="flex flex-col items-center justify-center shrink-0 cursor-pointer py-1 text-neutral-600 hover:text-blue-500 hover:bg-blue-50 group/menu-link"
+              className={cn(
+                'flex flex-col items-center justify-center shrink-0 cursor-pointer py-1',
+                isActive('/search')
+                  ? 'text-blue-500 bg-blue-50 rounded-lg px-2'
+                  : 'text-neutral-600 hover:text-blue-500 hover:bg-blue-50',
+              )}
               asChild>
               <Link
                 className="font-sans text-sm font-normal leading-[1.2] tracking-[-0.2px]"
-                href="#">
-                <SearchIcon className="group-hover/menu-link:text-blue-500 size-6" />
-                Search
+                href="/search"
+                onClick={() => setPendingHref('/search')}>
+                <SearchIcon className="size-6 text-current" />
+                <span className="hidden md:block">Search</span>
               </Link>
             </NavigationMenuLink>
           </NavigationMenuItem>
@@ -55,13 +84,19 @@ export default function MobileMenu() {
           />
           <NavigationMenuItem>
             <NavigationMenuLink
-              className="flex flex-col items-center justify-center shrink-0 cursor-pointer py-1 text-neutral-600 hover:text-blue-500 hover:bg-blue-50 group/menu-link"
+              className={cn(
+                'flex flex-col items-center justify-center shrink-0 cursor-pointer py-1',
+                isActive('/archivenotes')
+                  ? 'text-blue-500 bg-blue-50 rounded-lg px-2'
+                  : 'text-neutral-600 hover:text-blue-500 hover:bg-blue-50',
+              )}
               asChild>
               <Link
                 className="font-sans text-sm font-normal leading-[1.2] tracking-[-0.2px]"
-                href="/archivenotes">
-                <ArchiveIcon className="group-hover/menu-link:text-blue-500 size-6" />
-                Archived
+                href="/archivenotes"
+                onClick={() => setPendingHref('/archivenotes')}>
+                <ArchiveIcon className="size-6 text-current" />
+                <span className="hidden md:block">Archived</span>
               </Link>
             </NavigationMenuLink>
           </NavigationMenuItem>
@@ -71,13 +106,19 @@ export default function MobileMenu() {
           />
           <NavigationMenuItem>
             <NavigationMenuLink
-              className="flex flex-col items-center justify-center shrink-0 cursor-pointer py-1 text-neutral-600 hover:text-blue-500 hover:bg-blue-50 group/menu-link"
+              className={cn(
+                'flex flex-col items-center justify-center shrink-0 cursor-pointer py-1',
+                isActive('/tags')
+                  ? 'text-blue-500 bg-blue-50 rounded-lg px-2'
+                  : 'text-neutral-600 hover:text-blue-500 hover:bg-blue-50',
+              )}
               asChild>
               <Link
                 className="font-sans text-sm font-normal leading-[1.2] tracking-[-0.2px]"
-                href="#">
-                <TagIcon className="group-hover/menu-link:text-blue-500 size-6" />
-                Tags
+                href="/tags"
+                onClick={() => setPendingHref('/tags')}>
+                <TagIcon className="size-6 text-current" />
+                <span className="hidden md:block">Tags</span>
               </Link>
             </NavigationMenuLink>
           </NavigationMenuItem>
@@ -87,13 +128,19 @@ export default function MobileMenu() {
           />
           <NavigationMenuItem>
             <NavigationMenuLink
-              className="flex flex-col items-center justify-center shrink-0 cursor-pointer py-1 text-neutral-600 hover:text-blue-500 hover:bg-blue-50 group/menu-link"
+              className={cn(
+                'flex flex-col items-center justify-center shrink-0 cursor-pointer py-1',
+                isActive('/settings')
+                  ? 'text-blue-500 bg-blue-50 rounded-lg px-2'
+                  : 'text-neutral-600 hover:text-blue-500 hover:bg-blue-50',
+              )}
               asChild>
               <Link
                 className="font-sans text-sm font-normal leading-[1.2] tracking-[-0.2px]"
-                href="#">
-                <SettingIcon className="group-hover/menu-link:text-blue-500 size-6" />
-                Settings
+                href="/settings"
+                onClick={() => setPendingHref('/settings')}>
+                <SettingIcon className="size-6 text-current" />
+                <span className="hidden md:block">Settings</span>
               </Link>
             </NavigationMenuLink>
           </NavigationMenuItem>
