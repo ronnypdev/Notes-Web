@@ -3,15 +3,16 @@ import { Button } from '@/components/ui/button';
 import {
   TagIcon,
   CircleClockIcon,
+  LoadingIcon,
   ArrowLeftIcon,
-  ArchiveIcon,
+  RefreshIcon,
   DeleteIcon,
 } from '@/components/icons';
 import { Separator } from '@/components/ui/separator';
 import { Badge } from '@/components/ui/badge';
 import Link from 'next/link';
 
-export default function NoteItemDetails() {
+export default function ArchivedNoteDetails() {
   return (
     <>
       <article className="h-full flex flex-col">
@@ -19,13 +20,13 @@ export default function NoteItemDetails() {
           <div className="mobile-properties-link lg:hidden flex items-center justify-between">
             <Link
               className="flex items-center gap-1 font-sans text-sm font-normal leading-[1.3] tracking-[-0.0125rem] text-neutral-600"
-              href="/allnotes">
+              href="/archivenotes">
               <ArrowLeftIcon className="size-4 text-neutral-600" />
               Go Back
             </Link>
             <div className="mobile-properties-controls flex items-center gap-200">
               <DeleteIcon className="size-5 text-neutral-600 cursor-pointer" />
-              <ArchiveIcon className="size-5 text-neutral-600 cursor-pointer" />
+              <RefreshIcon className="size-5 text-neutral-600 cursor-pointer rotate-180" />
               <Button variant="link" className="text-neutral-600 p-0">
                 Cancel
               </Button>
@@ -51,6 +52,17 @@ export default function NoteItemDetails() {
                 <Badge variant="secondary">React</Badge>
                 <Badge variant="secondary">Performance</Badge>
               </div>
+            </div>
+            <div className="status flex items-center gap-3">
+              <div className="status-container flex items-center gap-1">
+                <LoadingIcon className="size-4 text-neutral-950" />
+                <span className="font-sans text-sm font-normal capitalize leading-[1.3] tracking-[-0.0125rem]">
+                  Status:
+                </span>
+              </div>
+              <span className="font-sans text-sm font-normal capitalize leading-[1.3] tracking-[-0.0125rem]">
+                Archived
+              </span>
             </div>
             <div className="last-modified flex items-center gap-3">
               <div className="last-modified-container flex items-center gap-1">
