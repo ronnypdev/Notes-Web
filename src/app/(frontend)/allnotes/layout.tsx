@@ -3,7 +3,7 @@
 import { usePathname } from 'next/navigation';
 
 import { Button } from '@/components/ui/button';
-import NoteItem from './components/NoteItem';
+import NoteItem from '../../../components/NoteItem/NoteItem';
 import { PlusIcon } from 'lucide-react';
 
 export default function NoteLayout({
