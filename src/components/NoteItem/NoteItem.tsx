@@ -17,11 +17,18 @@ interface NoteItemProps {
   tags?: string[];
   date: string;
   content?: string;
+  basePath?: string;
 }
 
-export default function NoteItem({ title, id, tags, date }: NoteItemProps) {
+export default function NoteItem({
+  title,
+  id,
+  tags,
+  date,
+  basePath = 'allnotes',
+}: NoteItemProps) {
   return (
-    <Link href={`/allnotes/${id}`}>
+    <Link href={`/${basePath}/${id}`}>
       <Item
         id={id}
         className="flex flex-col items-start gap-150 p-100 rounded-(--radius-6)  w-full bg-white hover:bg-neutral-100 transition-colors duration-100 cursor-pointer">
