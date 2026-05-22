@@ -7,5 +7,5 @@ export default async function ArchiveNotesPage() {
 
   if (!user) return <UnauthenticatedPage />;
 
-  return <div>Archive Notes Page</div>;
+  return <div>Archive Notes Pages</div>;
 }
