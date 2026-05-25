@@ -1,5 +1,5 @@
-import NotesPageLayout from './_components/NotesPageLayout';
-import NotesList from './_components/NotesList';
+import NotesPageLayout from '@/components/Notes/NotesPageLayout';
+import NotesList from '@/components/Notes/NotesList';
 
 export default function AllNotesLayout({
   children,

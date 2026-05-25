@@ -11,9 +11,11 @@ interface NotesListProps {
 export default function NotesList({ basePath }: NotesListProps) {
   return (
     <>
-      <Button className="w-full mb-200 hidden lg:block">
-        + Create New Note
-      </Button>
+      {basePath !== 'archivenotes' && (
+        <Button className="w-full mb-200 hidden lg:block">
+          + Create New Note
+        </Button>
+      )}
       <NoteItem
         title="React Performance Optimization"
         date="29 Oct 2024"
@@ -49,9 +51,11 @@ export default function NotesList({ basePath }: NotesListProps) {
         id="5"
         basePath={basePath}
       />
-      <Button variant="mobileCreate">
-        <PlusIcon className="size-6" />
-      </Button>
+      {basePath !== 'archivenotes' && (
+        <Button variant="mobileCreate">
+          <PlusIcon className="size-6" />
+        </Button>
+      )}
     </>
   );
 }
