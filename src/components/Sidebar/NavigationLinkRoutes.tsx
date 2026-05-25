@@ -21,27 +21,29 @@ export default function NavigationLinkRoutes() {
 
   return (
     <div className="flex flex-col gap-2">
-      {links.map((link) => (
-        <Link
-          key={link.href}
-          href={link.href}
-          className={clsx(
-            'py-1.5 px-3 flex items-center gap-2 text-neutral-950',
-            { 'rounded-lg bg-neutral-100': pathname === link.href },
-          )}>
-          <link.icon
-            className={clsx('w-5 h-5', {
-              'text-blue-500': pathname === link.href,
-            })}
-          />
-          <span>{link.label}</span>
-          <ChevronRightIcon
-            className={clsx('w-6 h-6 ml-auto', {
-              'text-blue-500': pathname === link.href,
-            })}
-          />
-        </Link>
-      ))}
+      {links.map((link) => {
+        const isActive =
+          pathname === link.href || pathname.startsWith(link.href + '/');
+        return (
+          <Link
+            key={link.href}
+            href={link.href}
+            className={clsx(
+              'py-1.5 px-3 flex items-center gap-2 text-neutral-950',
+              {
+                'rounded-lg bg-neutral-100': isActive,
+              },
+            )}>
+            <link.icon
+              className={clsx('w-5 h-5', { 'text-blue-500': isActive })}
+            />
+            <span>{link.label}</span>
+            <ChevronRightIcon
+              className={clsx('w-6 h-6 ml-auto', { 'text-blue-500': isActive })}
+            />
+          </Link>
+        );
+      })}
     </div>
   );
 }
