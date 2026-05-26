@@ -7,5 +7,5 @@ export default async function AllNotesPage() {
 
   if (!user) return <UnauthenticatedPage />;
 
-  return <p>Select a note to view it or create a new one</p>;
+  return null;
 }

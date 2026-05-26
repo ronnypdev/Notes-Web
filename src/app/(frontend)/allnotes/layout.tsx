@@ -1,63 +1,16 @@
-'use client';
+import NotesPageLayout from '@/components/Notes/NotesPageLayout';
+import NotesList from '@/components/Notes/NotesList';
 
-import { usePathname } from 'next/navigation';
-
-import { Button } from '@/components/ui/button';
-import NoteItem from '../../../components/NoteItem/NoteItem';
-import { PlusIcon } from '@/components/icons';
-
-export default function NoteLayout({
+export default function AllNotesLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const pathname = usePathname();
-  const isAllNotesRoute = pathname === '/allnotes';
   return (
-    <section className="w-full h-full grid grid-cols-1 lg:grid-cols-[350px_1fr] grid-rows-[1fr]">
-      <div
-        className={`notes-sidebar w-full col-span-1 row-span-1 border-r border-neutral-200 py-5 pl-4 pr-8 ${isAllNotesRoute ? 'block' : 'hidden'} lg:block relative`}>
-        <Button className="w-full mb-200 hidden lg:block">
-          + Create New Note
-        </Button>
-        <NoteItem
-          title="React Performance Optimization"
-          date="29 Oct 2024"
-          tags={['Dev', 'React']}
-          id="1"
-        />
-        <NoteItem
-          title="Japan Travel Planning"
-          date="28 Oct 2024"
-          tags={['travel', 'personal']}
-          id="2"
-        />
-        <NoteItem
-          title="Favorite Pasta Recipes"
-          date="27 Oct 2024"
-          tags={['cooking', 'recepies']}
-          id="3"
-        />
-        <NoteItem
-          title="Weekly Workout Plan"
-          date="25 Oct 2024"
-          tags={['gym', 'workout']}
-          id="4"
-        />
-        <NoteItem
-          title="Meal Prep Ideas"
-          date="12 Oct 2024"
-          tags={['cooking', 'meal prep']}
-          id="5"
-        />
-        <Button variant="mobileCreate">
-          <PlusIcon className="size-6" />
-        </Button>
-      </div>
-      <div
-        className={`notes-content col-span-1 row-span-1 p-4 ${isAllNotesRoute ? 'hidden' : 'block'} lg:block`}>
-        {children}
-      </div>
-    </section>
+    <NotesPageLayout
+      basePath="allnotes"
+      notesList={<NotesList basePath="allnotes" />}>
+      {children}
+    </NotesPageLayout>
   );
 }
