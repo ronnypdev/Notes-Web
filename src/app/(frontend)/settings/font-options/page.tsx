@@ -1,3 +1,3 @@
 export default function FontOptionsPage() {
-  return <div>FontOptionsPage</div>;
+  return <div>Font Options</div>;
 }
