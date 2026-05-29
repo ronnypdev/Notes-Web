@@ -17,40 +17,60 @@ export default function ColorThemePage() {
           <h4 className="font-sans text-base font-semibold tracking-[-0.3px] leading-[1.3] text-neutral-950">
             Color Theme
           </h4>
-          <p className="text-sm text-neutral-500">Choose your color theme:</p>
+          <p className="text-sm tracking-[-0.3px] leading-[1.3] text-neutral-500">
+            Choose your color theme:
+          </p>
         </header>
 
-        <RadioGroup defaultValue="plus" className="max-w-sm">
-          <FieldLabel htmlFor="plus-plan">
+        <RadioGroup defaultValue="plus" className="w-full max-w-full">
+          <FieldLabel
+            className="border-neutral-200 cursor-pointer"
+            htmlFor="plus-plan">
             <Field orientation="horizontal">
-              <SunIcon className="w-4 h-4 text-neutral-950" />
+              <div className="flex flex-col items-center w-10 h-full justify-center bg-transparent border border-solid border-neutral-200 rounded-12">
+                <SunIcon className="w-6 h-6 text-neutral-950" />
+              </div>
               <FieldContent>
-                <FieldTitle>Light Mode</FieldTitle>
-                <FieldDescription>
+                <FieldTitle className="font-sans text-base font-medium tracking-[-0.3px] leading-[1.3] text-neutral-950">
+                  Light Mode
+                </FieldTitle>
+                <FieldDescription className="text-sm font-normal tracking-[-0.3px] leading-[1.3] text-neutral-500">
                   Pick a clean and classic light theme
                 </FieldDescription>
               </FieldContent>
               <RadioGroupItem value="plus" id="plus-plan" />
             </Field>
           </FieldLabel>
-          <FieldLabel htmlFor="pro-plan">
+          <FieldLabel
+            className="border-neutral-200 cursor-pointer"
+            htmlFor="pro-plan">
             <Field orientation="horizontal">
-              <DarkModeIcon className="w-4 h-4 text-neutral-950" />
+              <div className="flex flex-col items-center w-10 h-full justify-center bg-transparent border border-solid border-neutral-200 rounded-12">
+                <DarkModeIcon className="w-6 h-6 text-neutral-950" />
+              </div>
               <FieldContent>
-                <FieldTitle>Dark Mode</FieldTitle>
-                <FieldDescription>
+                <FieldTitle className="font-sans text-base font-medium tracking-[-0.3px] leading-[1.3] text-neutral-950">
+                  Dark Mode
+                </FieldTitle>
+                <FieldDescription className="text-sm font-normal tracking-[-0.3px] leading-[1.3] text-neutral-500">
                   Select a sleek and modern dark theme
                 </FieldDescription>
               </FieldContent>
               <RadioGroupItem value="pro" id="pro-plan" />
             </Field>
           </FieldLabel>
-          <FieldLabel htmlFor="enterprise-plan">
+          <FieldLabel
+            className="border-neutral-200 cursor-pointer"
+            htmlFor="enterprise-plan">
             <Field orientation="horizontal">
-              <LightModeIcon className="w-4 h-4 text-neutral-950" />
+              <div className="flex flex-col items-center w-10 h-full justify-center bg-transparent border border-solid border-neutral-200 rounded-12">
+                <LightModeIcon className="w-6 h-6 text-neutral-950" />
+              </div>
               <FieldContent>
-                <FieldTitle>System</FieldTitle>
-                <FieldDescription>
+                <FieldTitle className="font-sans text-base font-medium tracking-[-0.3px] leading-[1.3] text-neutral-950">
+                  System
+                </FieldTitle>
+                <FieldDescription className="text-sm font-normal tracking-[-0.3px] leading-[1.3] text-neutral-500">
                   Adapts to your device’s theme
                 </FieldDescription>
               </FieldContent>
