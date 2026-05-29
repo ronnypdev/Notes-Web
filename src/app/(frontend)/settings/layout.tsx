@@ -18,6 +18,7 @@ export default function SettingsLayout({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
+  const isBaseRoute = pathname === '/settings';
   const settingsLinks = [
     {
       href: '/settings/color-theme',
@@ -38,7 +39,8 @@ export default function SettingsLayout({
 
   return (
     <section className="w-full h-full grid grid-cols-1 lg:grid-cols-[350px_1fr] grid-rows-[1fr]">
-      <div className="settings-sidebar w-full col-span-1 row-span-1 border-r border-neutral-200 py-5 pl-4 pr-8">
+      <div
+        className={`settings-sidebar w-full col-span-1 row-span-1 border-r border-neutral-200 py-5 pl-4 pr-8  ${isBaseRoute ? 'block' : 'hidden'} lg:block relative`}>
         <nav>
           <ul className="flex flex-col gap-2">
             {settingsLinks.map((link) => {
@@ -77,7 +79,8 @@ export default function SettingsLayout({
           </ul>
         </nav>
       </div>
-      <div className="settings-content col-span-1 row-span-1 p-4">
+      <div
+        className={`settings-content col-span-1 row-span-1 p-4 ${isBaseRoute ? 'hidden' : 'block'} lg:block`}>
         {children}
       </div>
     </section>
