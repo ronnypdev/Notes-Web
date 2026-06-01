@@ -11,14 +11,24 @@ import {
   AAMonoSpaceIcon,
   AASansSerifIcon,
   AASerifIcon,
+  ArrowLeftIcon,
 } from '@/components/icons';
 import { Button } from '@/components/ui/button';
+import Link from 'next/link';
 
 export default function FontOptionsPage() {
   return (
     <section className="w-full h-full">
-      <div className="w-[528px] flex flex-col gap-6">
-        <header className="flex flex-col">
+      <div className="w-full lg:w-[528px] max-w-full flex flex-col gap-6">
+        <header className="flex flex-col gap-3">
+          <div className="mobile-properties-link block lg:hidden">
+            <Link
+              className="flex items-center gap-1 font-sans text-sm font-normal leading-[1.3] tracking-[-0.0125rem] text-neutral-600"
+              href="/settings">
+              <ArrowLeftIcon className="size-4 text-neutral-600" />
+              Settings
+            </Link>
+          </div>
           <h4 className="font-sans text-base font-semibold tracking-[-0.3px] leading-[1.3] text-neutral-950">
             Font Theme
           </h4>

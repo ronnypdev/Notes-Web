@@ -7,6 +7,11 @@ import { usePathname } from 'next/navigation';
 export default function RightSideBar() {
   const pathname = usePathname();
   const isArchiveRoute = pathname.startsWith('/archivenotes');
+  const isSettingsRoute = pathname.startsWith('/settings');
+
+  if (isSettingsRoute) {
+    return null;
+  }
 
   return (
     <aside className="w-[var(--sidebar-width)] border-l border-solid border-neutral-200 bg-background p-4 lg:flex flex-col gap-2 hidden">
