@@ -11,7 +11,7 @@ interface NotesListProps {
 export default function NotesList({ basePath }: NotesListProps) {
   return (
     <>
-      {basePath !== 'archivenotes' && (
+      {basePath !== 'archivenotes' && basePath !== 'search' && (
         <Button className="w-full mb-200 hidden lg:block">
           + Create New Note
         </Button>
@@ -51,7 +51,7 @@ export default function NotesList({ basePath }: NotesListProps) {
         id="5"
         basePath={basePath}
       />
-      {basePath !== 'archivenotes' && (
+      {basePath !== 'archivenotes' && basePath !== 'search' && (
         <Button variant="mobileCreate">
           <PlusIcon className="size-6" />
         </Button>
