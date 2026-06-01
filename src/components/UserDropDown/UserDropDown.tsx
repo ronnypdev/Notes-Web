@@ -13,6 +13,8 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 
+import Link from 'next/link';
+
 function initials(input: string) {
   return input
     .split(' ')
@@ -50,17 +52,19 @@ export default function UserDropDown({ onSignOut, user }: UserDropDownProps) {
           align="end"
           className="bg-white border border-neutral-200 rounded-lg shadow-sm">
           <DropdownMenuGroup>
-            <DropdownMenuItem>
+            <DropdownMenuItem className="cursor-pointer">
               <BadgeCheckIcon />
               {user.name}
             </DropdownMenuItem>
-            <DropdownMenuItem>
+            <DropdownMenuItem className="cursor-pointer">
               <Mail />
               {user.email}
             </DropdownMenuItem>
-            <DropdownMenuItem>
-              <SettingIcon />
-              Settings
+            <DropdownMenuItem asChild className="cursor-pointer">
+              <Link href="/settings">
+                <SettingIcon />
+                Settings
+              </Link>
             </DropdownMenuItem>
           </DropdownMenuGroup>
           <DropdownMenuSeparator />
