@@ -1,5 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
+import { flushSync } from 'react-dom';
+
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 
@@ -50,7 +52,7 @@ export default function MobileMenu() {
               <Link
                 className="font-sans text-sm font-normal leading-[1.2] tracking-[-0.2px]"
                 href="/allnotes"
-                onClick={() => setPendingHref('/allnotes')}>
+                onClick={() => flushSync(() => setPendingHref('/allnotes'))}>
                 <HomeIcon className="size-6 text-current" />
                 <span className="hidden md:block">All Notes</span>
               </Link>
@@ -72,7 +74,7 @@ export default function MobileMenu() {
               <Link
                 className="font-sans text-sm font-normal leading-[1.2] tracking-[-0.2px]"
                 href="/search"
-                onClick={() => setPendingHref('/search')}>
+                onClick={() => flushSync(() => setPendingHref('/search'))}>
                 <SearchIcon className="size-6 text-current" />
                 <span className="hidden md:block">Search</span>
               </Link>
@@ -94,7 +96,9 @@ export default function MobileMenu() {
               <Link
                 className="font-sans text-sm font-normal leading-[1.2] tracking-[-0.2px]"
                 href="/archivenotes"
-                onClick={() => setPendingHref('/archivenotes')}>
+                onClick={() =>
+                  flushSync(() => setPendingHref('/archivenotes'))
+                }>
                 <ArchiveIcon className="size-6 text-current" />
                 <span className="hidden md:block">Archived</span>
               </Link>
@@ -116,7 +120,7 @@ export default function MobileMenu() {
               <Link
                 className="font-sans text-sm font-normal leading-[1.2] tracking-[-0.2px]"
                 href="/tags"
-                onClick={() => setPendingHref('/tags')}>
+                onClick={() => flushSync(() => setPendingHref('/tags'))}>
                 <TagIcon className="size-6 text-current" />
                 <span className="hidden md:block">Tags</span>
               </Link>
@@ -138,7 +142,7 @@ export default function MobileMenu() {
               <Link
                 className="font-sans text-sm font-normal leading-[1.2] tracking-[-0.2px]"
                 href="/settings"
-                onClick={() => setPendingHref('/settings')}>
+                onClick={() => flushSync(() => setPendingHref('/settings'))}>
                 <SettingIcon className="size-6 text-current" />
                 <span className="hidden md:block">Settings</span>
               </Link>
