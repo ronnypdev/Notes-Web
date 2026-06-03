@@ -14,7 +14,7 @@ import Link from 'next/link';
 export default function NoteItemDetails() {
   return (
     <>
-      <article className="h-full flex flex-col">
+      <form className="h-full flex flex-col">
         <header className="px-250 flex flex-col gap-200 text-neutral-950">
           <div className="mobile-properties-link lg:hidden flex items-center justify-between">
             <Link
@@ -68,7 +68,7 @@ export default function NoteItemDetails() {
         <Separator className="my-4" />
         <Textarea
           className="text-neutral-950 flex-1 min-h-0 border-none resize-none outline-none focus-visible:ring-0 focus-visible:ring-offset-0 shadow-none"
-          placeholder="Enter your note content here..."
+          placeholder="Start typing your note here…"
         />
 
         <Separator className="my-4" />
@@ -77,7 +77,7 @@ export default function NoteItemDetails() {
           <Button>Save</Button>
           <Button variant="secondary">Cancel</Button>
         </div>
-      </article>
+      </form>
     </>
   );
 }
