@@ -1,10 +1,4 @@
-import {
-  Field,
-  FieldContent,
-  FieldDescription,
-  FieldLabel,
-  FieldTitle,
-} from '@/components/ui/field';
+import { FieldSet, Field, FieldGroup, FieldLabel } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
@@ -43,9 +37,21 @@ export default function NoteItemDetails() {
             </div>
           </div>
           <Separator className="block lg:hidden" />
-          <h6 className="text-neutral-950 font-sans font-bold text-2xl leading-[1.2] tracking-[-0.5px]">
-            React Performance Optimization
-          </h6>
+
+          <FieldSet>
+            <FieldGroup>
+              <Field>
+                <FieldLabel htmlFor="noteTitle"></FieldLabel>
+                <Input
+                  id="noteTitle"
+                  type="text"
+                  placeholder="Enter a title…"
+                  className="text-neutral-950 font-sans font-bold text-2xl leading-[1.2] tracking-[-0.5px] border-none shadow-none focus:shadow-none"
+                />
+              </Field>
+            </FieldGroup>
+          </FieldSet>
+
           <div className="properties flex flex-col gap-4 items-start">
             <div className="tags flex items-center gap-4">
               <div className="tags-container flex items-center gap-1">
