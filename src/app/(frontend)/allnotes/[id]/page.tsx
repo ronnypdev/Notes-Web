@@ -46,7 +46,7 @@ export default function NoteItemDetails() {
                   id="noteTitle"
                   type="text"
                   placeholder="Enter a title…"
-                  className="text-neutral-950 font-sans font-bold text-2xl leading-[1.2] tracking-[-0.5px] border-none shadow-none focus:shadow-none"
+                  className="text-neutral-950 font-sans font-bold text-4xl leading-[1.2] tracking-[-0.5px] border-none shadow-none focus:shadow-none"
                 />
               </Field>
             </FieldGroup>
