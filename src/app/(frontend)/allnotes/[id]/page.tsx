@@ -16,8 +16,8 @@ import Link from 'next/link';
 export default function NoteItemDetails() {
   return (
     <>
-      <form className="h-full flex flex-col">
-        <header className="px-250 flex flex-col gap-200 text-neutral-950">
+      <form className="h-full flex flex-col py-5 px-6">
+        <header className="flex flex-col gap-200 text-neutral-950">
           <div className="mobile-properties-link lg:hidden flex items-center justify-between">
             <Link
               className="flex items-center gap-1 font-sans text-sm font-normal leading-[1.3] tracking-[-0.0125rem] text-neutral-600"
@@ -46,7 +46,7 @@ export default function NoteItemDetails() {
                   id="noteTitle"
                   type="text"
                   placeholder="Enter a title…"
-                  className="text-neutral-950 font-sans font-bold text-4xl leading-[1.2] tracking-[-0.5px] border-none shadow-none focus:shadow-none"
+                  className="text-neutral-950 font-sans font-bold text-xl md:text-2xl h-auto leading-[1.2] tracking-[-0.5px] border-none shadow-none placeholder:text-neutral-950"
                 />
               </Field>
             </FieldGroup>
