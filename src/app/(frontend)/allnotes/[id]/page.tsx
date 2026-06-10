@@ -53,7 +53,7 @@ export default function NoteItemDetails() {
 
         <form className="flex-1 min-h-0 flex flex-col" action="/">
           <FieldSet>
-            <FieldGroup>
+            <FieldGroup className="properties flex flex-col gap-4 items-start">
               <Field>
                 <FieldLabel htmlFor="noteTitle"></FieldLabel>
                 <Input
@@ -63,23 +63,28 @@ export default function NoteItemDetails() {
                   className="text-neutral-950 font-sans font-bold text-xl md:text-2xl h-auto leading-[1.2] tracking-[-0.5px] border-none shadow-none placeholder:text-neutral-950"
                 />
               </Field>
+              <Field
+                orientation="horizontal"
+                className="tags flex items-center gap-8">
+                <div className="tags-container flex items-center gap-1">
+                  <TagIcon className="size-4 text-neutral-950" />
+                  <FieldLabel
+                    htmlFor="tagsList"
+                    className="font-sans text-sm font-normal capitalize leading-[1.3] tracking-[-0.0125rem]">
+                    Tags:
+                  </FieldLabel>
+                </div>
+                <Input
+                  id="tagsList"
+                  type="text"
+                  placeholder="Add tags separated by commas (e.g. Work, Planning)"
+                  className="text-neutral-400 font-sans font-normal text-sm md:text-sm h-auto leading-[1.3] tracking-[-0.2px] border-none shadow-none placeholder:text-neutral-400"
+                />
+              </Field>
             </FieldGroup>
           </FieldSet>
 
           <div className="properties flex flex-col gap-4 items-start">
-            <div className="tags flex items-center gap-4">
-              <div className="tags-container flex items-center gap-1">
-                <TagIcon className="size-4 text-neutral-950" />
-                <span className="font-sans text-sm font-normal capitalize leading-[1.3] tracking-[-0.0125rem]">
-                  Tags:
-                </span>
-              </div>
-              <div className="tags-list flex items-center gap-2">
-                {/* <Badge variant="secondary">Dev</Badge>
-                <Badge variant="secondary">React</Badge>
-                <Badge variant="secondary">Performance</Badge> */}
-              </div>
-            </div>
             <div className="last-modified flex items-center gap-3">
               <div className="last-modified-container flex items-center gap-1">
                 <CircleClockIcon className="size-4 text-neutral-950" />
