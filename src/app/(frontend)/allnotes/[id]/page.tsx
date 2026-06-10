@@ -28,7 +28,7 @@ export default function NoteItemDetails() {
 
   return (
     <>
-      <div className="h-full flex flex-col py-5 px-6">
+      <section className="h-full flex flex-col py-5 px-6">
         <header className="flex flex-col gap-200 lg:hidden text-neutral-950">
           <div className="mobile-properties-link flex items-center justify-between">
             <Link
@@ -52,7 +52,7 @@ export default function NoteItemDetails() {
         </header>
 
         <form className="flex-1 min-h-0 flex flex-col" action="/">
-          <FieldSet>
+          <FieldSet className="flex-1 min-h-0">
             <FieldGroup className="properties flex flex-col gap-4 items-start">
               <Field>
                 <FieldLabel htmlFor="noteTitle"></FieldLabel>
@@ -100,23 +100,24 @@ export default function NoteItemDetails() {
                   placeholder="03/12/2026"
                 />
               </Field>
+              <Separator />
+              <Field>
+                <FieldLabel htmlFor="noteContent"></FieldLabel>
+                <Textarea
+                  id="noteContent"
+                  className="text-neutral-950 flex-1 min-h-0 border-none resize-none outline-none focus-visible:ring-0 focus-visible:ring-offset-0 shadow-none field-sizing-fixed"
+                  placeholder="Start typing your note here…"
+                />
+              </Field>
             </FieldGroup>
           </FieldSet>
-
           <Separator className="my-4" />
-          <Textarea
-            className="text-neutral-950 flex-1 min-h-0 border-none resize-none outline-none focus-visible:ring-0 focus-visible:ring-offset-0 shadow-none field-sizing-fixed"
-            placeholder="Start typing your note here…"
-          />
-
-          <Separator className="my-4" />
-
           <div className="actions hidden lg:flex items-center gap-2">
             <Button>Save</Button>
             <Button variant="secondary">Cancel</Button>
           </div>
         </form>
-      </div>
+      </section>
     </>
   );
 }
