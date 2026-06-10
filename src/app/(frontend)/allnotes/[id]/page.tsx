@@ -81,22 +81,28 @@ export default function NoteItemDetails() {
                   className="text-neutral-400 font-sans font-normal text-sm md:text-sm h-auto leading-[1.3] tracking-[-0.2px] border-none shadow-none placeholder:text-neutral-400"
                 />
               </Field>
+              <Field
+                orientation="horizontal"
+                className="last-modified flex items-center gap-3">
+                <div className="last-modified-container flex items-center gap-1 ">
+                  <CircleClockIcon className="size-4 text-neutral-950" />
+                  <FieldLabel
+                    htmlFor="lastEdit"
+                    className="font-sans text-sm font-normal capitalize leading-[1.3] tracking-[-0.0125rem] text-nowrap">
+                    Last Edited:
+                  </FieldLabel>
+                </div>
+                <Input
+                  id="lastEdit"
+                  type="date"
+                  className="font-sans text-sm font-normal h-auto text-neutral-400 capitalize leading-[1.3] tracking-[-0.0125rem]  border-none shadow-none placeholder:text-neutral-400"
+                  readOnly
+                  placeholder="03/12/2026"
+                />
+              </Field>
             </FieldGroup>
           </FieldSet>
 
-          <div className="properties flex flex-col gap-4 items-start">
-            <div className="last-modified flex items-center gap-3">
-              <div className="last-modified-container flex items-center gap-1">
-                <CircleClockIcon className="size-4 text-neutral-950" />
-                <span className="font-sans text-sm font-normal capitalize leading-[1.3] tracking-[-0.0125rem]">
-                  Last Edited:
-                </span>
-              </div>
-              <span className="font-sans text-sm font-normal capitalize leading-[1.3] tracking-[-0.0125rem]">
-                29 Oct 2024
-              </span>
-            </div>
-          </div>
           <Separator className="my-4" />
           <Textarea
             className="text-neutral-950 flex-1 min-h-0 border-none resize-none outline-none focus-visible:ring-0 focus-visible:ring-offset-0 shadow-none field-sizing-fixed"
