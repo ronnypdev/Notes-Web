@@ -1,0 +1,11 @@
+[mcp_servers.better-auth]
+url = "https://mcp.inkeep.com/better-auth/mcp"
+
+[mcp_servers.context7]
+url = "https://mcp.context7.com/mcp"
+
+[mcp_servers.figma]
+url = "https://mcp.figma.com/mcp"
+
+[mcp_servers.vercel]
+url = "https://mcp.vercel.com"

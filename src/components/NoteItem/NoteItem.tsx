@@ -10,13 +10,9 @@ import {
   ItemHeader,
 } from '@/components/ui/item';
 import { Separator } from '@/components/ui/separator';
+import { Note } from '@/types';
 
-interface NoteItemProps {
-  title: string;
-  id?: string;
-  tags?: string[];
-  date: string;
-  content?: string;
+interface NoteItemProps extends Note {
   basePath?: string;
 }
 
@@ -24,7 +20,7 @@ export default function NoteItem({
   title,
   id,
   tags,
-  date,
+  lastEdited,
   basePath = 'allnotes',
 }: NoteItemProps) {
   return (
@@ -51,7 +47,7 @@ export default function NoteItem({
           )}
         </ItemActions>
         <ItemFooter className="text-neutral-700 text-[12px] font-normal leading-[1.2] tracking-[-0.2px]">
-          {date}
+          {lastEdited}
         </ItemFooter>
         <Separator />
       </Item>
