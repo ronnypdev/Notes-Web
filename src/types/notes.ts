@@ -5,3 +5,8 @@ export interface Note {
   content?: string;
   lastEdited?: string;
 }
+
+export interface NoteContextValue {
+  noteCollection: Note[];
+  updateNote: (noteId: string, note: Partial<Note>) => void;
+}

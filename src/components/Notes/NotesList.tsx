@@ -18,35 +18,35 @@ export default function NotesList({ basePath }: NotesListProps) {
       )}
       <NoteItem
         title="React Performance Optimization"
-        date="29 Oct 2024"
+        lastEdited="29 Oct 2024"
         tags={['Dev', 'React']}
         id="1"
         basePath={basePath}
       />
       <NoteItem
         title="Japan Travel Planning"
-        date="28 Oct 2024"
+        lastEdited="28 Oct 2024"
         tags={['travel', 'personal']}
         id="2"
         basePath={basePath}
       />
       <NoteItem
         title="Favorite Pasta Recipes"
-        date="27 Oct 2024"
+        lastEdited="27 Oct 2024"
         tags={['cooking', 'recepies']}
         id="3"
         basePath={basePath}
       />
       <NoteItem
         title="Weekly Workout Plan"
-        date="25 Oct 2024"
+        lastEdited="25 Oct 2024"
         tags={['gym', 'workout']}
         id="4"
         basePath={basePath}
       />
       <NoteItem
         title="Meal Prep Ideas"
-        date="12 Oct 2024"
+        lastEdited="12 Oct 2024"
         tags={['cooking', 'meal prep']}
         id="5"
         basePath={basePath}
