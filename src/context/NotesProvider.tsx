@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { NotesContext } from './NotesContext.ts';
+import { NotesContext } from './NotesContext';
 import { Note } from '@/types';
 
 export function NotesProvider({ children }: { children: React.ReactNode }) {
@@ -38,22 +38,22 @@ export function NotesProvider({ children }: { children: React.ReactNode }) {
     },
   ]);
 
-  function updateNote(noteId) {
+  function updateNote(noteId: string, updates: Partial<Note>) {
     setNotes(
-          notes.map((note) => {
-            if (note.id === noteId) {
-              return { ...note, ...updates };
-            }
-            return note;
-          }),
-        ),
+      notes.map((note) => {
+        if (note.id === noteId) {
+          return { ...note, ...updates };
+        }
+        return note;
+      }),
+    );
   }
 
   return (
     <NotesContext
       value={{
         noteCollection: notes,
-        updateNote
+        updateNote,
       }}>
       {children}
     </NotesContext>
