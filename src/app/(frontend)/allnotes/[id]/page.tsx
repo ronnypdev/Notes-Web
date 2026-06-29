@@ -1,11 +1,8 @@
-// 'use client';
+'use client';
 
-// TODO:  1-) data bind the notiemdetails title to  the notiem title
-// TODO:  2 -) Create database schema for the noteitemdetails
-// TODO:  3-) Implement the add and edit noteitemdetails
-
-// import { useState } from 'react';
-// import { useForm, Controller } from 'react-hook-form';
+import { useState } from 'react';
+import { useParams } from 'next/navigation';
+import { useForm, Controller } from 'react-hook-form';
 // import { Tag, TagInput } from 'emblor';
 import { FieldSet, Field, FieldGroup, FieldLabel } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
