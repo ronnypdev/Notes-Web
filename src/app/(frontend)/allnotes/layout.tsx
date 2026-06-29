@@ -1,5 +1,6 @@
 import NotesPageLayout from '@/components/Notes/NotesPageLayout';
 import NotesList from '@/components/Notes/NotesList';
+import { NotesProvider } from '@/context/NotesProvider';
 
 export default function AllNotesLayout({
   children,
@@ -7,10 +8,12 @@ export default function AllNotesLayout({
   children: React.ReactNode;
 }) {
   return (
-    <NotesPageLayout
-      basePath="allnotes"
-      notesList={<NotesList basePath="allnotes" />}>
-      {children}
-    </NotesPageLayout>
+    <NotesProvider>
+      <NotesPageLayout
+        basePath="allnotes"
+        notesList={<NotesList basePath="allnotes" />}>
+        {children}
+      </NotesPageLayout>
+    </NotesProvider>
   );
 }
