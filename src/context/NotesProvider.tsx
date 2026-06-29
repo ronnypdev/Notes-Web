@@ -7,34 +7,34 @@ import { Note } from '@/types';
 export function NotesProvider({ children }: { children: React.ReactNode }) {
   const [notes, setNotes] = useState<Note[]>([
     {
-      title: 'Note 1',
+      title: 'Japan Travel Planning',
       id: '1',
-      tags: ['tag1', 'tag2'],
-      lastEdited: '2021-01-01',
+      tags: ['travel', 'personal'],
+      lastEdited: '28 Oct 2024',
     },
     {
-      title: 'Note 2',
+      title: 'Favorite Pasta Recipes',
       id: '2',
-      tags: ['tag3', 'tag4'],
-      lastEdited: '2021-01-02',
+      tags: ['cooking', 'recepies'],
+      lastEdited: '27 Oct 2024',
     },
     {
-      title: 'Note 3',
+      title: 'Weekly Workout Plan',
       id: '3',
-      tags: ['tag5', 'tag6'],
-      lastEdited: '2021-01-03',
+      tags: ['gym', 'workout'],
+      lastEdited: '25 Oct 2024',
     },
     {
-      title: 'Note 4',
+      title: 'Meal Prep Ideas',
       id: '4',
-      tags: ['tag7', 'tag8'],
-      lastEdited: '2021-01-04',
+      tags: ['cooking', 'meal prep'],
+      lastEdited: '12 Oct 2024',
     },
     {
-      title: 'Note 5',
+      title: 'React Performance Optimization',
       id: '5',
-      tags: ['tag9', 'tag10'],
-      lastEdited: '2021-01-05',
+      tags: ['Dev', 'React'],
+      lastEdited: '29 Oct 2024',
     },
   ]);
 

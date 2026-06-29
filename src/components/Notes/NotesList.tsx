@@ -1,5 +1,8 @@
 'use client';
 
+import { useContext } from 'react';
+import { NotesContext } from '@/context/NotesContext';
+
 import { Button } from '@/components/ui/button';
 import NoteItem from '@/components/NoteItem/NoteItem';
 import { PlusIcon } from '@/components/icons';
@@ -9,6 +12,8 @@ interface NotesListProps {
 }
 
 export default function NotesList({ basePath }: NotesListProps) {
+  const { noteCollection } = useContext(NotesContext);
+
   return (
     <>
       {basePath !== 'archivenotes' && basePath !== 'search' && (
@@ -16,41 +21,11 @@ export default function NotesList({ basePath }: NotesListProps) {
           + Create New Note
         </Button>
       )}
-      <NoteItem
-        title="React Performance Optimization"
-        lastEdited="29 Oct 2024"
-        tags={['Dev', 'React']}
-        id="1"
-        basePath={basePath}
-      />
-      <NoteItem
-        title="Japan Travel Planning"
-        lastEdited="28 Oct 2024"
-        tags={['travel', 'personal']}
-        id="2"
-        basePath={basePath}
-      />
-      <NoteItem
-        title="Favorite Pasta Recipes"
-        lastEdited="27 Oct 2024"
-        tags={['cooking', 'recepies']}
-        id="3"
-        basePath={basePath}
-      />
-      <NoteItem
-        title="Weekly Workout Plan"
-        lastEdited="25 Oct 2024"
-        tags={['gym', 'workout']}
-        id="4"
-        basePath={basePath}
-      />
-      <NoteItem
-        title="Meal Prep Ideas"
-        lastEdited="12 Oct 2024"
-        tags={['cooking', 'meal prep']}
-        id="5"
-        basePath={basePath}
-      />
+
+      {noteCollection.map((note) => (
+        <NoteItem key={note.id} {...note} basePath={basePath} />
+      ))}
+
       {basePath !== 'archivenotes' && basePath !== 'search' && (
         <Button variant="mobileCreate">
           <PlusIcon className="size-6" />
