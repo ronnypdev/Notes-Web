@@ -1,8 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { useContext } from 'react';
+import { NotesContext } from '@/context/NotesContext';
 import { useParams } from 'next/navigation';
-import { useForm, Controller } from 'react-hook-form';
+// import { useForm, Controller } from 'react-hook-form';
 // import { Tag, TagInput } from 'emblor';
 import { FieldSet, Field, FieldGroup, FieldLabel } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
@@ -16,16 +17,15 @@ import {
   DeleteIcon,
 } from '@/components/icons';
 import { Separator } from '@/components/ui/separator';
-// import { Badge } from '@/components/ui/badge';
 import Link from 'next/link';
 
 export default function NoteItemDetails() {
-  // const { control, handleSubmit, setValue } = useForm();
-  // const [tags, setTags] = React.useState<Tag[]>([]);
+  const { noteCollection, updateNote } = useContext(NotesContext);
+  const params = useParams();
 
-  // const onSubmit = (data) => {
-  //   console.log(data.tags); // Process tag data
-  // };
+  const currentNote = noteCollection.find((note) => note.id === params.id);
+
+  if (!currentNote) return null;
 
   return (
     <>
@@ -60,6 +60,12 @@ export default function NoteItemDetails() {
                 <Input
                   id="noteTitle"
                   type="text"
+                  value={currentNote?.title}
+                  onChange={(e) =>
+                    updateNote(currentNote.id, {
+                      title: e.target.value,
+                    })
+                  }
                   placeholder="Enter a title…"
                   className="text-neutral-950 font-sans font-bold text-xl md:text-2xl h-auto leading-[1.2] tracking-[-0.5px] border-none shadow-none placeholder:text-neutral-950"
                 />
