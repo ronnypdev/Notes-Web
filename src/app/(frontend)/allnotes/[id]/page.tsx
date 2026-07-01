@@ -1,3 +1,12 @@
+'use client';
+
+import { useContext } from 'react';
+import { NotesContext } from '@/context/NotesContext';
+import { useParams } from 'next/navigation';
+// import { useForm, Controller } from 'react-hook-form';
+// import { Tag, TagInput } from 'emblor';
+import { FieldSet, Field, FieldGroup, FieldLabel } from '@/components/ui/field';
+import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import {
@@ -8,15 +17,21 @@ import {
   DeleteIcon,
 } from '@/components/icons';
 import { Separator } from '@/components/ui/separator';
-import { Badge } from '@/components/ui/badge';
 import Link from 'next/link';
 
 export default function NoteItemDetails() {
+  const { noteCollection, updateNote } = useContext(NotesContext);
+  const params = useParams();
+
+  const currentNote = noteCollection.find((note) => note.id === params.id);
+
+  if (!currentNote) return null;
+
   return (
     <>
-      <article className="h-full flex flex-col">
-        <header className="px-250 flex flex-col gap-200 text-neutral-950">
-          <div className="mobile-properties-link lg:hidden flex items-center justify-between">
+      <section className="h-full flex flex-col py-5 px-6">
+        <header className="flex flex-col gap-200 lg:hidden text-neutral-950">
+          <div className="mobile-properties-link flex items-center justify-between">
             <Link
               className="flex items-center gap-1 font-sans text-sm font-normal leading-[1.3] tracking-[-0.0125rem] text-neutral-600"
               href="/allnotes">
@@ -35,49 +50,81 @@ export default function NoteItemDetails() {
             </div>
           </div>
           <Separator className="block lg:hidden" />
-          <h6 className="text-neutral-950 font-sans font-bold text-2xl leading-[1.2] tracking-[-0.5px]">
-            React Performance Optimization
-          </h6>
-          <div className="properties flex flex-col gap-4 items-start">
-            <div className="tags flex items-center gap-4">
-              <div className="tags-container flex items-center gap-1">
-                <TagIcon className="size-4 text-neutral-950" />
-                <span className="font-sans text-sm font-normal capitalize leading-[1.3] tracking-[-0.0125rem]">
-                  Tags:
-                </span>
-              </div>
-              <div className="tags-list flex items-center gap-2">
-                <Badge variant="secondary">Dev</Badge>
-                <Badge variant="secondary">React</Badge>
-                <Badge variant="secondary">Performance</Badge>
-              </div>
-            </div>
-            <div className="last-modified flex items-center gap-3">
-              <div className="last-modified-container flex items-center gap-1">
-                <CircleClockIcon className="size-4 text-neutral-950" />
-                <span className="font-sans text-sm font-normal capitalize leading-[1.3] tracking-[-0.0125rem]">
-                  Last Edited:
-                </span>
-              </div>
-              <span className="font-sans text-sm font-normal capitalize leading-[1.3] tracking-[-0.0125rem]">
-                29 Oct 2024
-              </span>
-            </div>
-          </div>
         </header>
-        <Separator className="my-4" />
-        <Textarea
-          className="text-neutral-950 flex-1 min-h-0 border-none resize-none outline-none focus-visible:ring-0 focus-visible:ring-offset-0 shadow-none"
-          placeholder="Enter your note content here..."
-        />
 
-        <Separator className="my-4" />
-
-        <div className="actions hidden lg:flex items-center gap-2">
-          <Button>Save</Button>
-          <Button variant="secondary">Cancel</Button>
-        </div>
-      </article>
+        <form className="flex-1 min-h-0 flex flex-col" action="/">
+          <FieldSet className="flex-1 min-h-0">
+            <FieldGroup className="properties flex flex-col gap-4 items-start">
+              <Field>
+                <FieldLabel htmlFor="noteTitle"></FieldLabel>
+                <Input
+                  id="noteTitle"
+                  type="text"
+                  value={currentNote?.title}
+                  onChange={(e) =>
+                    updateNote(currentNote.id, {
+                      title: e.target.value,
+                    })
+                  }
+                  placeholder="Enter a title…"
+                  className="text-neutral-950 font-sans font-bold text-xl md:text-2xl h-auto leading-[1.2] tracking-[-0.5px] border-none shadow-none placeholder:text-neutral-950"
+                />
+              </Field>
+              <Field
+                orientation="horizontal"
+                className="tags flex items-center gap-8">
+                <div className="tags-container flex items-center gap-1">
+                  <TagIcon className="size-4 text-neutral-950" />
+                  <FieldLabel
+                    htmlFor="tagsList"
+                    className="font-sans text-sm font-normal capitalize leading-[1.3] tracking-[-0.0125rem]">
+                    Tags:
+                  </FieldLabel>
+                </div>
+                <Input
+                  id="tagsList"
+                  type="text"
+                  placeholder="Add tags separated by commas (e.g. Work, Planning)"
+                  className="text-neutral-400 font-sans font-normal text-sm md:text-sm h-auto leading-[1.3] tracking-[-0.2px] border-none shadow-none placeholder:text-neutral-400"
+                />
+              </Field>
+              <Field
+                orientation="horizontal"
+                className="last-modified flex items-center gap-3">
+                <div className="last-modified-container flex items-center gap-1 ">
+                  <CircleClockIcon className="size-4 text-neutral-950" />
+                  <FieldLabel
+                    htmlFor="lastEdit"
+                    className="font-sans text-sm font-normal capitalize leading-[1.3] tracking-[-0.0125rem] text-nowrap">
+                    Last Edited:
+                  </FieldLabel>
+                </div>
+                <Input
+                  id="lastEdit"
+                  type="date"
+                  className="font-sans text-sm font-normal h-auto text-neutral-400 capitalize leading-[1.3] tracking-[-0.0125rem]  border-none shadow-none placeholder:text-neutral-400"
+                  readOnly
+                  placeholder="03/12/2026"
+                />
+              </Field>
+              <Separator />
+              <Field>
+                <FieldLabel htmlFor="noteContent"></FieldLabel>
+                <Textarea
+                  id="noteContent"
+                  className="text-neutral-950 flex-1 min-h-0 border-none resize-none outline-none focus-visible:ring-0 focus-visible:ring-offset-0 shadow-none field-sizing-fixed"
+                  placeholder="Start typing your note here…"
+                />
+              </Field>
+            </FieldGroup>
+          </FieldSet>
+          <Separator className="my-4" />
+          <div className="actions hidden lg:flex items-center gap-2">
+            <Button>Save</Button>
+            <Button variant="secondary">Cancel</Button>
+          </div>
+        </form>
+      </section>
     </>
   );
 }
