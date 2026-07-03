@@ -4,6 +4,8 @@ export interface Note {
   tags?: string[];
   content?: string;
   lastEdited?: string;
+  archive?: boolean;
+  created_at?: string;
 }
 
 export interface NoteContextValue {
