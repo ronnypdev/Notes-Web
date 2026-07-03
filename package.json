@@ -8,8 +8,10 @@
     "start": "next start",
     "lint": "next lint",
     "test": "vitest",
+    "drizzle:push": "drizzle-kit push",
     "generate": "drizzle-kit generate",
-    "migrate": "drizzle-kit migrate"
+    "migrate": "drizzle-kit migrate",
+    "drizzle:index": "tsx src/db/index.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
