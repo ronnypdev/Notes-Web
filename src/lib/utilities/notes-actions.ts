@@ -1,4 +1,6 @@
-export function createNote() {}
+'use server';
+
+export function createNote(noteItem: object) {}
 
 export function readNote() {}
 
