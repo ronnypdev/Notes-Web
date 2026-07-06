@@ -22,7 +22,7 @@ export default function NotesList({ basePath }: NotesListProps) {
   const { noteCollection } = useContext(NotesContext);
 
   return (
-    <form>
+    <form action="/" method="POST">
       {basePath !== 'archivenotes' && basePath !== 'search' && (
         <Button className="w-full mb-200 hidden lg:block" type="submit">
           + Create New Note
