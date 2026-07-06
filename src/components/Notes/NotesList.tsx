@@ -3,8 +3,15 @@
 import { useContext } from 'react';
 import { NotesContext } from '@/context/NotesContext';
 
-import { Button } from '@/components/ui/button';
+import {
+  createNote,
+  readNote,
+  updateNote,
+  deleteNote,
+} from '@/lib/utilities/notes-actions';
+
 import NoteItem from '@/components/NoteItem/NoteItem';
+import { Button } from '@/components/ui/button';
 import { PlusIcon } from '@/components/icons';
 
 interface NotesListProps {
@@ -15,9 +22,9 @@ export default function NotesList({ basePath }: NotesListProps) {
   const { noteCollection } = useContext(NotesContext);
 
   return (
-    <>
+    <form>
       {basePath !== 'archivenotes' && basePath !== 'search' && (
-        <Button className="w-full mb-200 hidden lg:block">
+        <Button className="w-full mb-200 hidden lg:block" type="submit">
           + Create New Note
         </Button>
       )}
@@ -27,10 +34,10 @@ export default function NotesList({ basePath }: NotesListProps) {
       ))}
 
       {basePath !== 'archivenotes' && basePath !== 'search' && (
-        <Button variant="mobileCreate">
+        <Button variant="mobileCreate" type="submit">
           <PlusIcon className="size-6" />
         </Button>
       )}
-    </>
+    </form>
   );
 }
