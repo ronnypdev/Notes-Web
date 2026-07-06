@@ -1,9 +1,9 @@
 'use server';
 
-export function createNote(noteItem: object) {}
+export async function createNote(noteItem: object) {}
 
-export function readNote() {}
+export async function readNote() {}
 
-export function updateNote() {}
+export async function updateNote() {}
 
-export function deleteNote() {}
+export async function deleteNote() {}
