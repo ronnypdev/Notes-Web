@@ -3,12 +3,7 @@
 import { useContext } from 'react';
 import { NotesContext } from '@/context/NotesContext';
 
-import {
-  createNote,
-  readNote,
-  updateNote,
-  deleteNote,
-} from '@/lib/utilities/notes-actions';
+import { createNote } from '@/lib/utilities/notes-actions';
 
 import NoteItem from '@/components/NoteItem/NoteItem';
 import { Button } from '@/components/ui/button';

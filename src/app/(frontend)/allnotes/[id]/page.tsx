@@ -2,6 +2,12 @@
 
 import { useContext } from 'react';
 import { NotesContext } from '@/context/NotesContext';
+import {
+  readNote,
+  updateNote,
+  deleteNote,
+} from '@/lib/utilities/notes-actions';
+
 import { useParams } from 'next/navigation';
 // import { useForm, Controller } from 'react-hook-form';
 // import { Tag, TagInput } from 'emblor';
