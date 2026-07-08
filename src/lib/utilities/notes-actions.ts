@@ -1,6 +1,6 @@
 'use server';
 
-export async function createNote(noteItem: object) {}
+export async function createNote() {}
 
 export async function readNote() {}
 
