@@ -5,7 +5,8 @@ export interface Note {
   content?: string;
   lastEdited?: string;
   archive?: boolean;
-  created_at?: string;
+  userId: string;
+  created_at?: Date;
 }
 
 export interface NoteContextValue {
