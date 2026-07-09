@@ -11,4 +11,4 @@ export async function readNote() {}
 
 export async function updateNote() {}
 
-export async function deleteNote() {}
+export async function deleteNote(noteId: string) {}

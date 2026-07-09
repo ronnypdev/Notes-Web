@@ -16,8 +16,12 @@ interface NotesListProps {
 export default function NotesList({ basePath }: NotesListProps) {
   const { noteCollection } = useContext(NotesContext);
 
+  function createNoteItem(event) {
+    event.PreventDefault();
+  }
+
   return (
-    <form action="/" method="POST">
+    <form onSubmit={createNoteItem} method="POST">
       {basePath !== 'archivenotes' && basePath !== 'search' && (
         <Button className="w-full mb-200 hidden lg:block" type="submit">
           + Create New Note
