@@ -1,6 +1,11 @@
 'use server';
 
-export async function createNote() {}
+import { Note } from '@/types';
+
+export async function createNote(noteItem: Note[]) {
+  try {
+  } catch (error) {}
+}
 
 export async function readNote() {}
 
