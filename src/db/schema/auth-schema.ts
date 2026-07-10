@@ -90,11 +90,11 @@ export const noteTable = pgTable('note', {
     .default(sql`ARRAY[]::text[]`),
   content: varchar('content'),
   lastEdited: date('last_edited').default(sql`CURRENT_DATE`),
-  archive: boolean('archive'),
+  archive: boolean('archive').default(false),
   userId: text('user_id')
     .notNull()
     .references(() => user.id, { onDelete: 'cascade' }),
-  createdAt: timestamp('created_at').notNull().defaultNow(),
+  createdAt: timestamp('created_at').defaultNow(),
 });
 
 export const userRelations = relations(user, ({ many }) => ({
