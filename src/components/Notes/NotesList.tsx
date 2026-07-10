@@ -16,8 +16,8 @@ interface NotesListProps {
 export default function NotesList({ basePath }: NotesListProps) {
   const { noteCollection } = useContext(NotesContext);
 
-  function createNoteItem(event) {
-    event.PreventDefault();
+  function createNoteItem(event: React.SubmitEvent<HTMLFormElement>) {
+    event.preventDefault();
   }
 
   return (
