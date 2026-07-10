@@ -84,16 +84,13 @@ export const verification = pgTable(
 
 export const noteTable = pgTable('note', {
   id: text('id').primaryKey(),
-  title: varchar('title', { length: 255 }).notNull(),
-  archive: boolean('archive').notNull(),
+  title: varchar('title', { length: 255 }),
   tags: text('tags')
     .array()
-    .notNull()
     .default(sql`ARRAY[]::text[]`),
-  content: varchar('content').notNull(),
-  lastEdited: date('last_edited')
-    .notNull()
-    .default(sql`CURRENT_DATE`),
+  content: varchar('content'),
+  lastEdited: date('last_edited').default(sql`CURRENT_DATE`),
+  archive: boolean('archive'),
   userId: text('user_id')
     .notNull()
     .references(() => user.id, { onDelete: 'cascade' }),
