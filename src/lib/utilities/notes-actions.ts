@@ -4,9 +4,11 @@ import { db } from '@/db';
 import { noteTable } from '@/db/schema/auth-schema';
 import { getServerSessions } from '../usersessions';
 
-type NewNoteItem = typeof noteTable.$inferInsert;
+type ServerItemRow = typeof noteTable.$inferInsert;
 
-export async function createNote(noteItem: NewNoteItem) {
+type CallerItemInput = Omit<ServerItemRow, 'id' | 'userId'>;
+
+export async function createNote(noteItem: CallerItemInput) {
   // Generate unique id for each note
   const uniqueNoteId = crypto.randomUUID();
 
