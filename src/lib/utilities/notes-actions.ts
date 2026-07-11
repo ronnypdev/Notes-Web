@@ -21,16 +21,13 @@ export async function createNote(noteItem: CallerItemInput) {
     }
 
     const authUserId = session.user.id;
-    const newNoteItemWithId = {
+    const newNoteItem = {
       ...noteItem,
       id: uniqueNoteId,
       userId: authUserId,
     };
 
-    const newNote = await db
-      .insert(noteTable)
-      .values(newNoteItemWithId)
-      .returning();
+    const newNote = await db.insert(noteTable).values(newNoteItem).returning();
     return {
       success: true,
       note: newNote,
