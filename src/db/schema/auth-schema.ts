@@ -84,7 +84,7 @@ export const verification = pgTable(
 
 export const noteTable = pgTable('note', {
   id: text('id').primaryKey(),
-  title: varchar('title', { length: 255 }),
+  title: varchar('title', { length: 255 }).default('Enter a title…'),
   tags: text('tags')
     .array()
     .default(sql`ARRAY[]::text[]`),
