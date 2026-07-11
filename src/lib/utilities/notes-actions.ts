@@ -5,8 +5,15 @@ import { noteTable } from '@/db/schema/auth-schema';
 type NewNoteItem = typeof noteTable.$inferInsert;
 
 export async function createNote(noteItem: NewNoteItem) {
+  // Generate unique id for each note
+  const uniqueNoteId = crypto.randomUUID();
+  const newNoteItemWithId = { ...noteItem, id: uniqueNoteId };
+
   try {
-    const newNote = await db.insert(noteTable).values(noteItem).returning();
+    const newNote = await db
+      .insert(noteTable)
+      .values(newNoteItemWithId)
+      .returning();
     return {
       success: true,
       note: newNote,
