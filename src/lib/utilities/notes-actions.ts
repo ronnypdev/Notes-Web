@@ -1,15 +1,30 @@
 'use server';
+
 import { db } from '@/db';
 import { noteTable } from '@/db/schema/auth-schema';
+import { getServerSessions } from '../usersessions';
 
 type NewNoteItem = typeof noteTable.$inferInsert;
 
 export async function createNote(noteItem: NewNoteItem) {
   // Generate unique id for each note
   const uniqueNoteId = crypto.randomUUID();
-  const newNoteItemWithId = { ...noteItem, id: uniqueNoteId };
 
   try {
+    // prevents client from creating a note under someone else's account
+    const session = await getServerSessions();
+
+    if (session === null) {
+      return { success: false, message: 'No active session at the moment' };
+    }
+
+    const authUserId = session.user.id;
+    const newNoteItemWithId = {
+      ...noteItem,
+      id: uniqueNoteId,
+      userId: authUserId,
+    };
+
     const newNote = await db
       .insert(noteTable)
       .values(newNoteItemWithId)
@@ -20,7 +35,7 @@ export async function createNote(noteItem: NewNoteItem) {
       message: 'Note successfully created',
     };
   } catch (error) {
-    console.error('Error adding item to cart:', error);
+    console.error('Error no note created:', error);
     return { success: false, message: 'Failed to create new note' };
   }
 }
