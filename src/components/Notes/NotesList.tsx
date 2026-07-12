@@ -1,6 +1,6 @@
 'use client';
 
-import { useContext } from 'react';
+import { useContext, useTransition } from 'react';
 import { NotesContext } from '@/context/NotesContext';
 
 import { createNote } from '@/lib/utilities/notes-actions';
@@ -8,23 +8,34 @@ import { createNote } from '@/lib/utilities/notes-actions';
 import NoteItem from '@/components/NoteItem/NoteItem';
 import { Button } from '@/components/ui/button';
 import { PlusIcon } from '@/components/icons';
+import { Spinner } from '../ui/spinner';
+
+import { Note } from '@/types';
+
+type newNoteItem = Omit<Note, 'id' | 'userId'>;
 
 interface NotesListProps {
   basePath: string;
+  item: newNoteItem;
 }
 
-export default function NotesList({ basePath }: NotesListProps) {
+export default function NotesList({ basePath, item }: NotesListProps) {
   const { noteCollection } = useContext(NotesContext);
+  const [isPending, startTransition] = useTransition();
 
-  function createNoteItem(event: React.SubmitEvent<HTMLFormElement>) {
-    event.preventDefault();
+  function createNoteItem() {
+    startTransition(async () => {
+      await createNote(item);
+    });
   }
 
   return (
-    <form onSubmit={createNoteItem} method="POST">
+    <>
       {basePath !== 'archivenotes' && basePath !== 'search' && (
-        <Button className="w-full mb-200 hidden lg:block" type="submit">
-          + Create New Note
+        <Button
+          className="w-full mb-200 hidden lg:block"
+          onClick={() => createNoteItem}>
+          {isPending ? <Spinner /> : '+ Create New Note'}
         </Button>
       )}
 
@@ -37,6 +48,6 @@ export default function NotesList({ basePath }: NotesListProps) {
           <PlusIcon className="size-6" />
         </Button>
       )}
-    </form>
+    </>
   );
 }
