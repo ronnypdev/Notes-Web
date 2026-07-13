@@ -20,12 +20,12 @@ interface NotesListProps {
 }
 
 export default function NotesList({ basePath, item }: NotesListProps) {
-  const { noteCollection } = useContext(NotesContext);
+  const { noteCollection, addNote } = useContext(NotesContext);
   const [isPending, startTransition] = useTransition();
 
-  function createNoteItem() {
+  function insertItem() {
     startTransition(async () => {
-      await createNote(item);
+      const insertedItem = await createNote(item);
     });
   }
 
@@ -34,7 +34,7 @@ export default function NotesList({ basePath, item }: NotesListProps) {
       {basePath !== 'archivenotes' && basePath !== 'search' && (
         <Button
           className="w-full mb-200 hidden lg:block"
-          onClick={() => createNoteItem}>
+          onClick={() => insertItem}>
           {isPending ? <Spinner /> : '+ Create New Note'}
         </Button>
       )}

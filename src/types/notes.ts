@@ -11,5 +11,6 @@ export interface Note {
 
 export interface NoteContextValue {
   noteCollection: Note[];
+  addNote: (note: Note) => void;
   updateNote: (noteId: string, note: Partial<Note>) => void;
 }
