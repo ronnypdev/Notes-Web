@@ -9,23 +9,34 @@ import NoteItem from '@/components/NoteItem/NoteItem';
 import { Button } from '@/components/ui/button';
 import { PlusIcon } from '@/components/icons';
 import { Spinner } from '../ui/spinner';
+import { toast } from 'sonner';
 
-import { Note } from '@/types';
+// import { Note } from '@/types';
 
-type newNoteItem = Omit<Note, 'id' | 'userId'>;
+// type newNoteItem = Omit<Note, 'id' | 'userId'>;
 
 interface NotesListProps {
   basePath: string;
-  item: newNoteItem;
 }
 
-export default function NotesList({ basePath, item }: NotesListProps) {
+export default function NotesList({ basePath }: NotesListProps) {
   const { noteCollection, addNote } = useContext(NotesContext);
   const [isPending, startTransition] = useTransition();
 
   function insertItem() {
     startTransition(async () => {
-      const insertedItem = await createNote(item);
+      const result = await createNote({});
+      if (result.success) {
+        toast.success('Congratulation! You successfully created a new note', {
+          position: 'bottom-right',
+        });
+        addNote(result.note[0]);
+      } else {
+        toast.error('Error: Failed to create note', {
+          position: 'bottom-right',
+        });
+        console.log(result.message);
+      }
     });
   }
 
