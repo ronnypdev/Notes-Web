@@ -11,9 +11,9 @@ import { PlusIcon } from '@/components/icons';
 import { Spinner } from '../ui/spinner';
 import { toast } from 'sonner';
 
-// import { Note } from '@/types';
+import { Note } from '@/types';
 
-// type newNoteItem = Omit<Note, 'id' | 'userId'>;
+type newNoteItem = Omit<Note, 'id' | 'userId'>;
 
 interface NotesListProps {
   basePath: string;
