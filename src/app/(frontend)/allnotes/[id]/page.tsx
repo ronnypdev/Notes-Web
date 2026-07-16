@@ -2,6 +2,8 @@
 
 import { useContext } from 'react';
 import { NotesContext } from '@/context/NotesContext';
+import { deleteNote } from '@/lib/utilities/notes-actions';
+
 import { useParams } from 'next/navigation';
 // import { useForm, Controller } from 'react-hook-form';
 // import { Tag, TagInput } from 'emblor';
@@ -60,7 +62,7 @@ export default function NoteItemDetails() {
                 <Input
                   id="noteTitle"
                   type="text"
-                  value={currentNote?.title}
+                  value={currentNote?.title ?? ''}
                   onChange={(e) =>
                     updateNote(currentNote.id, {
                       title: e.target.value,

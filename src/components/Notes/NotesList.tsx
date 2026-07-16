@@ -1,24 +1,48 @@
 'use client';
 
-import { useContext } from 'react';
+import { useContext, useTransition } from 'react';
 import { NotesContext } from '@/context/NotesContext';
 
-import { Button } from '@/components/ui/button';
-import NoteItem from '@/components/NoteItem/NoteItem';
-import { PlusIcon } from '@/components/icons';
+import { createNote } from '@/lib/utilities/notes-actions';
 
+import NoteItem from '@/components/NoteItem/NoteItem';
+import { Button } from '@/components/ui/button';
+import { PlusIcon } from '@/components/icons';
+import { Spinner } from '@/components/ui/spinner';
+import { toast } from 'sonner';
 interface NotesListProps {
   basePath: string;
 }
 
 export default function NotesList({ basePath }: NotesListProps) {
-  const { noteCollection } = useContext(NotesContext);
+  const { noteCollection, addNote } = useContext(NotesContext);
+  const [isPending, startTransition] = useTransition();
+
+  function insertItem() {
+    startTransition(async () => {
+      const result = await createNote({});
+      if (result.success && result.note) {
+        addNote(result.note[0]);
+        toast.success('Congratulations! You successfully created a new note', {
+          position: 'bottom-right',
+        });
+      } else {
+        toast.error('Error: Failed to create note', {
+          position: 'bottom-right',
+        });
+        console.log(result.message);
+      }
+    });
+  }
 
   return (
     <>
       {basePath !== 'archivenotes' && basePath !== 'search' && (
-        <Button className="w-full mb-200 hidden lg:block">
-          + Create New Note
+        <Button
+          className="w-full mb-200 hidden lg:block"
+          onClick={() => insertItem()}
+          disabled={isPending}>
+          {isPending ? <Spinner /> : '+ Create New Note'}
         </Button>
       )}
 
@@ -27,8 +51,11 @@ export default function NotesList({ basePath }: NotesListProps) {
       ))}
 
       {basePath !== 'archivenotes' && basePath !== 'search' && (
-        <Button variant="mobileCreate">
-          <PlusIcon className="size-6" />
+        <Button
+          variant="mobileCreate"
+          onClick={() => insertItem()}
+          disabled={isPending}>
+          {isPending ? <Spinner /> : <PlusIcon className="size-6" />}
         </Button>
       )}
     </>
