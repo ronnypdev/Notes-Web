@@ -66,7 +66,7 @@ export default function NoteItemDetails() {
                 <Input
                   id="noteTitle"
                   type="text"
-                  value={currentNote?.title}
+                  value={currentNote?.title ?? ''}
                   onChange={(e) =>
                     updateNote(currentNote.id, {
                       title: e.target.value,

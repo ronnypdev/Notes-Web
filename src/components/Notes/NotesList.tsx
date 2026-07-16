@@ -10,11 +10,6 @@ import { Button } from '@/components/ui/button';
 import { PlusIcon } from '@/components/icons';
 import { Spinner } from '../ui/spinner';
 import { toast } from 'sonner';
-
-import { Note } from '@/types';
-
-type newNoteItem = Omit<Note, 'id' | 'userId'>;
-
 interface NotesListProps {
   basePath: string;
 }
@@ -26,7 +21,7 @@ export default function NotesList({ basePath }: NotesListProps) {
   function insertItem() {
     startTransition(async () => {
       const result = await createNote({});
-      if (result.success && result.note[0]) {
+      if (result.note) {
         addNote(result.note[0]);
         toast.success('Congratulation! You successfully created a new note', {
           position: 'bottom-right',
@@ -45,7 +40,7 @@ export default function NotesList({ basePath }: NotesListProps) {
       {basePath !== 'archivenotes' && basePath !== 'search' && (
         <Button
           className="w-full mb-200 hidden lg:block"
-          onClick={() => insertItem}>
+          onClick={() => insertItem()}>
           {isPending ? <Spinner /> : '+ Create New Note'}
         </Button>
       )}

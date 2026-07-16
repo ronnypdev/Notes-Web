@@ -1,13 +1,6 @@
-export interface Note {
-  id: string;
-  title?: string;
-  tags?: string[];
-  content?: string;
-  lastEdited?: string;
-  archive?: boolean;
-  userId: string;
-  createdAt?: Date;
-}
+import { noteTable } from '@/db/schema/auth-schema';
+
+export type Note = typeof noteTable.$inferSelect;
 
 export interface NoteContextValue {
   noteCollection: Note[];
