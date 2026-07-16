@@ -8,7 +8,7 @@ import { createNote } from '@/lib/utilities/notes-actions';
 import NoteItem from '@/components/NoteItem/NoteItem';
 import { Button } from '@/components/ui/button';
 import { PlusIcon } from '@/components/icons';
-import { Spinner } from '../ui/spinner';
+import { Spinner } from '@/components/ui/spinner';
 import { toast } from 'sonner';
 interface NotesListProps {
   basePath: string;
@@ -21,9 +21,9 @@ export default function NotesList({ basePath }: NotesListProps) {
   function insertItem() {
     startTransition(async () => {
       const result = await createNote({});
-      if (result.note) {
+      if (result.success && result.note) {
         addNote(result.note[0]);
-        toast.success('Congratulation! You successfully created a new note', {
+        toast.success('Congratulations! You successfully created a new note', {
           position: 'bottom-right',
         });
       } else {
@@ -40,7 +40,8 @@ export default function NotesList({ basePath }: NotesListProps) {
       {basePath !== 'archivenotes' && basePath !== 'search' && (
         <Button
           className="w-full mb-200 hidden lg:block"
-          onClick={() => insertItem()}>
+          onClick={() => insertItem()}
+          disabled={isPending}>
           {isPending ? <Spinner /> : '+ Create New Note'}
         </Button>
       )}
@@ -50,8 +51,11 @@ export default function NotesList({ basePath }: NotesListProps) {
       ))}
 
       {basePath !== 'archivenotes' && basePath !== 'search' && (
-        <Button variant="mobileCreate" type="submit">
-          <PlusIcon className="size-6" />
+        <Button
+          variant="mobileCreate"
+          onClick={() => insertItem()}
+          disabled={isPending}>
+          {isPending ? <Spinner /> : <PlusIcon className="size-6" />}
         </Button>
       )}
     </>
