@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { NotesContext } from './NotesContext';
 import { Note } from '@/types';
+import { readNote } from '@/lib/utilities/notes-actions';
 
 export function NotesProvider({ children }: { children: React.ReactNode }) {
   const [notes, setNotes] = useState<Note[]>([]);
@@ -10,6 +11,8 @@ export function NotesProvider({ children }: { children: React.ReactNode }) {
   function addNote(newNote: Note) {
     setNotes((prevNotes) => [...prevNotes, newNote]);
   }
+
+  function readsNote(noteRead: Note) {}
 
   function updateNote(noteId: string, updates: Partial<Note>) {
     setNotes(
@@ -28,6 +31,7 @@ export function NotesProvider({ children }: { children: React.ReactNode }) {
         noteCollection: notes,
         updateNote,
         addNote,
+        readsNote,
       }}>
       {children}
     </NotesContext>

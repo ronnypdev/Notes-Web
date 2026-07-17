@@ -39,7 +39,17 @@ export async function createNote(noteItem: CallerItemInput) {
   }
 }
 
-export async function readNote() {}
+export async function readNote() {
+  try {
+    const redNote = await db.select().from(noteTable);
+    console.log('redNote: ', redNote);
+
+    return { success: true, note: redNote, message: 'Note successfully read' };
+  } catch (error) {
+    console.error('Error no note created:', error);
+    return { success: false, message: 'Can not read note at the moment' };
+  }
+}
 
 export async function updateNote() {}
 
