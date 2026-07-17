@@ -7,12 +7,24 @@ import { readNote } from '@/lib/utilities/notes-actions';
 
 export function NotesProvider({ children }: { children: React.ReactNode }) {
   const [notes, setNotes] = useState<Note[]>([]);
+  const [defaultNote, setDefaultNote] = useState<Note>();
 
   function addNote(newNote: Note) {
     setNotes((prevNotes) => [...prevNotes, newNote]);
   }
 
-  function readsNote(noteRead: Note) {}
+  async function readsNote() {
+    try {
+      const result = await readNote();
+      if (result.success && result.note) {
+        setDefaultNote(result.note[0]);
+      } else {
+        console.log(result.message);
+      }
+    } catch (error) {
+      console.error('Error no note read:', error);
+    }
+  }
 
   function updateNote(noteId: string, updates: Partial<Note>) {
     setNotes(
