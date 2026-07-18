@@ -22,7 +22,7 @@ export function NotesProvider({ children }: { children: React.ReactNode }) {
         console.log(result.message);
       }
     } catch (error) {
-      console.error('Error no note read:', error);
+      console.error('Error could not read the note:', error);
     }
   }
 
