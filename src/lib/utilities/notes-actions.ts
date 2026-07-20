@@ -65,6 +65,10 @@ export async function fetchNotes(): Promise<NotesResult> {
   }
 }
 
+export async function saveNote(
+  noteItem: CallerItemInput,
+): Promise<NotesResult> {}
+
 export async function updateNote() {}
 
 export async function deleteNote() {}
