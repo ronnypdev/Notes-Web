@@ -4,15 +4,11 @@ import { eq, desc } from 'drizzle-orm';
 import { db } from '@/db';
 import { noteTable } from '@/db/schema/auth-schema';
 import { getServerSessions } from '../usersessions';
-import { Note } from '@/types';
+import { NotesResult } from '@/types';
 
 type ServerItemRow = typeof noteTable.$inferInsert;
 
 type CallerItemInput = Omit<ServerItemRow, 'id' | 'userId'>;
-
-type NotesResult =
-  | { success: true; note: Note[]; message: string }
-  | { success: false; message: string };
 
 export async function createNote(
   noteItem: CallerItemInput,
