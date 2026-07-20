@@ -21,7 +21,7 @@ export default function NotesList({ basePath }: NotesListProps) {
   function insertItem() {
     startTransition(async () => {
       const result = await createNote({});
-      if (result.success && result.note) {
+      if (result.success) {
         addNote(result.note[0]);
         toast.success('Congratulations! You successfully created a new note', {
           position: 'bottom-right',
@@ -44,6 +44,12 @@ export default function NotesList({ basePath }: NotesListProps) {
           disabled={isPending}>
           {isPending ? <Spinner /> : '+ Create New Note'}
         </Button>
+      )}
+
+      {noteCollection.length === 0 && (
+        <div className="text-center text-gray-500">
+          <p>No notes found</p>
+        </div>
       )}
 
       {noteCollection.map((note) => (
