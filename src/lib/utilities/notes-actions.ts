@@ -4,12 +4,19 @@ import { eq, desc } from 'drizzle-orm';
 import { db } from '@/db';
 import { noteTable } from '@/db/schema/auth-schema';
 import { getServerSessions } from '../usersessions';
+import { Note } from '@/types';
 
 type ServerItemRow = typeof noteTable.$inferInsert;
 
 type CallerItemInput = Omit<ServerItemRow, 'id' | 'userId'>;
 
-export async function createNote(noteItem: CallerItemInput) {
+type NotesResult =
+  | { success: true; note: Note[]; message: string }
+  | { success: false; message: string };
+
+export async function createNote(
+  noteItem: CallerItemInput,
+): Promise<NotesResult> {
   // Generate unique id for each note
   const uniqueNoteId = crypto.randomUUID();
 
@@ -40,7 +47,7 @@ export async function createNote(noteItem: CallerItemInput) {
   }
 }
 
-export async function fetchNotes() {
+export async function fetchNotes(): Promise<NotesResult> {
   try {
     // Ensure that readNotes resturns the notes belogin to the currently-loggedin user.
     const session = await getServerSessions();
@@ -49,13 +56,13 @@ export async function fetchNotes() {
       return { success: false, message: 'No active session at the moment' };
     }
 
-    const redNote = await db
+    const notes = await db
       .select()
       .from(noteTable)
       .where(eq(noteTable.userId, session.user.id))
       .orderBy(desc(noteTable.createdAt));
 
-    return { success: true, note: redNote, message: 'Note successfully read' };
+    return { success: true, note: notes, message: 'Note successfully read' };
   } catch (error) {
     console.error('Error no note read:', error);
     return { success: false, message: 'Can not read note at the moment' };

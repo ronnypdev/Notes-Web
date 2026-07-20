@@ -21,7 +21,7 @@ export function NotesProvider({
   async function loadNotes() {
     try {
       const result = await fetchNotes();
-      if (result.success && result.note) {
+      if (result.success) {
         setNotes(result.note);
       } else {
         console.log(result.message);

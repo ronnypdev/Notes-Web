@@ -21,7 +21,7 @@ export default function NotesList({ basePath }: NotesListProps) {
   function insertItem() {
     startTransition(async () => {
       const result = await createNote({});
-      if (result.success && result.note) {
+      if (result.success) {
         addNote(result.note[0]);
         toast.success('Congratulations! You successfully created a new note', {
           position: 'bottom-right',
