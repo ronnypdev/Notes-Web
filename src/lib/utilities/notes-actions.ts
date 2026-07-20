@@ -1,5 +1,6 @@
 'use server';
 
+import { eq, desc } from 'drizzle-orm';
 import { db } from '@/db';
 import { noteTable } from '@/db/schema/auth-schema';
 import { getServerSessions } from '../usersessions';
@@ -41,7 +42,18 @@ export async function createNote(noteItem: CallerItemInput) {
 
 export async function readNote() {
   try {
-    const redNote = await db.select().from(noteTable);
+    // Ensure that readNotes resturns the notes belogin to the currently-loggedin user.
+    const session = await getServerSessions();
+
+    if (session === null) {
+      return { success: false, message: 'No active session at the moment' };
+    }
+
+    const redNote = await db
+      .select()
+      .from(noteTable)
+      .where(eq(noteTable.userId, session.user.id))
+      .orderBy(desc(noteTable.createdAt));
 
     return { success: true, note: redNote, message: 'Note successfully read' };
   } catch (error) {
