@@ -46,6 +46,12 @@ export default function NotesList({ basePath }: NotesListProps) {
         </Button>
       )}
 
+      {noteCollection.length === 0 && (
+        <div className="text-center text-gray-500">
+          <p>No notes found</p>
+        </div>
+      )}
+
       {noteCollection.map((note) => (
         <NoteItem key={note.id} {...note} basePath={basePath} />
       ))}

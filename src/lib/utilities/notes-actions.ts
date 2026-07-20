@@ -40,7 +40,7 @@ export async function createNote(noteItem: CallerItemInput) {
   }
 }
 
-export async function readNote() {
+export async function fetchNotes() {
   try {
     // Ensure that readNotes resturns the notes belogin to the currently-loggedin user.
     const session = await getServerSessions();

@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { NotesContext } from './NotesContext';
 import { Note } from '@/types';
-import { readNote } from '@/lib/utilities/notes-actions';
+import { fetchNotes } from '@/lib/utilities/notes-actions';
 
 export function NotesProvider({
   children,
@@ -18,9 +18,9 @@ export function NotesProvider({
     setNotes((prevNotes) => [...prevNotes, newNote]);
   }
 
-  async function readsNote() {
+  async function loadNotes() {
     try {
-      const result = await readNote();
+      const result = await fetchNotes();
       if (result.success && result.note) {
         setNotes(result.note);
       } else {
@@ -48,7 +48,7 @@ export function NotesProvider({
         noteCollection: notes,
         updateNote,
         addNote,
-        readsNote,
+        loadNotes,
       }}>
       {children}
     </NotesContext>
