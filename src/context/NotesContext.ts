@@ -4,6 +4,6 @@ import { NoteContextValue } from '@/types';
 export const NotesContext = createContext<NoteContextValue>({
   noteCollection: [],
   addNote: () => {},
-  loadNotes: () => {},
+  loadNotes: () => Promise.resolve(void 0),
   updateNote: () => {},
 });

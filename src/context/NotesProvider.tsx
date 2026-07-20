@@ -32,8 +32,8 @@ export function NotesProvider({
   }
 
   function updateNote(noteId: string, updates: Partial<Note>) {
-    setNotes(
-      notes.map((note) => {
+    setNotes((prev) =>
+      prev.map((note) => {
         if (note.id === noteId) {
           return { ...note, ...updates };
         }
