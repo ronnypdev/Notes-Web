@@ -2,7 +2,6 @@
 
 import { useContext } from 'react';
 import { NotesContext } from '@/context/NotesContext';
-import { deleteNote } from '@/lib/utilities/notes-actions';
 
 import { useParams } from 'next/navigation';
 // import { useForm, Controller } from 'react-hook-form';
