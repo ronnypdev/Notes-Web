@@ -10,6 +10,8 @@ type ServerItemRow = typeof noteTable.$inferInsert;
 
 type CallerItemInput = Omit<ServerItemRow, 'id' | 'userId'>;
 
+type SaveItemInput = Omit<ServerItemRow, 'userId'>; // includes the client-generated id
+
 export async function createNote(
   noteItem: CallerItemInput,
 ): Promise<NotesResult> {
