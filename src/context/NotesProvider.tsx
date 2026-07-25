@@ -15,8 +15,22 @@ export function NotesProvider({
   const [notes, setNotes] = useState<ClientNote[]>(initialNotes);
   const hasDraft = notes.some((note) => note.isDraft);
 
-  function addNote(newNote: ClientNote) {
-    setNotes((prevNotes) => [...prevNotes, newNote]);
+  function createDraft() {
+    if (hasDraft) return null; // enforce a single unsaved draft
+
+    const draft: ClientNote = {
+      id: crypto.randomUUID(),
+      title: '',
+      content: '',
+      archive: false,
+      lastEdited: null,
+      createdAt: null,
+      userId: '', // real userId is set server-side on save
+      isDraft: true,
+    };
+
+    setNotes((prev) => [draft, ...prev]);
+    return draft.id;
   }
 
   async function loadNotes() {
