@@ -15,7 +15,8 @@ export function NotesProvider({
   const [notes, setNotes] = useState<ClientNote[]>(initialNotes);
   const hasDraft = notes.some((note) => note.isDraft);
 
-  function createDraft() {
+  //  the one-draft-at-a-time guard lives here
+  function createDraft(): string | null {
     if (hasDraft) return null; // enforce a single unsaved draft
 
     const draft: ClientNote = {
@@ -31,6 +32,10 @@ export function NotesProvider({
 
     setNotes((prev) => [draft, ...prev]);
     return draft.id;
+  }
+
+  function cancelDraft(noteId: string) {
+    setNotes((prev) => prev.filter((note) => note.id !== noteId));
   }
 
   async function loadNotes() {
