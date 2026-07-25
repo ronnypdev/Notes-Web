@@ -30,12 +30,22 @@ export function NotesProvider({
       isDraft: true,
     };
 
-    setNotes((prev) => [draft, ...prev]);
+    setNotes((prevNotes) => [draft, ...prevNotes]);
     return draft.id;
   }
 
+  // Cancels draft and removes it from the front end only
   function cancelDraft(noteId: string) {
-    setNotes((prev) => prev.filter((note) => note.id !== noteId));
+    setNotes((prevNotes) => prevNotes.filter((note) => note.id !== noteId));
+  }
+
+  //  swap the in-memory draft for the persisted server row:
+  function markNoteSaved(noteId: string, saved: Note) {
+    setNotes((prev) =>
+      prev.map((note) =>
+        note.id === noteId ? { ...saved, isDraft: false } : note,
+      ),
+    );
   }
 
   async function loadNotes() {
