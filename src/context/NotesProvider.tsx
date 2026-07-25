@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { NotesContext } from './NotesContext';
-import { Note } from '@/types';
+import { Note, ClientNote } from '@/types';
 import { fetchNotes } from '@/lib/utilities/notes-actions';
 
 export function NotesProvider({
@@ -12,9 +12,9 @@ export function NotesProvider({
   children: React.ReactNode;
   initialNotes: Note[];
 }) {
-  const [notes, setNotes] = useState<Note[]>(initialNotes);
+  const [notes, setNotes] = useState<ClientNote[]>(initialNotes);
 
-  function addNote(newNote: Note) {
+  function addNote(newNote: ClientNote) {
     setNotes((prevNotes) => [...prevNotes, newNote]);
   }
 
@@ -47,7 +47,6 @@ export function NotesProvider({
       value={{
         noteCollection: notes,
         updateNote,
-        addNote,
         loadNotes,
       }}>
       {children}
