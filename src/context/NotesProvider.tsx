@@ -13,6 +13,7 @@ export function NotesProvider({
   initialNotes: Note[];
 }) {
   const [notes, setNotes] = useState<ClientNote[]>(initialNotes);
+  const hasDraft = notes.some((note) => note.isDraft);
 
   function addNote(newNote: ClientNote) {
     setNotes((prevNotes) => [...prevNotes, newNote]);
