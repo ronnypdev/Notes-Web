@@ -15,6 +15,30 @@ export function NotesProvider({
   const [notes, setNotes] = useState<ClientNote[]>(initialNotes);
   const hasDraft = notes.some((note) => note.isDraft);
 
+  async function loadNotes() {
+    try {
+      const result = await fetchNotes();
+      if (result.success) {
+        setNotes(result.note);
+      } else {
+        console.log(result.message);
+      }
+    } catch (error) {
+      console.error('Error could not read the note:', error);
+    }
+  }
+
+  function updateNote(noteId: string, updates: Partial<Note>) {
+    setNotes((prev) =>
+      prev.map((note) => {
+        if (note.id === noteId) {
+          return { ...note, ...updates };
+        }
+        return note;
+      }),
+    );
+  }
+
   //  the one-draft-at-a-time guard lives here
   function createDraft(): string | null {
     if (hasDraft) return null; // enforce a single unsaved draft
@@ -48,36 +72,15 @@ export function NotesProvider({
     );
   }
 
-  async function loadNotes() {
-    try {
-      const result = await fetchNotes();
-      if (result.success) {
-        setNotes(result.note);
-      } else {
-        console.log(result.message);
-      }
-    } catch (error) {
-      console.error('Error could not read the note:', error);
-    }
-  }
-
-  function updateNote(noteId: string, updates: Partial<Note>) {
-    setNotes((prev) =>
-      prev.map((note) => {
-        if (note.id === noteId) {
-          return { ...note, ...updates };
-        }
-        return note;
-      }),
-    );
-  }
-
   return (
     <NotesContext
       value={{
         noteCollection: notes,
         updateNote,
         loadNotes,
+        createDraft,
+        cancelDraft,
+        markNoteSaved,
       }}>
       {children}
     </NotesContext>
