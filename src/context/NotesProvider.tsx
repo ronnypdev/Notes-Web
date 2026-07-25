@@ -46,6 +46,7 @@ export function NotesProvider({
     const draft: ClientNote = {
       id: crypto.randomUUID(),
       title: '',
+      tags: [],
       content: '',
       archive: false,
       lastEdited: null,
@@ -81,6 +82,7 @@ export function NotesProvider({
         createDraft,
         cancelDraft,
         markNoteSaved,
+        hasDraft,
       }}>
       {children}
     </NotesContext>
