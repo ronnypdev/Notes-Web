@@ -29,7 +29,8 @@ export default function NotesList({ basePath }: NotesListProps) {
       {basePath !== 'archivenotes' && basePath !== 'search' && (
         <Button
           className="w-full mb-200 hidden lg:block"
-          onClick={() => insertItem()}>
+          onClick={insertItem}
+          disabled={hasDraft}>
           + Create New Note
         </Button>
       )}
@@ -45,7 +46,7 @@ export default function NotesList({ basePath }: NotesListProps) {
       ))}
 
       {basePath !== 'archivenotes' && basePath !== 'search' && (
-        <Button variant="mobileCreate" onClick={() => insertItem()}>
+        <Button variant="mobileCreate" onClick={insertItem} disabled={hasDraft}>
           <PlusIcon className="size-6" />
         </Button>
       )}
