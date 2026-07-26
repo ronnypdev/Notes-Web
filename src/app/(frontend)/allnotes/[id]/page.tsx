@@ -45,6 +45,13 @@ export default function NoteItemDetails() {
     });
   }
 
+  function handleCancel() {
+    if (currentNote.isDraft) {
+      cancelDraft(currentNote.id);
+      router.push('/allnotes');
+    }
+  }
+
   return (
     <>
       <section className="h-full flex flex-col py-5 px-6">
@@ -59,10 +66,18 @@ export default function NoteItemDetails() {
             <div className="mobile-properties-controls flex items-center gap-200">
               <DeleteIcon className="size-5 text-neutral-600 cursor-pointer" />
               <ArchiveIcon className="size-5 text-neutral-600 cursor-pointer" />
-              <Button variant="link" className="text-neutral-600 p-0">
+              <Button
+                variant="link"
+                className="text-neutral-600 p-0"
+                onClick={handleCancel}
+                disabled={isPending}>
                 Cancel
               </Button>
-              <Button variant="link" className="p-0">
+              <Button
+                variant="link"
+                className="p-0"
+                onClick={handleSave}
+                disabled={isPending}>
                 Save
               </Button>
             </div>
@@ -142,8 +157,15 @@ export default function NoteItemDetails() {
           </FieldSet>
           <Separator className="my-4" />
           <div className="actions hidden lg:flex items-center gap-2">
-            <Button>Save</Button>
-            <Button variant="secondary">Cancel</Button>
+            <Button onClick={handleSave} disabled={isPending}>
+              Save
+            </Button>
+            <Button
+              variant="secondary"
+              onClick={handleCancel}
+              disabled={isPending}>
+              Cancel
+            </Button>
           </div>
         </form>
       </section>
