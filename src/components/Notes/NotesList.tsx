@@ -1,22 +1,20 @@
 'use client';
 
-import { useContext, useTransition } from 'react';
+import { useContext } from 'react';
 import { NotesContext } from '@/context/NotesContext';
 
-import { createNote } from '@/lib/utilities/notes-actions';
+import { useRouter } from 'next/navigation';
 
 import NoteItem from '@/components/NoteItem/NoteItem';
 import { Button } from '@/components/ui/button';
 import { PlusIcon } from '@/components/icons';
-import { Spinner } from '@/components/ui/spinner';
-import { toast } from 'sonner';
+
 interface NotesListProps {
   basePath: string;
 }
 
 export default function NotesList({ basePath }: NotesListProps) {
-  const { noteCollection, addNote } = useContext(NotesContext);
-  const [isPending, startTransition] = useTransition();
+  const { noteCollection } = useContext(NotesContext);
 
   function insertItem() {
     startTransition(async () => {
