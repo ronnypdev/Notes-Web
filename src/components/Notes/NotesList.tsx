@@ -14,33 +14,18 @@ interface NotesListProps {
 }
 
 export default function NotesList({ basePath }: NotesListProps) {
-  const { noteCollection } = useContext(NotesContext);
+  const { noteCollection, createDraft, hasDraft } = useContext(NotesContext);
+  const router = useRouter();
 
-  function insertItem() {
-    startTransition(async () => {
-      const result = await createNote({});
-      if (result.success) {
-        addNote(result.note[0]);
-        toast.success('Congratulations! You successfully created a new note', {
-          position: 'bottom-right',
-        });
-      } else {
-        toast.error('Error: Failed to create note', {
-          position: 'bottom-right',
-        });
-        console.log(result.message);
-      }
-    });
-  }
+  function insertItem() {}
 
   return (
     <>
       {basePath !== 'archivenotes' && basePath !== 'search' && (
         <Button
           className="w-full mb-200 hidden lg:block"
-          onClick={() => insertItem()}
-          disabled={isPending}>
-          {isPending ? <Spinner /> : '+ Create New Note'}
+          onClick={() => insertItem()}>
+          + Create New Note
         </Button>
       )}
 
@@ -55,11 +40,8 @@ export default function NotesList({ basePath }: NotesListProps) {
       ))}
 
       {basePath !== 'archivenotes' && basePath !== 'search' && (
-        <Button
-          variant="mobileCreate"
-          onClick={() => insertItem()}
-          disabled={isPending}>
-          {isPending ? <Spinner /> : <PlusIcon className="size-6" />}
+        <Button variant="mobileCreate" onClick={() => insertItem()}>
+          <PlusIcon className="size-6" />
         </Button>
       )}
     </>
