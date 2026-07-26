@@ -24,14 +24,26 @@ import Link from 'next/link';
 export default function NoteItemDetails() {
   const { noteCollection, updateNote, cancelDraft, markNoteSaved } =
     useContext(NotesContext);
-  const router = useRouter();
   const [isPending, startTransition] = useTransition();
-
+  const router = useRouter();
   const params = useParams();
-
   const currentNote = noteCollection.find((note) => note.id === params.id);
 
   if (!currentNote) return null;
+
+  function handleSave() {
+    startTransition(async () => {
+      const { isDraft, ...row } = currentNote; // strip the client-only flag
+      const result = await saveNote(row);
+      if (result.success) {
+        markNoteSaved(row.id, result.note[0]);
+        toast.success('Note saved', { position: 'bottom-right' });
+      } else {
+        toast.error('Failed to save note', { position: 'bottom-right' });
+        // draft stays in place so the user can retry
+      }
+    });
+  }
 
   return (
     <>
