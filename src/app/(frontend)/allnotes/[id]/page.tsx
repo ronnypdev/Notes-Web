@@ -1,11 +1,12 @@
 'use client';
 
-import { useContext } from 'react';
+import { useContext, useTransition } from 'react';
 import { NotesContext } from '@/context/NotesContext';
 
-import { useParams } from 'next/navigation';
-// import { useForm, Controller } from 'react-hook-form';
-// import { Tag, TagInput } from 'emblor';
+import { saveNote } from '@/lib/utilities/notes-actions';
+
+import { toast } from 'sonner';
+import { useParams, useRouter } from 'next/navigation';
 import { FieldSet, Field, FieldGroup, FieldLabel } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -21,7 +22,11 @@ import { Separator } from '@/components/ui/separator';
 import Link from 'next/link';
 
 export default function NoteItemDetails() {
-  const { noteCollection, updateNote } = useContext(NotesContext);
+  const { noteCollection, updateNote, cancelDraft, markNoteSaved } =
+    useContext(NotesContext);
+  const router = useRouter();
+  const [isPending, startTransition] = useTransition();
+
   const params = useParams();
 
   const currentNote = noteCollection.find((note) => note.id === params.id);
