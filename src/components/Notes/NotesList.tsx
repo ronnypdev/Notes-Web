@@ -17,7 +17,12 @@ export default function NotesList({ basePath }: NotesListProps) {
   const { noteCollection, createDraft, hasDraft } = useContext(NotesContext);
   const router = useRouter();
 
-  function insertItem() {}
+  function insertItem() {
+    const newDraftId = createDraft();
+    if (newDraftId) {
+      router.push(`/allnotes/${newDraftId}`);
+    }
+  }
 
   return (
     <>
