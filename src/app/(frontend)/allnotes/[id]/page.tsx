@@ -120,6 +120,10 @@ export default function NoteItemDetails() {
                   id="noteContent"
                   className="text-neutral-950 flex-1 min-h-0 border-none resize-none outline-none focus-visible:ring-0 focus-visible:ring-offset-0 shadow-none field-sizing-fixed"
                   placeholder="Start typing your note here…"
+                  value={currentNote.content ?? ''}
+                  onChange={(e) =>
+                    updateNote(currentNote.id, { content: e.target.value })
+                  }
                 />
               </Field>
             </FieldGroup>
