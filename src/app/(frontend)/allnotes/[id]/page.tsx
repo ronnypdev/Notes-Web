@@ -1,12 +1,12 @@
 'use client';
 
-import { useContext } from 'react';
+import { useContext, useTransition } from 'react';
 import { NotesContext } from '@/context/NotesContext';
-import { deleteNote } from '@/lib/utilities/notes-actions';
 
-import { useParams } from 'next/navigation';
-// import { useForm, Controller } from 'react-hook-form';
-// import { Tag, TagInput } from 'emblor';
+import { saveNote } from '@/lib/utilities/notes-actions';
+
+import { toast } from 'sonner';
+import { useParams, useRouter } from 'next/navigation';
 import { FieldSet, Field, FieldGroup, FieldLabel } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -22,12 +22,40 @@ import { Separator } from '@/components/ui/separator';
 import Link from 'next/link';
 
 export default function NoteItemDetails() {
-  const { noteCollection, updateNote } = useContext(NotesContext);
+  const { noteCollection, updateNote, cancelDraft, markNoteSaved } =
+    useContext(NotesContext);
+  const [isPending, startTransition] = useTransition();
+  const router = useRouter();
   const params = useParams();
-
   const currentNote = noteCollection.find((note) => note.id === params.id);
 
   if (!currentNote) return null;
+
+  const handleSave = () => {
+    startTransition(async () => {
+      const result = await saveNote({
+        id: currentNote.id,
+        title: currentNote.title,
+        content: currentNote.content,
+        tags: currentNote.tags,
+        archive: currentNote.archive,
+      });
+      if (result.success) {
+        markNoteSaved(currentNote.id, result.note[0]);
+        toast.success('Note saved', { position: 'bottom-right' });
+      } else {
+        toast.error('Failed to save note', { position: 'bottom-right' });
+        // draft stays in place so the user can retry
+      }
+    });
+  };
+
+  const handleCancel = () => {
+    if (currentNote.isDraft) {
+      cancelDraft(currentNote.id);
+      router.push('/allnotes');
+    }
+  };
 
   return (
     <>
@@ -43,10 +71,20 @@ export default function NoteItemDetails() {
             <div className="mobile-properties-controls flex items-center gap-200">
               <DeleteIcon className="size-5 text-neutral-600 cursor-pointer" />
               <ArchiveIcon className="size-5 text-neutral-600 cursor-pointer" />
-              <Button variant="link" className="text-neutral-600 p-0">
+              <Button
+                variant="link"
+                className="text-neutral-600 p-0"
+                onClick={handleCancel}
+                disabled={isPending}
+                type="button">
                 Cancel
               </Button>
-              <Button variant="link" className="p-0">
+              <Button
+                variant="link"
+                className="p-0"
+                onClick={handleSave}
+                disabled={isPending}
+                type="button">
                 Save
               </Button>
             </div>
@@ -54,7 +92,7 @@ export default function NoteItemDetails() {
           <Separator className="block lg:hidden" />
         </header>
 
-        <form className="flex-1 min-h-0 flex flex-col" action="/">
+        <form className="flex-1 min-h-0 flex flex-col">
           <FieldSet className="flex-1 min-h-0">
             <FieldGroup className="properties flex flex-col gap-4 items-start">
               <Field>
@@ -116,14 +154,26 @@ export default function NoteItemDetails() {
                   id="noteContent"
                   className="text-neutral-950 flex-1 min-h-0 border-none resize-none outline-none focus-visible:ring-0 focus-visible:ring-offset-0 shadow-none field-sizing-fixed"
                   placeholder="Start typing your note here…"
+                  value={currentNote.content ?? ''}
+                  onChange={(e) =>
+                    updateNote(currentNote.id, { content: e.target.value })
+                  }
                 />
               </Field>
             </FieldGroup>
           </FieldSet>
           <Separator className="my-4" />
           <div className="actions hidden lg:flex items-center gap-2">
-            <Button>Save</Button>
-            <Button variant="secondary">Cancel</Button>
+            <Button onClick={handleSave} disabled={isPending} type="button">
+              Save
+            </Button>
+            <Button
+              variant="secondary"
+              onClick={handleCancel}
+              disabled={isPending}
+              type="button">
+              Cancel
+            </Button>
           </div>
         </form>
       </section>

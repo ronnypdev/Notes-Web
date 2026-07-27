@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { NotesContext } from './NotesContext';
-import { Note } from '@/types';
+import { Note, ClientNote } from '@/types';
 import { fetchNotes } from '@/lib/utilities/notes-actions';
 
 export function NotesProvider({
@@ -12,11 +12,8 @@ export function NotesProvider({
   children: React.ReactNode;
   initialNotes: Note[];
 }) {
-  const [notes, setNotes] = useState<Note[]>(initialNotes);
-
-  function addNote(newNote: Note) {
-    setNotes((prevNotes) => [...prevNotes, newNote]);
-  }
+  const [notes, setNotes] = useState<ClientNote[]>(initialNotes);
+  const hasDraft = notes.some((note) => note.isDraft);
 
   async function loadNotes() {
     try {
@@ -42,13 +39,50 @@ export function NotesProvider({
     );
   }
 
+  //  the one-draft-at-a-time guard lives here
+  function createDraft(): string | null {
+    if (hasDraft) return null; // enforce a single unsaved draft
+
+    const draft: ClientNote = {
+      id: crypto.randomUUID(),
+      title: '',
+      tags: [],
+      content: '',
+      archive: false,
+      lastEdited: null,
+      createdAt: null,
+      userId: '', // real userId is set server-side on save
+      isDraft: true,
+    };
+
+    setNotes((prevNotes) => [draft, ...prevNotes]);
+    return draft.id;
+  }
+
+  // Cancels draft and removes it from the front end only
+  function cancelDraft(noteId: string) {
+    setNotes((prevNotes) => prevNotes.filter((note) => note.id !== noteId));
+  }
+
+  //  swap the in-memory draft for the persisted server row:
+  function markNoteSaved(noteId: string, saved: Note) {
+    setNotes((prev) =>
+      prev.map((note) =>
+        note.id === noteId ? { ...saved, isDraft: false } : note,
+      ),
+    );
+  }
+
   return (
     <NotesContext
       value={{
         noteCollection: notes,
         updateNote,
-        addNote,
         loadNotes,
+        createDraft,
+        cancelDraft,
+        markNoteSaved,
+        hasDraft,
       }}>
       {children}
     </NotesContext>

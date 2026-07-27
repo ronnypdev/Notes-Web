@@ -8,14 +8,9 @@ import { NotesResult } from '@/types';
 
 type ServerItemRow = typeof noteTable.$inferInsert;
 
-type CallerItemInput = Omit<ServerItemRow, 'id' | 'userId'>;
+type SaveItemInput = Omit<ServerItemRow, 'userId'>; // includes the client-generated id
 
-export async function createNote(
-  noteItem: CallerItemInput,
-): Promise<NotesResult> {
-  // Generate unique id for each note
-  const uniqueNoteId = crypto.randomUUID();
-
+export async function saveNote(noteItem: SaveItemInput): Promise<NotesResult> {
   try {
     // prevents client from creating a note under someone else's account
     const session = await getServerSessions();
@@ -27,15 +22,18 @@ export async function createNote(
     const authUserId = session.user.id;
     const newNoteItem = {
       ...noteItem,
-      id: uniqueNoteId,
       userId: authUserId,
+      title: (noteItem.title ?? '').trim().slice(0, 255), // normalize + respect varchar(255)
     };
 
-    const newNote = await db.insert(noteTable).values(newNoteItem).returning();
+    const savedNote = await db
+      .insert(noteTable)
+      .values(newNoteItem)
+      .returning();
     return {
       success: true,
-      note: newNote,
-      message: 'Note successfully created',
+      note: savedNote,
+      message: 'Note successfully saved',
     };
   } catch (error) {
     console.error('Error no note created:', error);
