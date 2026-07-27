@@ -31,26 +31,31 @@ export default function NoteItemDetails() {
 
   if (!currentNote) return null;
 
-  function handleSave() {
+  const handleSave = () => {
     startTransition(async () => {
-      const { isDraft, ...row } = currentNote; // strip the client-only flag
-      const result = await saveNote(row);
+      const result = await saveNote({
+        id: currentNote.id,
+        title: currentNote.title,
+        content: currentNote.content,
+        tags: currentNote.tags,
+        archive: currentNote.archive,
+      });
       if (result.success) {
-        markNoteSaved(row.id, result.note[0]);
+        markNoteSaved(currentNote.id, result.note[0]);
         toast.success('Note saved', { position: 'bottom-right' });
       } else {
         toast.error('Failed to save note', { position: 'bottom-right' });
         // draft stays in place so the user can retry
       }
     });
-  }
+  };
 
-  function handleCancel() {
+  const handleCancel = () => {
     if (currentNote.isDraft) {
       cancelDraft(currentNote.id);
       router.push('/allnotes');
     }
-  }
+  };
 
   return (
     <>
@@ -70,14 +75,16 @@ export default function NoteItemDetails() {
                 variant="link"
                 className="text-neutral-600 p-0"
                 onClick={handleCancel}
-                disabled={isPending}>
+                disabled={isPending}
+                type="button">
                 Cancel
               </Button>
               <Button
                 variant="link"
                 className="p-0"
                 onClick={handleSave}
-                disabled={isPending}>
+                disabled={isPending}
+                type="button">
                 Save
               </Button>
             </div>
@@ -85,7 +92,7 @@ export default function NoteItemDetails() {
           <Separator className="block lg:hidden" />
         </header>
 
-        <form className="flex-1 min-h-0 flex flex-col" action="/">
+        <form className="flex-1 min-h-0 flex flex-col">
           <FieldSet className="flex-1 min-h-0">
             <FieldGroup className="properties flex flex-col gap-4 items-start">
               <Field>
@@ -157,13 +164,14 @@ export default function NoteItemDetails() {
           </FieldSet>
           <Separator className="my-4" />
           <div className="actions hidden lg:flex items-center gap-2">
-            <Button onClick={handleSave} disabled={isPending}>
+            <Button onClick={handleSave} disabled={isPending} type="button">
               Save
             </Button>
             <Button
               variant="secondary"
               onClick={handleCancel}
-              disabled={isPending}>
+              disabled={isPending}
+              type="button">
               Cancel
             </Button>
           </div>
