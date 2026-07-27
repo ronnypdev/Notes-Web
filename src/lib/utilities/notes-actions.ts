@@ -63,6 +63,8 @@ export async function fetchNotes(): Promise<NotesResult> {
   }
 }
 
-export async function updateNote() {}
+export async function updateNote(
+  noteItem: SaveItemInput,
+): Promise<NotesResult> {}
 
 export async function deleteNote() {}
