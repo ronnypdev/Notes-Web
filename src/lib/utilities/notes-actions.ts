@@ -64,7 +64,37 @@ export async function fetchNotes(): Promise<NotesResult> {
 }
 
 export async function updateNote(
-  noteItem: SaveItemInput,
-): Promise<NotesResult> {}
+  updateItem: SaveItemInput,
+): Promise<NotesResult> {
+  try {
+    // Ensure that the correct note is being updated
+    const session = await getServerSessions();
+
+    if (session === null) {
+      return { success: false, message: 'No active session at the moment' };
+    }
+
+    const updatedItem = {
+      ...updateItem,
+      title: noteTable.title,
+      content: noteTable.content,
+    };
+
+    const updatedNote = await db
+      .update(noteTable)
+      .set(updatedItem)
+      .where(eq(noteTable.id, session.user.id))
+      .returning();
+
+    return {
+      success: true,
+      note: updatedNote,
+      message: 'Note successfully saved',
+    };
+  } catch (error) {
+    console.error('Error no note read:', error);
+    return { success: false, message: 'Can not read note at the moment' };
+  }
+}
 
 export async function deleteNote() {}
