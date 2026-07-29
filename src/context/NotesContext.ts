@@ -3,7 +3,7 @@ import { NoteContextValue } from '@/types';
 
 export const NotesContext = createContext<NoteContextValue>({
   noteCollection: [],
-  updateNote: () => {},
+  changeNote: () => {},
   loadNotes: async () => {},
   createDraft: () => null,
   cancelDraft: () => {},

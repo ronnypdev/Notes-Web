@@ -64,6 +64,7 @@ export async function fetchNotes(): Promise<NotesResult> {
 }
 
 export async function updateNote(
+  noteId: string,
   updateItem: SaveItemInput,
 ): Promise<NotesResult> {
   try {
@@ -76,6 +77,7 @@ export async function updateNote(
 
     const updatedItem = {
       ...updateItem,
+      id: noteId,
       title: noteTable.title,
       content: noteTable.content,
     };
