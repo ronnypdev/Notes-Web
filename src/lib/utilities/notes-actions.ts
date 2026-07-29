@@ -65,7 +65,7 @@ export async function fetchNotes(): Promise<NotesResult> {
 
 export async function updateNote(
   noteId: string,
-  updateItem: SaveItemInput,
+  updateItem: Partial<SaveItemInput>,
 ): Promise<NotesResult> {
   try {
     // Ensure that the correct note is being updated

@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { NotesContext } from './NotesContext';
 import { Note, ClientNote } from '@/types';
-import { fetchNotes } from '@/lib/utilities/notes-actions';
+import { fetchNotes, updateNote } from '@/lib/utilities/notes-actions';
 
 export function NotesProvider({
   children,
@@ -37,6 +37,7 @@ export function NotesProvider({
         return note;
       }),
     );
+    updateNote(noteId, updates);
   }
 
   //  the one-draft-at-a-time guard lives here

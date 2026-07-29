@@ -22,7 +22,7 @@ import { Separator } from '@/components/ui/separator';
 import Link from 'next/link';
 
 export default function NoteItemDetails() {
-  const { noteCollection, updateNote, cancelDraft, markNoteSaved } =
+  const { noteCollection, changeNote, cancelDraft, markNoteSaved } =
     useContext(NotesContext);
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
@@ -42,6 +42,10 @@ export default function NoteItemDetails() {
       });
       if (result.success) {
         markNoteSaved(currentNote.id, result.note[0]);
+        changeNote(currentNote.id, {
+          title: currentNote.title,
+          content: currentNote.content,
+        });
         toast.success('Note saved', { position: 'bottom-right' });
       } else {
         toast.error('Failed to save note', { position: 'bottom-right' });
@@ -102,7 +106,7 @@ export default function NoteItemDetails() {
                   type="text"
                   value={currentNote?.title ?? ''}
                   onChange={(e) =>
-                    updateNote(currentNote.id, {
+                    changeNote(currentNote.id, {
                       title: e.target.value,
                     })
                   }
@@ -156,7 +160,7 @@ export default function NoteItemDetails() {
                   placeholder="Start typing your note here…"
                   value={currentNote.content ?? ''}
                   onChange={(e) =>
-                    updateNote(currentNote.id, { content: e.target.value })
+                    changeNote(currentNote.id, { content: e.target.value })
                   }
                 />
               </Field>
