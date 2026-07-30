@@ -1,6 +1,6 @@
 'use server';
 
-import { eq, desc } from 'drizzle-orm';
+import { eq, desc, and, sql } from 'drizzle-orm';
 import { db } from '@/db';
 import { noteTable } from '@/db/schema/auth-schema';
 import { getServerSessions } from '../usersessions';
@@ -75,18 +75,17 @@ export async function updateNote(
       return { success: false, message: 'No active session at the moment' };
     }
 
-    const updatedItem = {
-      ...updateItem,
-      id: noteId,
-      title: noteTable.title,
-      content: noteTable.content,
-    };
-
     const updatedNote = await db
       .update(noteTable)
-      .set(updatedItem)
-      .where(eq(noteTable.id, session.user.id))
+      .set({ ...updateItem, lastEdited: sql`CURRENT_DATE` })
+      .where(
+        and(eq(noteTable.id, noteId), eq(noteTable.userId, session.user.id)),
+      )
       .returning();
+
+    if (updatedNote.length === 0) {
+      return { success: false, message: 'Note not found or not yours' };
+    }
 
     return {
       success: true,
@@ -95,7 +94,10 @@ export async function updateNote(
     };
   } catch (error) {
     console.error('Error no note read:', error);
-    return { success: false, message: 'Can not read note at the moment' };
+    return {
+      success: false,
+      message: 'Can not save note changes at the moment',
+    };
   }
 }
 

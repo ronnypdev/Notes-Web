@@ -3,7 +3,7 @@
 import { useContext, useTransition } from 'react';
 import { NotesContext } from '@/context/NotesContext';
 
-import { saveNote } from '@/lib/utilities/notes-actions';
+import { saveNote, updateNote } from '@/lib/utilities/notes-actions';
 
 import { toast } from 'sonner';
 import { useParams, useRouter } from 'next/navigation';
@@ -33,19 +33,21 @@ export default function NoteItemDetails() {
 
   const handleSave = () => {
     startTransition(async () => {
-      const result = await saveNote({
-        id: currentNote.id,
-        title: currentNote.title,
-        content: currentNote.content,
-        tags: currentNote.tags,
-        archive: currentNote.archive,
-      });
+      const result = currentNote.isDraft
+        ? await saveNote({
+            id: currentNote.id,
+            title: currentNote.title,
+            content: currentNote.content,
+            tags: currentNote.tags,
+            archive: currentNote.archive,
+          })
+        : await updateNote(currentNote.id, {
+            // UPDATE
+            title: currentNote.title,
+            content: currentNote.content,
+          });
       if (result.success) {
         markNoteSaved(currentNote.id, result.note[0]);
-        changeNote(currentNote.id, {
-          title: currentNote.title,
-          content: currentNote.content,
-        });
         toast.success('Note saved', { position: 'bottom-right' });
       } else {
         toast.error('Failed to save note', { position: 'bottom-right' });
