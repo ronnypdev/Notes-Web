@@ -93,10 +93,10 @@ export async function updateNote(
       message: 'Note successfully saved',
     };
   } catch (error) {
-    console.error('Error no note read:', error);
+    console.error('Error note not updated:', error);
     return {
       success: false,
-      message: 'Can not save note changes at the moment',
+      message: 'Can not update note at the moment',
     };
   }
 }
