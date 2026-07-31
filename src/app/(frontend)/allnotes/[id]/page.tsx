@@ -57,6 +57,7 @@ export default function NoteItemDetails() {
           });
       if (result.success) {
         markNoteSaved(currentNote.id, result.note[0]);
+        originalNoteRef.current = { ...result.note[0], isDraft: false }; // ← new baseline
         toast.success('Note saved', { position: 'bottom-right' });
       } else {
         toast.error('Failed to save note', { position: 'bottom-right' });
