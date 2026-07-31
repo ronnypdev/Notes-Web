@@ -70,6 +70,9 @@ export default function NoteItemDetails() {
     if (currentNote.isDraft) {
       cancelDraft(currentNote.id);
       router.push('/allnotes');
+    } else if (originalNoteRef.current) {
+      changeNote(currentNote.id, originalNoteRef.current); // restore saved values
+      router.push('/allnotes');
     }
   };
 
