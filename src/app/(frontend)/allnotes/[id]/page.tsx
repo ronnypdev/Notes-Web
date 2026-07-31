@@ -1,9 +1,11 @@
 'use client';
 
-import { useContext, useTransition } from 'react';
+import { useContext, useTransition, useRef } from 'react';
 import { NotesContext } from '@/context/NotesContext';
 
 import { saveNote, updateNote } from '@/lib/utilities/notes-actions';
+
+import { ClientNote } from '@/types';
 
 import { toast } from 'sonner';
 import { useParams, useRouter } from 'next/navigation';
