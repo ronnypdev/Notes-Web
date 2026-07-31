@@ -24,6 +24,7 @@ import { Separator } from '@/components/ui/separator';
 import Link from 'next/link';
 
 export default function NoteItemDetails() {
+  const originalNoteRef = useRef<ClientNote | null>(null);
   const { noteCollection, changeNote, cancelDraft, markNoteSaved } =
     useContext(NotesContext);
   const [isPending, startTransition] = useTransition();
@@ -32,6 +33,12 @@ export default function NoteItemDetails() {
   const currentNote = noteCollection.find((note) => note.id === params.id);
 
   if (!currentNote) return null;
+
+  // Capture the saved snapshot once per note. Keyed on id, so typing
+  // (same id, new object each keystroke) never overwrites the baseline.
+  if (originalNoteRef.current?.id !== currentNote.id) {
+    originalNoteRef.current = currentNote;
+  }
 
   const handleSave = () => {
     startTransition(async () => {
