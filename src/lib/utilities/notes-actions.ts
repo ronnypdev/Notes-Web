@@ -101,16 +101,27 @@ export async function updateNote(
   }
 }
 
-export async function deleteNote(
-  noteItem: SaveItemInput,
-): Promise<NotesResult> {
+export async function deleteNote(noteId: string): Promise<NotesResult> {
   try {
-    // Ensure that the correct note is being updated
+    // Ensure that the correct note is being deleted by the correct user
     const session = await getServerSessions();
 
     if (session === null) {
       return { success: false, message: 'No active session at the moment' };
     }
+
+    const deletedNote = await db
+      .delete(noteTable)
+      .where(
+        and(eq(noteTable.id, noteId), eq(noteTable.userId, session.user.id)),
+      )
+      .returning();
+
+    return {
+      success: true,
+      note: deletedNote,
+      message: 'Note successfully saved',
+    };
   } catch (error) {
     console.error('Error note not updated:', error);
     return {
