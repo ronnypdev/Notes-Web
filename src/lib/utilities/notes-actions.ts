@@ -103,4 +103,19 @@ export async function updateNote(
 
 export async function deleteNote(
   noteItem: SaveItemInput,
-): Promise<NotesResult> {}
+): Promise<NotesResult> {
+  try {
+    // Ensure that the correct note is being updated
+    const session = await getServerSessions();
+
+    if (session === null) {
+      return { success: false, message: 'No active session at the moment' };
+    }
+  } catch (error) {
+    console.error('Error note not updated:', error);
+    return {
+      success: false,
+      message: 'Can not update note at the moment',
+    };
+  }
+}
