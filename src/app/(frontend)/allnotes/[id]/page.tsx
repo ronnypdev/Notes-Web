@@ -1,9 +1,11 @@
 'use client';
 
-import { useContext, useTransition } from 'react';
+import { useContext, useTransition, useRef } from 'react';
 import { NotesContext } from '@/context/NotesContext';
 
-import { saveNote } from '@/lib/utilities/notes-actions';
+import { saveNote, updateNote } from '@/lib/utilities/notes-actions';
+
+import { ClientNote } from '@/types';
 
 import { toast } from 'sonner';
 import { useParams, useRouter } from 'next/navigation';
@@ -22,7 +24,8 @@ import { Separator } from '@/components/ui/separator';
 import Link from 'next/link';
 
 export default function NoteItemDetails() {
-  const { noteCollection, updateNote, cancelDraft, markNoteSaved } =
+  const originalNoteRef = useRef<ClientNote | null>(null);
+  const { noteCollection, changeNote, cancelDraft, markNoteSaved } =
     useContext(NotesContext);
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
@@ -31,17 +34,30 @@ export default function NoteItemDetails() {
 
   if (!currentNote) return null;
 
+  // Capture the saved snapshot once per note. Keyed on id, so typing
+  // (same id, new object each keystroke) never overwrites the baseline.
+  if (originalNoteRef.current?.id !== currentNote.id) {
+    originalNoteRef.current = currentNote;
+  }
+
   const handleSave = () => {
     startTransition(async () => {
-      const result = await saveNote({
-        id: currentNote.id,
-        title: currentNote.title,
-        content: currentNote.content,
-        tags: currentNote.tags,
-        archive: currentNote.archive,
-      });
+      const result = currentNote.isDraft
+        ? await saveNote({
+            id: currentNote.id,
+            title: currentNote.title,
+            content: currentNote.content,
+            tags: currentNote.tags,
+            archive: currentNote.archive,
+          })
+        : await updateNote(currentNote.id, {
+            // UPDATE
+            title: currentNote.title,
+            content: currentNote.content,
+          });
       if (result.success) {
         markNoteSaved(currentNote.id, result.note[0]);
+        originalNoteRef.current = { ...result.note[0], isDraft: false }; // ← new baseline
         toast.success('Note saved', { position: 'bottom-right' });
       } else {
         toast.error('Failed to save note', { position: 'bottom-right' });
@@ -53,6 +69,9 @@ export default function NoteItemDetails() {
   const handleCancel = () => {
     if (currentNote.isDraft) {
       cancelDraft(currentNote.id);
+      router.push('/allnotes');
+    } else if (originalNoteRef.current) {
+      changeNote(currentNote.id, originalNoteRef.current); // restore saved values
       router.push('/allnotes');
     }
   };
@@ -102,7 +121,7 @@ export default function NoteItemDetails() {
                   type="text"
                   value={currentNote?.title ?? ''}
                   onChange={(e) =>
-                    updateNote(currentNote.id, {
+                    changeNote(currentNote.id, {
                       title: e.target.value,
                     })
                   }
@@ -156,7 +175,7 @@ export default function NoteItemDetails() {
                   placeholder="Start typing your note here…"
                   value={currentNote.content ?? ''}
                   onChange={(e) =>
-                    updateNote(currentNote.id, { content: e.target.value })
+                    changeNote(currentNote.id, { content: e.target.value })
                   }
                 />
               </Field>

@@ -1,6 +1,6 @@
 'use server';
 
-import { eq, desc } from 'drizzle-orm';
+import { eq, desc, and, sql } from 'drizzle-orm';
 import { db } from '@/db';
 import { noteTable } from '@/db/schema/auth-schema';
 import { getServerSessions } from '../usersessions';
@@ -63,6 +63,42 @@ export async function fetchNotes(): Promise<NotesResult> {
   }
 }
 
-export async function updateNote() {}
+export async function updateNote(
+  noteId: string,
+  updateItem: Partial<SaveItemInput>,
+): Promise<NotesResult> {
+  try {
+    // Ensure that the correct note is being updated
+    const session = await getServerSessions();
+
+    if (session === null) {
+      return { success: false, message: 'No active session at the moment' };
+    }
+
+    const updatedNote = await db
+      .update(noteTable)
+      .set({ ...updateItem, lastEdited: sql`CURRENT_DATE` })
+      .where(
+        and(eq(noteTable.id, noteId), eq(noteTable.userId, session.user.id)),
+      )
+      .returning();
+
+    if (updatedNote.length === 0) {
+      return { success: false, message: 'Note not found or not yours' };
+    }
+
+    return {
+      success: true,
+      note: updatedNote,
+      message: 'Note successfully saved',
+    };
+  } catch (error) {
+    console.error('Error note not updated:', error);
+    return {
+      success: false,
+      message: 'Can not update note at the moment',
+    };
+  }
+}
 
 export async function deleteNote() {}

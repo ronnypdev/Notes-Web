@@ -28,7 +28,7 @@ export function NotesProvider({
     }
   }
 
-  function updateNote(noteId: string, updates: Partial<Note>) {
+  function changeNote(noteId: string, updates: Partial<Note>) {
     setNotes((prev) =>
       prev.map((note) => {
         if (note.id === noteId) {
@@ -77,7 +77,7 @@ export function NotesProvider({
     <NotesContext
       value={{
         noteCollection: notes,
-        updateNote,
+        changeNote,
         loadNotes,
         createDraft,
         cancelDraft,

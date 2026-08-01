@@ -12,7 +12,7 @@ export type ClientNote = Note & { isDraft?: boolean };
 
 export interface NoteContextValue {
   noteCollection: ClientNote[];
-  updateNote: (noteId: string, note: Partial<Note>) => void;
+  changeNote: (noteId: string, note: Partial<Note>) => void;
   loadNotes: () => Promise<void>;
   createDraft: () => string | null; // returns the new draft id (null if a draft already exists)
   cancelDraft: (noteId: string) => void; // discard an unsaved draft (client-only)
