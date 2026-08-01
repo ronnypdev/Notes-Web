@@ -101,4 +101,6 @@ export async function updateNote(
   }
 }
 
-export async function deleteNote() {}
+export async function deleteNote(
+  noteItem: SaveItemInput,
+): Promise<NotesResult> {}
