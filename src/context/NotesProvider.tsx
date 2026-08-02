@@ -83,6 +83,7 @@ export function NotesProvider({
         cancelDraft,
         markNoteSaved,
         hasDraft,
+        removeNote,
       }}>
       {children}
     </NotesContext>
