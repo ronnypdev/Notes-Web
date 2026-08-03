@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { NotesContext } from './NotesContext';
 import { Note, ClientNote } from '@/types';
-import { fetchNotes } from '@/lib/utilities/notes-actions';
+import { fetchNotes, deleteNote } from '@/lib/utilities/notes-actions';
 
 export function NotesProvider({
   children,
@@ -73,8 +73,10 @@ export function NotesProvider({
     );
   }
 
+  // Remove active note
   function removeNote(noteId: string) {
     setNotes((prev) => prev.filter((note) => note.id !== noteId));
+    deleteNote(noteId);
   }
 
   return (
