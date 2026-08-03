@@ -73,6 +73,10 @@ export function NotesProvider({
     );
   }
 
+  function removeNote(noteId: string) {
+    setNotes((prev) => prev.filter((note) => note.id !== noteId));
+  }
+
   return (
     <NotesContext
       value={{
