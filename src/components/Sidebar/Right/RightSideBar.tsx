@@ -4,11 +4,14 @@ import { useContext } from 'react';
 import { NotesContext } from '@/context/NotesContext';
 import { Button } from '@/components/ui/button';
 import { ArchiveIcon, DeleteIcon, RefreshIcon } from '@/components/icons';
-import { usePathname } from 'next/navigation';
+import { usePathname, useParams, useRouter } from 'next/navigation';
 
 export default function RightSideBar() {
-  const { noteCollection, removeNote } = useContext(NotesContext);
+  const { removeNote } = useContext(NotesContext);
   const pathname = usePathname();
+  const params = useParams();
+  const router = useRouter();
+  const noteId = typeof params.id === 'string' ? params.id : undefined;
   const isArchiveRoute = pathname.startsWith('/archivenotes');
   const isSettingsRoute = pathname.startsWith('/settings');
 
@@ -33,7 +36,12 @@ export default function RightSideBar() {
         variant="outline"
         className="justify-start gap-2"
         size="lg"
-        onClick={() => removeNote(noteCollection.forEach((note) => note.id))}>
+        disabled={!noteId}
+        onClick={() => {
+          if (!noteId) return;
+          removeNote(noteId);
+          router.push(isArchiveRoute ? '/archivenotes' : '/allnotes');
+        }}>
         <DeleteIcon />
         Delete Note
       </Button>
