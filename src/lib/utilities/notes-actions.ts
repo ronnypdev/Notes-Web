@@ -124,13 +124,13 @@ export async function deleteNote(noteId: string): Promise<NotesResult> {
     return {
       success: true,
       note: deletedNote,
-      message: 'Note successfully saved',
+      message: 'Note successfully deleted',
     };
   } catch (error) {
-    console.error('Error note not updated:', error);
+    console.error('Error no note deleted:', error);
     return {
       success: false,
-      message: 'Can not update note at the moment',
+      message: 'Can not delete note at the moment',
     };
   }
 }
