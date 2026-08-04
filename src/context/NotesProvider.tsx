@@ -77,6 +77,8 @@ export function NotesProvider({
   // Remove active note
   async function removeNote(noteId: string) {
     const snapshot = notes; // remember
+    const target = notes.find((note) => note.id === noteId);
+
     setNotes((prev) => prev.filter((note) => note.id !== noteId)); // optimistic
 
     const result = await deleteNote(noteId);
@@ -86,6 +88,13 @@ export function NotesProvider({
       return;
     }
     toast.success('Note deleted', { position: 'bottom-right' });
+
+    if (!target) return;
+
+    if (target.isDraft) {
+      cancelDraft(noteId); // client-only, no network
+      return;
+    }
   }
 
   return (
