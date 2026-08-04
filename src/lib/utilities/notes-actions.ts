@@ -117,6 +117,10 @@ export async function deleteNote(noteId: string): Promise<NotesResult> {
       )
       .returning();
 
+    if (deletedNote.length === 0) {
+      return { success: false, message: 'Note not found or not yours' };
+    }
+
     return {
       success: true,
       note: deletedNote,
