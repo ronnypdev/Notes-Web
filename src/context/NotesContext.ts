@@ -9,5 +9,5 @@ export const NotesContext = createContext<NoteContextValue>({
   cancelDraft: () => {},
   markNoteSaved: () => {},
   hasDraft: false,
-  removeNote: () => {},
+  removeNote: async () => {},
 });

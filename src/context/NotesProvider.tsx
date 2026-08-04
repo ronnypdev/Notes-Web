@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { toast } from 'sonner';
 import { NotesContext } from './NotesContext';
 import { Note, ClientNote } from '@/types';
 import { fetchNotes, deleteNote } from '@/lib/utilities/notes-actions';
@@ -74,9 +75,17 @@ export function NotesProvider({
   }
 
   // Remove active note
-  function removeNote(noteId: string) {
-    setNotes((prev) => prev.filter((note) => note.id !== noteId));
-    deleteNote(noteId);
+  async function removeNote(noteId: string) {
+    const snapshot = notes; // remember
+    setNotes((prev) => prev.filter((note) => note.id !== noteId)); // optimistic
+
+    const result = await deleteNote(noteId);
+    if (!result.success) {
+      setNotes(snapshot); // roll back
+      toast.error(result.message, { position: 'bottom-right' });
+      return;
+    }
+    toast.success('Note deleted', { position: 'bottom-right' });
   }
 
   return (

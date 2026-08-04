@@ -18,5 +18,5 @@ export interface NoteContextValue {
   cancelDraft: (noteId: string) => void; // discard an unsaved draft (client-only)
   markNoteSaved: (noteId: string, saved: Note) => void; // swap draft → persisted row, isDraft:false  after saveNote succeeds
   hasDraft: boolean; // true while an unsaved draft exists (disables "Create New Note")
-  removeNote: (noteId: string) => void;
+  removeNote: (noteId: string) => Promise<void>;
 }
