@@ -87,9 +87,8 @@ export function NotesProvider({
     const snapshot = notes; // remember
     setNotes((prev) => prev.filter((note) => note.id !== noteId)); // optimistic
 
-    const result = await deleteNote(noteId);
-
     try {
+      const result = await deleteNote(noteId);
       if (!result.success) {
         setNotes(snapshot); // roll back
         toast.error(result.message, { position: 'bottom-right' });

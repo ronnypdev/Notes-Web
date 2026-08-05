@@ -50,12 +50,14 @@ export const Modal = ({ type, onConfirm, children }: ModalProps) => {
             </Button>
           </DialogClose>
 
-          <Button
-            type="button"
-            variant={type === 'delete' ? 'destructive' : 'default'}
-            onClick={onConfirm}>
-            {type === 'delete' ? 'Delete Note' : 'Archive Note'}
-          </Button>
+          <DialogClose asChild>
+            <Button
+              type="button"
+              variant={type === 'delete' ? 'destructive' : 'default'}
+              onClick={onConfirm}>
+              {type === 'delete' ? 'Delete Note' : 'Archive Note'}
+            </Button>
+          </DialogClose>
         </DialogFooter>
       </DialogContent>
     </Dialog>
