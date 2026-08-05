@@ -95,7 +95,12 @@ export default function NoteItemDetails() {
             </Link>
             <div className="mobile-properties-controls flex items-center gap-200">
               <Modal type="delete" onConfirm={handleDelete}>
-                <DeleteIcon className="size-5 text-neutral-600 cursor-pointer" />
+                <button
+                  type="button"
+                  aria-label="Delete note"
+                  className="cursor-pointer text-neutral-600">
+                  <DeleteIcon className="size-5" />
+                </button>
               </Modal>
               <ArchiveIcon className="size-5 text-neutral-600 cursor-pointer" />
               <Button
