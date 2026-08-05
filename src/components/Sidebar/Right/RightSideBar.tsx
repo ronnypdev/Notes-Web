@@ -5,6 +5,7 @@ import { NotesContext } from '@/context/NotesContext';
 import { Button } from '@/components/ui/button';
 import { ArchiveIcon, DeleteIcon, RefreshIcon } from '@/components/icons';
 import { usePathname, useParams, useRouter } from 'next/navigation';
+import { Modal } from '@/components/Modal/Modal';
 
 export default function RightSideBar() {
   const { removeNote } = useContext(NotesContext);
@@ -32,19 +33,22 @@ export default function RightSideBar() {
           Archive Note
         </Button>
       )}
-      <Button
-        variant="outline"
-        className="justify-start gap-2"
-        size="lg"
-        disabled={!noteId}
-        onClick={() => {
+      <Modal
+        type="delete"
+        onConfirm={() => {
           if (!noteId) return;
           removeNote(noteId);
           router.push(isArchiveRoute ? '/archivenotes' : '/allnotes');
         }}>
-        <DeleteIcon />
-        Delete Note
-      </Button>
+        <Button
+          variant="outline"
+          className="justify-start gap-2"
+          size="lg"
+          disabled={!noteId}>
+          <DeleteIcon />
+          Delete Note
+        </Button>
+      </Modal>
     </aside>
   );
 }
