@@ -13,13 +13,13 @@ export default async function FrontendLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const result = await fetchNotes();
-  const initialNotes = result.success ? result.note : [];
-
   const session = await getServerSessions();
   const user = session?.user;
 
   if (!user) return <UnauthenticatedPage />;
+
+  const result = await fetchNotes();
+  const initialNotes = result.success ? result.note : [];
 
   return (
     <NotesProvider initialNotes={initialNotes}>

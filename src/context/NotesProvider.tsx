@@ -76,24 +76,32 @@ export function NotesProvider({
 
   // Remove active note
   async function removeNote(noteId: string) {
-    const snapshot = notes; // remember
     const target = notes.find((note) => note.id === noteId);
-
-    setNotes((prev) => prev.filter((note) => note.id !== noteId)); // optimistic
-
-    const result = await deleteNote(noteId);
-    if (!result.success) {
-      setNotes(snapshot); // roll back
-      toast.error(result.message, { position: 'bottom-right' });
-      return;
-    }
-    toast.success('Note deleted', { position: 'bottom-right' });
-
     if (!target) return;
 
     if (target.isDraft) {
       cancelDraft(noteId); // client-only, no network
       return;
+    }
+
+    const snapshot = notes; // remember
+    setNotes((prev) => prev.filter((note) => note.id !== noteId)); // optimistic
+
+    const result = await deleteNote(noteId);
+
+    try {
+      if (!result.success) {
+        setNotes(snapshot); // roll back
+        toast.error(result.message, { position: 'bottom-right' });
+        return;
+      }
+      toast.success('Note deleted', { position: 'bottom-right' });
+    } catch (error) {
+      console.error('Delete request failed:', error);
+      setNotes(snapshot); // roll back
+      toast.error('Could not delete note. Check your connection.', {
+        position: 'bottom-right',
+      });
     }
   }
 
