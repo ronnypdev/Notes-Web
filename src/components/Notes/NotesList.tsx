@@ -17,7 +17,7 @@ export default function NotesList({ basePath }: NotesListProps) {
   const { noteCollection, createDraft, hasDraft } = useContext(NotesContext);
   const router = useRouter();
   const params = useParams();
-  // Active for the exact path OR any sub-routes
+  // The note currently open, read from the URL
   const activeNoteId = typeof params.id === 'string' ? params.id : undefined;
 
   function insertItem() {
