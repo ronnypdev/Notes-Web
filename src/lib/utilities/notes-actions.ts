@@ -101,4 +101,36 @@ export async function updateNote(
   }
 }
 
-export async function deleteNote() {}
+export async function deleteNote(noteId: string): Promise<NotesResult> {
+  try {
+    // Ensure that the correct note is being deleted by the correct user
+    const session = await getServerSessions();
+
+    if (session === null) {
+      return { success: false, message: 'No active session at the moment' };
+    }
+
+    const deletedNote = await db
+      .delete(noteTable)
+      .where(
+        and(eq(noteTable.id, noteId), eq(noteTable.userId, session.user.id)),
+      )
+      .returning();
+
+    if (deletedNote.length === 0) {
+      return { success: false, message: 'Note not found or not yours' };
+    }
+
+    return {
+      success: true,
+      note: deletedNote,
+      message: 'Note successfully deleted',
+    };
+  } catch (error) {
+    console.error('Error no note deleted:', error);
+    return {
+      success: false,
+      message: 'Can not delete note at the moment',
+    };
+  }
+}

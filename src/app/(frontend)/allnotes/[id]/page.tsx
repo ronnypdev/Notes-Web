@@ -22,10 +22,11 @@ import {
 } from '@/components/icons';
 import { Separator } from '@/components/ui/separator';
 import Link from 'next/link';
+import { Modal } from '@/components/Modal/Modal';
 
 export default function NoteItemDetails() {
   const originalNoteRef = useRef<ClientNote | null>(null);
-  const { noteCollection, changeNote, cancelDraft, markNoteSaved } =
+  const { noteCollection, changeNote, cancelDraft, markNoteSaved, removeNote } =
     useContext(NotesContext);
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
@@ -76,6 +77,11 @@ export default function NoteItemDetails() {
     }
   };
 
+  const handleDelete = () => {
+    removeNote(currentNote.id);
+    router.push('/allnotes');
+  };
+
   return (
     <>
       <section className="h-full flex flex-col py-5 px-6">
@@ -88,7 +94,14 @@ export default function NoteItemDetails() {
               Go Back
             </Link>
             <div className="mobile-properties-controls flex items-center gap-200">
-              <DeleteIcon className="size-5 text-neutral-600 cursor-pointer" />
+              <Modal type="delete" onConfirm={handleDelete}>
+                <button
+                  type="button"
+                  aria-label="Delete note"
+                  className="cursor-pointer text-neutral-600">
+                  <DeleteIcon className="size-5" />
+                </button>
+              </Modal>
               <ArchiveIcon className="size-5 text-neutral-600 cursor-pointer" />
               <Button
                 variant="link"

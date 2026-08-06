@@ -1,4 +1,4 @@
-import React from 'react';
+'use client';
 import {
   Dialog,
   DialogClose,
@@ -14,14 +14,14 @@ import { DeleteIcon, ArchiveIcon } from '@/components/icons';
 
 interface ModalProps {
   type: 'delete' | 'archive';
+  onConfirm: () => void;
+  children: React.ReactNode; // the element that opens the dialog
 }
 
-export const Modal = ({ type }: ModalProps) => {
+export const Modal = ({ type, onConfirm, children }: ModalProps) => {
   return (
     <Dialog>
-      <DialogTrigger asChild>
-        <Button variant="outline">Open Dialog</Button>
-      </DialogTrigger>
+      <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="max-w-full border-none">
         <div className="flex items-center justify-between gap-4">
           <div className="flex items-center justify-center bg-neutral-100 rounded-lg p-3 self-start">
@@ -45,15 +45,19 @@ export const Modal = ({ type }: ModalProps) => {
 
         <DialogFooter className="border-t border-solid border-neutral-200 pt-4">
           <DialogClose asChild>
-            <Button variant="secondary">Cancel</Button>
-          </DialogClose>
-          {type === 'delete' ? (
-            <Button type="submit" variant="destructive">
-              Delete Note
+            <Button variant="secondary" type="button">
+              Cancel
             </Button>
-          ) : (
-            <Button type="submit">Archive Note</Button>
-          )}
+          </DialogClose>
+
+          <DialogClose asChild>
+            <Button
+              type="button"
+              variant={type === 'delete' ? 'destructive' : 'default'}
+              onClick={onConfirm}>
+              {type === 'delete' ? 'Delete Note' : 'Archive Note'}
+            </Button>
+          </DialogClose>
         </DialogFooter>
       </DialogContent>
     </Dialog>

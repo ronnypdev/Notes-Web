@@ -11,9 +11,11 @@ import {
 } from '@/components/ui/item';
 import { Separator } from '@/components/ui/separator';
 import { Note } from '@/types';
+import { cn } from '@/lib/utils';
 
 interface NoteItemProps extends Note {
   basePath?: string;
+  isActive?: boolean;
 }
 
 export default function NoteItem({
@@ -22,12 +24,18 @@ export default function NoteItem({
   tags,
   lastEdited,
   basePath = 'allnotes',
+  isActive = false,
 }: NoteItemProps) {
   return (
-    <Link href={`/${basePath}/${id}`}>
+    <Link
+      href={`/${basePath}/${id}`}
+      aria-current={isActive ? 'page' : undefined}>
       <Item
         id={id}
-        className="flex flex-col items-start gap-150 p-100 rounded-(--radius-6)  w-full bg-white hover:bg-neutral-100 transition-colors duration-100 cursor-pointer">
+        className={cn(
+          'flex flex-col items-start gap-150 p-100 rounded-(--radius-6) w-full bg-white hover:bg-neutral-100 transition-colors duration-100 cursor-pointer',
+          isActive && 'bg-neutral-100',
+        )}>
         <ItemHeader>
           {title ? (
             <ItemTitle className="w-full text-neutral-950 font-semibold text-base leading-[1.2] tracking-[-0.3px]">

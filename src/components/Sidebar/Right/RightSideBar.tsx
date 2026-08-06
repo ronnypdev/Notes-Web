@@ -1,11 +1,18 @@
 'use client';
 
+import { useContext } from 'react';
+import { NotesContext } from '@/context/NotesContext';
 import { Button } from '@/components/ui/button';
 import { ArchiveIcon, DeleteIcon, RefreshIcon } from '@/components/icons';
-import { usePathname } from 'next/navigation';
+import { usePathname, useParams, useRouter } from 'next/navigation';
+import { Modal } from '@/components/Modal/Modal';
 
 export default function RightSideBar() {
+  const { removeNote } = useContext(NotesContext);
   const pathname = usePathname();
+  const params = useParams();
+  const router = useRouter();
+  const noteId = typeof params.id === 'string' ? params.id : undefined;
   const isArchiveRoute = pathname.startsWith('/archivenotes');
   const isSettingsRoute = pathname.startsWith('/settings');
 
@@ -26,10 +33,22 @@ export default function RightSideBar() {
           Archive Note
         </Button>
       )}
-      <Button variant="outline" className="justify-start gap-2" size="lg">
-        <DeleteIcon />
-        Delete Note
-      </Button>
+      <Modal
+        type="delete"
+        onConfirm={() => {
+          if (!noteId) return;
+          removeNote(noteId);
+          router.push(isArchiveRoute ? '/archivenotes' : '/allnotes');
+        }}>
+        <Button
+          variant="outline"
+          className="justify-start gap-2"
+          size="lg"
+          disabled={!noteId}>
+          <DeleteIcon />
+          Delete Note
+        </Button>
+      </Modal>
     </aside>
   );
 }

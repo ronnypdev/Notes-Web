@@ -3,7 +3,7 @@
 import { useContext } from 'react';
 import { NotesContext } from '@/context/NotesContext';
 
-import { useRouter } from 'next/navigation';
+import { useRouter, useParams } from 'next/navigation';
 
 import NoteItem from '@/components/NoteItem/NoteItem';
 import { Button } from '@/components/ui/button';
@@ -16,6 +16,9 @@ interface NotesListProps {
 export default function NotesList({ basePath }: NotesListProps) {
   const { noteCollection, createDraft, hasDraft } = useContext(NotesContext);
   const router = useRouter();
+  const params = useParams();
+  // Active for the exact path OR any sub-routes
+  const activeNoteId = typeof params.id === 'string' ? params.id : undefined;
 
   function insertItem() {
     const newDraftId = createDraft();
@@ -42,7 +45,12 @@ export default function NotesList({ basePath }: NotesListProps) {
       )}
 
       {noteCollection.map((note) => (
-        <NoteItem key={note.id} {...note} basePath={basePath} />
+        <NoteItem
+          key={note.id}
+          {...note}
+          basePath={basePath}
+          isActive={note.id === activeNoteId}
+        />
       ))}
 
       {basePath !== 'archivenotes' && basePath !== 'search' && (

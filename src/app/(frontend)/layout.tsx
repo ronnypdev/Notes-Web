@@ -1,3 +1,5 @@
+import { NotesProvider } from '@/context/NotesProvider';
+import { fetchNotes } from '@/lib/utilities/notes-actions';
 import Header from '@/components/Header/Header';
 import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
 import LeftSideBar from '@/components/Sidebar/Left/LeftSideBar';
@@ -16,8 +18,11 @@ export default async function FrontendLayout({
 
   if (!user) return <UnauthenticatedPage />;
 
+  const result = await fetchNotes();
+  const initialNotes = result.success ? result.note : [];
+
   return (
-    <>
+    <NotesProvider initialNotes={initialNotes}>
       <SidebarProvider>
         <LeftSideBar />
         <SidebarInset>
@@ -31,6 +36,6 @@ export default async function FrontendLayout({
       <div className="fixed bottom-0 left-0 w-full lg:hidden z-50">
         <MobileMenu />
       </div>
-    </>
+    </NotesProvider>
   );
 }
