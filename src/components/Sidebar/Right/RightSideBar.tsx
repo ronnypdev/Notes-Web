@@ -34,7 +34,7 @@ export default function RightSideBar() {
           onConfirm={() => {
             if (!noteId) return;
             archiveNote(noteId, noteObj);
-            router.push(isArchiveRoute ? '/archivenotes' : '/allnotes');
+            router.push(isArchiveRoute ? '/allnotes' : '/archivenotes');
           }}>
           <Button
             variant="outline"
