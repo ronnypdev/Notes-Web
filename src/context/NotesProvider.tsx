@@ -115,6 +115,7 @@ export function NotesProvider({
         markNoteSaved,
         hasDraft,
         removeNote,
+        archiveNote,
       }}>
       {children}
     </NotesContext>
