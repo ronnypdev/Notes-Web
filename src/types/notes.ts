@@ -19,5 +19,5 @@ export interface NoteContextValue {
   markNoteSaved: (noteId: string, saved: Note) => void; // swap draft → persisted row, isDraft:false  after saveNote succeeds
   hasDraft: boolean; // true while an unsaved draft exists (disables "Create New Note")
   removeNote: (noteId: string) => Promise<void>;
-  archiveNote: (noteId: string, note: Note) => void;
+  archiveNote: (noteId: string, noteItem: Note) => void;
 }

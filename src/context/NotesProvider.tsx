@@ -104,6 +104,14 @@ export function NotesProvider({
     }
   }
 
+  function archiveNote(noteId: string, noteItem: Note) {
+    setNotes((prev) =>
+      prev.map((note) =>
+        note.id === noteId ? { ...noteItem, archive: false } : note,
+      ),
+    );
+  }
+
   return (
     <NotesContext
       value={{
