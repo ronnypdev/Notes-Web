@@ -134,3 +134,41 @@ export async function deleteNote(noteId: string): Promise<NotesResult> {
     };
   }
 }
+
+export async function setArchiveNote(
+  noteId: string,
+  archived: boolean,
+): Promise<NotesResult> {
+  try {
+    // Ensure the correct note is being archived by the correct user
+    const session = await getServerSessions();
+
+    if (session === null) {
+      return { success: false, message: 'No active session at the moment' };
+    }
+
+    const archivedNote = await db
+      .update(noteTable)
+      .set({ archive: archived })
+      .where(
+        and(eq(noteTable.id, noteId), eq(noteTable.userId, session.user.id)),
+      )
+      .returning();
+
+    if (archivedNote.length === 0) {
+      return { success: false, message: 'Note not found or not yours' };
+    }
+
+    return {
+      success: true,
+      note: archivedNote,
+      message: archived ? 'Note archived' : 'Note restored',
+    };
+  } catch (error) {
+    console.error('Error note not archived:', error);
+    return {
+      success: false,
+      message: 'Can not archive note at the moment',
+    };
+  }
+}
