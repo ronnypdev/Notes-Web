@@ -15,6 +15,13 @@
       "when": 1783734312141,
       "tag": "0001_wandering_union_jack",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1786571602080,
+      "tag": "0002_bent_baron_zemo",
+      "breakpoints": true
     }
   ]
 }

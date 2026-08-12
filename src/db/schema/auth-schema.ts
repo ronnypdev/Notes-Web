@@ -90,7 +90,7 @@ export const noteTable = pgTable('note', {
     .default(sql`ARRAY[]::text[]`),
   content: varchar('content'),
   lastEdited: date('last_edited').default(sql`CURRENT_DATE`),
-  archive: boolean('archive').default(false),
+  archive: boolean('archive').notNull().default(false),
   userId: text('user_id')
     .notNull()
     .references(() => user.id, { onDelete: 'cascade' }),
