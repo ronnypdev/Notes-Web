@@ -13,7 +13,11 @@ export default function RightSideBar() {
   const params = useParams();
   const router = useRouter();
   const noteId = typeof params.id === 'string' ? params.id : undefined;
-  const noteObj = noteCollection[0];
+  const activeNote = noteId
+    ? noteCollection.find((note) => note.id === noteId)
+    : undefined;
+  // Only saved notes can be archived
+  const canArchive = activeNote !== undefined && !activeNote.isDraft;
   const isArchiveRoute = pathname.startsWith('/archivenotes');
   const isSettingsRoute = pathname.startsWith('/settings');
 
@@ -32,15 +36,15 @@ export default function RightSideBar() {
         <Modal
           type="archive"
           onConfirm={() => {
-            if (!noteId) return;
-            archiveNote(noteId, noteObj);
-            router.push(isArchiveRoute ? '/allnotes' : '/archivenotes');
+            if (!noteId || !canArchive) return;
+            archiveNote(noteId, true);
+            router.push('/archivenotes');
           }}>
           <Button
             variant="outline"
             className="justify-start gap-2"
             size="lg"
-            disabled={!noteId}>
+            disabled={!canArchive}>
             <ArchiveIcon />
             Archive Note
           </Button>
