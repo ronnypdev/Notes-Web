@@ -89,7 +89,7 @@ export default function NoteItemDetails() {
   };
 
   const handleArchive = () => {
-    if (currentNote.isDraft) return;
+    if (currentNote.isDraft || currentNote.archive) return;
     archiveNote(currentNote.id, true);
     router.push('/archivenotes');
   };
@@ -120,7 +120,7 @@ export default function NoteItemDetails() {
                   aria-label="Archive note"
                   disabled={currentNote.isDraft}
                   className="cursor-pointer text-neutral-600 disabled:opacity-50">
-                  <ArchiveIcon className="size-5 text-neutral-600 cursor-pointer" />
+                  <ArchiveIcon className="size-5 text-neutral-600 disabled:cursor-not-allowed" />
                 </button>
               </Modal>
               <Button
