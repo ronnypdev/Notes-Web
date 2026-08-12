@@ -20,6 +20,13 @@ export default function NotesList({ basePath }: NotesListProps) {
   // The note currently open, read from the URL
   const activeNoteId = typeof params.id === 'string' ? params.id : undefined;
 
+  // One collection feeds every route; each route derives its own view.
+  const visibleNotes = noteCollection.filter((note) => {
+    if (basePath === 'archivenotes') return note.archive === true;
+    if (basePath === 'allnotes') return !note.archive;
+    return true; // search spans archived and active notes
+  });
+
   function insertItem() {
     const newDraftId = createDraft();
     if (newDraftId) {
@@ -38,13 +45,13 @@ export default function NotesList({ basePath }: NotesListProps) {
         </Button>
       )}
 
-      {noteCollection.length === 0 && (
+      {visibleNotes.length === 0 && (
         <div className="text-center text-gray-500">
           <p>No notes found</p>
         </div>
       )}
 
-      {noteCollection.map((note) => (
+      {visibleNotes.map((note) => (
         <NoteItem
           key={note.id}
           {...note}
