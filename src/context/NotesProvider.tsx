@@ -4,7 +4,11 @@ import React, { useState } from 'react';
 import { toast } from 'sonner';
 import { NotesContext } from './NotesContext';
 import { Note, ClientNote } from '@/types';
-import { fetchNotes, deleteNote } from '@/lib/utilities/notes-actions';
+import {
+  fetchNotes,
+  deleteNote,
+  setArchiveNote,
+} from '@/lib/utilities/notes-actions';
 
 export function NotesProvider({
   children,
@@ -104,12 +108,53 @@ export function NotesProvider({
     }
   }
 
-  function archiveNote(noteId: string, noteItem: Note) {
+  async function archiveNote(noteId: string, archived: boolean) {
+    const target = notes.find((note) => note.id === noteId);
+    if (!target) return;
+
+    // Only saved notes can be archived — a draft has no database row yet.
+    if (target.isDraft) {
+      toast.error('Save this note before archiving it', {
+        position: 'bottom-right',
+      });
+      return;
+    }
+
+    // Already in the requested state; nothing to do.
+    if (Boolean(target.archive) === archived) return;
+
+    const snapshot = notes; // remember
     setNotes((prev) =>
       prev.map((note) =>
-        note.id === noteId ? { ...noteItem, archive: false } : note,
+        note.id === noteId ? { ...note, archive: archived } : note,
       ),
-    );
+    ); // optimistic
+
+    try {
+      const result = await setArchiveNote(noteId, archived);
+
+      if (!result.success) {
+        setNotes(snapshot); // roll back
+        toast.error(result.message, { position: 'bottom-right' });
+        return;
+      }
+      // Reconcile with the row the server actually wrote
+      setNotes((prev) =>
+        prev.map((note) =>
+          note.id === noteId ? { ...result.note[0], isDraft: false } : note,
+        ),
+      );
+
+      toast.success(archived ? 'Note archived' : 'Note restored', {
+        position: 'bottom-right',
+      });
+    } catch (error) {
+      console.error('Archive request failed:', error);
+      setNotes(snapshot); // roll back
+      toast.error('Could not archive note. Check your connection.', {
+        position: 'bottom-right',
+      });
+    }
   }
 
   return (
