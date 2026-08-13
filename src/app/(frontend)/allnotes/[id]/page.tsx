@@ -26,8 +26,14 @@ import { Modal } from '@/components/Modal/Modal';
 
 export default function NoteItemDetails() {
   const originalNoteRef = useRef<ClientNote | null>(null);
-  const { noteCollection, changeNote, cancelDraft, markNoteSaved, removeNote } =
-    useContext(NotesContext);
+  const {
+    noteCollection,
+    changeNote,
+    cancelDraft,
+    markNoteSaved,
+    removeNote,
+    archiveNote,
+  } = useContext(NotesContext);
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
   const params = useParams();
@@ -82,6 +88,12 @@ export default function NoteItemDetails() {
     router.push('/allnotes');
   };
 
+  const handleArchive = () => {
+    if (currentNote.isDraft || currentNote.archive) return;
+    archiveNote(currentNote.id, true);
+    router.push('/archivenotes');
+  };
+
   return (
     <>
       <section className="h-full flex flex-col py-5 px-6">
@@ -102,7 +114,15 @@ export default function NoteItemDetails() {
                   <DeleteIcon className="size-5" />
                 </button>
               </Modal>
-              <ArchiveIcon className="size-5 text-neutral-600 cursor-pointer" />
+              <Modal type="archive" onConfirm={handleArchive}>
+                <button
+                  type="button"
+                  aria-label="Archive note"
+                  disabled={currentNote.isDraft}
+                  className="cursor-pointer text-neutral-600 disabled:opacity-50 disabled:cursor-not-allowed">
+                  <ArchiveIcon className="size-5 text-neutral-600" />
+                </button>
+              </Modal>
               <Button
                 variant="link"
                 className="text-neutral-600 p-0"
