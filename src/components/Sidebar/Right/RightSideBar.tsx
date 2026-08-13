@@ -17,7 +17,8 @@ export default function RightSideBar() {
     ? noteCollection.find((note) => note.id === noteId)
     : undefined;
   // Only saved notes can be archived
-  const canArchive = activeNote !== undefined && !activeNote.isDraft;
+  const canArchive =
+    activeNote !== undefined && !activeNote.isDraft && !activeNote.archive;
   const isArchiveRoute = pathname.startsWith('/archivenotes');
   const isSettingsRoute = pathname.startsWith('/settings');
 
