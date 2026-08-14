@@ -172,3 +172,8 @@ export async function setArchiveNote(
     };
   }
 }
+
+export async function setRestoreNote(
+  noteId: string,
+  archived: boolean,
+): Promise<NotesResult> {}
