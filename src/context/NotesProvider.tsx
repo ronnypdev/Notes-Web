@@ -169,6 +169,7 @@ export function NotesProvider({
         hasDraft,
         removeNote,
         archiveNote,
+        restoreNote,
       }}>
       {children}
     </NotesContext>

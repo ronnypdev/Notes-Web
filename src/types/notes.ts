@@ -20,4 +20,5 @@ export interface NoteContextValue {
   hasDraft: boolean; // true while an unsaved draft exists (disables "Create New Note")
   removeNote: (noteId: string) => Promise<void>;
   archiveNote: (noteId: string, archived: boolean) => Promise<void>;
+  restoreNote: (noteId: string, restore: boolean) => Promise<void>;
 }
