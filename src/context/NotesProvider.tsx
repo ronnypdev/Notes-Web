@@ -178,7 +178,7 @@ export function NotesProvider({
       // Reconcile with the row the server actually wrote
       setNotes((prev) =>
         prev.map((note) =>
-          note.id === noteId ? { ...result.note[0], isDraft: false } : note,
+          note.id === noteId ? { ...result.note[0], isDraft: true } : note,
         ),
       );
 

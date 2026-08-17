@@ -13,7 +13,7 @@ import { Button } from '@/components/ui/button';
 import { DeleteIcon, ArchiveIcon } from '@/components/icons';
 
 interface ModalProps {
-  type: 'delete' | 'archive';
+  type: 'delete' | 'archive' | 'restore';
   onConfirm: () => void;
   children: React.ReactNode; // the element that opens the dialog
 }

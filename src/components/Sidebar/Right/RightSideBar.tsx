@@ -8,7 +8,8 @@ import { usePathname, useParams, useRouter } from 'next/navigation';
 import { Modal } from '@/components/Modal/Modal';
 
 export default function RightSideBar() {
-  const { removeNote, archiveNote, noteCollection } = useContext(NotesContext);
+  const { removeNote, archiveNote, restoreNote, noteCollection } =
+    useContext(NotesContext);
   const pathname = usePathname();
   const params = useParams();
   const router = useRouter();
@@ -29,10 +30,18 @@ export default function RightSideBar() {
   return (
     <aside className="w-[var(--sidebar-width)] border-l border-solid border-neutral-200 bg-background p-4 lg:flex flex-col gap-2 hidden">
       {isArchiveRoute ? (
-        <Button variant="outline" className="justify-start gap-2" size="lg">
-          <RefreshIcon />
-          Restore Note
-        </Button>
+        <Modal
+          type="restore"
+          onConfirm={() => {
+            if (!noteId) return;
+            restoreNote(noteId, false);
+            router.push('/allnotes');
+          }}>
+          <Button variant="outline" className="justify-start gap-2" size="lg">
+            <RefreshIcon />
+            Restore Note
+          </Button>
+        </Modal>
       ) : (
         <Modal
           type="archive"
