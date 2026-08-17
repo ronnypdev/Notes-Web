@@ -34,10 +34,14 @@ export const Modal = ({ type, onConfirm, children }: ModalProps) => {
           <DialogHeader>
             <DialogTitle className="font-sans font-semibold">
               {type === 'delete' ? 'Delete Note' : 'Archive Note'}
+              {type === 'restore' ? 'Restore Note' : 'Archive Note'}
             </DialogTitle>
             <DialogDescription className="font-sans font-normal">
               {type === 'delete'
                 ? 'Are you sure you want to permanently delete this note? This action cannot be undone'
+                : 'Are you sure you want to archive this note? You can find it in the Archived Notes section and restore it anytime.'}
+              {type === 'restore'
+                ? 'Are you sure you want to retore this note?'
                 : 'Are you sure you want to archive this note? You can find it in the Archived Notes section and restore it anytime.'}
             </DialogDescription>
           </DialogHeader>
@@ -56,6 +60,7 @@ export const Modal = ({ type, onConfirm, children }: ModalProps) => {
               variant={type === 'delete' ? 'destructive' : 'default'}
               onClick={onConfirm}>
               {type === 'delete' ? 'Delete Note' : 'Archive Note'}
+              {type === 'restore' ? 'Restore Note' : 'Archive Note'}
             </Button>
           </DialogClose>
         </DialogFooter>
