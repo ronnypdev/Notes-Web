@@ -157,6 +157,8 @@ export function NotesProvider({
     }
   }
 
+  async function restoreNote(noteId: string, restore: boolean) {}
+
   return (
     <NotesContext
       value={{
