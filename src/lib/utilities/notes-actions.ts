@@ -175,7 +175,7 @@ export async function setArchiveNote(
 
 export async function setRestoreNote(
   noteId: string,
-  archived: boolean,
+  restored: boolean,
 ): Promise<NotesResult> {
   try {
     const session = await getServerSessions();
@@ -184,9 +184,23 @@ export async function setRestoreNote(
       return { success: false, message: 'No active session at the moment' };
     }
 
+    const restoredNote = await db
+      .update(noteTable)
+      .set({ archive: restored })
+      .where(
+        and(eq(noteTable.id, noteId), eq(noteTable.userId, session.user.id)),
+      )
+      .returning();
+
     if (restoredNote.length === 0) {
       return { success: false, message: 'Note not found or not yours' };
     }
+
+    return {
+      success: true,
+      note: restoredNote,
+      message: restored ? 'Note restored' : 'Note archived',
+    };
   } catch (error) {
     console.error('Error note not archived:', error);
     return {
