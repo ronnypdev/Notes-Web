@@ -202,10 +202,10 @@ export async function setRestoreNote(
       message: restored ? 'Note restored' : 'Note archived',
     };
   } catch (error) {
-    console.error('Error note not archived:', error);
+    console.error('Error no note restored:', error);
     return {
       success: false,
-      message: 'Can not archive note at the moment',
+      message: 'Can not restored note at the moment',
     };
   }
 }

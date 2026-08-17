@@ -186,9 +186,9 @@ export function NotesProvider({
         position: 'bottom-right',
       });
     } catch (error) {
-      console.error('Archive request failed:', error);
+      console.error('Restored request failed:', error);
       setNotes(snapshot); // roll back
-      toast.error('Could not archive note. Check your connection.', {
+      toast.error('Could not restored note. Check your connection.', {
         position: 'bottom-right',
       });
     }
