@@ -191,13 +191,7 @@ export default function NoteItemDetails() {
                     Last Edited:
                   </FieldLabel>
                 </div>
-                <Input
-                  id="lastEdit"
-                  type="date"
-                  className="font-sans text-sm font-normal h-auto text-neutral-400 capitalize leading-[1.3] tracking-[-0.0125rem]  border-none shadow-none placeholder:text-neutral-400"
-                  readOnly
-                  placeholder="03/12/2026"
-                />
+                {currentNote.lastEdited}
               </Field>
               <Separator />
               <Field>
