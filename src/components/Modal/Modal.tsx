@@ -33,16 +33,18 @@ export const Modal = ({ type, onConfirm, children }: ModalProps) => {
           </div>
           <DialogHeader>
             <DialogTitle className="font-sans font-semibold">
-              {type === 'delete' ? 'Delete Note' : 'Archive Note'}
-              {type === 'restore' ? 'Restore Note' : 'Archive Note'}
+              {type === 'delete'
+                ? 'Delete Note'
+                : type === 'archive'
+                  ? 'Archive Note'
+                  : 'Restore Note'}
             </DialogTitle>
             <DialogDescription className="font-sans font-normal">
               {type === 'delete'
                 ? 'Are you sure you want to permanently delete this note? This action cannot be undone'
-                : 'Are you sure you want to archive this note? You can find it in the Archived Notes section and restore it anytime.'}
-              {type === 'restore'
-                ? 'Are you sure you want to retore this note?'
-                : 'Are you sure you want to archive this note? You can find it in the Archived Notes section and restore it anytime.'}
+                : type === 'archive'
+                  ? 'Are you sure you want to archive this note? You can find it in the Archived Notes section and restore it anytime.'
+                  : 'Are you sure you want to retore this note? You can always archive your notes backs with out any issues. Just make sure you are restoring the correct note'}
             </DialogDescription>
           </DialogHeader>
         </div>
@@ -59,8 +61,11 @@ export const Modal = ({ type, onConfirm, children }: ModalProps) => {
               type="button"
               variant={type === 'delete' ? 'destructive' : 'default'}
               onClick={onConfirm}>
-              {type === 'delete' ? 'Delete Note' : 'Archive Note'}
-              {type === 'restore' ? 'Restore Note' : 'Archive Note'}
+              {type === 'delete'
+                ? 'Delete Note'
+                : type === 'archive'
+                  ? 'Archive Note'
+                  : 'Restore Note'}
             </Button>
           </DialogClose>
         </DialogFooter>
