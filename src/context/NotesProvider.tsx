@@ -8,7 +8,6 @@ import {
   fetchNotes,
   deleteNote,
   setArchiveNote,
-  setRestoreNote,
 } from '@/lib/utilities/notes-actions';
 
 export function NotesProvider({
@@ -158,42 +157,6 @@ export function NotesProvider({
     }
   }
 
-  async function restoreNote(noteId: string, restored: boolean) {
-    const snapshot = notes; // remember
-    setNotes((prev) =>
-      prev.map((note) =>
-        note.id === noteId ? { ...note, archive: restored } : note,
-      ),
-    ); // optimistic
-
-    try {
-      const result = await setRestoreNote(noteId, restored);
-
-      if (!result.success) {
-        setNotes(snapshot); // roll back
-        toast.error(result.message, { position: 'bottom-right' });
-        return;
-      }
-
-      // Reconcile with the row the server actually wrote
-      setNotes((prev) =>
-        prev.map((note) =>
-          note.id === noteId ? { ...result.note[0], isDraft: false } : note,
-        ),
-      );
-
-      toast.success(restored ? 'Note restored' : 'Note archived', {
-        position: 'bottom-right',
-      });
-    } catch (error) {
-      console.error('Restored request failed:', error);
-      setNotes(snapshot); // roll back
-      toast.error('Could not restored note. Check your connection.', {
-        position: 'bottom-right',
-      });
-    }
-  }
-
   return (
     <NotesContext
       value={{
@@ -206,7 +169,6 @@ export function NotesProvider({
         hasDraft,
         removeNote,
         archiveNote,
-        restoreNote,
       }}>
       {children}
     </NotesContext>
