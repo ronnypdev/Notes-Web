@@ -46,13 +46,6 @@ export default function NoteItemDetails() {
   const params = useParams();
   const currentNote = noteCollection.find((note) => note.id === params.id);
 
-  const { control, handleSubmit, setValue } = useForm<tagsInputScehmasValue>({
-    resolver: zodResolver(tagsInputScehma),
-    defaultValues: {
-      tags: '',
-    },
-  });
-
   if (!currentNote) return null;
 
   // Capture the saved snapshot once per note. Keyed on id, so typing
@@ -108,6 +101,17 @@ export default function NoteItemDetails() {
     router.push('/archivenotes');
   };
 
+  const { control, handleSubmit, setValue } = useForm<tagsInputScehmasValue>({
+    resolver: zodResolver(tagsInputScehma),
+    defaultValues: {
+      tags: '',
+    },
+  });
+
+  const onSubmit = (currentNote) => {
+    console.log(currentNote.tags); // Process tag data
+  };
+
   return (
     <>
       <section className="h-full flex flex-col py-5 px-6">
@@ -158,7 +162,9 @@ export default function NoteItemDetails() {
           <Separator className="block lg:hidden" />
         </header>
 
-        <form className="flex-1 min-h-0 flex flex-col">
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="flex-1 min-h-0 flex flex-col">
           <FieldSet className="flex-1 min-h-0">
             <FieldGroup className="properties flex flex-col gap-4 items-start">
               <Field>
@@ -176,24 +182,35 @@ export default function NoteItemDetails() {
                   className="text-neutral-950 font-sans font-bold text-xl md:text-2xl h-auto leading-[1.2] tracking-[-0.5px] border-none shadow-none placeholder:text-neutral-950"
                 />
               </Field>
-              <Field
-                orientation="horizontal"
-                className="tags flex items-center gap-8">
-                <div className="tags-container flex items-center gap-1">
-                  <TagIcon className="size-4 text-neutral-950" />
-                  <FieldLabel
-                    htmlFor="tagsList"
-                    className="font-sans text-sm font-normal capitalize leading-[1.3] tracking-[-0.0125rem]">
-                    Tags:
-                  </FieldLabel>
-                </div>
-                <TagInput
-                  id="tagsList"
-                  type="text"
-                  placeholder="Add tags separated by commas (e.g. Work, Planning)"
-                  className="text-neutral-400 font-sans font-normal text-sm md:text-sm h-auto leading-[1.3] tracking-[-0.2px] border-none shadow-none placeholder:text-neutral-400"
-                />
-              </Field>
+              <Controller
+                name="tags"
+                control={control}
+                render={({ field }) => (
+                  <Field
+                    orientation="horizontal"
+                    className="tags flex items-center gap-8">
+                    <div className="tags-container flex items-center gap-1">
+                      <TagIcon className="size-4 text-neutral-950" />
+                      <FieldLabel
+                        htmlFor="tagsList"
+                        className="font-sans text-sm font-normal capitalize leading-[1.3] tracking-[-0.0125rem]">
+                        Tags:
+                      </FieldLabel>
+                    </div>
+                    <TagInput
+                      {...field}
+                      id="tagsList"
+                      tags={tags}
+                      placeholder="Add tags separated by commas (e.g. Work, Planning)"
+                      className="text-neutral-400 font-sans font-normal text-sm md:text-sm h-auto leading-[1.3] tracking-[-0.2px] border-none shadow-none placeholder:text-neutral-400"
+                      setTags={(newTags) => {
+                        setTags(newTags);
+                        setValue('tags', newTags as [Tag, ...Tag[]]);
+                      }}
+                    />
+                  </Field>
+                )}
+              />
               <Field
                 orientation="horizontal"
                 className="last-modified flex items-center gap-3">
