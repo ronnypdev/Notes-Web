@@ -1,9 +1,15 @@
 'use client';
 
-import { useContext, useTransition, useRef } from 'react';
+import { useState, useContext, useTransition, useRef } from 'react';
 import { NotesContext } from '@/context/NotesContext';
 
 import { saveNote, updateNote } from '@/lib/utilities/notes-actions';
+
+import { Controller, useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { tagsInputScehma, tagsInputScehmasValue } from '@/lib/zod';
+
+import { Tag, TagInput } from 'emblor';
 
 import { ClientNote } from '@/types';
 
@@ -35,9 +41,17 @@ export default function NoteItemDetails() {
     archiveNote,
   } = useContext(NotesContext);
   const [isPending, startTransition] = useTransition();
+  const [tags, setTags] = useState<Tag[]>([]);
   const router = useRouter();
   const params = useParams();
   const currentNote = noteCollection.find((note) => note.id === params.id);
+
+  const { control, handleSubmit, setValue } = useForm<tagsInputScehmasValue>({
+    resolver: zodResolver(tagsInputScehma),
+    defaultValues: {
+      tags: '',
+    },
+  });
 
   if (!currentNote) return null;
 
@@ -173,7 +187,7 @@ export default function NoteItemDetails() {
                     Tags:
                   </FieldLabel>
                 </div>
-                <Input
+                <TagInput
                   id="tagsList"
                   type="text"
                   placeholder="Add tags separated by commas (e.g. Work, Planning)"
