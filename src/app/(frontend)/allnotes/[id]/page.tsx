@@ -42,9 +42,17 @@ export default function NoteItemDetails() {
   } = useContext(NotesContext);
   const [isPending, startTransition] = useTransition();
   const [tags, setTags] = useState<Tag[]>([]);
+  const [activeTagIndex, setActiveTagIndex] = useState<number | null>(null);
   const router = useRouter();
   const params = useParams();
   const currentNote = noteCollection.find((note) => note.id === params.id);
+
+  const { control, handleSubmit, setValue } = useForm<tagsInputScehmasValue>({
+    resolver: zodResolver(tagsInputScehma),
+    defaultValues: {
+      tag: '',
+    },
+  });
 
   if (!currentNote) return null;
 
@@ -100,13 +108,6 @@ export default function NoteItemDetails() {
     archiveNote(currentNote.id, true);
     router.push('/archivenotes');
   };
-
-  const { control, handleSubmit, setValue } = useForm<tagsInputScehmasValue>({
-    resolver: zodResolver(tagsInputScehma),
-    defaultValues: {
-      tags: '',
-    },
-  });
 
   const onSubmit = (currentNote) => {
     console.log(currentNote.tags); // Process tag data
@@ -183,7 +184,7 @@ export default function NoteItemDetails() {
                 />
               </Field>
               <Controller
-                name="tags"
+                name="tag"
                 control={control}
                 render={({ field }) => (
                   <Field
@@ -202,11 +203,18 @@ export default function NoteItemDetails() {
                       id="tagsList"
                       tags={tags}
                       placeholder="Add tags separated by commas (e.g. Work, Planning)"
-                      className="text-neutral-400 font-sans font-normal text-sm md:text-sm h-auto leading-[1.3] tracking-[-0.2px] border-none shadow-none placeholder:text-neutral-400"
+                      className="border-0"
+                      styleClasses={{
+                        input:
+                          'text-neutral-700 font-sans font-normal text-sm md:text-sm h-auto leading-[1.3] tracking-[-0.2px] border-none shadow-none placeholder:text-neutral-400',
+                      }}
                       setTags={(newTags) => {
                         setTags(newTags);
-                        setValue('tags', newTags as [Tag, ...Tag[]]);
+                        setValue('tag', newTags as [Tag, ...Tag[]]);
                       }}
+                      activeTagIndex={activeTagIndex}
+                      setActiveTagIndex={setActiveTagIndex}
+                      inlineTags={true}
                     />
                   </Field>
                 )}

@@ -37,7 +37,7 @@ export const resetPasswordSchema = z
 export type ResetPasswordFormValues = z.infer<typeof resetPasswordSchema>;
 
 export const tagsInputScehma = z.object({
-  tags: z.array(z.string()),
+  tag: z.array(z.string()),
 });
 
 export type tagsInputScehmasValue = z.infer<typeof tagsInputScehma>;
