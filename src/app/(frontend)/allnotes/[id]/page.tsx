@@ -50,7 +50,12 @@ export default function NoteItemDetails() {
   const { control, handleSubmit, setValue } = useForm<tagsInputScehmasValue>({
     resolver: zodResolver(tagsInputScehma),
     defaultValues: {
-      tag: '',
+      tag: [
+        {
+          id: '',
+          text: '',
+        },
+      ],
     },
   });
 
@@ -215,6 +220,8 @@ export default function NoteItemDetails() {
                       activeTagIndex={activeTagIndex}
                       setActiveTagIndex={setActiveTagIndex}
                       inlineTags={true}
+                      maxTags={5}
+                      showCount={true}
                     />
                   </Field>
                 )}
