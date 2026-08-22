@@ -210,8 +210,14 @@ export default function NoteItemDetails() {
                       placeholder="Add tags separated by commas (e.g. Work, Planning)"
                       className="border-0"
                       styleClasses={{
+                        inlineTagsContainer: 'border-none',
                         input:
                           'text-neutral-700 font-sans font-normal text-sm md:text-sm h-auto leading-[1.3] tracking-[-0.2px] border-none shadow-none placeholder:text-neutral-400',
+                        tag: {
+                          body: 'px-2 py-1 bg-neutral-100 rounded-full text-neutral-700 text-sm border-none cursor-pointer',
+                          closeButton:
+                            'text-neutral-500 hover:text-neutral-700 p-1 cursor-pointer',
+                        },
                       }}
                       setTags={(newTags) => {
                         setTags(newTags);
