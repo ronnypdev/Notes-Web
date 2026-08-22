@@ -220,7 +220,6 @@ export default function NoteItemDetails() {
                       activeTagIndex={activeTagIndex}
                       setActiveTagIndex={setActiveTagIndex}
                       inlineTags={true}
-                      maxTags={5}
                       showCount={true}
                     />
                   </Field>
