@@ -114,8 +114,8 @@ export default function NoteItemDetails() {
     router.push('/archivenotes');
   };
 
-  const onSubmit = (currentNote) => {
-    console.log(currentNote.tags); // Process tag data
+  const onSubmit = (data: tagsInputScehmasValue) => {
+    console.log(data.tag); // Process tag data
   };
 
   return (
