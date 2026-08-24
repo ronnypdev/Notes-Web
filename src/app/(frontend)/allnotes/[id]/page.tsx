@@ -207,7 +207,7 @@ export default function NoteItemDetails() {
                       {...field}
                       id="tagsList"
                       tags={tags}
-                      placeholder="Add tags separated by commas (e.g. Work, Planning)"
+                      placeholder="Press enter to add Tags(e.g. Work, Planning)"
                       className="border-0"
                       styleClasses={{
                         inlineTagsContainer: 'border-none',
