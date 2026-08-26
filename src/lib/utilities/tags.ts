@@ -1,9 +1,9 @@
 export const MAX_TAGS = 5;
-export const MAX_TAGS_LENGTH = 20;
+export const MAX_TAG_LENGTH = 20;
 
 /** Trim, collapse internal whitespace, cap length  */
 export function normalizeTag(raw: string): string {
-  return raw.trim().replace(/\s+/g, '').slice(0, MAX_TAGS_LENGTH).trim();
+  return raw.trim().replace(/\s+/g, '').slice(0, MAX_TAG_LENGTH).trim();
 }
 
 /**
