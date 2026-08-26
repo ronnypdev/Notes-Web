@@ -5,10 +5,17 @@ import { db } from '@/db';
 import { noteTable } from '@/db/schema/auth-schema';
 import { getServerSessions } from '../usersessions';
 import { NotesResult } from '@/types';
+import { noteTagsSchema } from '@/lib/zod';
 
 type ServerItemRow = typeof noteTable.$inferInsert;
 
 type SaveItemInput = Omit<ServerItemRow, 'userId'>; // includes the client-generated id
+
+type NoteUpdateInput = {
+  title?: string | null;
+  content?: string | null;
+  tags?: string[] | null;
+};
 
 export async function saveNote(noteItem: SaveItemInput): Promise<NotesResult> {
   try {
@@ -65,7 +72,7 @@ export async function fetchNotes(): Promise<NotesResult> {
 
 export async function updateNote(
   noteId: string,
-  updateItem: Partial<SaveItemInput>,
+  updateItem: Partial<NoteUpdateInput>,
 ): Promise<NotesResult> {
   try {
     // Ensure that the correct note is being updated
@@ -75,9 +82,27 @@ export async function updateNote(
       return { success: false, message: 'No active session at the moment' };
     }
 
+    const patch: Partial<ServerItemRow> = {};
+
+    if (updateItem.title !== undefined) {
+      patch.title = (updateItem.title ?? '').trim().slice(0, 255);
+    }
+
+    if (updateItem.content !== undefined) {
+      patch.content = updateItem.content;
+    }
+
+    if (updateItem.tags !== undefined) {
+      const parsedTags = noteTagsSchema.safeParse(updateItem.tags ?? []);
+      if (!parsedTags.success) {
+        return { success: false, message: 'Invalid tags' };
+      }
+      patch.tags = parsedTags.data;
+    }
+
     const updatedNote = await db
       .update(noteTable)
-      .set({ ...updateItem, lastEdited: sql`CURRENT_DATE` })
+      .set({ ...patch, lastEdited: sql`CURRENT_DATE` })
       .where(
         and(eq(noteTable.id, noteId), eq(noteTable.userId, session.user.id)),
       )

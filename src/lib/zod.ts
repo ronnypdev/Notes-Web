@@ -37,7 +37,7 @@ export const resetPasswordSchema = z
 
 export type ResetPasswordFormValues = z.infer<typeof resetPasswordSchema>;
 
-export const notesTagsSchema = z
+export const noteTagsSchema = z
   .array(z.string().max(200))
   .max(50)
   .transform(normalizeTags);
