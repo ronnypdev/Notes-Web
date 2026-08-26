@@ -25,12 +25,18 @@ export async function saveNote(noteItem: SaveItemInput): Promise<NotesResult> {
     if (session === null) {
       return { success: false, message: 'No active session at the moment' };
     }
+    const parsedTags = noteTagsSchema.safeParse(noteItem.tags ?? []);
+    if (!parsedTags.success) {
+      return { success: false, message: 'Invalid tags' };
+    }
 
     const authUserId = session.user.id;
     const newNoteItem = {
       ...noteItem,
       userId: authUserId,
       title: (noteItem.title ?? '').trim().slice(0, 255), // normalize + respect varchar(255)
+      tags: parsedTags.data,
+      archive: false,
     };
 
     const savedNote = await db
