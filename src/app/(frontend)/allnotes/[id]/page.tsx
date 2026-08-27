@@ -37,23 +37,9 @@ export default function NoteItemDetails() {
     archiveNote,
   } = useContext(NotesContext);
   const [isPending, startTransition] = useTransition();
-  const [tags, setTags] = useState<Tag[]>([]);
-  const [activeTagIndex, setActiveTagIndex] = useState<number | null>(null);
   const router = useRouter();
   const params = useParams();
   const currentNote = noteCollection.find((note) => note.id === params.id);
-
-  const { control, handleSubmit, setValue } = useForm<tagsInputScehmasValue>({
-    resolver: zodResolver(tagsInputScehma),
-    defaultValues: {
-      tag: [
-        {
-          id: '',
-          text: '',
-        },
-      ],
-    },
-  });
 
   if (!currentNote) return null;
 
