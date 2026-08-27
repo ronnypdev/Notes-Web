@@ -63,6 +63,7 @@ export default function NoteItemDetails() {
             // UPDATE
             title: currentNote.title,
             content: currentNote.content,
+            tags: currentNote.tags ?? [],
           });
       if (result.success) {
         markNoteSaved(currentNote.id, result.note[0]);
