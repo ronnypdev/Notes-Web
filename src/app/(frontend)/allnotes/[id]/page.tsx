@@ -96,10 +96,6 @@ export default function NoteItemDetails() {
     router.push('/archivenotes');
   };
 
-  const onSubmit = (data: tagsInputScehmasValue) => {
-    console.log(data.tag); // Process tag data
-  };
-
   return (
     <>
       <section className="h-full flex flex-col py-5 px-6">
