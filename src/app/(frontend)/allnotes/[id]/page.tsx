@@ -148,7 +148,10 @@ export default function NoteItemDetails() {
         </header>
 
         <form
-          onSubmit={handleSubmit(onSubmit)}
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleSave();
+          }}
           className="flex-1 min-h-0 flex flex-col">
           <FieldSet className="flex-1 min-h-0">
             <FieldGroup className="properties flex flex-col gap-4 items-start">
