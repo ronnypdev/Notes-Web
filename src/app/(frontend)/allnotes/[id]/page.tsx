@@ -5,12 +5,6 @@ import { NotesContext } from '@/context/NotesContext';
 
 import { saveNote, updateNote } from '@/lib/utilities/notes-actions';
 
-import { Controller, useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { tagsInputScehma, tagsInputScehmasValue } from '@/lib/zod';
-
-import { Tag, TagInput } from 'emblor';
-
 import { ClientNote } from '@/types';
 
 import { toast } from 'sonner';
