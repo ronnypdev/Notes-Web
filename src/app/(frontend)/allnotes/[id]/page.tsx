@@ -1,17 +1,13 @@
 'use client';
 
-import { useState, useContext, useTransition, useRef } from 'react';
+import { useContext, useTransition, useRef } from 'react';
 import { NotesContext } from '@/context/NotesContext';
 
 import { saveNote, updateNote } from '@/lib/utilities/notes-actions';
 
-import { Controller, useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { tagsInputScehma, tagsInputScehmasValue } from '@/lib/zod';
-
-import { Tag, TagInput } from 'emblor';
-
 import { ClientNote } from '@/types';
+
+import NoteTagsField from '@/components/NoteTags/NoteTagsField';
 
 import { toast } from 'sonner';
 import { useParams, useRouter } from 'next/navigation';
@@ -41,23 +37,9 @@ export default function NoteItemDetails() {
     archiveNote,
   } = useContext(NotesContext);
   const [isPending, startTransition] = useTransition();
-  const [tags, setTags] = useState<Tag[]>([]);
-  const [activeTagIndex, setActiveTagIndex] = useState<number | null>(null);
   const router = useRouter();
   const params = useParams();
   const currentNote = noteCollection.find((note) => note.id === params.id);
-
-  const { control, handleSubmit, setValue } = useForm<tagsInputScehmasValue>({
-    resolver: zodResolver(tagsInputScehma),
-    defaultValues: {
-      tag: [
-        {
-          id: '',
-          text: '',
-        },
-      ],
-    },
-  });
 
   if (!currentNote) return null;
 
@@ -81,6 +63,7 @@ export default function NoteItemDetails() {
             // UPDATE
             title: currentNote.title,
             content: currentNote.content,
+            tags: currentNote.tags ?? [],
           });
       if (result.success) {
         markNoteSaved(currentNote.id, result.note[0]);
@@ -112,10 +95,6 @@ export default function NoteItemDetails() {
     if (currentNote.isDraft || currentNote.archive) return;
     archiveNote(currentNote.id, true);
     router.push('/archivenotes');
-  };
-
-  const onSubmit = (data: tagsInputScehmasValue) => {
-    console.log(data.tag); // Process tag data
   };
 
   return (
@@ -169,7 +148,10 @@ export default function NoteItemDetails() {
         </header>
 
         <form
-          onSubmit={handleSubmit(onSubmit)}
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleSave();
+          }}
           className="flex-1 min-h-0 flex flex-col">
           <FieldSet className="flex-1 min-h-0">
             <FieldGroup className="properties flex flex-col gap-4 items-start">
@@ -188,50 +170,23 @@ export default function NoteItemDetails() {
                   className="text-neutral-950 font-sans font-bold text-xl md:text-2xl h-auto leading-[1.2] tracking-[-0.5px] border-none shadow-none placeholder:text-neutral-950"
                 />
               </Field>
-              <Controller
-                name="tag"
-                control={control}
-                render={({ field }) => (
-                  <Field
-                    orientation="horizontal"
-                    className="tags flex items-center gap-8">
-                    <div className="tags-container flex items-center gap-1">
-                      <TagIcon className="size-4 text-neutral-950" />
-                      <FieldLabel
-                        htmlFor="tagsList"
-                        className="font-sans text-sm font-normal capitalize leading-[1.3] tracking-[-0.0125rem]">
-                        Tags:
-                      </FieldLabel>
-                    </div>
-                    <TagInput
-                      {...field}
-                      id="tagsList"
-                      tags={tags}
-                      placeholder="Press enter to add Tags(e.g. Work, Planning)"
-                      className="border-0"
-                      styleClasses={{
-                        inlineTagsContainer: 'border-none',
-                        input:
-                          'text-neutral-700 font-sans font-normal text-sm md:text-sm h-auto leading-[1.3] tracking-[-0.2px] border-none shadow-none placeholder:text-neutral-400',
-                        tag: {
-                          body: 'px-2 py-1 bg-neutral-100 rounded-full text-neutral-700 text-sm border-none cursor-pointer',
-                          closeButton:
-                            'text-neutral-500 hover:text-neutral-700 p-1 cursor-pointer',
-                        },
-                      }}
-                      setTags={(newTags) => {
-                        setTags(newTags);
-                        setValue('tag', newTags as [Tag, ...Tag[]]);
-                      }}
-                      activeTagIndex={activeTagIndex}
-                      setActiveTagIndex={setActiveTagIndex}
-                      inlineTags={true}
-                      maxTags={5}
-                      showCount={false}
-                    />
-                  </Field>
-                )}
-              />
+              <Field
+                orientation="horizontal"
+                className="tags flex items-center gap-8">
+                <div className="tags-container flex items-center gap-1">
+                  <TagIcon className="size-4 text-neutral-950" />
+                  <FieldLabel
+                    htmlFor="tagsList"
+                    className="font-sans text-sm font-normal capitalize leading-[1.3] tracking-[-0.0125rem]">
+                    Tags:
+                  </FieldLabel>
+                </div>
+                <NoteTagsField
+                  key={currentNote.id}
+                  tags={currentNote.tags ?? []}
+                  onTagsChange={(tags) => changeNote(currentNote.id, { tags })}
+                />
+              </Field>
               <Field
                 orientation="horizontal"
                 className="last-modified flex items-center gap-3">

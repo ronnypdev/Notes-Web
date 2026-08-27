@@ -1,4 +1,5 @@
 import * as z from 'zod';
+import { normalizeTags } from '@/lib/utilities/tags';
 
 export const signUpSchema = z.object({
   email: z.email({ pattern: z.regexes.email }).min(8, 'Email is required'),
@@ -36,13 +37,7 @@ export const resetPasswordSchema = z
 
 export type ResetPasswordFormValues = z.infer<typeof resetPasswordSchema>;
 
-export const tagsInputScehma = z.object({
-  tag: z.array(
-    z.object({
-      id: z.string(),
-      text: z.string(),
-    }),
-  ),
-});
-
-export type tagsInputScehmasValue = z.infer<typeof tagsInputScehma>;
+export const noteTagsSchema = z
+  .array(z.string().max(200))
+  .max(50)
+  .transform(normalizeTags);
