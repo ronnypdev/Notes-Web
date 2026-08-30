@@ -35,7 +35,7 @@ export default function Header() {
               <div className="flex items-center gap-2">
                 <Label htmlFor="search"></Label>
                 <Input
-                  className="px-0 pl-10"
+                  className="px-0 pl-10 pr-1.5"
                   type="search"
                   id="search"
                   placeholder="Search by title, content, or tags…"
