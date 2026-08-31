@@ -65,6 +65,11 @@ export default function ArchivedNoteDetails() {
     router.push('/archivenotes');
   };
 
+  const handleDelete = () => {
+    removeNote(currentNote.id);
+    router.push('/archivenotes');
+  };
+
   return (
     <>
       <article className="h-full flex flex-col">
