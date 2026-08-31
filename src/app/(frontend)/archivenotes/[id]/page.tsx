@@ -25,6 +25,16 @@ import { Separator } from '@/components/ui/separator';
 import Link from 'next/link';
 
 export default function ArchivedNoteDetails() {
+  const originalNoteRef = useRef<ClientNote | null>(null);
+  const { noteCollection, changeNote, markNoteSaved, removeNote, archiveNote } =
+    useContext(NotesContext);
+  const [isPending, startTransition] = useTransition();
+  const router = useRouter();
+  const params = useParams();
+  const currentNote = noteCollection.find((note) => note.id === params.id);
+
+  if (!currentNote) return null;
+
   return (
     <>
       <article className="h-full flex flex-col">
