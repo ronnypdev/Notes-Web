@@ -35,6 +35,12 @@ export default function ArchivedNoteDetails() {
 
   if (!currentNote) return null;
 
+  // Capture the saved snapshot once per note. Keyed on id, so typing
+  // (same id, new object each keystroke) never overwrites the baseline.
+  if (originalNoteRef.current?.id !== currentNote.id) {
+    originalNoteRef.current = currentNote;
+  }
+
   return (
     <>
       <article className="h-full flex flex-col">
