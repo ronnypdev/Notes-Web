@@ -78,7 +78,7 @@ export default function ArchivedNoteDetails() {
   return (
     <>
       <article className="h-full flex flex-col">
-        <header className="px-250 flex flex-col gap-200 text-neutral-950">
+        <header className="flex flex-col gap-200 lg:hidden text-neutral-950">
           <div className="mobile-properties-link lg:hidden flex items-center justify-between">
             <Link
               className="flex items-center gap-1 font-sans text-sm font-normal leading-[1.3] tracking-[-0.0125rem] text-neutral-600"
@@ -89,10 +89,20 @@ export default function ArchivedNoteDetails() {
             <div className="mobile-properties-controls flex items-center gap-200">
               <DeleteIcon className="size-5 text-neutral-600 cursor-pointer" />
               <RefreshIcon className="size-5 text-neutral-600 cursor-pointer rotate-180" />
-              <Button variant="link" className="text-neutral-600 p-0">
+              <Button
+                variant="link"
+                className="text-neutral-600 p-0"
+                onClick={handleCancel}
+                disabled={isPending}
+                type="button">
                 Cancel
               </Button>
-              <Button variant="link" className="p-0">
+              <Button
+                variant="link"
+                className="p-0"
+                onClick={handleSave}
+                disabled={isPending}
+                type="button">
                 Save
               </Button>
             </div>
