@@ -70,6 +70,11 @@ export default function ArchivedNoteDetails() {
     router.push('/archivenotes');
   };
 
+  const handleRestore = () => {
+    archiveNote(currentNote.id, false);
+    router.push(`/allnotes/${currentNote.id}`);
+  };
+
   return (
     <>
       <article className="h-full flex flex-col">
