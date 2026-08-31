@@ -1,3 +1,16 @@
+'use client';
+
+import { useContext, useTransition, useRef } from 'react';
+import { NotesContext } from '@/context/NotesContext';
+import { updateNote } from '@/lib/utilities/notes-actions';
+import { ClientNote } from '@/types';
+import NoteTagsField from '@/components/NoteTags/NoteTagsField';
+import { toast } from 'sonner';
+import { useParams, useRouter } from 'next/navigation';
+import { FieldSet, Field, FieldGroup, FieldLabel } from '@/components/ui/field';
+import { Input } from '@/components/ui/input';
+import { Modal } from '@/components/Modal/Modal';
+
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import {
@@ -9,7 +22,6 @@ import {
   DeleteIcon,
 } from '@/components/icons';
 import { Separator } from '@/components/ui/separator';
-import { Badge } from '@/components/ui/badge';
 import Link from 'next/link';
 
 export default function ArchivedNoteDetails() {
