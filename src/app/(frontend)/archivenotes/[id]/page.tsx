@@ -58,6 +58,13 @@ export default function ArchivedNoteDetails() {
     });
   };
 
+  const handleCancel = () => {
+    if (originalNoteRef.current) {
+      changeNote(currentNote.id, originalNoteRef.current);
+    }
+    router.push('/archivenotes');
+  };
+
   return (
     <>
       <article className="h-full flex flex-col">
