@@ -41,6 +41,23 @@ export default function ArchivedNoteDetails() {
     originalNoteRef.current = currentNote;
   }
 
+  const handleSave = () => {
+    startTransition(async () => {
+      const result = await updateNote(currentNote.id, {
+        title: currentNote.title,
+        content: currentNote.content,
+        tags: currentNote.tags ?? [],
+      });
+      if (result.success) {
+        markNoteSaved(currentNote.id, result.note[0]);
+        originalNoteRef.current = { ...result.note[0], isDraft: false };
+        toast.success('Note saved', { position: 'bottom-right' });
+      } else {
+        toast.error('Failed to save note', { position: 'bottom-right' });
+      }
+    });
+  };
+
   return (
     <>
       <article className="h-full flex flex-col">
