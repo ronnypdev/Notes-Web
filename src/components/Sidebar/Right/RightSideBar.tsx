@@ -19,6 +19,9 @@ export default function RightSideBar() {
   // Only saved notes can be archived
   const canArchive =
     activeNote !== undefined && !activeNote.isDraft && !activeNote.archive;
+  // Only an archived note can be restored
+  const canRestore = activeNote !== undefined && activeNote.archive;
+
   const isArchiveRoute = pathname.startsWith('/archivenotes');
   const isSettingsRoute = pathname.startsWith('/settings');
 
