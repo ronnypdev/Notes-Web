@@ -79,7 +79,7 @@ export default function ArchivedNoteDetails() {
     <>
       <section className="h-full flex flex-col py-5 px-6">
         <header className="flex flex-col gap-200 lg:hidden text-neutral-950">
-          <div className="mobile-properties-link lg:hidden flex items-center justify-between">
+          <div className="mobile-properties-link flex items-center justify-between">
             <Link
               className="flex items-center gap-1 font-sans text-sm font-normal leading-[1.3] tracking-[-0.0125rem] text-neutral-600"
               href="/archivenotes">
