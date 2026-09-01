@@ -89,6 +89,14 @@ export default function ArchivedNoteDetails() {
             <div className="mobile-properties-controls flex items-center gap-200">
               <DeleteIcon className="size-5 text-neutral-600 cursor-pointer" />
               <RefreshIcon className="size-5 text-neutral-600 cursor-pointer rotate-180" />
+              <Modal type="delete" onConfirm={handleDelete}>
+                <button
+                  type="button"
+                  aria-label="Delete note"
+                  className="cursor-pointer text-neutral-600">
+                  <DeleteIcon className="size-5" />
+                </button>
+              </Modal>
               <Button
                 variant="link"
                 className="text-neutral-600 p-0"
