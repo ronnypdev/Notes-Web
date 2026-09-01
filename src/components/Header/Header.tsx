@@ -4,8 +4,13 @@ import { useRouter } from 'next/navigation';
 import { authClient } from '@/lib/auth-client';
 
 import Logo from '../Logo/Logo';
-import InputField from '../InputField/InputField';
+
+import { Field } from '@/components/ui/field';
+import { Label } from '@/components/ui/label';
+import { Input } from '@/components/ui/input';
+
 import UserDropDown from '../UserDropDown/UserDropDown';
+import { SearchIcon } from 'lucide-react';
 
 export default function Header() {
   const router = useRouter();
@@ -23,12 +28,21 @@ export default function Header() {
         <h1 className="font-sans font-bold text-2xl hidden lg:block">
           All Notes
         </h1>
-        <div className="hidden lg:flex justify-center items-center gap-4 w-[358px] max-w-full h-11">
-          <InputField
-            label="search-notes"
-            type="search"
-            placeholder="Search by title, content, or tags…"
-          />
+        <div className="hidden lg:flex justify-center items-center gap-4 w-[400px] max-w-full h-11">
+          <form className="w-full">
+            <Field className="relative flex items-center">
+              <SearchIcon className="w-5 h-5 max-w-fit text-neutral-600 absolute left-5 top-1/2 -translate-y-1/2" />
+              <div className="flex items-center gap-2">
+                <Label htmlFor="search"></Label>
+                <Input
+                  className="px-0 pl-10 pr-1.5"
+                  type="search"
+                  id="search"
+                  placeholder="Search by title, content, or tags…"
+                />
+              </div>
+            </Field>
+          </form>
           <UserDropDown
             user={user}
             onSignOut={() => {

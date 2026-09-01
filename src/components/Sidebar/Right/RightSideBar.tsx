@@ -19,6 +19,9 @@ export default function RightSideBar() {
   // Only saved notes can be archived
   const canArchive =
     activeNote !== undefined && !activeNote.isDraft && !activeNote.archive;
+  // Only an archived note can be restored
+  const canRestore = activeNote !== undefined && activeNote.archive;
+
   const isArchiveRoute = pathname.startsWith('/archivenotes');
   const isSettingsRoute = pathname.startsWith('/settings');
 
@@ -32,11 +35,15 @@ export default function RightSideBar() {
         <Modal
           type="restore"
           onConfirm={() => {
-            if (!noteId) return;
+            if (!noteId || !canRestore) return;
             archiveNote(noteId, false); // false = not archived = restored
-            router.push('/allnotes');
+            router.push(`/allnotes/${noteId}`);
           }}>
-          <Button variant="outline" className="justify-start gap-2" size="lg">
+          <Button
+            variant="outline"
+            className="justify-start gap-2"
+            size="lg"
+            disabled={!canRestore}>
             <RefreshIcon />
             Restore Note
           </Button>

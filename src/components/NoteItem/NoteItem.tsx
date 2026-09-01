@@ -9,7 +9,6 @@ import {
   ItemFooter,
   ItemHeader,
 } from '@/components/ui/item';
-import { Separator } from '@/components/ui/separator';
 import { Note } from '@/types';
 import { cn } from '@/lib/utils';
 
@@ -33,8 +32,8 @@ export default function NoteItem({
       <Item
         id={id}
         className={cn(
-          'flex flex-col items-start gap-150 p-100 rounded-(--radius-6) w-full bg-white hover:bg-neutral-100 transition-colors duration-100 cursor-pointer',
-          isActive && 'bg-neutral-100',
+          'flex flex-col items-start gap-150 p-100 rounded-(--radius-6) w-full bg-white hover:bg-neutral-100 transition-colors duration-100 cursor-pointer border-b border-solid border-neutral-200 shadow-large mb-150',
+          isActive && 'bg-neutral-100 shadow-none',
         )}>
         <ItemHeader>
           {title ? (
@@ -63,7 +62,7 @@ export default function NoteItem({
         <ItemFooter className="text-neutral-700 text-[12px] font-normal leading-[1.2] tracking-[-0.2px]">
           {lastEdited}
         </ItemFooter>
-        <Separator />
+        {/* <Separator /> */}
       </Item>
     </Link>
   );
