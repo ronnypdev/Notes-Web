@@ -1,6 +1,6 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import { authClient } from '@/lib/auth-client';
 
 import Logo from '../Logo/Logo';
@@ -14,6 +14,7 @@ import { SearchIcon } from 'lucide-react';
 
 export default function Header() {
   const router = useRouter();
+  const pathname = usePathname();
   const session = authClient.useSession();
   const user = session.data?.user;
 
@@ -25,9 +26,21 @@ export default function Header() {
         <div className="lg:hidden">
           <Logo />
         </div>
-        <h1 className="font-sans font-bold text-2xl hidden lg:block">
-          All Notes
-        </h1>
+
+        {pathname === '/allnotes' ? (
+          <h1 className="font-sans font-bold text-2xl hidden lg:block">
+            All Notes
+          </h1>
+        ) : pathname === '/archivenotes' ? (
+          <h1 className="font-sans font-bold text-2xl hidden lg:block">
+            Archive Notes
+          </h1>
+        ) : (
+          <h1 className="font-sans font-bold text-2xl hidden lg:block">
+            Search
+          </h1>
+        )}
+
         <div className="hidden lg:flex justify-center items-center gap-4 w-[400px] max-w-full h-11">
           <form className="w-full">
             <Field className="relative flex items-center">
