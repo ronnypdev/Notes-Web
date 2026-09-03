@@ -1,16 +1,11 @@
-'use client';
-import { useSearchParams } from 'next/navigation';
+import { getServerSessions } from '@/lib/usersessions';
+import UnauthenticatedPage from '../unauthenticated/page';
 
-// import { getServerSessions } from '@/lib/usersessions';
-// import UnauthenticatedPage from '../unauthenticated/page';
+export default async function SearchPage() {
+  const session = await getServerSessions();
+  const user = session?.user;
 
-export default function SearchPage() {
-  // const session = await getServerSessions();
-  // const user = session?.user;
-  // if (!user) return <UnauthenticatedPage />;
-  // return null;
+  if (!user) return <UnauthenticatedPage />;
 
-  const q = useSearchParams().get('q');
-  console.log('[spike] render, q =', q);
-  return <p style={{ padding: 24 }}>q = {q ?? '(none)'}</p>;
+  return null;
 }
