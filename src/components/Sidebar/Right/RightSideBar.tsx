@@ -4,7 +4,12 @@ import { useContext } from 'react';
 import { NotesContext } from '@/context/NotesContext';
 import { Button } from '@/components/ui/button';
 import { ArchiveIcon, DeleteIcon, RefreshIcon } from '@/components/icons';
-import { usePathname, useParams, useRouter } from 'next/navigation';
+import {
+  usePathname,
+  useParams,
+  useRouter,
+  useSearchParams,
+} from 'next/navigation';
 import { Modal } from '@/components/Modal/Modal';
 
 export default function RightSideBar() {
@@ -12,6 +17,7 @@ export default function RightSideBar() {
   const pathname = usePathname();
   const params = useParams();
   const router = useRouter();
+  const searchParams = useSearchParams();
   const noteId = typeof params.id === 'string' ? params.id : undefined;
   const activeNote = noteId
     ? noteCollection.find((note) => note.id === noteId)
