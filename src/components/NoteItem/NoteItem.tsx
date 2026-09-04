@@ -60,7 +60,6 @@ export default function NoteItem({
         <ItemFooter className="text-neutral-700 text-[12px] font-normal leading-[1.2] tracking-[-0.2px]">
           {lastEdited}
         </ItemFooter>
-        {/* <Separator /> */}
       </Item>
     </Link>
   );
