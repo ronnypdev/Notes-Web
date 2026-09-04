@@ -7,7 +7,7 @@ import Logo from '../Logo/Logo';
 
 import { Field } from '@/components/ui/field';
 import { Label } from '@/components/ui/label';
-import { Input } from '@/components/ui/input';
+import SearchField from '@/components/Search/SearchField';
 
 import UserDropDown from '../UserDropDown/UserDropDown';
 import { SearchIcon } from 'lucide-react';
@@ -42,20 +42,22 @@ export default function Header() {
         )}
 
         <div className="hidden lg:flex justify-center items-center gap-4 w-[400px] max-w-full h-11">
-          <form className="w-full">
+          <div className="w-full">
             <Field className="relative flex items-center">
               <SearchIcon className="w-5 h-5 max-w-fit text-neutral-600 absolute left-5 top-1/2 -translate-y-1/2" />
               <div className="flex items-center gap-2">
-                <Label htmlFor="search"></Label>
-                <Input
+                <Label htmlFor="desktop-search" className="sr-only">
+                  Search notes
+                </Label>
+                <SearchField
+                  id="desktop-search"
                   className="px-0 pl-10 pr-1.5"
-                  type="search"
-                  id="search"
                   placeholder="Search by title, content, or tags…"
                 />
               </div>
             </Field>
-          </form>
+          </div>
+
           <UserDropDown
             user={user}
             onSignOut={() => {
