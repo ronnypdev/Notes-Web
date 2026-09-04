@@ -79,7 +79,7 @@ export default function NotesList({ basePath }: NotesListProps) {
         <NoteItem
           key={note.id}
           {...note}
-          basePath={`/${basePath}/${note.id}${queryString}`}
+          href={`/${basePath}/${note.id}${queryString}`}
           isActive={note.id === activeNoteId}
         />
       ))}

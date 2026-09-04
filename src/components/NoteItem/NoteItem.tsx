@@ -13,7 +13,7 @@ import { Note } from '@/types';
 import { cn } from '@/lib/utils';
 
 interface NoteItemProps extends Note {
-  basePath?: string;
+  href: string;
   isActive?: boolean;
 }
 
@@ -22,13 +22,11 @@ export default function NoteItem({
   id,
   tags,
   lastEdited,
-  basePath = 'allnotes',
+  href,
   isActive = false,
 }: NoteItemProps) {
   return (
-    <Link
-      href={`/${basePath}/${id}`}
-      aria-current={isActive ? 'page' : undefined}>
+    <Link href={`/${href}/${id}`} aria-current={isActive ? 'page' : undefined}>
       <Item
         id={id}
         className={cn(
