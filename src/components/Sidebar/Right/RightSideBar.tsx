@@ -22,6 +22,12 @@ export default function RightSideBar() {
   const activeNote = noteId
     ? noteCollection.find((note) => note.id === noteId)
     : undefined;
+  // Only saved notes can be archived
+  const canArchive =
+    activeNote !== undefined && !activeNote.isDraft && !activeNote.archive;
+  // Only an archived note can be restored
+  const canRestore = activeNote !== undefined && activeNote.archive;
+
   const isSearchRoute = pathname.startsWith('/search');
   const isArchiveRoute = pathname.startsWith('/archivenotes');
   const isSettingsRoute = pathname.startsWith('/settings');
@@ -47,13 +53,14 @@ export default function RightSideBar() {
 
   return (
     <aside className="w-[var(--sidebar-width)] border-l border-solid border-neutral-200 bg-background p-4 lg:flex flex-col gap-2 hidden">
-      {isArchiveRoute ? (
+      {showRestore ? (
         <Modal
           type="restore"
           onConfirm={() => {
             if (!noteId || !canRestore) return;
             archiveNote(noteId, false); // false = not archived = restored
-            router.push(`/allnotes/${noteId}`);
+            // On search the note stays in the results, so stay put.
+            if (!isSearchRoute) router.push(`/allnotes/${noteId}`);
           }}>
           <Button
             variant="outline"
@@ -70,7 +77,7 @@ export default function RightSideBar() {
           onConfirm={() => {
             if (!noteId || !canArchive) return;
             archiveNote(noteId, true);
-            router.push('/archivenotes');
+            if (!isSearchRoute) router.push('/archivenotes');
           }}>
           <Button
             variant="outline"
@@ -87,7 +94,7 @@ export default function RightSideBar() {
         onConfirm={() => {
           if (!noteId) return;
           removeNote(noteId);
-          router.push(isArchiveRoute ? '/archivenotes' : '/allnotes');
+          router.push(listHref);
         }}>
         <Button
           variant="outline"
