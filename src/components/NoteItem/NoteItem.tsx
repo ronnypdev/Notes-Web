@@ -26,7 +26,7 @@ export default function NoteItem({
   isActive = false,
 }: NoteItemProps) {
   return (
-    <Link href={`/${href}/${id}`} aria-current={isActive ? 'page' : undefined}>
+    <Link href={href} aria-current={isActive ? 'page' : undefined}>
       <Item
         id={id}
         className={cn(
