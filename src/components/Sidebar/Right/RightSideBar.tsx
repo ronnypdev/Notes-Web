@@ -22,18 +22,28 @@ export default function RightSideBar() {
   const activeNote = noteId
     ? noteCollection.find((note) => note.id === noteId)
     : undefined;
-  // Only saved notes can be archived
-  const canArchive =
-    activeNote !== undefined && !activeNote.isDraft && !activeNote.archive;
-  // Only an archived note can be restored
-  const canRestore = activeNote !== undefined && activeNote.archive;
-
+  const isSearchRoute = pathname.startsWith('/search');
   const isArchiveRoute = pathname.startsWith('/archivenotes');
   const isSettingsRoute = pathname.startsWith('/settings');
 
   if (isSettingsRoute) {
     return null;
   }
+
+  // The note decides which action to offer when one is open; fall back to
+  // the route for the empty state, so /archivenotes still reads "Restore"
+  // with nothing selected.
+  const showRestore = activeNote ? activeNote.archive : isArchiveRoute;
+
+  const rawQuery = (searchParams.get('q') ?? '').trim();
+  const queryString = rawQuery ? `?q=${encodeURIComponent(rawQuery)}` : '';
+
+  // Where Delete returns to: the list you came from, query intact.
+  const listHref = isSearchRoute
+    ? `/search${queryString}`
+    : isArchiveRoute
+      ? '/archivenotes'
+      : '/allnotes';
 
   return (
     <aside className="w-[var(--sidebar-width)] border-l border-solid border-neutral-200 bg-background p-4 lg:flex flex-col gap-2 hidden">
