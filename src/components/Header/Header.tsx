@@ -12,6 +12,16 @@ import SearchField from '@/components/Search/SearchField';
 import UserDropDown from '../UserDropDown/UserDropDown';
 import { SearchIcon } from 'lucide-react';
 
+function pageTitle(pathname: string, query: string): string {
+  if (pathname.startsWith('/search')) {
+    return query ? `Showing results for: “${query}”` : 'Search';
+  }
+  if (pathname.startsWith('/archivenotes')) return 'Archived Notes';
+  if (pathname.startsWith('/allnotes')) return 'All Notes';
+  if (pathname.startsWith('/settings')) return 'Settings';
+  return '';
+}
+
 export default function Header() {
   const router = useRouter();
   const pathname = usePathname();
