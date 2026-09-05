@@ -14,7 +14,7 @@ export default function LeftSideBar() {
   return (
     <>
       <Sidebar side="left">
-        <SidebarHeader className="border-b border-neutral-200">
+        <SidebarHeader className="border-b border-border">
           <div className="py-3 px-4 my-3">
             <Logo />
           </div>
@@ -23,7 +23,7 @@ export default function LeftSideBar() {
         <SidebarContent>
           <SidebarGroup></SidebarGroup>
         </SidebarContent>
-        <SidebarFooter className="text-neutral-950 bg-neutral-100 font-sans text-sm font-medium leading-[1.2] tracking-[-0.2px]">
+        <SidebarFooter className="text-foreground bg-muted font-sans text-sm font-medium leading-[1.2] tracking-[-0.2px]">
           A place to keep all your notes organized
         </SidebarFooter>
       </Sidebar>
