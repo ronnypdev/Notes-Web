@@ -4,7 +4,12 @@ import { useContext } from 'react';
 import { NotesContext } from '@/context/NotesContext';
 import { Button } from '@/components/ui/button';
 import { ArchiveIcon, DeleteIcon, RefreshIcon } from '@/components/icons';
-import { usePathname, useParams, useRouter } from 'next/navigation';
+import {
+  usePathname,
+  useParams,
+  useRouter,
+  useSearchParams,
+} from 'next/navigation';
 import { Modal } from '@/components/Modal/Modal';
 
 export default function RightSideBar() {
@@ -12,6 +17,7 @@ export default function RightSideBar() {
   const pathname = usePathname();
   const params = useParams();
   const router = useRouter();
+  const searchParams = useSearchParams();
   const noteId = typeof params.id === 'string' ? params.id : undefined;
   const activeNote = noteId
     ? noteCollection.find((note) => note.id === noteId)
@@ -22,6 +28,7 @@ export default function RightSideBar() {
   // Only an archived note can be restored
   const canRestore = activeNote !== undefined && activeNote.archive;
 
+  const isSearchRoute = pathname.startsWith('/search');
   const isArchiveRoute = pathname.startsWith('/archivenotes');
   const isSettingsRoute = pathname.startsWith('/settings');
 
@@ -29,15 +36,31 @@ export default function RightSideBar() {
     return null;
   }
 
+  // The note decides which action to offer when one is open; fall back to
+  // the route for the empty state, so /archivenotes still reads "Restore"
+  // with nothing selected.
+  const showRestore = activeNote ? activeNote.archive : isArchiveRoute;
+
+  const rawQuery = (searchParams.get('q') ?? '').trim();
+  const queryString = rawQuery ? `?q=${encodeURIComponent(rawQuery)}` : '';
+
+  // Where Delete returns to: the list you came from, query intact.
+  const listHref = isSearchRoute
+    ? `/search${queryString}`
+    : isArchiveRoute
+      ? '/archivenotes'
+      : '/allnotes';
+
   return (
     <aside className="w-[var(--sidebar-width)] border-l border-solid border-neutral-200 bg-background p-4 lg:flex flex-col gap-2 hidden">
-      {isArchiveRoute ? (
+      {showRestore ? (
         <Modal
           type="restore"
           onConfirm={() => {
             if (!noteId || !canRestore) return;
             archiveNote(noteId, false); // false = not archived = restored
-            router.push(`/allnotes/${noteId}`);
+            // On search the note stays in the results, so stay put.
+            if (!isSearchRoute) router.push(`/allnotes/${noteId}`);
           }}>
           <Button
             variant="outline"
@@ -54,7 +77,7 @@ export default function RightSideBar() {
           onConfirm={() => {
             if (!noteId || !canArchive) return;
             archiveNote(noteId, true);
-            router.push('/archivenotes');
+            if (!isSearchRoute) router.push('/archivenotes');
           }}>
           <Button
             variant="outline"
@@ -71,7 +94,7 @@ export default function RightSideBar() {
         onConfirm={() => {
           if (!noteId) return;
           removeNote(noteId);
-          router.push(isArchiveRoute ? '/archivenotes' : '/allnotes');
+          router.push(listHref);
         }}>
         <Button
           variant="outline"
