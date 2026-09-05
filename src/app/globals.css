@@ -153,27 +153,34 @@
 }
 
 .dark {
-  --color-background: oklch(0.145 0 0);
-  --color-foreground: oklch(0.985 0 0);
-  --color-border: hsl(221, 16%, 20%);
-  --color-input: hsl(221, 16%, 20%);
-  --color-ring: hsl(228, 100%, 60%);
-  --color-primary-foreground: hsl(0, 0%, 100%);
-  --color-secondary: hsl(231, 16%, 16%);
-  --color-secondary-foreground: hsl(216, 33%, 97%);
-  --color-destructive: hsl(355, 96%, 60%);
-  --color-muted: hsl(231, 16%, 16%);
-  --color-muted-foreground: hsl(220, 11%, 64%);
-  --color-accent: hsl(231, 16%, 16%);
-  --color-accent-foreground: hsl(216, 33%, 97%);
-  --sidebar: hsl(240 5.9% 10%);
-  --sidebar-foreground: hsl(240 4.8% 95.9%);
-  --sidebar-primary: hsl(224.3 76.3% 48%);
-  --sidebar-primary-foreground: hsl(0 0% 100%);
-  --sidebar-accent: hsl(240 3.7% 15.9%);
-  --sidebar-accent-foreground: hsl(240 4.8% 95.9%);
-  --sidebar-border: hsl(240 3.7% 15.9%);
-  --sidebar-ring: hsl(217.2 91.2% 59.8%);
+  --background: hsl(222, 32%, 8%); /* neutral-950 */
+  --foreground: hsl(0, 0%, 100%); /* neutral-0 */
+  --card: hsl(230, 19%, 12%); /* neutral-900 */
+  --card-foreground: hsl(0, 0%, 100%); /* neutral-0 */
+  --popover: hsl(230, 19%, 12%); /* neutral-900 */
+  --popover-foreground: hsl(0, 0%, 100%); /* neutral-0 */
+  --primary: hsl(228, 100%, 60%); /* blue-500 */
+  --primary-foreground: hsl(0, 0%, 100%); /* neutral-0 */
+  --secondary: hsl(231, 16%, 16%); /* neutral-800 */
+  --secondary-foreground: hsl(216, 33%, 97%); /* neutral-50 */
+  --muted: hsl(231, 16%, 16%); /* neutral-800 */
+  --muted-foreground: hsl(220, 11%, 64%); /* neutral-400 */
+  --accent: hsl(231, 16%, 16%); /* neutral-800 */
+  --accent-foreground: hsl(216, 33%, 97%); /* neutral-50 */
+  --destructive: hsl(355, 96%, 60%); /* red-500 */
+  --border: hsl(231, 16%, 16%); /* neutral-800 */
+  --input: hsl(221, 16%, 20%); /* neutral-700 */
+  --ring: hsl(228, 100%, 60%); /* blue-500 */
+
+  /* Sidebar */
+  --sidebar: transparent;
+  --sidebar-foreground: hsl(0, 0%, 100%); /* neutral-0 */
+  --sidebar-primary: hsl(228, 100%, 60%); /* blue-500 */
+  --sidebar-primary-foreground: hsl(0, 0%, 100%); /* neutral-0 */
+  --sidebar-accent: hsl(231, 16%, 16%); /* neutral-800 */
+  --sidebar-accent-foreground: hsl(216, 33%, 97%); /* neutral-50 */
+  --sidebar-border: hsl(231, 16%, 16%); /* neutral-800 */
+  --sidebar-ring: hsl(228, 100%, 60%); /* blue-500 */
 }
 
 @layer base {
