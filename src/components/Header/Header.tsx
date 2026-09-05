@@ -1,6 +1,6 @@
 'use client';
 
-import { useRouter, usePathname } from 'next/navigation';
+import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 import { authClient } from '@/lib/auth-client';
 
 import Logo from '../Logo/Logo';
@@ -27,6 +27,8 @@ export default function Header() {
   const pathname = usePathname();
   const session = authClient.useSession();
   const user = session.data?.user;
+  const rawQuery = (useSearchParams().get('q') ?? '').trim();
+  const title = pageTitle(pathname, rawQuery);
 
   if (!user) return;
 
@@ -37,19 +39,11 @@ export default function Header() {
           <Logo />
         </div>
 
-        {pathname === '/allnotes' ? (
-          <h1 className="font-sans font-bold text-2xl hidden lg:block">
-            All Notes
-          </h1>
-        ) : pathname === '/archivenotes' ? (
-          <h1 className="font-sans font-bold text-2xl hidden lg:block">
-            Archive Notes
-          </h1>
-        ) : (
-          <h1 className="font-sans font-bold text-2xl hidden lg:block">
-            Search
-          </h1>
-        )}
+        <h1
+          className="font-sans font-bold text-2xl hidden lg:block truncate max-w-[40%]"
+          title={title}>
+          {title}
+        </h1>
 
         <div className="hidden lg:flex justify-center items-center gap-4 w-[400px] max-w-full h-11">
           <div className="w-full">
