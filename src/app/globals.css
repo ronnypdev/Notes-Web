@@ -185,7 +185,7 @@
 
 @layer base {
   body {
-    @apply bg-background text-foreground font-sans h-dvh border-b border-neutral-200;
+    @apply bg-background text-foreground font-sans h-dvh border-b border-border;
   }
 }
 
