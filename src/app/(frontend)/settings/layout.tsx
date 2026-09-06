@@ -40,7 +40,7 @@ export default function SettingsLayout({
   return (
     <section className="w-full h-full grid grid-cols-1 lg:grid-cols-[350px_1fr] grid-rows-[1fr]">
       <div
-        className={`settings-sidebar w-full col-span-1 row-span-1 border-r border-neutral-200 py-5 pl-4 pr-8  ${isBaseRoute ? 'block' : 'hidden'} lg:block relative`}>
+        className={`settings-sidebar w-full col-span-1 row-span-1 border-r border-border py-5 pl-4 pr-8  ${isBaseRoute ? 'block' : 'hidden'} lg:block relative`}>
         <nav>
           <ul className="flex flex-col gap-2">
             {settingsLinks.map((link) => {
@@ -51,9 +51,9 @@ export default function SettingsLayout({
                   <Link
                     href={link.href}
                     className={clsx(
-                      'py-1.5 px-3 flex items-center gap-2 text-neutral-950',
+                      'py-1.5 px-3 flex items-center gap-2 text-foreground',
                       {
-                        'rounded-lg bg-neutral-100': isActive,
+                        'rounded-lg bg-accent': isActive,
                       },
                     )}>
                     <link.icon
@@ -72,7 +72,7 @@ export default function SettingsLayout({
           </ul>
           <Separator className="my-4" />
           <ul className="flex flex-col gap-2">
-            <li className="py-1.5 px-3 flex items-center gap-2 text-neutral-950">
+            <li className="py-1.5 px-3 flex items-center gap-2 text-foreground">
               <LogoutIcon className="w-5 h-5" />
               <Link href="/settings/logout">Logout</Link>
             </li>
