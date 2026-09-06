@@ -50,7 +50,7 @@ export default function UserDropDown({ onSignOut, user }: UserDropDownProps) {
         </DropdownMenuTrigger>
         <DropdownMenuContent
           align="end"
-          className="bg-white border border-neutral-200 rounded-lg shadow-sm">
+          className="bg-popover border border-border rounded-lg shadow-sm">
           <DropdownMenuGroup>
             <DropdownMenuItem className="cursor-pointer">
               <BadgeCheckIcon />
