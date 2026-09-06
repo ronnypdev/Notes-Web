@@ -34,7 +34,7 @@ export default function Header() {
 
   return (
     <>
-      <header className="w-full max-w-full flex items-center justify-between my-0 mx-auto bg-neutral-100 lg:bg-transparent border-none lg:border-solid lg:border-b lg:border-b-neutral-200 px-[var(--spacing-400)] py-3.5">
+      <header className="w-full max-w-full flex items-center justify-between my-0 mx-auto bg-muted lg:bg-transparent border-none lg:border-solid lg:border-b lg:border-b-border px-[var(--spacing-400)] py-3.5">
         <div className="lg:hidden">
           <Logo />
         </div>
@@ -48,7 +48,7 @@ export default function Header() {
         <div className="hidden lg:flex justify-center items-center gap-4 w-[400px] max-w-full h-11">
           <div className="w-full">
             <Field className="relative flex items-center">
-              <SearchIcon className="w-5 h-5 max-w-fit text-neutral-600 absolute left-5 top-1/2 -translate-y-1/2" />
+              <SearchIcon className="w-5 h-5 max-w-fit text-muted-foreground absolute left-5 top-1/2 -translate-y-1/2" />
               <div className="flex items-center gap-2">
                 <Label htmlFor="desktop-search" className="sr-only">
                   Search notes
