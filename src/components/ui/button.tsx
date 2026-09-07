@@ -24,7 +24,6 @@ const buttonVariants = cva(
         mobileCreate:
           'flex items-center bg-primary justify-center mb-200 lg:hidden w-16 h-16 rounded-full text-primary-foreground text-2xl cursor-pointer shadow-btn-create-new-note absolute bottom-25 right-8',
       },
-
       size: {
         default:
           'py-[var(--spacing-150)] px-[var(--spacing-200)] has-[>svg]:px-3',
