@@ -43,6 +43,7 @@
   --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary-hover: var(--secondary-hover);
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
   --color-popover: var(--popover);
@@ -130,6 +131,7 @@
   --popover-foreground: hsl(222, 32%, 8%); /* neutral-950 */
   --primary: hsl(228, 100%, 60%); /* blue-500 */
   --primary-foreground: hsl(0, 0%, 100%); /* neutral-0 */
+  --secondary-hover: hsl(0, 0%, 100%); /* neutral-0 */
   --secondary: hsl(216, 26%, 96%); /* neutral-100 */
   --secondary-foreground: hsl(222, 32%, 8%); /* neutral-950 */
   --muted: hsl(216, 26%, 96%); /* neutral-100 */
@@ -160,6 +162,7 @@
   --popover: hsl(230, 19%, 12%); /* neutral-900 */
   --popover-foreground: hsl(0, 0%, 100%); /* neutral-0 */
   --primary: hsl(228, 100%, 60%); /* blue-500 */
+  --secondary-hover: hsl(221, 16%, 20%); /* neutral-700 */
   --primary-foreground: hsl(0, 0%, 100%); /* neutral-0 */
   --secondary: hsl(231, 16%, 16%); /* neutral-800 */
   --secondary-foreground: hsl(216, 33%, 97%); /* neutral-50 */
