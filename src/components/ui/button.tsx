@@ -9,20 +9,22 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: 'bg-primary text-white shadow-xs hover:bg-blue-700/90',
+        default:
+          'bg-primary text-primary-foreground shadow-xs hover:bg-blue-700/90',
         secondary:
-          'bg-neutral-100 text-neutral-600 shadow-xs hover:bg-neutral-0 hover:text-neutral-950 border border-solid border-transparent hover:border-neutral-300 focus-visible:shadow-btn-secondary-hover focus-visible:border-neutral-600 focus-visible:shadow-[var(--box-shadow-btn-secondary-hover)]',
+          'bg-secondary text-muted-foreground shadow-xs hover:bg-secondary-hover hover:text-foreground border border-solid border-transparent hover:border-input focus-visible:shadow-btn-secondary-hover focus-visible:border-muted-foreground',
         outline:
-          'border bg-neutral-0 text-neutral-600 border border-solid rounded-lg border-neutral-300 hover:bg-neutral-100 hover:text-neutral-600 hover:border-transparent shadow-xs focus-visible:shadow-btn-secondary-hover focus-visible:border-neutral-600 focus-visible:shadow-[var(--box-shadow-btn-secondary-hover)]',
+          'border bg-card text-muted-foreground border border-solid rounded-lg border-input hover:bg-accent hover:text-muted-foreground hover:border-transparent shadow-xs focus-visible:shadow-btn-secondary-hover focus-visible:border-muted-foreground',
         destructive: 'bg-red-500 text-white shadow-xs hover:bg-red-500/90',
         ghost:
           'hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50',
         disabled:
-          'bg-neutral-100 text-neutral-300 py-[var(--spacing-150)] px-[var(--spacing-200)] pointer-events-none',
+          'bg-muted text-muted-foreground/50 py-[var(--spacing-150)] px-[var(--spacing-200)] pointer-events-none',
         link: 'text-primary underline-offset-4 hover:underline-offset-0',
         mobileCreate:
-          'flex items-center bg-primary justify-center mb-200 lg:hidden w-16 h-16 rounded-full text-white text-2xl cursor-pointer shadow-btn-create-new-note absolute bottom-25 right-8',
+          'flex items-center bg-primary justify-center mb-200 lg:hidden w-16 h-16 rounded-full text-primary-foreground text-2xl cursor-pointer shadow-btn-create-new-note absolute bottom-25 right-8',
       },
+
       size: {
         default:
           'py-[var(--spacing-150)] px-[var(--spacing-200)] has-[>svg]:px-3',
