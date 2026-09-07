@@ -24,13 +24,13 @@ export const Modal = ({ type, onConfirm, children }: ModalProps) => {
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="max-w-full border-none">
         <div className="flex items-center justify-between gap-4">
-          <div className="flex items-center justify-center bg-neutral-100 rounded-lg p-3 self-start">
+          <div className="flex items-center justify-center bg-muted rounded-lg p-3 self-start">
             {type === 'delete' ? (
-              <DeleteIcon className="size-6 text-neutral-950" />
+              <DeleteIcon className="size-6 text-foreground" />
             ) : type === 'archive' ? (
-              <ArchiveIcon className="size-6 text-neutral-950" />
+              <ArchiveIcon className="size-6 text-foreground" />
             ) : (
-              <RefreshIcon className="size-6 text-neutral-950 rotate-180" />
+              <RefreshIcon className="size-6 text-foreground rotate-180" />
             )}
           </div>
           <DialogHeader>
@@ -51,7 +51,7 @@ export const Modal = ({ type, onConfirm, children }: ModalProps) => {
           </DialogHeader>
         </div>
 
-        <DialogFooter className="border-t border-solid border-neutral-200 pt-4">
+        <DialogFooter className="border-t border-solid border-border pt-4">
           <DialogClose asChild>
             <Button variant="secondary" type="button">
               Cancel
