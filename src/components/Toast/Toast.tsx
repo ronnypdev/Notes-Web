@@ -29,20 +29,20 @@ export const Toast = ({ message, type, routeLink }: ToastProps) => {
 
   return (
     <div
-      className={`toast ${type} w-full max-w-full flex items-center justify-between border border-solid border-neutral-200 rounded-lg p-[var(--spacing-100)] bg-neutral-0 shadow-toast`}>
+      className={`toast ${type} w-full max-w-full flex items-center justify-between border border-solid border-border rounded-lg p-[var(--spacing-100)] bg-popover shadow-toast`}>
       <div className="flex items-center gap-[var(--spacing-100)]">
         <CheckCircleIcon className="size-4 text-green-500" />
-        <p className="text-xs text-neutral-950 font-sans font-normal leading-line-normal">
+        <p className="text-xs text-foreground font-sans font-normal leading-line-normal">
           {message}
         </p>
       </div>
       <div className="flex items-center gap-[var(--spacing-100)]">
         <Link
           href={routeLink || '/'}
-          className="text-xs text-neutral-950 underline font-sans font-normal leading-line-sm tracking-tighter-xxs">
+          className="text-xs text-foreground underline font-sans font-normal leading-line-sm tracking-tighter-xxs">
           {toastNotificationType(type)}
         </Link>
-        <CloseRemoveIcon className="size-4 text-neutral-400 cursor-pointer" />
+        <CloseRemoveIcon className="size-4 text-muted-foreground cursor-pointer" />
       </div>
     </div>
   );
