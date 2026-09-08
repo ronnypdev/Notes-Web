@@ -30,7 +30,7 @@ export default function NoteItem({
       <Item
         id={id}
         className={cn(
-          'flex flex-col items-start gap-150 p-100 rounded-(--radius-6) w-full bg-background hover:bg-accent transition-colors duration-100 cursor-pointer border-b border-solid border-border shadow-large mb-150',
+          'flex flex-col items-start gap-150 p-100 rounded-(--radius-6) w-full bg-background hover:bg-accent transition-colors duration-100 cursor-pointer border-b border-solid border-border shadow-large dark:shadow-none mb-150',
           isActive && 'bg-accent shadow-none',
         )}>
         <ItemHeader>
