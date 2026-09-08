@@ -59,7 +59,7 @@
 
   /* Shadows */
   --shadow-btn-focus:
-    0px 0px 0px 2px hsl(0, 0%, 100%), 0px 0px 0px 4px hsl(220, 11%, 64%);
+    0px 0px 0px 2px var(--background), 0px 0px 0px 4px var(--ring);
   --shadow-btn-secondary-hover: 0px 1px 2px 0px rgba(14, 18, 27, 0.03);
   --shadow-toast: 0px 16px 32px -12px rgba(14, 18, 27, 0.1);
   --shadow-mobile-search-input: 0 1px 2px 0 rgba(10, 13, 20, 0.03);
