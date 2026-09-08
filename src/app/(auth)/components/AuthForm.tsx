@@ -12,7 +12,7 @@ import GoogleIcon from '@/components/icons/GoogleIcon';
 
 import { Spinner } from '@/components/ui/spinner';
 import Link from 'next/link';
-import Image from 'next/image';
+import Logo from '@/components/Logo/Logo';
 
 interface AuthFormProps {
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void | Promise<void>;
@@ -48,13 +48,7 @@ export default function AuthForm({
   return (
     <Card className="bg-background border border-border w-[540px] max-w-full p-12 rounded-12">
       <CardHeader className="flex flex-col items-center justify-center p-0">
-        <Image
-          src="/logo.svg"
-          alt="Logo"
-          width={28}
-          height={28}
-          className="w-28 h-7 mb-4"
-        />
+        <Logo />
         <div className="mb-4 text-center flex flex-col items-center gap-2 w-full">
           <CardTitle className="text-2xl font-bold">{formTitle}</CardTitle>
           <CardDescription className="text-xs text-muted-foreground">

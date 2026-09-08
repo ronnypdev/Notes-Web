@@ -177,7 +177,7 @@
 
   /* Sidebar */
   --sidebar: transparent;
-  --sidebar-foreground: hsl(0, 0%, 100%); /* neutral-0 */
+  --sidebar-foreground: hsl(231, 16%, 16%); /* neutral-800 */
   --sidebar-primary: hsl(228, 100%, 60%); /* blue-500 */
   --sidebar-primary-foreground: hsl(0, 0%, 100%); /* neutral-0 */
   --sidebar-accent: hsl(231, 16%, 16%); /* neutral-800 */
