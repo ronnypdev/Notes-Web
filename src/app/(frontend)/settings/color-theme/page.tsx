@@ -65,16 +65,16 @@ export default function ColorThemePage() {
         <header className="flex flex-col gap-3">
           <div className="mobile-properties-link block lg:hidden">
             <Link
-              className="flex items-center gap-1 font-sans text-sm font-normal leading-[1.3] tracking-[-0.0125rem] text-neutral-600"
+              className="flex items-center gap-1 font-sans text-sm font-normal leading-[1.3] tracking-[-0.0125rem] text-muted-foreground"
               href="/settings">
-              <ArrowLeftIcon className="size-4 text-neutral-600" />
+              <ArrowLeftIcon className="size-4 text-muted-foreground" />
               Settings
             </Link>
           </div>
-          <h4 className="font-sans text-base font-semibold tracking-[-0.3px] leading-[1.3] text-neutral-950">
+          <h4 className="font-sans text-base font-semibold tracking-[-0.3px] leading-[1.3] text-foreground">
             Color Theme
           </h4>
-          <p className="text-sm tracking-[-0.3px] leading-[1.3] text-neutral-500">
+          <p className="text-sm tracking-[-0.3px] leading-[1.3] text-muted-foreground">
             Choose your color theme:
           </p>
         </header>
@@ -86,17 +86,17 @@ export default function ColorThemePage() {
             {themeOptions.map((option) => (
               <FieldLabel
                 key={option.value}
-                className="border-neutral-200 cursor-pointer"
+                className="border-border cursor-pointer"
                 htmlFor={option.id}>
                 <Field orientation="horizontal">
-                  <div className="flex flex-col items-center w-10 h-full justify-center bg-transparent border border-solid border-neutral-200 rounded-12">
-                    <option.icon className="w-6 h-6 text-neutral-950" />
+                  <div className="flex flex-col items-center w-10 h-full justify-center bg-transparent border border-solid border-border rounded-12">
+                    <option.icon className="w-6 h-6 text-foreground" />
                   </div>
                   <FieldContent>
-                    <FieldTitle className="font-sans text-base font-medium tracking-[-0.3px] leading-[1.3] text-neutral-950">
+                    <FieldTitle className="font-sans text-base font-medium tracking-[-0.3px] leading-[1.3] text-foreground">
                       {option.label}
                     </FieldTitle>
-                    <FieldDescription className="text-sm font-normal tracking-[-0.3px] leading-[1.3] text-neutral-500">
+                    <FieldDescription className="text-sm font-normal tracking-[-0.3px] leading-[1.3] text-muted-foreground">
                       {option.description}
                     </FieldDescription>
                   </FieldContent>

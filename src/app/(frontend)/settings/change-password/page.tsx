@@ -25,13 +25,13 @@ export default function ChangePasswordPage() {
         <header className="flex flex-col gap-3">
           <div className="mobile-properties-link block lg:hidden">
             <Link
-              className="flex items-center gap-1 font-sans text-sm font-normal leading-[1.3] tracking-[-0.0125rem] text-neutral-600"
+              className="flex items-center gap-1 font-sans text-sm font-normal leading-[1.3] tracking-[-0.0125rem] text-muted-foreground"
               href="/settings">
-              <ArrowLeftIcon className="size-4 text-neutral-600" />
+              <ArrowLeftIcon className="size-4 text-muted-foreground" />
               Settings
             </Link>
           </div>
-          <h4 className="font-sans text-base font-semibold tracking-[-0.3px] leading-[1.3] text-neutral-950">
+          <h4 className="font-sans text-base font-semibold tracking-[-0.3px] leading-[1.3] text-foreground">
             Change Password
           </h4>
         </header>
@@ -48,7 +48,7 @@ export default function ChangePasswordPage() {
                     required
                   />
                   <ShowIcon
-                    className="w-4 h-4 text-neutral-600 absolute cursor-pointer right-2 top-2.5"
+                    className="w-4 h-4 text-muted-foreground absolute cursor-pointer right-2 top-2.5"
                     onClick={() =>
                       setShowOldPassword((prevPassword) => !prevPassword)
                     }
@@ -69,7 +69,7 @@ export default function ChangePasswordPage() {
                     required
                   />
                   <ShowIcon
-                    className="w-4 h-4 text-neutral-600 absolute cursor-pointer right-2 top-2.5"
+                    className="w-4 h-4 text-muted-foreground absolute cursor-pointer right-2 top-2.5"
                     onClick={() =>
                       setShowNewPassword((prevPassword) => !prevPassword)
                     }
@@ -80,8 +80,8 @@ export default function ChangePasswordPage() {
                   />
                 </div>
                 <FieldDescription className="flex items-center relative bottom-2">
-                  <InfoCircleIcon className="w-4 h-4 text-neutral-600" />
-                  <span className="text-xs text-neutral-600">
+                  <InfoCircleIcon className="w-4 h-4 text-muted-foreground" />
+                  <span className="text-xs text-muted-foreground">
                     At least 8 characters
                   </span>
                 </FieldDescription>
@@ -98,7 +98,7 @@ export default function ChangePasswordPage() {
                     required
                   />
                   <ShowIcon
-                    className="w-4 h-4 text-neutral-600 absolute cursor-pointer right-2 top-2.5"
+                    className="w-4 h-4 text-muted-foreground absolute cursor-pointer right-2 top-2.5"
                     onClick={() =>
                       setShowConfirmNewPassword((prevPassword) => !prevPassword)
                     }

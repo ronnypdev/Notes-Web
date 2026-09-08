@@ -23,33 +23,33 @@ export default function FontOptionsPage() {
         <header className="flex flex-col gap-3">
           <div className="mobile-properties-link block lg:hidden">
             <Link
-              className="flex items-center gap-1 font-sans text-sm font-normal leading-[1.3] tracking-[-0.0125rem] text-neutral-600"
+              className="flex items-center gap-1 font-sans text-sm font-normal leading-[1.3] tracking-[-0.0125rem] text-muted-foreground"
               href="/settings">
-              <ArrowLeftIcon className="size-4 text-neutral-600" />
+              <ArrowLeftIcon className="size-4 text-muted-foreground" />
               Settings
             </Link>
           </div>
-          <h4 className="font-sans text-base font-semibold tracking-[-0.3px] leading-[1.3] text-neutral-950">
+          <h4 className="font-sans text-base font-semibold tracking-[-0.3px] leading-[1.3] text-foreground">
             Font Theme
           </h4>
-          <p className="text-sm tracking-[-0.3px] leading-[1.3] text-neutral-500">
+          <p className="text-sm tracking-[-0.3px] leading-[1.3] text-muted-foreground">
             Choose your font theme:
           </p>
         </header>
         <form>
           <RadioGroup defaultValue="plus" className="w-full max-w-full">
             <FieldLabel
-              className="border-neutral-200 cursor-pointer"
+              className="border-border cursor-pointer"
               htmlFor="plus-plan">
               <Field orientation="horizontal">
-                <div className="flex flex-col items-center w-10 h-full justify-center bg-transparent border border-solid border-neutral-200 rounded-12">
-                  <AASansSerifIcon className="w-4 h-4 text-neutral-950" />
+                <div className="flex flex-col items-center w-10 h-full justify-center bg-transparent border border-solid border-border rounded-12">
+                  <AASansSerifIcon className="w-4 h-4 text-foreground" />
                 </div>
                 <FieldContent>
-                  <FieldTitle className="font-sans text-base font-medium tracking-[-0.3px] leading-[1.3] text-neutral-950">
+                  <FieldTitle className="font-sans text-base font-medium tracking-[-0.3px] leading-[1.3] text-foreground">
                     Sans Serif
                   </FieldTitle>
-                  <FieldDescription className="text-sm font-normal tracking-[-0.3px] leading-[1.3] text-neutral-500">
+                  <FieldDescription className="text-sm font-normal tracking-[-0.3px] leading-[1.3] text-muted-foreground">
                     Clean and modern, easy to read.
                   </FieldDescription>
                 </FieldContent>
@@ -57,17 +57,17 @@ export default function FontOptionsPage() {
               </Field>
             </FieldLabel>
             <FieldLabel
-              className="border-neutral-200 cursor-pointer"
+              className="border-border cursor-pointer"
               htmlFor="pro-plan">
               <Field orientation="horizontal">
-                <div className="flex flex-col items-center w-10 h-full justify-center bg-transparent border border-solid border-neutral-200 rounded-12">
-                  <AASerifIcon className="w-4 h-4 text-neutral-950" />
+                <div className="flex flex-col items-center w-10 h-full justify-center bg-transparent border border-solid border-border rounded-12">
+                  <AASerifIcon className="w-4 h-4 text-foreground" />
                 </div>
                 <FieldContent>
-                  <FieldTitle className="font-sans text-base font-medium tracking-[-0.3px] leading-[1.3] text-neutral-950">
+                  <FieldTitle className="font-sans text-base font-medium tracking-[-0.3px] leading-[1.3] text-foreground">
                     Serif
                   </FieldTitle>
-                  <FieldDescription className="text-sm font-normal tracking-[-0.3px] leading-[1.3] text-neutral-500">
+                  <FieldDescription className="text-sm font-normal tracking-[-0.3px] leading-[1.3] text-muted-foreground">
                     Classic and elegant for a timeless feel.
                   </FieldDescription>
                 </FieldContent>
@@ -75,17 +75,17 @@ export default function FontOptionsPage() {
               </Field>
             </FieldLabel>
             <FieldLabel
-              className="border-neutral-200 cursor-pointer"
+              className="border-border cursor-pointer"
               htmlFor="enterprise-plan">
               <Field orientation="horizontal">
-                <div className="flex flex-col items-center w-10 h-full justify-center bg-transparent border border-solid border-neutral-200 rounded-12">
-                  <AAMonoSpaceIcon className="w-4 h-4 text-neutral-950" />
+                <div className="flex flex-col items-center w-10 h-full justify-center bg-transparent border border-solid border-border rounded-12">
+                  <AAMonoSpaceIcon className="w-4 h-4 text-foreground" />
                 </div>
                 <FieldContent>
-                  <FieldTitle className="font-sans text-base font-medium tracking-[-0.3px] leading-[1.3] text-neutral-950">
+                  <FieldTitle className="font-sans text-base font-medium tracking-[-0.3px] leading-[1.3] text-foreground">
                     Mono Space
                   </FieldTitle>
-                  <FieldDescription className="text-sm font-normal tracking-[-0.3px] leading-[1.3] text-neutral-500">
+                  <FieldDescription className="text-sm font-normal tracking-[-0.3px] leading-[1.3] text-muted-foreground">
                     Code-like, great for a technical vibe.
                   </FieldDescription>
                 </FieldContent>
