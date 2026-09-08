@@ -63,7 +63,7 @@ export default function Login() {
   });
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-neutral-100 p-5 md:p-0">
+    <div className="flex flex-col items-center justify-center h-screen bg-muted p-5 md:p-0">
       <AuthForm
         onSubmit={handleSubmit(handleLoginForm)}
         loading={isLoading}
@@ -114,7 +114,7 @@ export default function Login() {
                     <FieldLabel htmlFor="password">Password</FieldLabel>
                     <Link
                       href="/forgotpassword"
-                      className="text-sm text-neutral-600 font-sans font-normal leading-4 tracking-tight">
+                      className="text-sm text-muted-foreground font-sans font-normal leading-4 tracking-tight">
                       <span className="underline">Forgot</span>
                     </Link>
                   </div>
@@ -129,7 +129,7 @@ export default function Login() {
                       required={true}
                     />
                     <ShowIcon
-                      className="w-4 h-4 text-neutral-600 absolute cursor-pointer right-2 top-1/2 -translate-y-1/2"
+                      className="w-4 h-4 text-muted-foreground absolute cursor-pointer right-2 top-1/2 -translate-y-1/2"
                       onClick={() =>
                         setShowPassword((prevPassword) => !prevPassword)
                       }
