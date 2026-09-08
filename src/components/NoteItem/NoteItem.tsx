@@ -30,16 +30,16 @@ export default function NoteItem({
       <Item
         id={id}
         className={cn(
-          'flex flex-col items-start gap-150 p-100 rounded-(--radius-6) w-full bg-white hover:bg-neutral-100 transition-colors duration-100 cursor-pointer border-b border-solid border-neutral-200 shadow-large mb-150',
-          isActive && 'bg-neutral-100 shadow-none',
+          'flex flex-col items-start gap-150 p-100 rounded-(--radius-6) w-full bg-background hover:bg-accent transition-colors duration-100 cursor-pointer border-b border-solid border-border shadow-large mb-150',
+          isActive && 'bg-accent shadow-none',
         )}>
         <ItemHeader>
           {title ? (
-            <ItemTitle className="w-full text-neutral-950 font-semibold text-base leading-[1.2] tracking-[-0.3px]">
+            <ItemTitle className="w-full text-foreground font-semibold text-base leading-[1.2] tracking-[-0.3px]">
               {title}
             </ItemTitle>
           ) : (
-            <ItemTitle className="w-full text-neutral-950 font-semibold text-base leading-[1.2] tracking-[-0.3px]">
+            <ItemTitle className="w-full text-foreground font-semibold text-base leading-[1.2] tracking-[-0.3px]">
               Enter title
             </ItemTitle>
           )}
@@ -50,14 +50,14 @@ export default function NoteItem({
               {tags.map((tag) => (
                 <span
                   key={tag}
-                  className="bg-neutral-200 text-neutral-950 text-[12px] font-normal leading-[1.2] tracking-[-0.2px] rounded-[4px] px-[6px] py-[2px] capitalize">
+                  className="bg-muted text-foreground text-[12px] font-normal leading-[1.2] tracking-[-0.2px] rounded-[4px] px-[6px] py-[2px] capitalize">
                   {tag}
                 </span>
               ))}
             </div>
           )}
         </ItemActions>
-        <ItemFooter className="text-neutral-700 text-[12px] font-normal leading-[1.2] tracking-[-0.2px]">
+        <ItemFooter className="text-muted-foreground text-[12px] font-normal leading-[1.2] tracking-[-0.2px]">
           {lastEdited}
         </ItemFooter>
       </Item>
