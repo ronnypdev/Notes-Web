@@ -59,7 +59,7 @@ export default function ForgotPassword() {
   });
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-neutral-100 p-5 md:p-0">
+    <div className="flex flex-col items-center justify-center h-screen bg-muted p-5 md:p-0">
       <AuthForm
         onSubmit={handleSubmit(handleForgotPasswordForm)}
         loading={isLoading}
