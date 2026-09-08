@@ -37,7 +37,7 @@ function InvalidTokenCard() {
   return (
     <>
       {error === 'INVALID_TOKEN' && (
-        <Card className="bg-white border border-neutral-100 w-[540px] max-w-full p-12 rounded-12">
+        <Card className="bg-background border border-border w-[540px] max-w-full p-12 rounded-12">
           <CardHeader className="flex flex-col items-center justify-center p-0">
             <CardTitle className="text-2xl font-bold text-red-500">
               Invalid Token
@@ -103,7 +103,7 @@ function ResetPasswordContent() {
   });
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-neutral-100 p-5 md:p-0">
+    <div className="flex flex-col items-center justify-center h-screen bg-muted p-5 md:p-0">
       <AuthForm
         onSubmit={handleSubmit(handleResetPasswordForm)}
         loading={isLoading}
@@ -128,7 +128,7 @@ function ResetPasswordContent() {
                       required={true}
                     />
                     <ShowIcon
-                      className="w-4 h-4 text-neutral-600 absolute cursor-pointer right-2 top-1/2 -translate-y-1/2"
+                      className="w-4 h-4 text-muted-foreground absolute cursor-pointer right-2 top-1/2 -translate-y-1/2"
                       onClick={() =>
                         setShowPassword((prevPassword) => !prevPassword)
                       }
@@ -138,8 +138,8 @@ function ResetPasswordContent() {
                     )}
                   </div>
                   <FieldDescription className="flex items-center relative bottom-2">
-                    <InfoCircleIcon className="w-4 h-4 text-neutral-600" />
-                    <span className="text-xs text-neutral-600">
+                    <InfoCircleIcon className="w-4 h-4 text-muted-foreground" />
+                    <span className="text-xs text-muted-foreground">
                       At least 8 characters
                     </span>
                   </FieldDescription>
@@ -164,7 +164,7 @@ function ResetPasswordContent() {
                       required={true}
                     />
                     <ShowIcon
-                      className="w-4 h-4 text-neutral-600 absolute cursor-pointer right-2 top-1/2 -translate-y-1/2"
+                      className="w-4 h-4 text-muted-foreground absolute cursor-pointer right-2 top-1/2 -translate-y-1/2"
                       onClick={() =>
                         setShowPassword((prevPassword) => !prevPassword)
                       }
