@@ -52,7 +52,7 @@ export default function NotesList({ basePath }: NotesListProps) {
   // Search with nothing typed yet: prompt rather than dump the whole collection.
   if (isSearch && !query) {
     return (
-      <p className="text-center text-neutral-600 font-sans text-sm leading-[1.3] tracking-[-0.0125rem]">
+      <p className="text-center text-muted-foreground font-sans text-sm leading-[1.3] tracking-[-0.0125rem]">
         Start typing to search by title, content, or tags.
       </p>
     );
@@ -70,7 +70,7 @@ export default function NotesList({ basePath }: NotesListProps) {
       )}
 
       {visibleNotes.length === 0 && (
-        <div className="text-center text-neutral-600 font-sans text-sm leading-[1.3] tracking-[-0.0125rem]">
+        <div className="text-center text-muted-foreground font-sans text-sm leading-[1.3] tracking-[-0.0125rem]">
           <p>{isSearch ? `No notes match “${rawQuery}”.` : 'No notes found'}</p>
         </div>
       )}

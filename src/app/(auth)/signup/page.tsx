@@ -82,7 +82,7 @@ export default function Signup() {
   });
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-neutral-100 p-5 md:p-0">
+    <div className="flex flex-col items-center justify-center h-screen bg-muted p-5 md:p-0">
       <AuthForm
         onSubmit={handleSubmit(handleSignUpForm)}
         loading={isLoading}
@@ -141,7 +141,7 @@ export default function Signup() {
                       required={true}
                     />
                     <ShowIcon
-                      className="w-4 h-4 text-neutral-600 absolute cursor-pointer right-2 top-1/2 -translate-y-1/2"
+                      className="w-4 h-4 text-muted-foreground absolute cursor-pointer right-2 top-1/2 -translate-y-1/2"
                       onClick={() =>
                         setShowPassword((prevPassword) => !prevPassword)
                       }
@@ -151,8 +151,8 @@ export default function Signup() {
                     )}
                   </div>
                   <FieldDescription className="flex items-center relative bottom-2">
-                    <InfoCircleIcon className="w-4 h-4 text-neutral-600" />
-                    <span className="text-xs text-neutral-600">
+                    <InfoCircleIcon className="w-4 h-4 text-muted-foreground" />
+                    <span className="text-xs text-muted-foreground">
                       At least 8 characters
                     </span>
                   </FieldDescription>

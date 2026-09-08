@@ -52,7 +52,7 @@ export default function RightSideBar() {
       : '/allnotes';
 
   return (
-    <aside className="w-[var(--sidebar-width)] border-l border-solid border-neutral-200 bg-background p-4 lg:flex flex-col gap-2 hidden">
+    <aside className="w-[var(--sidebar-width)] border-l border-solid border-border bg-background p-4 lg:flex flex-col gap-2 hidden">
       {showRestore ? (
         <Modal
           type="restore"

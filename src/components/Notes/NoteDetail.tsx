@@ -124,12 +124,12 @@ export default function NoteDetail({
 
   return (
     <section className="h-full flex flex-col py-5 px-6">
-      <header className="flex flex-col gap-200 lg:hidden text-neutral-950">
+      <header className="flex flex-col gap-200 lg:hidden text-foreground">
         <div className="mobile-properties-link flex items-center justify-between">
           <Link
-            className="flex items-center gap-1 font-sans text-sm font-normal leading-[1.3] tracking-[-0.0125rem] text-neutral-600"
+            className="flex items-center gap-1 font-sans text-sm font-normal leading-[1.3] tracking-[-0.0125rem] text-muted-foreground"
             href={backHref}>
-            <ArrowLeftIcon className="size-4 text-neutral-600" />
+            <ArrowLeftIcon className="size-4 text-muted-foreground" />
             Go Back
           </Link>
           <div className="mobile-properties-controls flex items-center gap-200">
@@ -137,7 +137,7 @@ export default function NoteDetail({
               <button
                 type="button"
                 aria-label="Delete note"
-                className="cursor-pointer text-neutral-600">
+                className="cursor-pointer text-muted-foreground">
                 <DeleteIcon className="size-5" />
               </button>
             </Modal>
@@ -148,7 +148,7 @@ export default function NoteDetail({
                 type="button"
                 aria-label={isArchived ? 'Restore note' : 'Archive note'}
                 disabled={currentNote.isDraft}
-                className="cursor-pointer text-neutral-600 disabled:opacity-50 disabled:cursor-not-allowed">
+                className="cursor-pointer text-muted-foreground disabled:opacity-50 disabled:cursor-not-allowed">
                 {isArchived ? (
                   <RefreshIcon className="size-5 rotate-180" />
                 ) : (
@@ -158,7 +158,7 @@ export default function NoteDetail({
             </Modal>
             <Button
               variant="link"
-              className="text-neutral-600 p-0"
+              className="text-muted-foreground p-0"
               onClick={handleCancel}
               disabled={isPending}
               type="button">
@@ -194,14 +194,14 @@ export default function NoteDetail({
                   changeNote(currentNote.id, { title: e.target.value })
                 }
                 placeholder="Enter a title…"
-                className="text-neutral-950 font-sans font-bold text-xl md:text-2xl h-auto leading-[1.2] tracking-[-0.5px] border-none shadow-none placeholder:text-neutral-950"
+                className="text-foreground font-sans font-bold text-xl md:text-2xl h-auto leading-[1.2] tracking-[-0.5px] border-none shadow-none placeholder:text-foreground"
               />
             </Field>
             <Field
               orientation="horizontal"
               className="tags flex items-center gap-8">
               <div className="tags-container flex items-center gap-1">
-                <TagIcon className="size-4 text-neutral-950" />
+                <TagIcon className="size-4 text-foreground" />
                 <FieldLabel
                   htmlFor="tagsList"
                   className="font-sans text-sm font-normal capitalize leading-[1.3] tracking-[-0.0125rem]">
@@ -219,7 +219,7 @@ export default function NoteDetail({
                 orientation="horizontal"
                 className="status flex items-center gap-3">
                 <div className="status-container flex items-center gap-1">
-                  <LoadingIcon className="size-4 text-neutral-950" />
+                  <LoadingIcon className="size-4 text-foreground" />
                   <span className="font-sans text-sm font-normal capitalize leading-[1.3] tracking-[-0.0125rem]">
                     Status:
                   </span>
@@ -233,7 +233,7 @@ export default function NoteDetail({
               orientation="horizontal"
               className="last-modified flex items-center gap-3">
               <div className="last-modified-container flex items-center gap-1 ">
-                <CircleClockIcon className="size-4 text-neutral-950" />
+                <CircleClockIcon className="size-4 text-foreground" />
                 <FieldLabel
                   htmlFor="lastEdit"
                   className="font-sans text-sm font-normal capitalize leading-[1.3] tracking-[-0.0125rem] text-nowrap">
@@ -247,7 +247,7 @@ export default function NoteDetail({
               <FieldLabel htmlFor="noteContent"></FieldLabel>
               <Textarea
                 id="noteContent"
-                className="text-neutral-950 flex-1 min-h-0 border-none resize-none outline-none focus-visible:ring-0 focus-visible:ring-offset-0 shadow-none field-sizing-fixed"
+                className="text-foreground flex-1 min-h-0 border-none resize-none outline-none focus-visible:ring-0 focus-visible:ring-offset-0 shadow-none field-sizing-fixed"
                 placeholder="Start typing your note here…"
                 value={currentNote.content ?? ''}
                 onChange={(e) =>

@@ -29,9 +29,9 @@ export default function NavigationLinkRoutes() {
             key={link.href}
             href={link.href}
             className={clsx(
-              'py-1.5 px-3 flex items-center gap-2 text-neutral-950',
+              'py-1.5 px-3 flex items-center gap-2 text-foreground',
               {
-                'rounded-lg bg-neutral-100': isActive,
+                'rounded-lg bg-accent': isActive,
               },
             )}>
             <link.icon

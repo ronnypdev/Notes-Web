@@ -12,7 +12,7 @@ import GoogleIcon from '@/components/icons/GoogleIcon';
 
 import { Spinner } from '@/components/ui/spinner';
 import Link from 'next/link';
-import Image from 'next/image';
+import Logo from '@/components/Logo/Logo';
 
 interface AuthFormProps {
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void | Promise<void>;
@@ -46,18 +46,12 @@ export default function AuthForm({
   formFooterLinkText,
 }: AuthFormProps) {
   return (
-    <Card className="bg-white border border-neutral-100 w-[540px] max-w-full p-12 rounded-12">
+    <Card className="bg-background border border-border w-[540px] max-w-full p-12 rounded-12">
       <CardHeader className="flex flex-col items-center justify-center p-0">
-        <Image
-          src="/logo.svg"
-          alt="Logo"
-          width={28}
-          height={28}
-          className="w-28 h-7 mb-4"
-        />
+        <Logo />
         <div className="mb-4 text-center flex flex-col items-center gap-2 w-full">
           <CardTitle className="text-2xl font-bold">{formTitle}</CardTitle>
-          <CardDescription className="text-xs text-neutral-500">
+          <CardDescription className="text-xs text-muted-foreground">
             {formDescription}
           </CardDescription>
         </div>
@@ -72,8 +66,8 @@ export default function AuthForm({
       </CardContent>
       <CardFooter className="flex-col gap-2 w-full max-w-full px-0">
         {loggingWithGoogle && (
-          <div className="w-full flex flex-col items-center gap-4 self-stretch pt-3 border-t border-neutral-200 mb-1.5">
-            <p className="text-sm font-sans font-normal leading-4 tracking-tight text-neutral-600">
+          <div className="w-full flex flex-col items-center gap-4 self-stretch pt-3 border-t border-border mb-1.5">
+            <p className="text-sm font-sans font-normal leading-4 tracking-tight text-muted-foreground">
               {loggingWithGoogleText}
             </p>
             <Button
@@ -88,13 +82,13 @@ export default function AuthForm({
         )}
         {formFooterText && formFooterLink && formFooterLinkText && (
           <>
-            <div className="border-t border-neutral-200 h-0.5 w-full"></div>
+            <div className="border-t border-border h-0.5 w-full"></div>
             <div className="flex items-center justify-center">
-              <p className="text-sm font-sans font-normal leading-4 tracking-tight text-neutral-600">
+              <p className="text-sm font-sans font-normal leading-4 tracking-tight text-muted-foreground">
                 {formFooterText}{' '}
                 <Link
                   href={formFooterLink}
-                  className="text-neutral-950 underline">
+                  className="text-foreground underline">
                   {formFooterLinkText}
                 </Link>
               </p>

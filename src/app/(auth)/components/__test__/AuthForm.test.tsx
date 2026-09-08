@@ -12,17 +12,29 @@ const baseProps = {
 
 describe('AuthForm', () => {
   test('renders the form title', () => {
-    render(<AuthForm {...baseProps}><input /></AuthForm>);
+    render(
+      <AuthForm {...baseProps}>
+        <input />
+      </AuthForm>,
+    );
     expect(screen.getByText('Welcome Back')).toBeInTheDocument();
   });
 
   test('renders the form description', () => {
-    render(<AuthForm {...baseProps}><input /></AuthForm>);
+    render(
+      <AuthForm {...baseProps}>
+        <input />
+      </AuthForm>,
+    );
     expect(screen.getByText('Please sign in to continue.')).toBeInTheDocument();
   });
 
   test('renders the submit button with correct text when not loading', () => {
-    render(<AuthForm {...baseProps}><input /></AuthForm>);
+    render(
+      <AuthForm {...baseProps}>
+        <input />
+      </AuthForm>,
+    );
     expect(screen.getByRole('button', { name: 'Sign In' })).toBeInTheDocument();
   });
 
@@ -30,7 +42,7 @@ describe('AuthForm', () => {
     render(
       <AuthForm {...baseProps}>
         <input type="email" placeholder="Email address" />
-      </AuthForm>
+      </AuthForm>,
     );
     expect(screen.getByPlaceholderText('Email address')).toBeInTheDocument();
   });
@@ -42,17 +54,22 @@ describe('AuthForm', () => {
         loggingWithGoogle={true}
         loggingWithGoogleText="Or continue with"
         googleButtonText="Continue with Google"
-        onGoogleLogin={() => {}}
-      >
+        onGoogleLogin={() => {}}>
         <input />
-      </AuthForm>
+      </AuthForm>,
     );
     expect(screen.getByText('Or continue with')).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /continue with google/i })).toBeInTheDocument();
+    expect(
+      screen.getByRole('button', { name: /continue with google/i }),
+    ).toBeInTheDocument();
   });
 
   test('does not render Google login section when loggingWithGoogle is false', () => {
-    render(<AuthForm {...baseProps} loggingWithGoogle={false}><input /></AuthForm>);
+    render(
+      <AuthForm {...baseProps} loggingWithGoogle={false}>
+        <input />
+      </AuthForm>,
+    );
     expect(screen.queryByText('Or continue with')).not.toBeInTheDocument();
   });
 
@@ -62,17 +79,28 @@ describe('AuthForm', () => {
         {...baseProps}
         formFooterText="Don't have an account?"
         formFooterLink="/sign-up"
-        formFooterLinkText="Sign up"
-      >
+        formFooterLinkText="Sign up">
         <input />
-      </AuthForm>
+      </AuthForm>,
     );
-    expect(screen.getByText("Don't have an account?", { exact: false })).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: 'Sign up' })).toHaveAttribute('href', '/sign-up');
+    expect(
+      screen.getByText("Don't have an account?", { exact: false }),
+    ).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'Sign up' })).toHaveAttribute(
+      'href',
+      '/sign-up',
+    );
   });
 
   test('does not render footer when footer props are missing', () => {
-    render(<AuthForm {...baseProps}><input /></AuthForm>);
-    expect(screen.queryByRole('link')).not.toBeInTheDocument();
+    render(
+      <AuthForm {...baseProps}>
+        <input />
+      </AuthForm>,
+    );
+    // The logo always renders as a link to "/"; the footer would add a second.
+    const links = screen.queryAllByRole('link');
+    expect(links).toHaveLength(1);
+    expect(links[0]).toHaveAttribute('href', '/');
   });
 });

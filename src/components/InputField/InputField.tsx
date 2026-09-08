@@ -34,7 +34,7 @@ export default function InputField({
             {forgotPasswordLink && (
               <Link
                 href={forgotPasswordLink}
-                className="text-sm text-neutral-600 font-sans font-normal leading-4 tracking-tight">
+                className="text-sm text-muted-foreground font-sans font-normal leading-4 tracking-tight">
                 <span className="underline">Forgot</span>
               </Link>
             )}
@@ -42,7 +42,7 @@ export default function InputField({
         )}
         <div className="relative w-full flex items-center">
           {type === 'search' && (
-            <SearchIcon className="w-5 h-5 text-neutral-600 absolute left-2 -top-0.5 translate-y-1/2" />
+            <SearchIcon className="w-5 h-5 text-muted-foreground absolute left-2 -top-0.5 translate-y-1/2" />
           )}
           <Input
             className={`${type === 'search' ? 'px-8' : ''}`}
@@ -52,14 +52,14 @@ export default function InputField({
             required={required}
           />
           {type === 'password' && (
-            <ShowIcon className="w-4 h-4 text-neutral-600 absolute right-2 top-1/2 -translate-y-1/2" />
+            <ShowIcon className="w-4 h-4 text-muted-foreground absolute right-2 top-1/2 -translate-y-1/2" />
           )}
         </div>
       </div>
       {info && (
         <div className="flex items-center relative bottom-5">
-          <InfoCircleIcon className="w-4 h-4 text-neutral-600" />
-          <span className="text-sm text-neutral-600">{info}</span>
+          <InfoCircleIcon className="w-4 h-4 text-muted-foreground" />
+          <span className="text-sm text-muted-foreground">{info}</span>
         </div>
       )}
     </>

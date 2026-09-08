@@ -38,15 +38,15 @@ export default function MobileMenu() {
     <>
       <NavigationMenu
         viewport={false}
-        className="w-full border-t max-w-full bg-white border-neutral-200 shadow-mobile-menu [&>div]:w-full">
+        className="w-full border-t max-w-full bg-card border-border shadow-mobile-menu dark:shadow-none [&>div]:w-full">
         <NavigationMenuList className="flex items-center justify-between py-[var(--spacing-150)] px-[var(--spacing-200)]">
           <NavigationMenuItem>
             <NavigationMenuLink
               className={cn(
                 'flex flex-col items-center justify-center shrink-0 cursor-pointer py-1',
                 isActive('/allnotes')
-                  ? 'text-blue-500 bg-blue-50 rounded-lg px-2'
-                  : 'text-neutral-600 hover:text-blue-500 hover:bg-blue-50',
+                  ? 'text-blue-500 bg-primary/10 rounded-lg px-2'
+                  : 'text-muted-foreground hover:text-blue-500 hover:bg-primary/10',
               )}
               asChild>
               <Link
@@ -67,8 +67,8 @@ export default function MobileMenu() {
               className={cn(
                 'flex flex-col items-center justify-center shrink-0 cursor-pointer py-1',
                 isActive('/search')
-                  ? 'text-blue-500 bg-blue-50 rounded-lg px-2'
-                  : 'text-neutral-600 hover:text-blue-500 hover:bg-blue-50',
+                  ? 'text-blue-500 bg-primary/10 rounded-lg px-2'
+                  : 'text-muted-foreground hover:text-blue-500 hover:bg-primary/10',
               )}
               asChild>
               <Link
@@ -89,8 +89,8 @@ export default function MobileMenu() {
               className={cn(
                 'flex flex-col items-center justify-center shrink-0 cursor-pointer py-1',
                 isActive('/archivenotes')
-                  ? 'text-blue-500 bg-blue-50 rounded-lg px-2'
-                  : 'text-neutral-600 hover:text-blue-500 hover:bg-blue-50',
+                  ? 'text-blue-500 bg-primary/10 rounded-lg px-2'
+                  : 'text-muted-foreground hover:text-blue-500 hover:bg-primary/10',
               )}
               asChild>
               <Link
@@ -113,8 +113,8 @@ export default function MobileMenu() {
               className={cn(
                 'flex flex-col items-center justify-center shrink-0 cursor-pointer py-1',
                 isActive('/tags')
-                  ? 'text-blue-500 bg-blue-50 rounded-lg px-2'
-                  : 'text-neutral-600 hover:text-blue-500 hover:bg-blue-50',
+                  ? 'text-blue-500 bg-primary/10 rounded-lg px-2'
+                  : 'text-muted-foreground hover:text-blue-500 hover:bg-primary/10',
               )}
               asChild>
               <Link
@@ -135,8 +135,8 @@ export default function MobileMenu() {
               className={cn(
                 'flex flex-col items-center justify-center shrink-0 cursor-pointer py-1',
                 isActive('/settings')
-                  ? 'text-blue-500 bg-blue-50 rounded-lg px-2'
-                  : 'text-neutral-600 hover:text-blue-500 hover:bg-blue-50',
+                  ? 'text-blue-500 bg-primary/10 rounded-lg px-2'
+                  : 'text-muted-foreground hover:text-blue-500 hover:bg-primary/10',
               )}
               asChild>
               <Link

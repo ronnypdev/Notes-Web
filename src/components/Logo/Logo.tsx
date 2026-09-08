@@ -1,7 +1,6 @@
-"use client";
-import Link from "next/link";
-import Image from "next/image";
-const img = "/logo.svg"; // Replace with actual SVG path if available in public folder
+'use client';
+import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Logo() {
   return (
@@ -11,9 +10,16 @@ export default function Logo() {
       data-name="logo">
       <div className="relative shrink-0" data-name="Feather Notes Logo">
         <Image
-          alt="Logo icon"
-          className="block max-w-full size-full"
-          src={img}
+          alt="Notes"
+          className="hidden max-w-full size-full dark:block"
+          src="/logowhite.svg"
+          width={28}
+          height={28}
+        />
+        <Image
+          alt="Notes"
+          className="block max-w-full size-full dark:hidden"
+          src="/logo.svg"
           width={28}
           height={28}
         />
