@@ -22,7 +22,7 @@ const buttonVariants = cva(
           'bg-muted text-muted-foreground/50 py-[var(--spacing-150)] px-[var(--spacing-200)] pointer-events-none',
         link: 'text-primary underline-offset-4 hover:underline-offset-0',
         mobileCreate:
-          'flex items-center bg-primary justify-center mb-200 lg:hidden w-16 h-16 rounded-full text-primary-foreground text-2xl cursor-pointer shadow-btn-create-new-note absolute bottom-25 right-8',
+          'flex items-center bg-primary justify-center mb-200 lg:hidden w-16 h-16 rounded-full text-primary-foreground text-2xl cursor-pointer shadow-btn-create-new-note dark:shadow-none absolute bottom-25 right-8',
       },
       size: {
         default:
