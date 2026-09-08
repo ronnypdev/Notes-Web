@@ -43,11 +43,11 @@ export default function NoteTagsField({
       styleClasses={{
         inlineTagsContainer: 'border-none',
         input:
-          'text-neutral-700 font-sans font-normal text-sm md:text-sm h-auto leading-[1.3] tracking-[-0.2px] border-none shadow-none placeholder:text-neutral-400',
+          'text-foreground font-sans font-normal text-sm md:text-sm h-auto leading-[1.3] tracking-[-0.2px] border-none shadow-none placeholder:text-muted-foreground',
         tag: {
-          body: 'px-2 py-1 bg-neutral-100 rounded-full text-neutral-700 text-sm border-none cursor-pointer',
+          body: 'px-2 py-1 bg-muted rounded-full text-foreground text-sm border-none cursor-pointer',
           closeButton:
-            'text-neutral-500 hover:text-neutral-700 p-1 cursor-pointer',
+            'text-muted-foreground hover:text-foreground p-1 cursor-pointer',
         },
       }}
     />
