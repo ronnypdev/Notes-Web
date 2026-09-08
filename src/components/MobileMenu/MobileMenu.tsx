@@ -38,7 +38,7 @@ export default function MobileMenu() {
     <>
       <NavigationMenu
         viewport={false}
-        className="w-full border-t max-w-full bg-card border-border shadow-mobile-menu [&>div]:w-full">
+        className="w-full border-t max-w-full bg-card border-border shadow-mobile-menu dark:shadow-none [&>div]:w-full">
         <NavigationMenuList className="flex items-center justify-between py-[var(--spacing-150)] px-[var(--spacing-200)]">
           <NavigationMenuItem>
             <NavigationMenuLink
