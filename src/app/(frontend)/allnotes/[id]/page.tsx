@@ -154,7 +154,7 @@ export default function NoteItemDetails() {
           }}
           className="flex-1 min-h-0 flex flex-col">
           <FieldSet className="flex-1 min-h-0">
-            <FieldGroup className="properties flex flex-col gap-4 items-start">
+            <FieldGroup className="properties flex flex-col gap-4 items-start h-full">
               <Field>
                 <FieldLabel htmlFor="noteTitle"></FieldLabel>
                 <Input
@@ -201,11 +201,11 @@ export default function NoteItemDetails() {
                 {currentNote.lastEdited}
               </Field>
               <Separator />
-              <Field>
+              <Field className="flex-1 min-h-0 h-full">
                 <FieldLabel htmlFor="noteContent"></FieldLabel>
                 <Textarea
                   id="noteContent"
-                  className="text-foreground flex-1 min-h-0 border-none resize-none outline-none focus-visible:ring-0 focus-visible:ring-offset-0 shadow-none field-sizing-fixed"
+                  className="text-foreground flex-1 min-h-0 h-full border-none resize-none outline-none focus-visible:ring-0 focus-visible:ring-offset-0 shadow-none field-sizing-fixed"
                   placeholder="Start typing your note here…"
                   value={currentNote.content ?? ''}
                   onChange={(e) =>
