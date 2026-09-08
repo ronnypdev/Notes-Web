@@ -10,15 +10,14 @@ export default function Logo() {
       data-name="logo">
       <div className="relative shrink-0" data-name="Feather Notes Logo">
         <Image
-          alt="Logo Light version"
-          aria-hidden
+          alt="Notes"
           className="hidden max-w-full size-full dark:block"
           src="/logowhite.svg"
           width={28}
           height={28}
         />
         <Image
-          alt="Logo Dark version"
+          alt="Notes"
           className="block max-w-full size-full dark:hidden"
           src="/logo.svg"
           width={28}
