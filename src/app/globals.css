@@ -218,19 +218,4 @@
   .font-extrabold {
     font-weight: 800;
   }
-
-  /* Font Family Utilities */
-  .font-inter {
-    font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  }
-  .font-jetbrains-mono {
-    font-family:
-      var(--font-jetbrains-mono), ui-monospace, 'Courier New', monospace;
-  }
-  .font-noto-serif {
-    font-family: var(--font-noto-serif), ui-serif, serif;
-  }
-  .font-source-code-pro {
-    font-family: var(--font-source-code-pro), ui-monospace, monospace;
-  }
 }
