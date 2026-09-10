@@ -48,8 +48,10 @@ export default function RootLayout({
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange>
-          {children}
-          <Toaster />
+          <FontThemeProvider>
+            {children}
+            <Toaster />
+          </FontThemeProvider>
         </ThemeProvider>
       </body>
     </html>
