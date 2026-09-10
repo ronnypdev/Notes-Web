@@ -3,6 +3,10 @@
 import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { authClient } from '@/lib/auth-client';
+import { toast } from 'sonner';
+import { Spinner } from '@/components/ui/spinner';
+
 import { changePasswordSchema, ChangePasswordFormValues } from '@/lib/zod';
 import {
   Field,
