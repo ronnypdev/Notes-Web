@@ -1,23 +1,13 @@
 import { ThemeProvider } from '@/context/ThemeProvider';
+import { FontThemeProvider } from '@/context/FontThemeProvider';
+
 import type { Metadata } from 'next';
-import {
-  Inter,
-  JetBrains_Mono,
-  Source_Code_Pro,
-  Noto_Serif,
-} from 'next/font/google';
+import { Inter, Source_Code_Pro, Noto_Serif } from 'next/font/google';
 import './globals.css';
 import { Toaster } from '@/components/ui/sonner';
 
 const inter = Inter({
   variable: '--font-inter',
-  subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700', '800'],
-  display: 'swap',
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  variable: '--font-jetbrains-mono',
   subsets: ['latin'],
   weight: ['300', '400', '500', '600', '700', '800'],
   display: 'swap',
@@ -48,16 +38,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${inter.variable} ${jetbrainsMono.variable} ${sourceCodePro.variable} ${notoSerif.variable} antialiased`}>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`${inter.variable} ${sourceCodePro.variable} ${notoSerif.variable}`}>
+      <body className="antialiased">
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange>
-          {children}
-          <Toaster />
+          <FontThemeProvider>
+            {children}
+            <Toaster />
+          </FontThemeProvider>
         </ThemeProvider>
       </body>
     </html>
