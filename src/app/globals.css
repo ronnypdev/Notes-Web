@@ -152,6 +152,7 @@
   --sidebar-border: hsl(216, 19%, 90%); /* neutral-200 */
   --sidebar-ring: hsl(220, 11%, 64%); /* neutral-400 */
 }
+
 :root[data-font='serif'] {
   --font-theme: var(--font-noto-serif);
 }
