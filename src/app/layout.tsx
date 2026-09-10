@@ -1,4 +1,6 @@
 import { ThemeProvider } from '@/context/ThemeProvider';
+import { FontThemeProvider } from '@/context/FontThemeProvider';
+
 import type { Metadata } from 'next';
 import { Inter, Source_Code_Pro, Noto_Serif } from 'next/font/google';
 import './globals.css';
@@ -36,9 +38,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${inter.variable} ${sourceCodePro.variable} ${notoSerif.variable} antialiased`}>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`${inter.variable} ${sourceCodePro.variable} ${notoSerif.variable}`}>
+      <body className="antialiased">
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
