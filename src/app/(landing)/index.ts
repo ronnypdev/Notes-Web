@@ -1,4 +1,4 @@
-export { LandingPage } from './page';
+export { default as LandingPage } from './page';
 export { Navbar } from './Navbar';
 export { Hero } from './Hero';
 export { AppPreview } from './AppPreview';

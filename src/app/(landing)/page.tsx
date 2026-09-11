@@ -9,7 +9,7 @@ import { Faq } from './Faq';
 import { FinalCta } from './FinalCta';
 import { Footer } from './Footer';
 
-export function LandingPage() {
+export default function LandingPage() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Navbar />
