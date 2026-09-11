@@ -28,7 +28,7 @@ export default function ChangePasswordPage() {
     useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const { control, handleSubmit } = useForm<ChangePasswordFormValues>({
+  const { control, handleSubmit, reset } = useForm<ChangePasswordFormValues>({
     resolver: zodResolver(changePasswordSchema),
     defaultValues: {
       oldPassword: '',
