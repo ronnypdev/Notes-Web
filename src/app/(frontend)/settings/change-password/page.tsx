@@ -28,6 +28,35 @@ export default function ChangePasswordPage() {
     useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
+  const handleChangePasswordForm = (values: ChangePasswordFormValues) => {
+    authClient.changePassword(
+      {
+        currentPassword: values.oldPassword,
+        newPassword: values.newPassword,
+        revokeOtherSessions: true,
+      },
+      {
+        onRequest: () => {
+          setIsLoading(true);
+        },
+        onResponse: () => {
+          setIsLoading(false);
+        },
+        onSuccess: () => {
+          toast.success('Your password has been changed', {
+            position: 'bottom-right',
+          });
+          reset();
+        },
+        onError: ({ error }) => {
+          toast.error(error.message, {
+            position: 'bottom-right',
+          });
+        },
+      },
+    );
+  };
+
   const { control, handleSubmit, reset } = useForm<ChangePasswordFormValues>({
     resolver: zodResolver(changePasswordSchema),
     defaultValues: {
@@ -36,10 +65,6 @@ export default function ChangePasswordPage() {
       confirmNewPassword: '',
     },
   });
-
-  const handleChangePasswordForm = (values: ChangePasswordFormValues) => {
-    console.log('valid submit', values); // replaced in step 3
-  };
 
   return (
     <section className="w-full h-full">
@@ -171,8 +196,8 @@ export default function ChangePasswordPage() {
             </FieldGroup>
           </FieldSet>
           <div className="flex justify-end">
-            <Button type="submit" className="mt-4">
-              Change Password
+            <Button type="submit" className="mt-4" disabled={isLoading}>
+              {isLoading ? <Spinner /> : 'Change Password'}
             </Button>
           </div>
         </form>
