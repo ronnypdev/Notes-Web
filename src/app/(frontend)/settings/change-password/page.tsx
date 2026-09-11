@@ -1,6 +1,13 @@
 'use client';
 
 import { useState } from 'react';
+import { Controller, useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { authClient } from '@/lib/auth-client';
+import { toast } from 'sonner';
+import { Spinner } from '@/components/ui/spinner';
+
+import { changePasswordSchema, ChangePasswordFormValues } from '@/lib/zod';
 import {
   Field,
   FieldDescription,
@@ -19,6 +26,46 @@ export default function ChangePasswordPage() {
   const [showNewPassword, setShowNewPassword] = useState<boolean>(false);
   const [showConfirmNewPassword, setShowConfirmNewPassword] =
     useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const handleChangePasswordForm = (values: ChangePasswordFormValues) => {
+    authClient.changePassword(
+      {
+        currentPassword: values.oldPassword,
+        newPassword: values.newPassword,
+        revokeOtherSessions: true,
+      },
+      {
+        onRequest: () => {
+          setIsLoading(true);
+        },
+        onResponse: () => {
+          setIsLoading(false);
+        },
+        onSuccess: () => {
+          toast.success('Your password has been changed', {
+            position: 'bottom-right',
+          });
+          reset();
+        },
+        onError: ({ error }) => {
+          toast.error(error.message, {
+            position: 'bottom-right',
+          });
+        },
+      },
+    );
+  };
+
+  const { control, handleSubmit, reset } = useForm<ChangePasswordFormValues>({
+    resolver: zodResolver(changePasswordSchema),
+    defaultValues: {
+      oldPassword: '',
+      newPassword: '',
+      confirmNewPassword: '',
+    },
+  });
+
   return (
     <section className="w-full h-full">
       <div className="w-full lg:w-[528px] max-w-full flex flex-col gap-6">
@@ -35,87 +82,122 @@ export default function ChangePasswordPage() {
             Change Password
           </h4>
         </header>
-        <form>
+        <form onSubmit={handleSubmit(handleChangePasswordForm)}>
           <FieldSet>
             <FieldGroup className="gap-4">
-              <Field>
-                <FieldLabel htmlFor="oldPassword">Old Password</FieldLabel>
-                <div className="relative w-full flex flex-col items-center gap-1.5">
-                  <Input
-                    id="oldPassword"
-                    type={showOldPassword ? 'text' : 'password'}
-                    placeholder="Old Password"
-                    required
-                  />
-                  <ShowIcon
-                    className="w-4 h-4 text-muted-foreground absolute cursor-pointer right-2 top-2.5"
-                    onClick={() =>
-                      setShowOldPassword((prevPassword) => !prevPassword)
-                    }
-                  />
-                  <FieldError
-                    className="self-start hidden"
-                    errors={[{ message: 'Old password is required' }]}
-                  />
-                </div>
-              </Field>
-              <Field>
-                <FieldLabel htmlFor="newPassword">New Password</FieldLabel>
-                <div className="relative w-full flex flex-col items-center gap-1.5">
-                  <Input
-                    id="newPassword"
-                    type={showNewPassword ? 'text' : 'password'}
-                    placeholder="New Password"
-                    required
-                  />
-                  <ShowIcon
-                    className="w-4 h-4 text-muted-foreground absolute cursor-pointer right-2 top-2.5"
-                    onClick={() =>
-                      setShowNewPassword((prevPassword) => !prevPassword)
-                    }
-                  />
-                  <FieldError
-                    className="self-start hidden"
-                    errors={[{ message: 'New password is required' }]}
-                  />
-                </div>
-                <FieldDescription className="flex items-center relative bottom-2">
-                  <InfoCircleIcon className="w-4 h-4 text-muted-foreground" />
-                  <span className="text-xs text-muted-foreground">
-                    At least 8 characters
-                  </span>
-                </FieldDescription>
-              </Field>
-              <Field>
-                <FieldLabel htmlFor="confirmNewPassword">
-                  Confirm New Password
-                </FieldLabel>
-                <div className="relative w-full flex flex-col items-center gap-1.5">
-                  <Input
-                    id="confirmNewPassword"
-                    type={showConfirmNewPassword ? 'text' : 'password'}
-                    placeholder="Confirm New Password"
-                    required
-                  />
-                  <ShowIcon
-                    className="w-4 h-4 text-muted-foreground absolute cursor-pointer right-2 top-2.5"
-                    onClick={() =>
-                      setShowConfirmNewPassword((prevPassword) => !prevPassword)
-                    }
-                  />
-                  <FieldError
-                    className="self-start hidden"
-                    errors={[
-                      { message: 'Confirm new password does not match' },
-                    ]}
-                  />
-                </div>
-              </Field>
+              <Controller
+                name="oldPassword"
+                control={control}
+                render={({ field, fieldState }) => (
+                  <Field>
+                    <FieldLabel htmlFor={field.name}>Old Password</FieldLabel>
+                    <div className="relative w-full flex flex-col items-center gap-1.5">
+                      <Input
+                        {...field}
+                        id={field.name}
+                        value={field.value ?? ''}
+                        type={showOldPassword ? 'text' : 'password'}
+                        aria-invalid={fieldState.invalid}
+                        placeholder="Old Password"
+                        required
+                      />
+                      <ShowIcon
+                        className="w-4 h-4 text-muted-foreground absolute cursor-pointer right-2 top-2.5"
+                        onClick={() =>
+                          setShowOldPassword((prevPassword) => !prevPassword)
+                        }
+                      />
+                      {fieldState.invalid && (
+                        <FieldError
+                          className="self-start"
+                          errors={[fieldState.error]}
+                        />
+                      )}
+                    </div>
+                  </Field>
+                )}
+              />
+
+              <Controller
+                name="newPassword"
+                control={control}
+                render={({ field, fieldState }) => (
+                  <Field>
+                    <FieldLabel htmlFor={field.name}>New Password</FieldLabel>
+                    <div className="relative w-full flex flex-col items-center gap-1.5">
+                      <Input
+                        {...field}
+                        id={field.name}
+                        value={field.value ?? ''}
+                        type={showNewPassword ? 'text' : 'password'}
+                        aria-invalid={fieldState.invalid}
+                        placeholder="New Password"
+                        required
+                      />
+                      <ShowIcon
+                        className="w-4 h-4 text-muted-foreground absolute cursor-pointer right-2 top-2.5"
+                        onClick={() =>
+                          setShowNewPassword((prevPassword) => !prevPassword)
+                        }
+                      />
+                      {fieldState.invalid && (
+                        <FieldError
+                          className="self-start"
+                          errors={[fieldState.error]}
+                        />
+                      )}
+                    </div>
+                    <FieldDescription className="flex items-center relative bottom-2">
+                      <InfoCircleIcon className="w-4 h-4 text-muted-foreground" />
+                      <span className="text-xs text-muted-foreground">
+                        At least 8 characters
+                      </span>
+                    </FieldDescription>
+                  </Field>
+                )}
+              />
+
+              <Controller
+                name="confirmNewPassword"
+                control={control}
+                render={({ field, fieldState }) => (
+                  <Field>
+                    <FieldLabel htmlFor={field.name}>
+                      Confirm New Password
+                    </FieldLabel>
+                    <div className="relative w-full flex flex-col items-center gap-1.5">
+                      <Input
+                        {...field}
+                        id={field.name}
+                        value={field.value ?? ''}
+                        type={showConfirmNewPassword ? 'text' : 'password'}
+                        aria-invalid={fieldState.invalid}
+                        placeholder="Confirm New Password"
+                        required
+                      />
+                      <ShowIcon
+                        className="w-4 h-4 text-muted-foreground absolute cursor-pointer right-2 top-2.5"
+                        onClick={() =>
+                          setShowConfirmNewPassword(
+                            (prevPassword) => !prevPassword,
+                          )
+                        }
+                      />
+                      {fieldState.invalid && (
+                        <FieldError
+                          className="self-start"
+                          errors={[fieldState.error]}
+                        />
+                      )}
+                    </div>
+                  </Field>
+                )}
+              />
             </FieldGroup>
           </FieldSet>
           <div className="flex justify-end">
-            <Button type="submit" className="mt-4">
-              Change Password
+            <Button type="submit" className="mt-4" disabled={isLoading}>
+              {isLoading ? <Spinner /> : 'Change Password'}
             </Button>
           </div>
         </form>
